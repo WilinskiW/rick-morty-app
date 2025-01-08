@@ -1,12 +1,13 @@
-package com.rick_morty.rick_morty_data_client;
+package com.rick_morty.rick_morty_updater;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RickMortyDataClientApplication {
+public class RickMortyUpdaterApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RickMortyDataClientApplication.class, args);
+		SpringApplication.run(RickMortyUpdaterApplication.class, args);
 	}
+
 }
