@@ -7,7 +7,7 @@ public record EpisodeDto(int id,
                          String name,
                          String air_date,
                          String episode,
-                         List<CharacterDto> characters,
+                         List<String> characters,
                          String url,
                          LocalDateTime created) {
 }

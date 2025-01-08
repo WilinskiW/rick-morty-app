@@ -8,17 +8,13 @@ public record CharacterDto(int id,
                            String status,
                            String species,
                            String gender,
-                           OriginDto origin,
+                           LocationDto origin,
                            LocationDto location,
-                           EpisodeDto episode,
+                           String image,
+                           List<String> episode,
                            String url,
                            LocalDateTime created) {
 
-
-    record OriginDto(String name, String url) {}
-
-    record LocationDto(String image, EpisodeDto episode) {}
-
-    record EpisodeDto(List<String> episode) {}
+    record LocationDto(String name, String url) {}
 }
 
