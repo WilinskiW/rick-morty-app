@@ -9,5 +9,4 @@ public class RickMortyDataClientApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RickMortyDataClientApplication.class, args);
 	}
-
 }
