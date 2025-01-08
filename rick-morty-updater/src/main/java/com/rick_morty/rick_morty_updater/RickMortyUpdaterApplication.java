@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-@SpringBootApplication
-@EnableJpaRepositories
+@SpringBootApplication(scanBasePackages = "com.rick_morty")
+@EnableJpaRepositories(basePackages = "com.rick_morty")
 @EnableAsync
 public class RickMortyUpdaterApplication {
 
