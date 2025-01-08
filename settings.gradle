@@ -1,2 +1,4 @@
 rootProject.name = 'rick-morty-app'
 
+include 'rick-morty-data'
+include 'rick-morty-data-client'
