@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/updater")
 public class UpdaterController {
@@ -17,6 +19,6 @@ public class UpdaterController {
     @RequestMapping("/start")
     public ResponseEntity<String> startUpdate(){
         dbUpdater.updateDatabase();
-        return ResponseEntity.ok("Updater started...");
+        return ResponseEntity.ok("Updater started..." + LocalDateTime.now());
     }
 }

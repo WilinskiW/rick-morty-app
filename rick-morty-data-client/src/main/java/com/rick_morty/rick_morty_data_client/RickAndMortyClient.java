@@ -1,8 +1,6 @@
 package com.rick_morty.rick_morty_data_client;
 
-import com.rick_morty.rick_morty_data_client.contract.CharactersDto;
-import com.rick_morty.rick_morty_data_client.contract.EpisodesDto;
-import com.rick_morty.rick_morty_data_client.contract.LocationsDto;
+import com.rick_morty.rick_morty_data_client.contract.*;
 import org.springframework.web.client.RestTemplate;
 
 public class RickAndMortyClient implements RickAndMortyDataPuller {
@@ -36,5 +34,32 @@ public class RickAndMortyClient implements RickAndMortyDataPuller {
                 .pathSegment("location")
                 .toUriString();
         return restClient.getForEntity(uri, LocationsDto.class).getBody();
+    }
+
+    @Override
+    public CharacterDto getCharacter(int id) {
+        var uri = provider.builder()
+                .pathSegment("character")
+                .pathSegment("" + id)
+                .toUriString();
+        return restClient.getForEntity(uri, CharacterDto.class).getBody();
+    }
+
+    @Override
+    public EpisodeDto getEpisode(int id) {
+        var uri = provider.builder()
+                .pathSegment("episode")
+                .pathSegment("" + id)
+                .toUriString();
+        return restClient.getForEntity(uri, EpisodeDto.class).getBody();
+    }
+
+    @Override
+    public LocationDto getLocation(int id) {
+        var uri = provider.builder()
+                .pathSegment("location")
+                .pathSegment("" + id)
+                .toUriString();
+        return restClient.getForEntity(uri, LocationDto.class).getBody();
     }
 }

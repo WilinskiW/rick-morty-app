@@ -7,6 +7,7 @@ public record CharacterDto(int id,
                            String name,
                            String status,
                            String species,
+                           String type,
                            String gender,
                            LocationDto origin,
                            LocationDto location,
@@ -15,6 +16,6 @@ public record CharacterDto(int id,
                            String url,
                            LocalDateTime created) {
 
-    record LocationDto(String name, String url) {}
+    public record LocationDto(String name, String url) {}
 }
 
