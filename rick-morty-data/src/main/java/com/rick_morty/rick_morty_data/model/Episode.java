@@ -15,23 +15,26 @@ public class Episode {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "source_id", nullable = false, unique = true)
+    private int source_id;
+
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "air_date")
+    @Column(name = "air_date", nullable = false)
     private String airDate;
 
-    @Column(name = "episode")
+    @Column(name = "episode", nullable = false)
     private String episode;
-
-    @Column(name = "created")
-    private LocalDateTime created;
 
     @ManyToMany
     @JoinTable(
             name = "character_episode",
-            joinColumns = @JoinColumn(name = "episode_id"),
-            inverseJoinColumns = @JoinColumn(name = "character_id")
+            joinColumns = @JoinColumn(name = "episode_id", nullable = false, unique = true),
+            inverseJoinColumns = @JoinColumn(name = "character_id", nullable = false, unique = true)
     )
     private Set<Character> characters;
+
+    @Column(name = "created")
+    private LocalDateTime created;
 }

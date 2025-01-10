@@ -15,35 +15,39 @@ public class Character {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "source_id", nullable = false, unique = true)
+    private int source_id;
+
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private String status;
 
-    @Column(name = "species")
+    @Column(name = "species", nullable = false)
     private String species;
 
     @Column(name = "type")
     private String type;
 
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     private String gender;
 
     @ManyToOne
-    @JoinColumn(name = "origin_id")
+    @JoinColumn(name = "origin_id", nullable = false)
     private Location origin;
 
     @ManyToOne
-    @JoinColumn(name = "location_id")
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
-    @Column(name = "image")
+    @Column(name = "image", nullable = false)
     private String imageUrl;
 
-    @Column(name = "created")
+    @Column(name = "created", nullable = false)
     private LocalDateTime created;
 
     @ManyToMany(mappedBy = "characters")
+    @Column(name = "episodes", nullable = false)
     private Set<Episode> episodes;
 }

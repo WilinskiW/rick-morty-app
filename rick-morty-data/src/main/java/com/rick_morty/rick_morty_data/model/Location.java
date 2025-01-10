@@ -15,16 +15,19 @@ public class Location {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "source_id", nullable = false, unique = true)
+    private int source_id;
+
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "dimension")
+    @Column(name = "dimension", nullable = false)
     private String dimension;
 
-    @Column(name = "created")
+    @Column(name = "created", nullable = false)
     private LocalDateTime created;
 
     @OneToMany(mappedBy = "origin")
