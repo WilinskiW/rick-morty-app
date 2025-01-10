@@ -13,28 +13,56 @@ public class RickAndMortyClient implements RickAndMortyDataPuller {
     }
 
     @Override
-    public CharactersDto getCharacters() {
+    public ResultCharactersDto getCharacters() {
         var uri = provider.builder()
                 .pathSegment("character")
                 .toUriString();
-        return restClient.getForEntity(uri, CharactersDto.class).getBody();
+        return restClient.getForEntity(uri, ResultCharactersDto.class).getBody();
     }
 
     @Override
-    public EpisodesDto getEpisodes() {
+    public ResultCharactersDto getCharacters(int page) {
+        var uri = provider.builder()
+                .pathSegment("character")
+                .queryParam("page", page)
+                .toUriString();
+        return restClient.getForEntity(uri, ResultCharactersDto.class).getBody();
+    }
+
+    @Override
+    public ResultEpisodesDto getEpisodes() {
         var uri = provider.builder()
                 .pathSegment("episode")
                 .toUriString();
-        return restClient.getForEntity(uri, EpisodesDto.class).getBody();
+        return restClient.getForEntity(uri, ResultEpisodesDto.class).getBody();
     }
 
     @Override
-    public LocationsDto getLocations() {
+    public ResultEpisodesDto getEpisodes(int page) {
+        var uri = provider.builder()
+                .pathSegment("episode")
+                .queryParam("page", page)
+                .toUriString();
+        return restClient.getForEntity(uri, ResultEpisodesDto.class).getBody();
+    }
+
+    @Override
+    public ResultLocationDto getLocations() {
         var uri = provider.builder()
                 .pathSegment("location")
                 .toUriString();
-        return restClient.getForEntity(uri, LocationsDto.class).getBody();
+        return restClient.getForEntity(uri, ResultLocationDto.class).getBody();
     }
+
+    @Override
+    public ResultLocationDto getLocations(int page) {
+        var uri = provider.builder()
+                .pathSegment("location")
+                .queryParam("page", page)
+                .toUriString();
+        return restClient.getForEntity(uri, ResultLocationDto.class).getBody();
+    }
+
 
     @Override
     public CharacterDto getCharacter(int id) {
