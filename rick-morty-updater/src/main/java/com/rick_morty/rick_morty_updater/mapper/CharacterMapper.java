@@ -23,8 +23,8 @@ public class CharacterMapper implements DtoEntityMapper<CharacterDto, Character>
         character.setSpecies(characterDto.species());
         character.setType(characterDto.type());
         character.setGender(characterDto.gender());
-        //character.setOrigin(characterLocationMapper.mapDtoToEntity(characterDto.origin()));
-       // character.setLocation(characterLocationMapper.mapDtoToEntity(characterDto.location()));
+        character.setOrigin(characterLocationMapper.mapDtoToEntity(characterDto.origin()));
+        character.setLocation(characterLocationMapper.mapDtoToEntity(characterDto.location()));
         character.setImageUrl(characterDto.url());
         character.setCreated(characterDto.created());
         character.setEpisodes(new HashSet<>() ); //todo

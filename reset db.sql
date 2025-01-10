@@ -19,8 +19,6 @@ create table episodes (id integer not null auto_increment, source_id integer not
 create table locations (id integer not null auto_increment, source_id integer not null, created datetime(6) not null, dimension varchar(255) not null, name varchar(255) not null, type varchar(255) not null, primary key (id)) engine=InnoDB;
 create table user_favorites (character_id integer, id integer not null auto_increment, username varchar(255), primary key (id)) engine=InnoDB;
 create table users (enabled bit not null, password varchar(255) not null, username varchar(255) not null, primary key (username)) engine=InnoDB;
-alter table if exists character_episode add constraint UK63kur5052ug64m0t8saek4co8 unique (character_id);
-alter table if exists character_episode add constraint UKljhddgorg1lxxq1gpwpfq9cgf unique (episode_id);
 alter table if exists characters add constraint UK2cdrn845gk3iddssbdvh797sr unique (source_id);
 alter table if exists episodes add constraint UKddkles17asmedse8c95uwsn31 unique (source_id);
 alter table if exists episodes add constraint UKl9vh14ovyme2n3w8pc3nsm68t unique (name);

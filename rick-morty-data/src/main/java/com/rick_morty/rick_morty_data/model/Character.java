@@ -48,6 +48,5 @@ public class Character {
     private LocalDateTime created;
 
     @ManyToMany(mappedBy = "characters")
-    @Column(name = "episodes", nullable = false)
     private Set<Episode> episodes;
 }

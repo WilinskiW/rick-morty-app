@@ -30,8 +30,8 @@ public class Episode {
     @ManyToMany
     @JoinTable(
             name = "character_episode",
-            joinColumns = @JoinColumn(name = "episode_id", nullable = false, unique = true),
-            inverseJoinColumns = @JoinColumn(name = "character_id", nullable = false, unique = true)
+            joinColumns = @JoinColumn(name = "episode_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "character_id", nullable = false)
     )
     private Set<Character> characters;
 
