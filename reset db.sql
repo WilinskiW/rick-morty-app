@@ -14,7 +14,7 @@ drop table if exists users;
 
 create table authorities (id bigint not null auto_increment, authority varchar(255) not null, username varchar(255) not null, primary key (id)) engine=InnoDB;
 create table character_episode (character_id integer not null, episode_id integer not null, primary key (character_id, episode_id)) engine=InnoDB;
-create table characters (id integer not null auto_increment, location_id integer not null, origin_id integer not null, source_id integer not null, created datetime(6) not null, gender varchar(255) not null, image varchar(255) not null, name varchar(255) not null, species varchar(255) not null, status varchar(255) not null, type varchar(255), primary key (id)) engine=InnoDB;
+create table characters (id integer not null auto_increment, location_id integer, origin_id integer, source_id integer not null, created datetime(6) not null, gender varchar(255) not null, image varchar(255) not null, name varchar(255) not null, species varchar(255) not null, status varchar(255) not null, type varchar(255), primary key (id)) engine=InnoDB;
 create table episodes (id integer not null auto_increment, source_id integer not null, created datetime(6), air_date varchar(255) not null, episode varchar(255) not null, name varchar(255) not null, primary key (id)) engine=InnoDB;
 create table locations (id integer not null auto_increment, source_id integer not null, created datetime(6) not null, dimension varchar(255) not null, name varchar(255) not null, type varchar(255) not null, primary key (id)) engine=InnoDB;
 create table user_favorites (character_id integer, id integer not null auto_increment, username varchar(255), primary key (id)) engine=InnoDB;

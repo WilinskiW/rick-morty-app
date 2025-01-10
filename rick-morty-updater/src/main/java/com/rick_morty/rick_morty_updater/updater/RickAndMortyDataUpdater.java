@@ -5,12 +5,16 @@ import com.rick_morty.rick_morty_data.model.Episode;
 import com.rick_morty.rick_morty_data.model.Location;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_data_client.RickAndMortyDataPuller;
+import com.rick_morty.rick_morty_data_client.contract.CharacterDto;
 import com.rick_morty.rick_morty_updater.mapper.CatalogMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RickAndMortyDataUpdater implements DbUpdater {
@@ -33,14 +37,36 @@ public class RickAndMortyDataUpdater implements DbUpdater {
     @Override
     @Transactional
     public void updateCharacters() {
-        List<Character> characters = dataPuller.getCharacters().results().stream()
-                .map(characterDto ->
-                        entityMapper.forCharacter().mapDtoToEntity(characterDto))
+        List<CharacterDto> characterDtos = getCharactersDto();
+        List<Long> sourceIds = characterDtos.stream()
+                .map(dto -> (long) dto.id())
                 .toList();
-        dbCataloger.getCharacterRepository().saveAll(characters);
-        System.out.println(characters);
-        System.out.println("Done!");
+
+        List<Long> existingSourceIds = dbCataloger.getCharacters()
+                .withSourceIds(sourceIds)
+                .stream()
+                .map(character -> (long) character.getSource_id() )
+                .toList();
+
+        List<Character> toAddCharacters = characterDtos.stream()
+                .filter(dto -> !existingSourceIds.contains((long) dto.id()))
+                .map(dto -> entityMapper.forCharacter().mapDtoToEntity(dto))
+                .toList();
+
+        if (!toAddCharacters.isEmpty()) {
+            dbCataloger.getCharacters().saveAll(toAddCharacters);
+        }
     }
+
+    private List<CharacterDto> getCharactersDto() {
+        int totalPages = dataPuller.getCharacters().info().pages();
+        List<CharacterDto> allCharacterDtos = new ArrayList<>();
+        for (int page = 1; page <= totalPages; page++) {
+            allCharacterDtos.addAll(dataPuller.getCharacters(page).results());
+        }
+        return allCharacterDtos;
+    }
+
 
     @Override
     @Transactional
@@ -50,8 +76,6 @@ public class RickAndMortyDataUpdater implements DbUpdater {
                         entityMapper.forLocation().mapDtoToEntity(locationDto))
                 .toList();
         System.out.println(locations);
-        System.out.println("Done!");
-        dbCataloger.getLocationRepository().saveAll(locations);
     }
 
     @Override
@@ -61,8 +85,6 @@ public class RickAndMortyDataUpdater implements DbUpdater {
                 .map(episodeDto ->
                         entityMapper.forEpisode().mapDtoToEntity(episodeDto))
                 .toList();
-        dbCataloger.getEpisodeRepository().saveAll(episodes);
-        System.out.println(episodes);
-        System.out.println("Done!");
+        dbCataloger.getEpisodes().saveAll(episodes);
     }
 }

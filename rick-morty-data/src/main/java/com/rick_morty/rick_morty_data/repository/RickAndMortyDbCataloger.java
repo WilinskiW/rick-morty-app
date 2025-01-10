@@ -1,10 +1,10 @@
 package com.rick_morty.rick_morty_data.repository;
 
 public interface RickAndMortyDbCataloger {
-    AuthorityRepository getAuthorityRepository();
-    UserRepository getUserRepository();
+    AuthorityRepository getAuthorities();
+    UserRepository getUsers();
     UserFavoritesRepository getUserFavoritesRepository();
-    EpisodeRepository getEpisodeRepository();
-    LocationRepository getLocationRepository();
-    CharacterRepository getCharacterRepository();
+    EpisodeRepository getEpisodes();
+    LocationRepository getLocations();
+    CharacterRepository getCharacters();
 }

@@ -22,12 +22,12 @@ public class RickAndMortyDbCatalog implements RickAndMortyDbCataloger{
     }
 
     @Override
-    public AuthorityRepository getAuthorityRepository() {
+    public AuthorityRepository getAuthorities() {
         return authorityRepository;
     }
 
     @Override
-    public UserRepository getUserRepository() {
+    public UserRepository getUsers() {
         return userRepository;
     }
 
@@ -37,17 +37,17 @@ public class RickAndMortyDbCatalog implements RickAndMortyDbCataloger{
     }
 
     @Override
-    public EpisodeRepository getEpisodeRepository() {
+    public EpisodeRepository getEpisodes() {
         return episodeRepository;
     }
 
     @Override
-    public LocationRepository getLocationRepository() {
+    public LocationRepository getLocations() {
         return locationRepository;
     }
 
     @Override
-    public CharacterRepository getCharacterRepository() {
+    public CharacterRepository getCharacters() {
         return characterRepository;
     }
 }

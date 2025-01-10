@@ -34,11 +34,11 @@ public class Character {
     private String gender;
 
     @ManyToOne
-    @JoinColumn(name = "origin_id", nullable = false)
+    @JoinColumn(name = "origin_id")
     private Location origin;
 
     @ManyToOne
-    @JoinColumn(name = "location_id", nullable = false)
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @Column(name = "image", nullable = false)
