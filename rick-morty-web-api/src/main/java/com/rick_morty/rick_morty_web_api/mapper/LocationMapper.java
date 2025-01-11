@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class LocationMapper implements Mapper<Location, LocationDto> {
@@ -26,12 +25,6 @@ public class LocationMapper implements Mapper<Location, LocationDto> {
                 .toList();
     }
 
-    @Override
-    public List<LocationDto> entityListToDtoList(List<Location> locations) {
-        return locations.stream()
-                .map(this::entityToDto)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public Location dtoToEntity(LocationDto locationDto) {

@@ -7,8 +7,6 @@ import com.rick_morty.rick_morty_web_api.contract.LocationSummaryDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CharacterMapper implements Mapper<Character, CharacterSummaryDto> {
@@ -24,13 +22,6 @@ public class CharacterMapper implements Mapper<Character, CharacterSummaryDto> {
                 locationToDto(character.getOrigin()),
                 locationToDto(character.getLocation()),
                 character.getImageUrl());
-    }
-
-    @Override
-    public List<CharacterSummaryDto> entityListToDtoList(List<Character> characters) {
-        return characters.stream()
-                .map(this::entityToDto)
-                .collect(Collectors.toList());
     }
 
     @Override

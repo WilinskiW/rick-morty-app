@@ -20,16 +20,6 @@ public class LocationService {
     private final RickAndMortyDbCataloger db;
     private final LocationMapper mapper;
 
-    public List<LocationDto> getAll() {
-        return mapper.entityListToDtoList(db.getLocations().findAll());
-    }
-
-    public LocationDto getById(Integer id) {
-        var location = db.getLocations().findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Location not found"));
-        return mapper.entityToDto(location);
-    }
-
     @Transactional
     public void save(CreateLocationDto createLocationDto) {
         if (createLocationDto != null) {
@@ -43,6 +33,15 @@ public class LocationService {
         }
     }
 
+    public List<LocationDto> getAll() {
+        return mapper.entityListToDtoList(db.getLocations().findAll());
+    }
+
+    public LocationDto getById(Integer id) {
+        var location = db.getLocations().findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Location not found"));
+        return mapper.entityToDto(location);
+    }
 
     @Transactional
     public void update(Integer id, LocationSummaryDto locationSummaryDto) {

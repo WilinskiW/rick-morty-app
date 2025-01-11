@@ -4,7 +4,7 @@ import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.contract.CharacterSummaryDto;
-import com.rick_morty.rick_morty_web_api.exception.UserNotFoundException;
+import com.rick_morty.rick_morty_web_api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.mapper.CharacterMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -46,7 +46,7 @@ public class CharacterService {
         var character = db.getCharacters().findById(id);
 
         if (character.isEmpty()) {
-            throw new UserNotFoundException("Character not found");
+            throw new DataNotFoundException("Character not found");
         }
 
         return mapper.entityToDto(character.get());
@@ -60,7 +60,7 @@ public class CharacterService {
     public void update(Integer id, CharacterSummaryDto characterSummaryDto) {
         var characterOptional = db.getCharacters().findById(id);
         if (characterOptional.isEmpty()) {
-            throw new UserNotFoundException("Character not found");
+            throw new DataNotFoundException("Character not found");
         }
         var character = characterOptional.get();
 
