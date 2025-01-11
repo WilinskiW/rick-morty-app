@@ -2,22 +2,24 @@ package com.rick_morty.rick_morty_data_client;
 
 import com.rick_morty.rick_morty_data_client.contract.*;
 
-public interface RickAndMortyDataPuller {
-    ResultCharactersDto getCharacters();
+import java.util.List;
 
-    ResultCharactersDto getCharacters(int page);
+public interface RickAndMortyDataPuller {
+    List<CharacterDto> getCharacters();
+
+    ResultCharactersDto getCharactersPage(int page);
 
     CharacterDto getCharacter(int id);
 
-    ResultEpisodesDto getEpisodes();
+    List<EpisodeDto> getEpisodes();
 
-    ResultEpisodesDto getEpisodes(int page);
+    ResultEpisodesDto getEpisodesPage(int page);
 
     EpisodeDto getEpisode(int id);
 
-    ResultLocationDto getLocations();
+    List<LocationDto> getLocations();
 
-    ResultLocationDto getLocations(int page);
+    ResultLocationDto getLocationsPage(int page);
 
     LocationDto getLocation(int id);
 }
