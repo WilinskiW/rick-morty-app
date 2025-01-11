@@ -6,8 +6,12 @@ import com.rick_morty.rick_morty_web_api.contract.CharacterSummaryDto;
 import com.rick_morty.rick_morty_web_api.contract.LocationSummaryDto;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
-public class CharacterMapper implements EntityToDtoMapper<Character, CharacterSummaryDto> {
+public class CharacterMapper implements Mapper<Character, CharacterSummaryDto> {
     @Override
     public CharacterSummaryDto entityToDto(Character character) {
         return new CharacterSummaryDto(
@@ -18,9 +22,33 @@ public class CharacterMapper implements EntityToDtoMapper<Character, CharacterSu
                 character.getType(),
                 character.getGender(),
                 locationToDto(character.getOrigin()),
-                locationToDto(character.getLocation())
-        );
+                locationToDto(character.getLocation()),
+                character.getImageUrl());
     }
+
+    @Override
+    public List<CharacterSummaryDto> entityListToDtoList(List<Character> characters) {
+        return characters.stream()
+                .map(this::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Character dtoToEntity(CharacterSummaryDto characterSummaryDto) {
+        Character character = new Character();
+        character.setSourceId(characterSummaryDto.id());
+        character.setName(characterSummaryDto.name());
+        character.setStatus(characterSummaryDto.status());
+        character.setSpecies(characterSummaryDto.species());
+        character.setType(characterSummaryDto.type());
+        character.setGender(characterSummaryDto.gender());
+        character.setOrigin(character.getOrigin());
+        character.setOrigin(character.getLocation());
+        character.setImageUrl(characterSummaryDto.imageUrl());
+        character.setCreated(LocalDateTime.now());
+        return character;
+    }
+
 
     private LocationSummaryDto locationToDto(Location location) {
         if(location== null){

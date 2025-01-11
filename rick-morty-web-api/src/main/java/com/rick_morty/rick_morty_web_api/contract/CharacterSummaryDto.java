@@ -7,4 +7,5 @@ public record CharacterSummaryDto(int id,
                                   String type,
                                   String gender,
                                   LocationSummaryDto origin,
-                                  LocationSummaryDto currentLocation){}
+                                  LocationSummaryDto currentLocation,
+                                  String imageUrl){}

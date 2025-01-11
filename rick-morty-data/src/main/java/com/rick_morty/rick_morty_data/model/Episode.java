@@ -16,19 +16,19 @@ public class Episode {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "source_id", nullable = false, unique = true)
+    @Column(name = "source_id")
     private int sourceId;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "air_date", nullable = false)
+    @Column(name = "air_date")
     private String airDate;
 
-    @Column(name = "episode", nullable = false)
+    @Column(name = "episode")
     private String episode;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "character_episode",
             joinColumns = @JoinColumn(name = "episode_id", nullable = false),
