@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -49,4 +50,17 @@ public class Character {
 
     @ManyToMany(mappedBy = "characters")
     private Set<Episode> episodes;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Character character = (Character) o;
+        return sourceId == character.sourceId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceId, name);
+    }
 }

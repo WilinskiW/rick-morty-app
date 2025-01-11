@@ -8,6 +8,7 @@ import com.rick_morty.rick_morty_data_client.contract.EpisodeDto;
 import com.rick_morty.rick_morty_data_client.contract.LocationDto;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -34,6 +35,7 @@ public class DtoToEntityMapper {
         episode.setName(dto.name());
         episode.setAirDate(dto.air_date());
         episode.setEpisode(dto.episode());
+        episode.setCharacters(new HashSet<>());
         episode.setCreated(dto.created());
         return episode;
     }
@@ -43,6 +45,8 @@ public class DtoToEntityMapper {
         location.setSourceId(dto.id());
         location.setName(dto.name());
         location.setType(dto.type());
+        location.setCurrentCharacters(new HashSet<>());
+        location.setOriginCharacters(new HashSet<>());
         location.setDimension(dto.dimension());
         location.setCreated(dto.created());
         return location;

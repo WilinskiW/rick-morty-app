@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -35,4 +36,17 @@ public class Location {
 
     @OneToMany(mappedBy = "location")
     private Set<Character> currentCharacters;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return sourceId == location.sourceId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceId, name);
+    }
 }

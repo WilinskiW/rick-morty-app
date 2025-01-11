@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -37,4 +38,17 @@ public class Episode {
 
     @Column(name = "created")
     private LocalDateTime created;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Episode episode = (Episode) o;
+        return sourceId == episode.sourceId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceId, name);
+    }
 }

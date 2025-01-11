@@ -38,8 +38,6 @@ public class RickAndMortyDataUpdater {
 
         Map<Integer, Episode> episodeMap = fetchAllEpisodes();
 
-        System.out.println("Fetched " + episodeMap.size() + " episodes");
-
         fetchAllCharacters(locationMap, episodeMap);
     }
 
@@ -62,7 +60,7 @@ public class RickAndMortyDataUpdater {
         return episodesDto.stream()
                 .map(mapper::mapToEntity)
                 .peek(episode -> {
-                    boolean exists = Boolean.TRUE.equals(dbCataloger.getEpisodes().existsBySourceId(episode.getSourceId()));
+                    boolean exists = dbCataloger.getEpisodes().existsBySourceId(episode.getSourceId());
                     if (!exists) {
                         dbCataloger.getEpisodes().save(episode);
                     }
@@ -86,8 +84,13 @@ public class RickAndMortyDataUpdater {
 
                 Character character = mapper.mapToEntity(characterDto, origin, currentLocation, episodes);
 
-                boolean exists = Boolean.TRUE.equals(dbCataloger.getCharacters().existsBySourceId(character.getSourceId()));
+                boolean exists = dbCataloger.getCharacters().existsBySourceId(character.getSourceId());
                 if (!exists) {
+                    episodes.forEach(episode -> {
+                        episode.getCharacters().add(character); // Dodanie do encji Episode
+                        character.getEpisodes().add(episode);   // Dodanie do encji Character
+                    });
+
                     dbCataloger.getCharacters().save(character);
                 }
             });
@@ -102,7 +105,7 @@ public class RickAndMortyDataUpdater {
 
 
     private Location getCharacterLocation(CharacterDto.LocationDto loc, Map<Integer, Location> locationMap) {
-        if(!loc.url().isEmpty()){
+        if (!loc.url().isEmpty()) {
             return locationMap.get(extractIdFromUrl(loc.url()));
         }
         return null;
