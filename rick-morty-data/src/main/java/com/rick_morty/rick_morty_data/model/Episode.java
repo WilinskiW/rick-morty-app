@@ -16,7 +16,7 @@ public class Episode {
     private int id;
 
     @Column(name = "source_id", nullable = false, unique = true)
-    private int source_id;
+    private int sourceId;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;

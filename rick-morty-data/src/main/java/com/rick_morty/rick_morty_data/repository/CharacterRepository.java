@@ -10,6 +10,5 @@ import java.util.Set;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
-    @Query("select x from Character x where x.source_id in (:sourceIds)")
-    List<Character> withSourceIds(List<Long> sourceIds);
+    boolean existsBySourceId(Integer sourceId);
 }
