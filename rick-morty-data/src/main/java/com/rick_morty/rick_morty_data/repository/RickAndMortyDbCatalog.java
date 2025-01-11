@@ -1,8 +1,10 @@
 package com.rick_morty.rick_morty_data.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 public class RickAndMortyDbCatalog implements RickAndMortyDbCataloger{
     private final AuthorityRepository authorityRepository;
     private final UserRepository userRepository;
@@ -10,16 +12,6 @@ public class RickAndMortyDbCatalog implements RickAndMortyDbCataloger{
     private final CharacterRepository characterRepository;
     private final UserFavoritesRepository userFavoritesRepository;
     private final LocationRepository locationRepository;
-
-
-    public RickAndMortyDbCatalog(AuthorityRepository authorityRepository, UserRepository userRepository, EpisodeRepository episodeRepository, CharacterRepository characterRepository, UserFavoritesRepository userFavoritesRepository, LocationRepository locationRepository) {
-        this.authorityRepository = authorityRepository;
-        this.userRepository = userRepository;
-        this.episodeRepository = episodeRepository;
-        this.characterRepository = characterRepository;
-        this.userFavoritesRepository = userFavoritesRepository;
-        this.locationRepository = locationRepository;
-    }
 
     @Override
     public AuthorityRepository getAuthorities() {

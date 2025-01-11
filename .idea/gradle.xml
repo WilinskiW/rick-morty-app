@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/rick-morty-data" />
             <option value="$PROJECT_DIR$/rick-morty-data-client" />
+            <option value="$PROJECT_DIR$/rick-morty-updater" />
+            <option value="$PROJECT_DIR$/rick-morty-web-api" />
           </set>
         </option>
       </GradleProjectSettings>
