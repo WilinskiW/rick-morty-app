@@ -18,7 +18,7 @@ public class CharacterController {
      * CREATE
      */
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Void> createCharacter(@RequestBody CharacterSummaryDto characterSummaryDto) {
         characterService.save(characterSummaryDto);
         return ResponseEntity.ok().build();
