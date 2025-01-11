@@ -16,25 +16,25 @@ public class Location {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "source_id", nullable = false, unique = true)
+    @Column(name = "source_id", unique = true)
     private int sourceId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "type")
     private String type;
 
-    @Column(name = "dimension", nullable = false)
+    @Column(name = "dimension")
     private String dimension;
 
-    @Column(name = "created", nullable = false)
+    @Column(name = "created")
     private LocalDateTime created;
 
-    @OneToMany(mappedBy = "origin")
+    @OneToMany(mappedBy = "origin", cascade = CascadeType.ALL)
     private Set<Character> originCharacters;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private Set<Character> currentCharacters;
 
     @Override

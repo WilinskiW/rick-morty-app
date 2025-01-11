@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
+
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
     boolean existsBySourceId(Integer sourceId);
+
+    @Query("select x from Character x where x.name like (:pattern)")
+    List<Character> findLike(String pattern);
 }

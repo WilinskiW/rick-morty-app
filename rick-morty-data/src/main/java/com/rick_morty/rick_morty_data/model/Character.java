@@ -16,22 +16,22 @@ public class Character {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "source_id", nullable = false, unique = true)
+    @Column(name = "source_id", unique = true)
     private int sourceId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private String status;
 
-    @Column(name = "species", nullable = false)
+    @Column(name = "species")
     private String species;
 
     @Column(name = "type")
     private String type;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private String gender;
 
     @ManyToOne
@@ -42,13 +42,13 @@ public class Character {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @Column(name = "image", nullable = false)
+    @Column(name = "image")
     private String imageUrl;
 
-    @Column(name = "created", nullable = false)
+    @Column(name = "created")
     private LocalDateTime created;
 
-    @ManyToMany(mappedBy = "characters")
+    @ManyToMany(mappedBy = "characters", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Episode> episodes;
 
     @Override
