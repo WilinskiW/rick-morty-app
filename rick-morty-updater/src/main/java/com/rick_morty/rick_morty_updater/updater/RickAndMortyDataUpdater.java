@@ -34,8 +34,6 @@ public class RickAndMortyDataUpdater {
     public void syncData() {
         Map<Integer, Location> locationMap = fetchAllLocations();
 
-        System.out.println("Fetched " + locationMap.size() + " locations");
-
         Map<Integer, Episode> episodeMap = fetchAllEpisodes();
 
         fetchAllCharacters(locationMap, episodeMap);
@@ -87,8 +85,8 @@ public class RickAndMortyDataUpdater {
                 boolean exists = dbCataloger.getCharacters().existsBySourceId(character.getSourceId());
                 if (!exists) {
                     episodes.forEach(episode -> {
-                        episode.getCharacters().add(character); // Dodanie do encji Episode
-                        character.getEpisodes().add(episode);   // Dodanie do encji Character
+                        episode.getCharacters().add(character);
+                        character.getEpisodes().add(episode);
                     });
 
                     dbCataloger.getCharacters().save(character);
@@ -113,7 +111,6 @@ public class RickAndMortyDataUpdater {
 
     private int extractIdFromUrl(String url) {
         String[] parts = url.split("/");
-
         return Integer.parseInt(parts[parts.length - 1]);
     }
 }
