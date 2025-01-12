@@ -3,6 +3,8 @@ package com.rick_morty.rick_morty_web_api.controller;
 import com.rick_morty.rick_morty_web_api.contract.CharacterSummaryDto;
 import com.rick_morty.rick_morty_web_api.service.CharacterService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ public class CharacterController {
      */
 
     @PostMapping
+    @CachePut(value = "characters", key = "'allCharacter'")
     public ResponseEntity<Void> createCharacter(@RequestBody CharacterSummaryDto characterSummaryDto) {
         characterService.save(characterSummaryDto);
         return ResponseEntity.ok().build();
@@ -29,6 +32,7 @@ public class CharacterController {
      */
 
     @GetMapping("/all")
+    @Cacheable(value = "characters", key = "'allCharacter'")
     public ResponseEntity<List<CharacterSummaryDto>> findAll() {
         var result = characterService.getAll();
         return ResponseEntity.ok(result);
@@ -51,6 +55,7 @@ public class CharacterController {
      */
 
     @PutMapping("/{id}")
+    @CachePut(value = "characters", key = "'allCharacter'")
     public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @RequestBody CharacterSummaryDto characterSummaryDto) {
         characterService.update(id, characterSummaryDto);
         return ResponseEntity.ok().build();
@@ -61,6 +66,7 @@ public class CharacterController {
      */
 
     @DeleteMapping("/{id}")
+    @CachePut(value = "characters", key = "'allCharacter'")
     public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
         characterService.deleteById(id);
         return ResponseEntity.ok().build();

@@ -5,6 +5,8 @@ import com.rick_morty.rick_morty_web_api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.contract.LocationSummaryDto;
 import com.rick_morty.rick_morty_web_api.service.LocationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,7 @@ public class LocationController {
      */
 
     @PostMapping
+    @CachePut(value = "locations", key = "'allLocations'")
     public ResponseEntity<Void> createLocation(@RequestBody CreateLocationDto createLocationDto) {
         locationService.save(createLocationDto);
         return ResponseEntity.ok().build();
@@ -31,6 +34,7 @@ public class LocationController {
      */
 
     @GetMapping("/all")
+    @Cacheable(value = "locations", key = "'allLocations'")
     public ResponseEntity<List<LocationDto>> findAll() {
         var result = locationService.getAll();
         return ResponseEntity.ok(result);
@@ -46,6 +50,7 @@ public class LocationController {
      * UPDATE
      */
     @PutMapping("/{id}")
+    @CachePut(value = "locations", key = "'allLocations'")
     public ResponseEntity<Void> updateLocation(@PathVariable Integer id, @RequestBody LocationSummaryDto locationSummaryDto) {
         locationService.update(id, locationSummaryDto);
         return ResponseEntity.ok().build();
@@ -55,6 +60,7 @@ public class LocationController {
      * DELETE
      */
     @DeleteMapping("/{id}")
+    @CachePut(value = "locations", key = "'allLocations'")
     public ResponseEntity<Void> deleteLocation(@PathVariable Integer id) {
         locationService.deleteById(id);
         return ResponseEntity.ok().build();

@@ -3,6 +3,8 @@ package com.rick_morty.rick_morty_web_api.controller;
 import com.rick_morty.rick_morty_web_api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.service.EpisodeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ public class EpisodeController {
      */
 
     @PostMapping
+    @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> createCharacter(@RequestBody EpisodeDto episodeDto) {
         episodeService.save(episodeDto);
         return ResponseEntity.ok().build();
@@ -29,6 +32,7 @@ public class EpisodeController {
      */
 
     @GetMapping("/all")
+    @Cacheable(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<List<EpisodeDto>> findAll() {
         var result = episodeService.getAll();
         return ResponseEntity.ok(result);
@@ -45,6 +49,7 @@ public class EpisodeController {
      */
 
     @PutMapping("/{id}")
+    @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @RequestBody EpisodeDto episodeDto) {
         episodeService.update(id, episodeDto);
         return ResponseEntity.ok().build();
@@ -55,6 +60,7 @@ public class EpisodeController {
      */
 
     @DeleteMapping("/{id}")
+    @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
         episodeService.deleteById(id);
         return ResponseEntity.ok().build();
