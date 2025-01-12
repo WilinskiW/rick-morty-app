@@ -1,9 +1,9 @@
-package com.rick_morty.rick_morty_web_api.service;
+package com.rick_morty.rick_morty_web_api.api.service;
 
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
-import com.rick_morty.rick_morty_web_api.contract.EpisodeDto;
-import com.rick_morty.rick_morty_web_api.exception.DataNotFoundException;
-import com.rick_morty.rick_morty_web_api.mapper.EpisodeMapper;
+import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
+import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
+import com.rick_morty.rick_morty_web_api.api.mapper.EpisodeMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -1,23 +1,31 @@
-package com.rick_morty.rick_morty_web_api.service;
+package com.rick_morty.rick_morty_web_api.api.service;
 
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
-import com.rick_morty.rick_morty_web_api.contract.CharacterSummaryDto;
-import com.rick_morty.rick_morty_web_api.exception.DataNotFoundException;
-import com.rick_morty.rick_morty_web_api.mapper.CharacterMapper;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
+import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
-@RequiredArgsConstructor
 public class CharacterService {
     private final RickAndMortyDbCataloger db;
     private final CharacterMapper mapper;
+    @Getter
+    private CharacterSummaryDto scheduleCharacter;
+
+    public CharacterService(RickAndMortyDbCataloger db, CharacterMapper mapper) {
+        this.db = db;
+        this.mapper = mapper;
+        setScheduleCharacter();
+    }
 
     @Transactional
     public void save(CharacterSummaryDto characterSummaryDto) {
@@ -93,5 +101,15 @@ public class CharacterService {
             db.getEpisodes().save(episode); //update
         }
         db.getCharacters().delete(character);
+    }
+
+    public void setScheduleCharacter() {
+        int count = (int) db.getCharacters().count();
+        Random random = new Random();
+        try {
+            this.scheduleCharacter = getCharacterById(random.nextInt(count)+1);
+        } catch (DataNotFoundException e) {
+            setScheduleCharacter();
+        }
     }
 }

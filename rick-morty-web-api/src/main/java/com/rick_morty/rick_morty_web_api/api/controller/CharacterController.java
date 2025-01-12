@@ -1,7 +1,7 @@
-package com.rick_morty.rick_morty_web_api.controller;
+package com.rick_morty.rick_morty_web_api.api.controller;
 
-import com.rick_morty.rick_morty_web_api.contract.CharacterSummaryDto;
-import com.rick_morty.rick_morty_web_api.service.CharacterService;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -47,6 +47,12 @@ public class CharacterController {
     @GetMapping("like/{like}")
     public ResponseEntity<List<CharacterSummaryDto>> findByNameLike(@PathVariable String like) {
         var result = characterService.getAllLikeName(like);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/schedule")
+    public ResponseEntity<CharacterSummaryDto> findScheduleCharacter() {
+        var result = characterService.getScheduleCharacter();
         return ResponseEntity.ok(result);
     }
 

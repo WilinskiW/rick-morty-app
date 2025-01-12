@@ -1,4 +1,4 @@
-package com.rick_morty.rick_morty_web_api.mapper;
+package com.rick_morty.rick_morty_web_api.api.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

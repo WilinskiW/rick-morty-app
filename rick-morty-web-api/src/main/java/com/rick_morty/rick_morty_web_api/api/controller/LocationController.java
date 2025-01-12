@@ -1,9 +1,9 @@
-package com.rick_morty.rick_morty_web_api.controller;
+package com.rick_morty.rick_morty_web_api.api.controller;
 
-import com.rick_morty.rick_morty_web_api.contract.CreateLocationDto;
-import com.rick_morty.rick_morty_web_api.contract.LocationDto;
-import com.rick_morty.rick_morty_web_api.contract.LocationSummaryDto;
-import com.rick_morty.rick_morty_web_api.service.LocationService;
+import com.rick_morty.rick_morty_web_api.api.contract.CreateLocationDto;
+import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
+import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

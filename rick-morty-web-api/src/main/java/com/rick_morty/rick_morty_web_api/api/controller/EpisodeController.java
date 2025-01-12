@@ -1,7 +1,7 @@
-package com.rick_morty.rick_morty_web_api.controller;
+package com.rick_morty.rick_morty_web_api.api.controller;
 
-import com.rick_morty.rick_morty_web_api.contract.EpisodeDto;
-import com.rick_morty.rick_morty_web_api.service.EpisodeService;
+import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
+import com.rick_morty.rick_morty_web_api.api.service.EpisodeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

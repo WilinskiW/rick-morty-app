@@ -1,7 +1,7 @@
-package com.rick_morty.rick_morty_web_api.mapper;
+package com.rick_morty.rick_morty_web_api.api.mapper;
 
 import com.rick_morty.rick_morty_data.model.Location;
-import com.rick_morty.rick_morty_web_api.contract.LocationDto;
+import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

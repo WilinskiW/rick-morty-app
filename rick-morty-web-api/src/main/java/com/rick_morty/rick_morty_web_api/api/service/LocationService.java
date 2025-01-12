@@ -1,11 +1,11 @@
-package com.rick_morty.rick_morty_web_api.service;
+package com.rick_morty.rick_morty_web_api.api.service;
 
 import com.rick_morty.rick_morty_data.model.Location;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
-import com.rick_morty.rick_morty_web_api.contract.CreateLocationDto;
-import com.rick_morty.rick_morty_web_api.contract.LocationDto;
-import com.rick_morty.rick_morty_web_api.contract.LocationSummaryDto;
-import com.rick_morty.rick_morty_web_api.mapper.LocationMapper;
+import com.rick_morty.rick_morty_web_api.api.contract.CreateLocationDto;
+import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
+import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
