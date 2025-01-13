@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${location.name()} + ' - Location'">Location Details</title>
+</head>
+<body>
+<h1 th:text="${location.name()}"></h1>
+<p><strong>Type:</strong> <span th:text="${location.type()}"></span></p>
+<p><strong>Dimension:</strong> <span th:text="${location.dimension()}"></span></p>
+<p><strong>Residents:</strong></p>
+<ul>
+    <li th:each="resident : ${location.residents}" th:text="${resident.name()}"></li>
+</ul>
+<a href="/locations">Back to Locations</a>
+</body>
+</html>

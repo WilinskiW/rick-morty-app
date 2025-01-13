@@ -1,7 +1,9 @@
 package com.rick_morty.rick_morty_web_api.mapper;
 
 import com.rick_morty.rick_morty_data.model.Location;
+import com.rick_morty.rick_morty_web_api.contract.CharacterSummaryDto;
 import com.rick_morty.rick_morty_web_api.contract.LocationDto;
+import com.rick_morty.rick_morty_web_api.contract.LocationSummaryDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -19,10 +21,27 @@ public class LocationMapper implements Mapper<Location, LocationDto> {
                 residentsToDto(location));
     }
 
-    private List<LocationDto.Residents> residentsToDto(Location location) {
+    private List<CharacterSummaryDto> residentsToDto(Location location) {
         return location.getCurrentCharacters().stream()
-                .map(c -> new LocationDto.Residents(c.getSourceId(), c.getName()))
+                .map(c -> new CharacterSummaryDto(
+                        c.getId(),
+                        c.getName(),
+                        c.getStatus(),
+                        c.getSpecies(),
+                        c.getType(),
+                        c.getGender(),
+                        summaryToDto(location),
+                        summaryToDto(location),
+                        c.getImageUrl()
+                ))
                 .toList();
+    }
+
+    private LocationSummaryDto summaryToDto(Location location) {
+        return new LocationSummaryDto(location.getId(),
+                location.getName(),
+                location.getType(),
+                location.getDimension());
     }
 
 

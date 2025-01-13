@@ -17,6 +17,13 @@ public class ViewController {
         return "homepage";
     }
 
+    @GetMapping("/episodes")
+    public String showEpisodesPage(Model model){
+        var episodes = appClient.getAllEpisodes();
+        model.addAttribute("episodes", episodes);
+        return "episodes";
+    }
+
     @GetMapping("/episode/{id}")
     public String showEpisodePage(Model model, @PathVariable int id){
         var episode = appClient.getEpisode("episode", id);
@@ -30,5 +37,28 @@ public class ViewController {
     public String showCharactersPage(Model model){
         model.addAttribute("characters", appClient.getAllCharacters());
         return "characters";
+    }
+
+    @GetMapping("character/{id}")
+    public String showCharacterPage(Model model, @PathVariable int id){
+        var character = appClient.getCharacter("character", id);
+        model.addAttribute("character", appClient.getCharacter("character", id));
+        model.addAttribute("title", character.name());
+        return "character";
+    }
+
+    @GetMapping("locations")
+    public String showLocationsPage(Model model){
+        var locations = appClient.getAllLocations();
+        model.addAttribute("locations", locations);
+        return "locations";
+    }
+
+
+    @GetMapping("location/{id}")
+    public String showLocationPage(Model model, @PathVariable int id) {
+        var location = appClient.getLocation("location", id);
+        model.addAttribute("location", location);
+        return "location";
     }
 }

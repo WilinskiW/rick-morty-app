@@ -1,4 +1,4 @@
-package com.rick_morty.rick_morty_web_api.contract;
+package com.rick_morty.rick_morty_ui.dto;
 
 import java.util.List;
 
@@ -7,5 +7,6 @@ public record LocationDto(
         String name,
         String type,
         String dimension,
-        List<CharacterSummaryDto> residents) {
+        List<CharacterDto> residents
+) {
 }

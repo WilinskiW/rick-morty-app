@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rick and Morty - Locations</title>
+</head>
+<body>
+<h1>Locations</h1>
+<table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Dimension</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="location : ${locations}">
+        <td th:text="${location.id()}"></td>
+        <td th:text="${location.name()}"></td>
+        <td th:text="${location.type()}"></td>
+        <td th:text="${location.dimension()}"></td>
+        <td>
+            <a th:href="@{/location/{id}(id=${location.id()})}">View Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/">Back to home</a>
+</body>
+</html>

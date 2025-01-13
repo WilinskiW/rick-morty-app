@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Rick and Morty - ' + ${title}">Character</title>
+</head>
+<body>
+<h1 th:text="${character.name()}"></h1>
+<p><strong>Status:</strong> <span th:text="${character.status()}"></span>
+
+
+<p><strong>Species:</strong> <span th:text="${character.species()}"></span></p>
+
+<p th:if="${#strings.isEmpty(character.type()) == false}">
+    <strong>Type:</strong> <span th:text="${character.type()}"></span>
+</p>
+
+<p><strong>Gender:</strong> <span th:text="${character.species()}"></span></p>
+
+<p><strong>Origin:</strong> <span th:text="${character.origin()?.name() ?: 'Unknown'}" ></span></p>
+
+<p><strong>Last seen:</strong> <span th:text="${character.currentLocation()?.name() ?: 'Unknown'}"></span></p>
+
+<img th:src="${character.imageUrl()}" th:alt="${character.name()}" th:size="50">
+
+<a href="/locations">Back to Locations</a>
+</body>
+</html>

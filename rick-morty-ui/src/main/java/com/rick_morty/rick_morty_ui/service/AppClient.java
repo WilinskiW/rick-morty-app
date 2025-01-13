@@ -2,6 +2,7 @@ package com.rick_morty.rick_morty_ui.service;
 
 import com.rick_morty.rick_morty_ui.dto.CharacterDto;
 import com.rick_morty.rick_morty_ui.dto.EpisodeDto;
+import com.rick_morty.rick_morty_ui.dto.LocationDto;
 import com.rick_morty.rick_morty_ui.service.uri_builder.MyAppUriProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -24,13 +25,28 @@ public class AppClient {
                 .pathSegment(id+"")
                 .toUriString();
 
-        System.out.println("Constructed URL: " + url);
-
         try {
             return restTemplate.getForObject(url, EpisodeDto.class);
         } catch (Exception e) {
             throw new RuntimeException("Failed to fetch episode", e);
         }
+    }
+
+    public List<EpisodeDto> getAllEpisodes() {
+        String url = provider.builder()
+                .pathSegment("episode")
+                .pathSegment("all")
+                .toUriString();
+
+        ResponseEntity<List<EpisodeDto>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return response.getBody();
     }
 
 
@@ -49,5 +65,47 @@ public class AppClient {
         );
 
         return response.getBody();
+    }
+
+    public CharacterDto getCharacter(String path, int id) {
+        String url = provider.builder()
+                .pathSegment(path)
+                .pathSegment(id+"")
+                .toUriString();
+
+        try {
+            return restTemplate.getForObject(url, CharacterDto.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch character", e);
+        }
+    }
+
+    public List<LocationDto> getAllLocations(){
+        String url = provider.builder()
+                .pathSegment("location")
+                .pathSegment("all")
+                .toUriString();
+
+        ResponseEntity<List<LocationDto>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                }
+        );
+        return response.getBody();
+    }
+
+    public LocationDto getLocation(String path, int id) {
+        String url = provider.builder()
+                .pathSegment(path)
+                .pathSegment(id+"")
+                .toUriString();
+
+        try {
+            return restTemplate.getForObject(url, LocationDto.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch location", e);
+        }
     }
 }
