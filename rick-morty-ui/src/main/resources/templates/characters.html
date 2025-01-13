@@ -25,7 +25,9 @@
         <td th:text="${character.gender()}"></td>
         <td th:text="${character.origin()?.name() ?: 'Unknown'}"></td>
         <td th:text="${character.currentLocation()?.name() ?: 'Unknown'}"></td>
-        <td th:text="${character.imageUrl()}"></td>
+        <td>
+            <img th:src="${character.imageUrl()}" th:alt="${character.name()}" th:size="50">
+        </td>
     </tr>
 </table>
 </body>
