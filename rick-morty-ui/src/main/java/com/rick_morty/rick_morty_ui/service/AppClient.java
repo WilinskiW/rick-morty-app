@@ -2,34 +2,42 @@ package com.rick_morty.rick_morty_ui.service;
 
 import com.rick_morty.rick_morty_ui.dto.CharacterDto;
 import com.rick_morty.rick_morty_ui.dto.EpisodeDto;
-import org.springframework.beans.factory.annotation.Value;
+import com.rick_morty.rick_morty_ui.service.uri_builder.MyAppUriProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
 @Service
-public class GuiClient {
+@RequiredArgsConstructor
+public class AppClient {
     private final RestTemplate restTemplate = new RestTemplate();
+    private final MyAppUriProvider provider;
 
-    @Value("${rick-morty.api.url}")
-    private String apiUrl;
-
-    public EpisodeDto getEpisode(String path) {
-        String url = UriComponentsBuilder.fromUriString(apiUrl)
-                .path(path)
+    public EpisodeDto getEpisode(String path, int id) {
+        String url = provider.builder()
+                .pathSegment(path)
+                .pathSegment(id+"")
                 .toUriString();
 
-        return restTemplate.getForObject(url, EpisodeDto.class);
+        System.out.println("Constructed URL: " + url);
+
+        try {
+            return restTemplate.getForObject(url, EpisodeDto.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch episode", e);
+        }
     }
 
+
     public List<CharacterDto> getAllCharacters() {
-        String url = UriComponentsBuilder.fromUriString(apiUrl)
-                .path("/character/all")
+        String url = provider.builder()
+                .pathSegment("character")
+                .pathSegment("all")
                 .toUriString();
 
         ResponseEntity<List<CharacterDto>> response = restTemplate.exchange(

@@ -2,7 +2,10 @@ package com.rick_morty.rick_morty_web_api.mapper;
 
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
+import com.rick_morty.rick_morty_data.model.Location;
+import com.rick_morty.rick_morty_web_api.contract.CharacterSummaryDto;
 import com.rick_morty.rick_morty_web_api.contract.EpisodeDto;
+import com.rick_morty.rick_morty_web_api.contract.LocationSummaryDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -21,10 +24,33 @@ public class EpisodeMapper implements Mapper<Episode, EpisodeDto> {
         );
     }
 
-    private List<EpisodeDto.Characters> charactersToDto(Set<Character> characters) {
+    private List<CharacterSummaryDto> charactersToDto(Set<Character> characters) {
         return characters.stream()
-                .map(character -> new EpisodeDto.Characters(character.getId(),character.getName()))
+                .map(character ->
+                        new CharacterSummaryDto(
+                                character.getId(),
+                                character.getName(),
+                                character.getStatus(),
+                                character.getSpecies(),
+                                character.getType(),
+                                character.getGender(),
+                                locationToDto(character.getOrigin()),
+                                locationToDto(character.getLocation()),
+                                character.getImageUrl())
+                )
                 .toList();
+    }
+
+    private LocationSummaryDto locationToDto(Location location) {
+        if (location == null) {
+            return null;
+        }
+        
+        return new LocationSummaryDto(
+                location.getId(),
+                location.getName(),
+                location.getType(),
+                location.getDimension());
     }
 
     @Override
