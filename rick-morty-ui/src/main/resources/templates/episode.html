@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Rick and Morty Episode ' + ${title}">Episode</title>
+</head>
+<body>
+<h1>Episode</h1>
+<ul th:object="${episode}">
+    <li th:text="*{id()}"></li>
+    <li th:text="*{title()}"></li>
+    <li th:text="*{airDate()}"></li>
+    <li th:text="*{episode()}"></li>
+</ul>
+<h2>Characters</h2>
+<table style="border: 1px">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Type</th>
+        <th>Gender</th>
+        <th>Origin</th>
+        <th>Last seen</th>
+        <th>Image url</th>
+    </tr>
+    <tr th:each="character : ${characters}">
+        <td th:text="${character.id()}"></td>
+        <td th:text="${character.name()}"></td>
+        <td th:text="${character.status()}"></td>
+        <td th:text="${character.type()}"></td>
+        <td th:text="${character.gender()}"></td>
+        <td th:text="${character.origin()?.name() ?: 'Unknown'}"></td>
+        <td th:text="${character.currentLocation()?.name() ?: 'Unknown'}"></td>
+        <td>
+            <img th:src="${character.imageUrl()}" th:alt="${character.name()}" th:size="50">
+        </td>
+    </tr>
+</table>
+<a href="/episodes">Back to Episodes</a>
+</body>
+</html>
