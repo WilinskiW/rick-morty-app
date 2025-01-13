@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rick and Morty - Characters</title>
+</head>
+<body>
+<h1>Characters</h1>
+<table style="border: 1px">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Type</th>
+        <th>Gender</th>
+        <th>Origin</th>
+        <th>Last seen</th>
+        <th>Image url</th>
+    </tr>
+    <tr th:each="character : ${characters}">
+        <td th:text="${character.id()}"></td>
+        <td th:text="${character.name()}"></td>
+        <td th:text="${character.status()}"></td>
+        <td th:text="${character.type()}"></td>
+        <td th:text="${character.gender()}"></td>
+        <td th:text="${character.origin()?.name() ?: 'Unknown'}"></td>
+        <td th:text="${character.currentLocation()?.name() ?: 'Unknown'}"></td>
+        <td th:text="${character.imageUrl()}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -16,9 +16,18 @@ public class ViewController {
         return "homepage";
     }
 
-    @GetMapping("episode")
-    public String showEpisodesPage(Model model){
-        model.addAttribute("episode", guiClient.getEpisode("/episode/all"));
-        return "episodes";
+    @GetMapping("/episode")
+    public String showEpisodePage(Model model){
+        var episode = guiClient.getEpisode("/episode/5");
+        model.addAttribute("episode", episode);
+        model.addAttribute("title", episode.episode());
+        model.addAttribute("characters", episode.characters());
+        return "episode";
+    }
+
+    @GetMapping("characters")
+    public String showCharactersPage(Model model){
+        model.addAttribute("characters", guiClient.getAllCharacters());
+        return "characters";
     }
 }
