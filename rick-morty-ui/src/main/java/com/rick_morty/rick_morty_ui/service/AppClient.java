@@ -22,7 +22,7 @@ public class AppClient {
     public EpisodeDto getEpisode(String path, int id) {
         String url = provider.builder()
                 .pathSegment(path)
-                .pathSegment(id+"")
+                .pathSegment(id + "")
                 .toUriString();
 
         try {
@@ -70,7 +70,7 @@ public class AppClient {
     public CharacterDto getCharacter(String path, int id) {
         String url = provider.builder()
                 .pathSegment(path)
-                .pathSegment(id+"")
+                .pathSegment(id + "")
                 .toUriString();
 
         try {
@@ -80,7 +80,7 @@ public class AppClient {
         }
     }
 
-    public List<LocationDto> getAllLocations(){
+    public List<LocationDto> getAllLocations() {
         String url = provider.builder()
                 .pathSegment("location")
                 .pathSegment("all")
@@ -99,7 +99,7 @@ public class AppClient {
     public LocationDto getLocation(String path, int id) {
         String url = provider.builder()
                 .pathSegment(path)
-                .pathSegment(id+"")
+                .pathSegment(id + "")
                 .toUriString();
 
         try {
@@ -107,5 +107,23 @@ public class AppClient {
         } catch (Exception e) {
             throw new RuntimeException("Failed to fetch location", e);
         }
+    }
+
+    public void delete(String path, int id) {
+        String url = provider.builder()
+                .pathSegment(path)
+                .pathSegment(id + "")
+                .toUriString();
+
+        restTemplate.delete(url);
+    }
+
+    public <T> void update(String path, int id, T body){
+        String url = provider.builder()
+                .pathSegment(path)
+                .pathSegment(id + "")
+                .toUriString();
+
+        restTemplate.put(url, body);
     }
 }

@@ -13,19 +13,19 @@ public class ViewController {
     private final AppClient appClient;
 
     @GetMapping("/")
-    public String showHomePage(){
+    public String showHomePage() {
         return "homepage";
     }
 
     @GetMapping("/episodes")
-    public String showEpisodesPage(Model model){
+    public String showEpisodesPage(Model model) {
         var episodes = appClient.getAllEpisodes();
         model.addAttribute("episodes", episodes);
         return "episodes";
     }
 
     @GetMapping("/episode/{id}")
-    public String showEpisodePage(Model model, @PathVariable int id){
+    public String showEpisodePage(Model model, @PathVariable int id) {
         var episode = appClient.getEpisode("episode", id);
         model.addAttribute("episode", episode);
         model.addAttribute("title", episode.episode());
@@ -34,13 +34,13 @@ public class ViewController {
     }
 
     @GetMapping("characters")
-    public String showCharactersPage(Model model){
+    public String showCharactersPage(Model model) {
         model.addAttribute("characters", appClient.getAllCharacters());
         return "characters";
     }
 
     @GetMapping("character/{id}")
-    public String showCharacterPage(Model model, @PathVariable int id){
+    public String showCharacterPage(Model model, @PathVariable int id) {
         var character = appClient.getCharacter("character", id);
         model.addAttribute("character", appClient.getCharacter("character", id));
         model.addAttribute("title", character.name());
@@ -48,7 +48,7 @@ public class ViewController {
     }
 
     @GetMapping("locations")
-    public String showLocationsPage(Model model){
+    public String showLocationsPage(Model model) {
         var locations = appClient.getAllLocations();
         model.addAttribute("locations", locations);
         return "locations";
@@ -60,5 +60,19 @@ public class ViewController {
         var location = appClient.getLocation("location", id);
         model.addAttribute("location", location);
         return "location";
+    }
+
+    @GetMapping("/{type}/{id}")
+    public String showEditPage(@PathVariable String type, @PathVariable int id, Model model) {
+        Object object = switch (type) {
+            case "episode" -> appClient.getEpisode("episode", id);
+            case "character" -> appClient.getCharacter("character", id);
+            case "location" -> appClient.getLocation("location", id);
+            default -> null;
+        };
+
+        model.addAttribute("type", type);
+        model.addAttribute("object", object);
+        return "edit";
     }
 }
