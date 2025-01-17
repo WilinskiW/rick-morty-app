@@ -31,10 +31,10 @@ public class Location {
     @Column(name = "created")
     private LocalDateTime created;
 
-    @OneToMany(mappedBy = "origin", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "origin", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Character> originCharacters;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Character> currentCharacters;
 
     @Override

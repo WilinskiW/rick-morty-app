@@ -62,6 +62,10 @@ public class LocationService {
     public void deleteById(Integer id) {
         var location = db.getLocations().findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Location not found"));
+
+        location.getOriginCharacters().forEach(originCharacter -> originCharacter.setOrigin(null));
+        location.getCurrentCharacters().forEach(currentCharacter -> currentCharacter.setLocation(null));
+
         db.getLocations().delete(location);
     }
 }
