@@ -2,6 +2,7 @@ package com.rick_morty.rick_morty_ui.controller;
 
 import com.rick_morty.rick_morty_ui.dto.CharacterDto;
 import com.rick_morty.rick_morty_ui.dto.EpisodeDto;
+import com.rick_morty.rick_morty_ui.dto.LocationDto;
 import com.rick_morty.rick_morty_ui.service.AppClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -43,4 +44,9 @@ public class ModificationController {
         return "redirect:/characters";
     }
 
-}
+    @PostMapping("edit/location/{id}")
+    public String editLocation(@PathVariable("id") int id, @ModelAttribute LocationDto locationDto){
+        appClient.update("location", id, locationDto);
+
+        return "redirect:/locations";
+    }}

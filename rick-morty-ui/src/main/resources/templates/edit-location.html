@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Editing Location: ' + ${location.name}">Editing Location</title>
+</head>
+<body>
+<h1 th:text="'Editing Location: ' + ${location.name}">Editing Location</h1>
+<form th:object="${location}" th:action="@{/edit/location/{id}(id=${location.id})}" method="POST">
+    <label>Name: <input type="text" th:field="*{name}"></label>
+    <br>
+    <label>Type: <input type="text" th:field="*{type}"></label>
+    <br>
+    <label>Dimension: <input type="text" th:field="*{dimension}"></label>
+    <br>
+
+    <!-- Residents (Optional) -->
+    <fieldset>
+        <legend>Residents</legend>
+        <label>Select Residents:</label>
+        <select th:field="*{residents}" multiple="true">
+            <option th:each="resident : ${allCharacters}" th:value="${resident.id}"
+                    th:text="${resident.name}"
+                    th:selected="${location.residents.contains(resident)}">
+            </option>
+        </select>
+    </fieldset>
+    <br>
+
+    <input type="submit" value="Save Location">
+</form>
+
+<a href="/locations">Back to Locations</a>
+</body>
+</html>

@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class ViewController {
@@ -82,10 +84,12 @@ public class ViewController {
         return "edit-character";
     }
 
-    @GetMapping("edit/location/{id}")
-    public String showLocationEditPage(@PathVariable int id, Model model) {
-        var location = appClient.getLocation("location", id);
-        model.addAttribute("location", location);
-        return "edit-character";
+
+    @GetMapping("/edit/location/{id}")
+    public String showLocationEditForm(@PathVariable("id") int id, Model model) {
+        model.addAttribute("location", appClient.getLocation("location", id));
+        model.addAttribute("allCharacters", appClient.getAllCharacters());
+        return "edit-location";
     }
+
 }

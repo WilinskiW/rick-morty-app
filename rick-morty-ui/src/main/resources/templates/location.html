@@ -20,6 +20,10 @@
     </button>
 </form>
 
+<form action="#" th:action="@{/edit/location/{id}(id=${location.id})}" method="GET">
+    <input type="submit" value="Edit">
+</form>
+
 <a href="/locations">Back to Locations</a>
 </body>
 </html>
