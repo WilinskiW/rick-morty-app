@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1 th:text="'Editing Location: ' + ${location.name}">Editing Location</h1>
-<form th:object="${location}" th:action="@{/edit/location/{id}(id=${location.id})}" method="POST">
+<form th:object="${location}" th:action="@{/location/edit/{id}(id=${location.id})}" method="POST">
     <label>Name: <input type="text" th:field="*{name}"></label>
     <br>
     <label>Type: <input type="text" th:field="*{type}"></label>
@@ -30,6 +30,6 @@
     <input type="submit" value="Save Location">
 </form>
 
-<a href="/locations">Back to Locations</a>
+<a href="/location/all">Back to Locations</a>
 </body>
 </html>

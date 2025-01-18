@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1 th:text="'Editing: ' + ${character.name}">Editing Character</h1>
-<form th:object="${character}" th:action="@{/edit/character/{id}(id=${character.id})}" method="POST">
+<form th:object="${character}" th:action="@{/character/edit/{id}(id=${character.id})}" method="POST">
     <label>Name: <input type="text" th:field="*{name}"></label>
     <br>
     <label>Status:
@@ -67,6 +67,6 @@
     <input type="submit" value="Save edit">
 </form>
 
-<a href="/characters">Back to Characters</a>
+<a href="/character/all">Back to Characters</a>
 </body>
 </html>

@@ -16,77 +16,30 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AppClient {
+
     private final RestTemplate restTemplate = new RestTemplate();
     private final MyAppUriProvider provider;
 
-    public EpisodeDto getEpisode(String path, int id) {
+    private <T> T getForObject(String path, Class<T> responseType, String... pathVariables) {
         String url = provider.builder()
                 .pathSegment(path)
-                .pathSegment(id + "")
+                .pathSegment(pathVariables)
                 .toUriString();
 
         try {
-            return restTemplate.getForObject(url, EpisodeDto.class);
+            return restTemplate.getForObject(url, responseType);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to fetch episode", e);
+            throw new RuntimeException("Failed to fetch data", e);
         }
     }
 
-    public List<EpisodeDto> getAllEpisodes() {
-        String url = provider.builder()
-                .pathSegment("episode")
-                .pathSegment("all")
-                .toUriString();
-
-        ResponseEntity<List<EpisodeDto>> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {
-                }
-        );
-
-        return response.getBody();
-    }
-
-
-    public List<CharacterDto> getAllCharacters() {
-        String url = provider.builder()
-                .pathSegment("character")
-                .pathSegment("all")
-                .toUriString();
-
-        ResponseEntity<List<CharacterDto>> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {
-                }
-        );
-
-        return response.getBody();
-    }
-
-    public CharacterDto getCharacter(String path, int id) {
+    private <T> List<T> getAllForObject(String path, Class<T> responseType, String... pathVariables) {
         String url = provider.builder()
                 .pathSegment(path)
-                .pathSegment(id + "")
+                .pathSegment(pathVariables)
                 .toUriString();
 
-        try {
-            return restTemplate.getForObject(url, CharacterDto.class);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to fetch character", e);
-        }
-    }
-
-    public List<LocationDto> getAllLocations() {
-        String url = provider.builder()
-                .pathSegment("location")
-                .pathSegment("all")
-                .toUriString();
-
-        ResponseEntity<List<LocationDto>> response = restTemplate.exchange(
+        ResponseEntity<List<T>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 null,
@@ -94,41 +47,52 @@ public class AppClient {
                 }
         );
         return response.getBody();
-    }
-
-    public LocationDto getLocation(String path, int id) {
-        String url = provider.builder()
-                .pathSegment(path)
-                .pathSegment(id + "")
-                .toUriString();
-
-        try {
-            return restTemplate.getForObject(url, LocationDto.class);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to fetch location", e);
-        }
-    }
-
-    public void delete(String path, int id) {
-        String url = provider.builder()
-                .pathSegment(path)
-                .pathSegment(id + "")
-                .toUriString();
-
-        restTemplate.delete(url);
     }
 
     public <T> void update(String path, int id, T body) {
         String url = provider.builder()
                 .pathSegment(path)
-                .pathSegment(id + "")
+                .pathSegment(String.valueOf(id))
                 .toUriString();
 
         restTemplate.put(url, body, id);
     }
 
+    public void delete(String path, int id) {
+        String url = provider.builder()
+                .pathSegment(path)
+                .pathSegment(String.valueOf(id))
+                .toUriString();
+
+        restTemplate.delete(url);
+    }
+
+    public EpisodeDto getEpisode(int id) {
+        return getForObject("episode", EpisodeDto.class, String.valueOf(id));
+    }
+
+    public List<EpisodeDto> getAllEpisodes() {
+        return getAllForObject("episode", EpisodeDto.class, "all");
+    }
+
+    public List<CharacterDto> getAllCharacters() {
+        return getAllForObject("character", CharacterDto.class, "all");
+    }
+
+    public CharacterDto getCharacter(int id) {
+        return getForObject("character", CharacterDto.class, String.valueOf(id));
+    }
+
+    public List<LocationDto> getAllLocations() {
+        return getAllForObject("location", LocationDto.class, "all");
+    }
+
+    public LocationDto getLocation(int id) {
+        return getForObject("location", LocationDto.class, String.valueOf(id));
+    }
+
     public CharacterDto.LocationSummaryDto getLocationSummary(int id) {
-        var location = getLocation("location", id);
+        LocationDto location = getLocation(id);
         CharacterDto.LocationSummaryDto locationSummary = new CharacterDto.LocationSummaryDto();
         locationSummary.setId(location.getId());
         locationSummary.setName(location.getName());

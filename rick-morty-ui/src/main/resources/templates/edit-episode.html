@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1 th:text="'Editing: ' + ${episode.episode}">Editing episode</h1>
-<form action="#" th:object="${episode}" th:action="@{/edit/episode/{id}(id=${episode.id})}" method="POST">
+<form action="#" th:object="${episode}" th:action="@{/episode/edit/{id}(id=${episode.id})}" method="POST">
     <label>Id: <input type="text" th:field="*{id}"></label>
     <br>
     <label>Title: <input type="text" th:field="*{title}"></label>
