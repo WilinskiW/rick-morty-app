@@ -118,12 +118,12 @@ public class AppClient {
         restTemplate.delete(url);
     }
 
-    public <T> void update(String path, int id, T body){
+    public void update(String path, int id, EpisodeDto episodeDto) {
         String url = provider.builder()
                 .pathSegment(path)
                 .pathSegment(id + "")
                 .toUriString();
 
-        restTemplate.put(url, body);
+        restTemplate.put(url, episodeDto, id);
     }
 }

@@ -1,5 +1,6 @@
 package com.rick_morty.rick_morty_ui.controller;
 
+import com.rick_morty.rick_morty_ui.dto.EpisodeDto;
 import com.rick_morty.rick_morty_ui.service.AppClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,8 @@ public class ViewController {
     public String showEpisodePage(Model model, @PathVariable int id) {
         var episode = appClient.getEpisode("episode", id);
         model.addAttribute("episode", episode);
-        model.addAttribute("title", episode.episode());
-        model.addAttribute("characters", episode.characters());
+        model.addAttribute("title", episode.getEpisode());
+        model.addAttribute("characters", episode.getCharacters());
         return "episode";
     }
 
@@ -42,8 +43,7 @@ public class ViewController {
     @GetMapping("character/{id}")
     public String showCharacterPage(Model model, @PathVariable int id) {
         var character = appClient.getCharacter("character", id);
-        model.addAttribute("character", appClient.getCharacter("character", id));
-        model.addAttribute("title", character.name());
+        model.addAttribute("character", character);
         return "character";
     }
 
@@ -62,17 +62,10 @@ public class ViewController {
         return "location";
     }
 
-    @GetMapping("/{type}/{id}")
-    public String showEditPage(@PathVariable String type, @PathVariable int id, Model model) {
-        Object object = switch (type) {
-            case "episode" -> appClient.getEpisode("episode", id);
-            case "character" -> appClient.getCharacter("character", id);
-            case "location" -> appClient.getLocation("location", id);
-            default -> null;
-        };
-
-        model.addAttribute("type", type);
-        model.addAttribute("object", object);
-        return "edit";
+    @GetMapping("edit/episode/{id}")
+    public String showEditPage(@PathVariable int id, Model model) {
+        var episode = appClient.getEpisode("episode", id);
+        model.addAttribute("episode", episode);
+        return "edit-episode";
     }
 }

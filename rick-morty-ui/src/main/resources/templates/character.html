@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Rick and Morty - ' + ${title}">Character</title>
+    <title th:text="'Rick and Morty - ' + ${character.name()}">Character</title>
 </head>
 <body>
 <h1 th:text="${character.name()}"></h1>

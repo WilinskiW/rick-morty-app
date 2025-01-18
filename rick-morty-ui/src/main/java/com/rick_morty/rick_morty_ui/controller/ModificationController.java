@@ -1,10 +1,14 @@
 package com.rick_morty.rick_morty_ui.controller;
 
+import com.rick_morty.rick_morty_ui.dto.EpisodeDto;
 import com.rick_morty.rick_morty_ui.service.AppClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,6 +30,12 @@ public class ModificationController {
     @DeleteMapping("episode/{id}")
     public String deleteEpisodes(@PathVariable("id") int id) {
         appClient.delete("episode", id);
+        return "redirect:/episodes";
+    }
+
+    @PostMapping("edit/episode/{id}")
+    public String editEpisode(@PathVariable("id") int id, @ModelAttribute EpisodeDto episode) {
+        appClient.update("episode", id, episode);
         return "redirect:/episodes";
     }
 }
