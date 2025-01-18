@@ -18,12 +18,12 @@
     </thead>
     <tbody>
     <tr th:each="location : ${locations}">
-        <td th:text="${location.id()}"></td>
-        <td th:text="${location.name()}"></td>
-        <td th:text="${location.type()}"></td>
-        <td th:text="${location.dimension()}"></td>
+        <td th:text="${location.id}"></td>
+        <td th:text="${location.name}"></td>
+        <td th:text="${location.type}"></td>
+        <td th:text="${location.dimension}"></td>
         <td>
-            <a th:href="@{/location/{id}(id=${location.id()})}">View Details</a>
+            <a th:href="@{/location/{id}(id=${location.id})}">View Details</a>
         </td>
     </tr>
     </tbody>

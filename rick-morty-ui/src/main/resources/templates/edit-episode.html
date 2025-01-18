@@ -5,8 +5,8 @@
     <title>Rick and Morty - Episode</title>
 </head>
 <body>
-<h1 th:text="'Editing: ' + ${episode.getEpisode()}">Editing episode</h1>
-<form action="#" th:object="${episode}" th:action="@{/edit/episode/{id}(id=${episode.getId()})}" method="POST">
+<h1 th:text="'Editing: ' + ${episode.episode}">Editing episode</h1>
+<form action="#" th:object="${episode}" th:action="@{/edit/episode/{id}(id=${episode.id})}" method="POST">
     <label>Id: <input type="text" th:field="*{id}"></label>
     <br>
     <label>Title: <input type="text" th:field="*{title}"></label>
@@ -29,16 +29,16 @@
         <th>Image url</th>
         <th>Actions</th>
     </tr>
-    <tr th:each="character : ${episode.getCharacters()}">
-        <td th:text="${character.id()}"></td>
-        <td th:text="${character.name()}"></td>
-        <td th:text="${character.status()}"></td>
-        <td th:text="${character.type()}"></td>
-        <td th:text="${character.gender()}"></td>
-        <td th:text="${character.origin()?.name() ?: 'Unknown'}"></td>
-        <td th:text="${character.currentLocation()?.name() ?: 'Unknown'}"></td>
+    <tr th:each="character : ${episode.characters}">
+        <td th:text="${character.id}"></td>
+        <td th:text="${character.name}"></td>
+        <td th:text="${character.status}"></td>
+        <td th:text="${character.type}"></td>
+        <td th:text="${character.gender}"></td>
+        <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
+        <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
         <td>
-            <img th:src="${character.imageUrl()}" th:alt="${character.name()}" th:size="50">
+            <img th:src="${character.imageUrl}" th:alt="${character.name}" th:size="50">
         </td>
         <td>
             <form>

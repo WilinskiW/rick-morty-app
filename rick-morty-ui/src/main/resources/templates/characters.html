@@ -18,15 +18,15 @@
         <th>Details</th>
     </tr>
     <tr th:each="character : ${characters}">
-        <td th:text="${character.id()}"></td>
-        <td th:text="${character.name()}"></td>
-        <td th:text="${character.status()}"></td>
-        <td th:text="${character.type()}"></td>
-        <td th:text="${character.gender()}"></td>
-        <td th:text="${character.origin()?.name() ?: 'Unknown'}"></td>
-        <td th:text="${character.currentLocation()?.name() ?: 'Unknown'}"></td>
+        <td th:text="${character.id}"></td>
+        <td th:text="${character.name}"></td>
+        <td th:text="${character.status}"></td>
+        <td th:text="${character.type}"></td>
+        <td th:text="${character.gender}"></td>
+        <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
+        <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
         <td>
-            <a th:href="@{/character/{id}(id=${character.id()})}">View Details</a>
+            <a th:href="@{/character/{id}(id=${character.id})}">View Details</a>
         </td>
     </tr>
 </table>

@@ -18,13 +18,13 @@
     </thead>
     <tbody>
     <tr th:each="episode : ${episodes}">
-        <td th:text="${episode.getId()}"></td>
-        <td th:text="${episode.getTitle()}"></td>
-        <td th:text="${episode.getAirDate()}"></td>
-        <td th:text="${episode.getEpisode()}"></td>
-        <td th:text="${episode.getCharacters().size()}"></td>
+        <td th:text="${episode.id}"></td>
+        <td th:text="${episode.title}"></td>
+        <td th:text="${episode.airDate}"></td>
+        <td th:text="${episode.episode}"></td>
+        <td th:text="${episode.characters.size()}"></td>
         <td>
-            <a th:href="@{/episode/{id}(id=${episode.getId()})}">View Details</a>
+            <a th:href="@{/episode/{id}(id=${episode.id})}">View Details</a>
         </td>
     </tr>
     </tbody>

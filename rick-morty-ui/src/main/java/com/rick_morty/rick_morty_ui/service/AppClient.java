@@ -118,12 +118,22 @@ public class AppClient {
         restTemplate.delete(url);
     }
 
-    public void update(String path, int id, EpisodeDto episodeDto) {
+    public <T> void update(String path, int id, T body) {
         String url = provider.builder()
                 .pathSegment(path)
                 .pathSegment(id + "")
                 .toUriString();
 
-        restTemplate.put(url, episodeDto, id);
+        restTemplate.put(url, body, id);
+    }
+
+    public CharacterDto.LocationSummaryDto getLocationSummary(int id) {
+        var location = getLocation("location", id);
+        CharacterDto.LocationSummaryDto locationSummary = new CharacterDto.LocationSummaryDto();
+        locationSummary.setId(location.getId());
+        locationSummary.setName(location.getName());
+        locationSummary.setType(location.getType());
+        locationSummary.setDimension(location.getDimension());
+        return locationSummary;
     }
 }

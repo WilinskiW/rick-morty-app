@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Editing: ' + ${character.name}">Editing Character</title>
+</head>
+<body>
+<h1 th:text="'Editing: ' + ${character.name}">Editing Character</h1>
+<form th:object="${character}" th:action="@{/edit/character/{id}(id=${character.id})}" method="POST">
+    <label>Name: <input type="text" th:field="*{name}"></label>
+    <br>
+    <label>Status:
+        <select th:field="*{status}">
+            <option value="Alive" th:selected="${character.status == 'Alive'}">Alive</option>
+            <option value="Dead" th:selected="${character.status == 'Dead'}">Dead</option>
+            <option value="Unknown" th:selected="${character.status == 'Unknown'}">Unknown</option>
+        </select>
+    </label>
+    <br>
+    <label>Species: <input type="text" th:field="*{species}"></label>
+    <br>
+    <label>Type: <input type="text" th:field="*{type}"></label>
+    <br>
+    <label>Gender:
+        <select th:field="*{gender}">
+            <option value="Male" th:selected="${character.gender == 'Male'}">Male</option>
+            <option value="Female" th:selected="${character.gender == 'Female'}">Female</option>
+            <option value="Unknown" th:selected="${character.gender == 'Unknown'}">Unknown</option>
+        </select>
+    </label>
+    <br>
+
+    <!-- Origin -->
+    <fieldset>
+        <legend>Origin</legend>
+        <label>Select Origin:</label>
+        <select th:field="*{origin}" th:required="false">
+            <option value="" th:if="*{origin == null}" selected>None</option>
+            <option th:each="location : ${locations}" th:value="${location.id}"
+                    th:text="${location.name}" th:selected="${character.origin?.id == location.id}">
+            </option>
+        </select>
+        <br>
+        <a href="/add-location" target="_blank">Add New Location</a>
+    </fieldset>
+    <br>
+
+    <!-- Current Location -->
+    <fieldset>
+        <legend>Current Location</legend>
+        <label>Select Current Location:</label>
+        <select th:field="*{currentLocation}" th:required="false">
+            <option value="" th:if="*{currentLocation == null}" selected>None</option>
+            <option th:each="location : ${locations}" th:value="${location.id}"
+                    th:text="${location.name}" th:selected="${character.currentLocation?.id == location.id}">
+            </option>
+        </select>
+        <br>
+        <a href="/add-location" target="_blank">Add New Location</a>
+    </fieldset>
+    <br>
+
+    <label>Image URL: <input type="text" th:field="*{imageUrl}"></label>
+    <br>
+    <img th:src="${character.imageUrl}" th:alt="${character.name}" style="max-height: 100px;">
+    <br>
+    <input type="submit" value="Save edit">
+</form>
+
+<a href="/characters">Back to Characters</a>
+</body>
+</html>

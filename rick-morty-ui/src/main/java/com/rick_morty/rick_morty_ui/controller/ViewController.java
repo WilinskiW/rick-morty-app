@@ -1,6 +1,6 @@
 package com.rick_morty.rick_morty_ui.controller;
 
-import com.rick_morty.rick_morty_ui.dto.EpisodeDto;
+import com.rick_morty.rick_morty_ui.dto.CharacterDto;
 import com.rick_morty.rick_morty_ui.service.AppClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -63,9 +63,29 @@ public class ViewController {
     }
 
     @GetMapping("edit/episode/{id}")
-    public String showEditPage(@PathVariable int id, Model model) {
+    public String showEpisodeEditPage(@PathVariable int id, Model model) {
         var episode = appClient.getEpisode("episode", id);
         model.addAttribute("episode", episode);
         return "edit-episode";
+    }
+
+    @GetMapping("edit/character/{id}")
+    public String showCharacterEditPage(@PathVariable int id, Model model) {
+        var character = appClient.getCharacter("character", id);
+        var locationsSummary = appClient.getAllLocations().stream()
+                .map(l -> l.toLocationSummaryDto())
+                .toList();
+
+        model.addAttribute("character", character);
+        model.addAttribute("locations", locationsSummary);
+
+        return "edit-character";
+    }
+
+    @GetMapping("edit/location/{id}")
+    public String showLocationEditPage(@PathVariable int id, Model model) {
+        var location = appClient.getLocation("location", id);
+        model.addAttribute("location", location);
+        return "edit-character";
     }
 }
