@@ -38,8 +38,11 @@ public class LocationController implements EntityController<LocationDto> {
     }
 
     @Override
+    @GetMapping("/add")
     public String showAddPage(Model model) {
-        return "";
+        model.addAttribute("location", new LocationDto());
+        model.addAttribute("allCharacters", appClient.getAllCharacters());
+        return "add-location";
     }
 
     @Override
@@ -57,7 +60,9 @@ public class LocationController implements EntityController<LocationDto> {
     }
 
     @Override
+    @PostMapping("/add")
     public String create(LocationDto locationDto) {
-        return "";
+        appClient.create("location", locationDto);
+        return "redirect:/location/all";
     }
 }

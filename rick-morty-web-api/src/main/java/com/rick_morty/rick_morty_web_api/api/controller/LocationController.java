@@ -1,6 +1,5 @@
 package com.rick_morty.rick_morty_web_api.api.controller;
 
-import com.rick_morty.rick_morty_web_api.api.contract.CreateLocationDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import com.rick_morty.rick_morty_web_api.api.service.LocationService;
@@ -24,8 +23,8 @@ public class LocationController {
 
     @PostMapping
     @CachePut(value = "locations", key = "'allLocations'")
-    public ResponseEntity<Void> createLocation(@RequestBody CreateLocationDto createLocationDto) {
-        locationService.save(createLocationDto);
+    public ResponseEntity<Void> createLocation(@RequestBody LocationDto locationDto) {
+        locationService.save(locationDto);
         return ResponseEntity.ok().build();
     }
 

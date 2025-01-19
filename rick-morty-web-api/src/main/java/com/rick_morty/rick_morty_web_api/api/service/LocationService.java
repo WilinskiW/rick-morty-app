@@ -1,8 +1,8 @@
 package com.rick_morty.rick_morty_web_api.api.service;
 
+import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Location;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
-import com.rick_morty.rick_morty_web_api.api.contract.CreateLocationDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,13 +23,24 @@ public class LocationService {
     private final LocationMapper mapper;
 
     @Transactional
-    public void save(CreateLocationDto createLocationDto) {
-        if (createLocationDto != null) {
+    public void save(LocationDto locationDto) {
+        if (locationDto != null) {
             Location location = new Location();
-            location.setName(createLocationDto.name());
-            location.setType(createLocationDto.type());
-            location.setDimension(createLocationDto.dimension());
+
+            Set<Character> characters = locationDto.residents().stream()
+                    .map(dto -> {
+                        var character = db.getCharacters().findById(dto.id())
+                                .orElseThrow(() -> new EntityNotFoundException("Character not found"));
+                       character.setLocation(location);
+                       return character;
+                    })
+                    .collect(Collectors.toSet());
+
+            location.setName(locationDto.name());
+            location.setType(locationDto.type());
+            location.setDimension(locationDto.dimension());
             location.setCreated(LocalDateTime.now());
+            location.setCurrentCharacters(characters);
 
             db.getLocations().save(location);
         }
