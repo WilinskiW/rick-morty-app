@@ -18,7 +18,7 @@ public class LocationController implements EntityController<LocationDto> {
     public String showSinglePage(@PathVariable int id, Model model) {
         var location = appClient.getLocationsSummary(id);
         model.addAttribute("location", location);
-        return "location";
+        return "location/location";
     }
 
     @Override
@@ -26,7 +26,7 @@ public class LocationController implements EntityController<LocationDto> {
     public String showAll(Model model) {
         var locations = appClient.getAllLocations();
         model.addAttribute("locations", locations);
-        return "locations";
+        return "location/locations";
     }
 
     @Override
@@ -34,7 +34,7 @@ public class LocationController implements EntityController<LocationDto> {
     public String showEditPage(@PathVariable int id, Model model) {
         model.addAttribute("location", appClient.getLocationsSummary(id));
         model.addAttribute("allCharacters", appClient.getAllCharacters());
-        return "edit-location";
+        return "location/edit-location";
     }
 
     @Override
@@ -42,7 +42,7 @@ public class LocationController implements EntityController<LocationDto> {
     public String showAddPage(Model model) {
         model.addAttribute("location", new LocationDto());
         model.addAttribute("allCharacters", appClient.getAllCharacters());
-        return "add-location";
+        return "location/add-location";
     }
 
     @Override

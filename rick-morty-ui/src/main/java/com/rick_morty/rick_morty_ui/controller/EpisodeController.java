@@ -20,7 +20,7 @@ public class EpisodeController implements EntityController<EpisodeDto> {
         model.addAttribute("episode", episode);
         model.addAttribute("title", episode.getEpisode());
         model.addAttribute("characters", episode.getCharacters());
-        return "episode";
+        return "episode/episode";
     }
 
     @Override
@@ -28,7 +28,7 @@ public class EpisodeController implements EntityController<EpisodeDto> {
     public String showAll(Model model) {
         var episodes = appClient.getAllEpisodes();
         model.addAttribute("episodes", episodes);
-        return "episodes";
+        return "episode/episodes";
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EpisodeController implements EntityController<EpisodeDto> {
         model.addAttribute("episode", episode);
         model.addAttribute("characters", episode.getCharacters());
         model.addAttribute("allCharacters", appClient.getAllCharacters());
-        return "edit-episode";
+        return "episode/edit-episode";
     }
 
     @Override
@@ -46,7 +46,7 @@ public class EpisodeController implements EntityController<EpisodeDto> {
     public String showAddPage(Model model) {
         model.addAttribute("episode", new EpisodeDto());
         model.addAttribute("allCharacters", appClient.getAllCharacters());
-        return "add-episode";
+        return "episode/add-episode";
     }
 
     @Override

@@ -18,14 +18,14 @@ public class CharacterController implements EntityController<CharacterDto> {
     public String showSinglePage(@PathVariable int id, Model model) {
         var character = appClient.getCharacter(id);
         model.addAttribute("character", character);
-        return "character";
+        return "character/character";
     }
 
     @Override
     @GetMapping("/all")
     public String showAll(Model model) {
         model.addAttribute("characters", appClient.getAllCharacters());
-        return "characters";
+        return "character/characters";
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CharacterController implements EntityController<CharacterDto> {
         model.addAttribute("character", character);
         model.addAttribute("locations", appClient.getLocationsSummary());
 
-        return "edit-character";
+        return "character/edit-character";
     }
 
 
@@ -45,7 +45,7 @@ public class CharacterController implements EntityController<CharacterDto> {
     public String showAddPage(Model model) {
         model.addAttribute("character", new CharacterDto());
         model.addAttribute("locations", appClient.getLocationsSummary());
-        return "add-character";
+        return "character/add-character";
     }
 
     @Override
