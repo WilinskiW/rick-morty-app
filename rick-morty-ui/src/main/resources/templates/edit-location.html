@@ -13,10 +13,47 @@
     <br>
     <label>Dimension: <input type="text" th:field="*{dimension}"></label>
     <br>
-
-    <!-- Residents (Optional) -->
+    <table th:if="*{!residents.isEmpty()}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Species</th>
+            <th>Type</th>
+            <th>Gender</th>
+            <th>Origin</th>
+            <th>Last Location</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="character : *{residents}">
+            <td th:text="${character.id}"></td>
+            <td th:text="${character.name}"></td>
+            <td th:text="${character.status}"></td>
+            <td th:text="${character.species}"></td>
+            <td th:text="${character.type ?: 'N/A'}"></td>
+            <td th:text="${character.gender}"></td>
+            <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
+            <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
+            <td>
+                <img th:src="${character.imageUrl}" th:alt="${character.name}" style="max-height: 50px;">
+            </td>
+            <td>
+                <form th:action="@{/character/edit/{id}(id=${character.id})}" method="GET" style="display:inline;">
+                    <input type="submit" value="Edit">
+                </form>
+                <form method="POST" style="display:inline;">
+                    <input type="submit" value="Remove">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <fieldset>
-        <legend>Residents</legend>
+        <legend>Select new residents</legend>
         <label>Select Residents:</label>
         <select th:field="*{residents}" multiple="true">
             <option th:each="resident : ${allCharacters}" th:value="${resident.id}"
