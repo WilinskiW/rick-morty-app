@@ -38,7 +38,7 @@ public class LocationController implements EntityController<LocationDto> {
     }
 
     @Override
-    public String showAddPage() {
+    public String showAddPage(Model model) {
         return "";
     }
 
@@ -57,7 +57,7 @@ public class LocationController implements EntityController<LocationDto> {
     }
 
     @Override
-    public String create() {
+    public String create(LocationDto locationDto) {
         return "";
     }
 }

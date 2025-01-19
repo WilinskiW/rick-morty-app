@@ -2,52 +2,68 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Rick and Morty - Episode</title>
+    <title th:text="'Editing: ' + ${episode.title}">Editing Episode</title>
 </head>
 <body>
-<h1 th:text="'Editing: ' + ${episode.episode}">Editing episode</h1>
-<form action="#" th:object="${episode}" th:action="@{/episode/edit/{id}(id=${episode.id})}" method="POST">
-    <label>Id: <input type="text" th:field="*{id}"></label>
+<h1 th:text="'Editing: ' + ${episode.title}">Editing Episode</h1>
+<form th:object="${episode}" th:action="@{/episode/edit/{id}(id=${episode.id})}" method="POST">
+    <label>Title: <input type="text" th:field="*{title}" required></label>
     <br>
-    <label>Title: <input type="text" th:field="*{title}"></label>
+    <label>Air Date: <input type="text" th:field="*{airDate}" placeholder="YYYY-MM-DD" required></label>
     <br>
-    <label>Air date: <input type="text" th:field="*{airDate}"></label>
+    <label>Episode: <input type="text" th:field="*{episode}" placeholder="SXXEXX" required></label>
     <br>
-    <label>Episode: <input type="text" th:field="*{episode}"></label>
-    <br>
-    <input type="submit" value="Save edit">
+    <h2>Characters in this episode</h2>
+    <label>Select Characters:</label>
+    <select th:field="*{characters}" multiple size="10">
+        <option th:each="character : ${allCharacters}"
+                th:value="${character.id}"
+                th:text="${character.name}"></option>
+    </select>
+
+    <table th:if="*{!characters.isEmpty()}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Species</th>
+            <th>Type</th>
+            <th>Gender</th>
+            <th>Origin</th>
+            <th>Last Location</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="character : *{characters}">
+            <td th:text="${character.id}"></td>
+            <td th:text="${character.name}"></td>
+            <td th:text="${character.status}"></td>
+            <td th:text="${character.species}"></td>
+            <td th:text="${character.type ?: 'N/A'}"></td>
+            <td th:text="${character.gender}"></td>
+            <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
+            <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
+            <td>
+                <img th:src="${character.imageUrl}" th:alt="${character.name}" style="max-height: 50px;">
+            </td>
+            <td>
+                <form th:action="@{/character/edit/{id}(id=${character.id})}" method="GET" style="display:inline;">
+                    <input type="submit" value="Edit">
+                </form>
+                <form th:action="@{/character/remove-from-episode/{episodeId}/{characterId}(episodeId=${episode.id}, characterId=${character.id})}"
+                      method="POST" style="display:inline;">
+                    <input type="submit" value="Remove">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="submit" value="Save">
 </form>
-<table style="border: 1px">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Type</th>
-        <th>Gender</th>
-        <th>Origin</th>
-        <th>Last seen</th>
-        <th>Image url</th>
-        <th>Actions</th>
-    </tr>
-    <tr th:each="character : ${episode.characters}">
-        <td th:text="${character.id}"></td>
-        <td th:text="${character.name}"></td>
-        <td th:text="${character.status}"></td>
-        <td th:text="${character.type}"></td>
-        <td th:text="${character.gender}"></td>
-        <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
-        <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
-        <td>
-            <img th:src="${character.imageUrl}" th:alt="${character.name}" th:size="50">
-        </td>
-        <td>
-            <form>
-                <!--                    TODO-->
-                <input type="button" value="Edit">
-                <input type="button" value="Delete">
-            </form>
-        </td>
-    </tr>
-</table>
+
+<a href="/episode/all">Back to Episodes</a>
 </body>
 </html>

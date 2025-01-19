@@ -43,7 +43,7 @@ public class CharacterController implements EntityController<CharacterDto> {
     }
 
     @Override
-    public String showAddPage() {
+    public String showAddPage(Model model) {
         return "";
     }
 
@@ -62,7 +62,7 @@ public class CharacterController implements EntityController<CharacterDto> {
     }
 
     @Override
-    public String create() {
+    public String create(CharacterDto characterDto) {
         return "";
     }
 }

@@ -13,7 +13,10 @@
     <li th:text="*{episode}"></li>
 </ul>
 <h2>Characters</h2>
-<table style="border: 1px">
+<div th:if="${characters.isEmpty()}">
+    <p>No known characters in episode. Click edit to add characters to episode</p>
+</div>
+<table th:if="${!characters.isEmpty()}" style="border: 1px">
     <tr>
         <th>ID</th>
         <th>Name</th>

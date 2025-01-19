@@ -2,6 +2,7 @@ package com.rick_morty.rick_morty_ui.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -10,5 +11,5 @@ public class EpisodeDto{
     private String title;
     private String airDate;
     private String episode;
-    private List<CharacterDto> characters;
+    private List<CharacterDto> characters = new ArrayList<>();
 }

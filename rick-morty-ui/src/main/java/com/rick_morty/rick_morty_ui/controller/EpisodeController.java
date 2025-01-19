@@ -32,16 +32,21 @@ public class EpisodeController implements EntityController<EpisodeDto> {
     }
 
     @Override
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String showEditPage(@PathVariable int id, Model model) {
         var episode = appClient.getEpisode(id);
         model.addAttribute("episode", episode);
+        model.addAttribute("characters", episode.getCharacters());
+        model.addAttribute("allCharacters", appClient.getAllCharacters());
         return "edit-episode";
     }
 
     @Override
-    public String showAddPage() {
-        return "";
+    @GetMapping("/add")
+    public String showAddPage(Model model) {
+        model.addAttribute("episode", new EpisodeDto());
+        model.addAttribute("allCharacters", appClient.getAllCharacters());
+        return "add-episode";
     }
 
     @Override
@@ -52,14 +57,16 @@ public class EpisodeController implements EntityController<EpisodeDto> {
     }
 
     @Override
-    @PostMapping("edit/{id}")
+    @PostMapping("/edit/{id}")
     public String update(@PathVariable int id, EpisodeDto episodeDto) {
         appClient.update("episode", id, episodeDto);
-        return "redirect:/episode/all";
+        return "redirect:/episode/"+id;
     }
 
     @Override
-    public String create() {
-        return "";
+    @PostMapping("/add")
+    public String create(EpisodeDto episodeDto) {
+        appClient.create("episode", episodeDto);
+        return "redirect:/episode/all";
     }
 }

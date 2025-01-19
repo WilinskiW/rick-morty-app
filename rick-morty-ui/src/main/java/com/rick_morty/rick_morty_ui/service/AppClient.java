@@ -56,6 +56,14 @@ public class AppClient {
         restTemplate.put(url, body, id);
     }
 
+    public <T> void create(String path, T body) {
+        String url = provider.builder()
+                .pathSegment(path)
+                .toUriString();
+
+        restTemplate.postForLocation(url, body);
+    }
+
     public void delete(String path, int id) {
         String url = provider.builder()
                 .pathSegment(path)

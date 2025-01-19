@@ -10,11 +10,11 @@ public interface EntityController<TDto> {
 
     String showEditPage(int id, Model model);
 
-    String showAddPage();
+    String showAddPage(Model model);
 
     String delete(int id);
 
     String update(int id, TDto dto);
 
-    String create();
+    String create(TDto tDto);
 }

@@ -1,6 +1,8 @@
 package com.rick_morty.rick_morty_web_api.api.service;
 
+import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.EpisodeMapper;
@@ -9,24 +11,26 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class EpisodeService {
     private final RickAndMortyDbCataloger db;
-    private final EpisodeMapper mapper;
+    private final EpisodeMapper episodeMapper;
 
     @Transactional
     public void save(EpisodeDto episodeDto) {
         if (episodeDto != null) {
-            db.getEpisodes().save(mapper.dtoToEntity(episodeDto));
+            db.getEpisodes().save(episodeMapper.dtoToEntity(episodeDto));
         }
     }
 
     public List<EpisodeDto> getAll() {
         return db.getEpisodes().findAll().stream()
-                .map(mapper::entityToDto)
+                .map(episodeMapper::entityToDto)
                 .toList();
     }
 
@@ -37,7 +41,7 @@ public class EpisodeService {
             throw new DataNotFoundException("Episode not found");
         }
 
-        return mapper.entityToDto(episode.get());
+        return episodeMapper.entityToDto(episode.get());
     }
 
     @Transactional
@@ -48,11 +52,19 @@ public class EpisodeService {
         }
         var episode = episodeOptional.get();
 
+        Set<Character> characters = new HashSet<>();
+
+        for (CharacterSummaryDto characterDto : episodeDto.characters()) {
+            Character character = db.getCharacters().findById(characterDto.id())
+                    .orElseThrow(() -> new EntityNotFoundException("Character not found"));
+            characters.add(character);
+        }
+
+        episode.getCharacters().addAll(characters);
+
         episode.setName(episodeDto.title());
-        episode.setEpisode(episode.getEpisode());
-        episode.setAirDate(episode.getAirDate());
-        episode.setCreated(episode.getCreated());
-        episode.setCharacters(episode.getCharacters());
+        episode.setEpisode(episodeDto.episode());
+        episode.setAirDate(episodeDto.airDate());
 
         db.getEpisodes().save(episode);
     }

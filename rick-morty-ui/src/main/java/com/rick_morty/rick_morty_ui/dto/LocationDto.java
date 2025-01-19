@@ -1,6 +1,8 @@
 package com.rick_morty.rick_morty_ui.dto;
 
 import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -9,7 +11,7 @@ public class LocationDto {
     private String name;
     private String type;
     private String dimension;
-    private List<CharacterDto> residents;
+    private List<CharacterDto> residents = new ArrayList<>();
 
     public CharacterDto.LocationSummaryDto toLocationSummaryDto() {
         CharacterDto.LocationSummaryDto dto = new CharacterDto.LocationSummaryDto();

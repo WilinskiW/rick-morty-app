@@ -1,5 +1,6 @@
 package com.rick_morty.rick_morty_ui.config;
 
+import com.rick_morty.rick_morty_ui.service.utils.CharacterConverter;
 import com.rick_morty.rick_morty_ui.service.utils.LocationSummaryConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
     private final LocationSummaryConverter locationSummaryConverter;
+    private final CharacterConverter characterConverter;
+
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
@@ -20,5 +23,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(locationSummaryConverter);
+        registry.addConverter(characterConverter);
     }
 }
