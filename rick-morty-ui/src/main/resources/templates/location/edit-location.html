@@ -55,7 +55,7 @@
     <fieldset>
         <legend>Select new residents</legend>
         <label>Select Residents:</label>
-        <select th:field="*{residents}" multiple="true">
+        <select th:field="*{residents}" multiple="multiple">
             <option th:each="resident : ${allCharacters}" th:value="${resident.id}"
                     th:text="${resident.name}"
                     th:selected="${location.residents.contains(resident)}">
