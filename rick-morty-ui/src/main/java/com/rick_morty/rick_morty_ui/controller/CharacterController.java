@@ -32,19 +32,20 @@ public class CharacterController implements EntityController<CharacterDto> {
     @GetMapping("edit/{id}")
     public String showEditPage(@PathVariable int id, Model model) {
         var character = appClient.getCharacter(id);
-        var locationsSummary = appClient.getAllLocations().stream()
-                .map(l -> l.toLocationSummaryDto())
-                .toList();
 
         model.addAttribute("character", character);
-        model.addAttribute("locations", locationsSummary);
+        model.addAttribute("locations", appClient.getLocationsSummary());
 
         return "edit-character";
     }
 
+
     @Override
+    @GetMapping("/add")
     public String showAddPage(Model model) {
-        return "";
+        model.addAttribute("character", new CharacterDto());
+        model.addAttribute("locations", appClient.getLocationsSummary());
+        return "add-character";
     }
 
     @Override
@@ -62,7 +63,9 @@ public class CharacterController implements EntityController<CharacterDto> {
     }
 
     @Override
+    @PostMapping("/add")
     public String create(CharacterDto characterDto) {
-        return "";
+        appClient.create("character", characterDto);
+        return "redirect:/character/all";
     }
 }

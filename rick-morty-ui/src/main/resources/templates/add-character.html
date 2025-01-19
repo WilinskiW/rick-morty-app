@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rick and Morty - Add new character</title>
+</head>
+<body>
+<h1>Create new character</h1>
+<form th:object="${character}" th:action="@{/character/add}" method="POST">
+    <label>Name: <input type="text" th:field="*{name}" required></label>
+    <br>
+    <label>Status:
+        <select th:field="*{status}" required>
+            <option value="Alive">Alive</option>
+            <option value="Dead">Dead</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+    </label>
+    <br>
+    <label>Species: <input type="text" th:field="*{species}" required></label>
+    <br>
+    <label>Type: <input type="text" th:field="*{type}"></label>
+    <br>
+    <label>Gender:
+        <select th:field="*{gender}" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+    </label>
+    <br>
+
+    <!-- Origin -->
+    <fieldset>
+        <legend>Origin</legend>
+        <label>Select Origin:</label>
+        <select th:field="*{origin}" th:required="false">
+            <option value="" selected>None</option>
+            <option th:each="location : ${locations}" th:value="${location.id}" th:text="${location.name}">
+            </option>
+        </select>
+        <br>
+        <a href="/location/add" target="_blank">Add New Location</a>
+    </fieldset>
+    <br>
+
+    <!-- Current Location -->
+    <fieldset>
+        <legend>Current Location</legend>
+        <label>Select Current Location:</label>
+        <select th:field="*{currentLocation}" th:required="false">
+            <option value="" selected>None</option>
+            <option th:each="location : ${locations}" th:value="${location.id}" th:text="${location.name}">
+            </option>
+        </select>
+        <br>
+        <a href="/location/add" target="_blank">Add New Location</a>
+    </fieldset>
+    <br>
+
+    <label>Image URL: <input type="text" th:field="*{imageUrl}"></label>
+    <br>
+    <img th:src="${character.imageUrl}" th:alt="${character.name}" style="max-height: 100px;">
+    <br>
+    <input type="submit" value="Save">
+</form>
+
+<a href="/character/all">Back to Characters</a>
+</body>
+</html>

@@ -16,7 +16,7 @@ public class LocationController implements EntityController<LocationDto> {
     @Override
     @GetMapping("/{id}")
     public String showSinglePage(@PathVariable int id, Model model) {
-        var location = appClient.getLocation(id);
+        var location = appClient.getLocationsSummary(id);
         model.addAttribute("location", location);
         return "location";
     }
@@ -32,7 +32,7 @@ public class LocationController implements EntityController<LocationDto> {
     @Override
     @GetMapping("/edit/{id}")
     public String showEditPage(@PathVariable int id, Model model) {
-        model.addAttribute("location", appClient.getLocation(id));
+        model.addAttribute("location", appClient.getLocationsSummary(id));
         model.addAttribute("allCharacters", appClient.getAllCharacters());
         return "edit-location";
     }

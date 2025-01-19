@@ -78,11 +78,13 @@ public class AppClient {
     }
 
     public List<EpisodeDto> getAllEpisodes() {
-        return getAllForObject("episode", new ParameterizedTypeReference<>(){});
+        return getAllForObject("episode", new ParameterizedTypeReference<>() {
+        });
     }
 
     public List<CharacterDto> getAllCharacters() {
-        return getAllForObject("character", new ParameterizedTypeReference<>(){});
+        return getAllForObject("character", new ParameterizedTypeReference<>() {
+        });
     }
 
     public CharacterDto getCharacter(int id) {
@@ -90,14 +92,21 @@ public class AppClient {
     }
 
     public List<LocationDto> getAllLocations() {
-        return getAllForObject("location", new ParameterizedTypeReference<>(){});
+        return getAllForObject("location", new ParameterizedTypeReference<>() {
+        });
     }
 
-    public LocationDto getLocation(int id) {
+    public LocationDto getLocationsSummary(int id) {
         return getForObject("location", LocationDto.class, String.valueOf(id));
     }
 
     public CharacterDto.LocationSummaryDto getLocationSummary(int id) {
-        return getLocation(id).toLocationSummaryDto();
+        return getLocationsSummary(id).toLocationSummaryDto();
+    }
+
+    public List<CharacterDto.LocationSummaryDto> getLocationsSummary() {
+        return getAllLocations().stream()
+                .map(l -> l.toLocationSummaryDto())
+                .toList();
     }
 }
