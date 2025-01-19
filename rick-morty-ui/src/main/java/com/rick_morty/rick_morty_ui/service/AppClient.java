@@ -16,7 +16,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AppClient {
-
     private final RestTemplate restTemplate = new RestTemplate();
     private final MyAppUriProvider provider;
 
@@ -33,18 +32,17 @@ public class AppClient {
         }
     }
 
-    private <T> List<T> getAllForObject(String path, Class<T> responseType, String... pathVariables) {
+    private <T> List<T> getAllForObject(String path, ParameterizedTypeReference<List<T>> responseType) {
         String url = provider.builder()
                 .pathSegment(path)
-                .pathSegment(pathVariables)
+                .pathSegment("all")
                 .toUriString();
 
         ResponseEntity<List<T>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<>() {
-                }
+                responseType
         );
         return response.getBody();
     }
@@ -72,11 +70,11 @@ public class AppClient {
     }
 
     public List<EpisodeDto> getAllEpisodes() {
-        return getAllForObject("episode", EpisodeDto.class, "all");
+        return getAllForObject("episode", new ParameterizedTypeReference<>(){});
     }
 
     public List<CharacterDto> getAllCharacters() {
-        return getAllForObject("character", CharacterDto.class, "all");
+        return getAllForObject("character", new ParameterizedTypeReference<>(){});
     }
 
     public CharacterDto getCharacter(int id) {
@@ -84,7 +82,7 @@ public class AppClient {
     }
 
     public List<LocationDto> getAllLocations() {
-        return getAllForObject("location", LocationDto.class, "all");
+        return getAllForObject("location", new ParameterizedTypeReference<>(){});
     }
 
     public LocationDto getLocation(int id) {
@@ -92,12 +90,6 @@ public class AppClient {
     }
 
     public CharacterDto.LocationSummaryDto getLocationSummary(int id) {
-        LocationDto location = getLocation(id);
-        CharacterDto.LocationSummaryDto locationSummary = new CharacterDto.LocationSummaryDto();
-        locationSummary.setId(location.getId());
-        locationSummary.setName(location.getName());
-        locationSummary.setType(location.getType());
-        locationSummary.setDimension(location.getDimension());
-        return locationSummary;
+        return getLocation(id).toLocationSummaryDto();
     }
 }
