@@ -1,6 +1,8 @@
 package com.rick_morty.rick_morty_web_api.api.service;
 
 import com.rick_morty.rick_morty_data.model.Character;
+import com.rick_morty.rick_morty_data.model.Episode;
+import com.rick_morty.rick_morty_data.model.Location;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
@@ -74,5 +76,18 @@ public class EpisodeService {
         var episode = db.getEpisodes().findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Episode not found"));
         db.getEpisodes().delete(episode);
+    }
+
+    @Transactional
+    public void removeCharacterFromLocation(Integer episodeId, Integer characterId) {
+        Episode episode = db.getEpisodes().findById(episodeId).orElseThrow(() -> new RuntimeException("Location not found"));
+        Character character = db.getCharacters().findById(characterId).orElseThrow(() -> new RuntimeException("Character not found"));
+
+        episode.getCharacters().remove(character);
+
+        character.getEpisodes().remove(episode);
+
+        db.getEpisodes().save(episode);
+        db.getCharacters().save(character);
     }
 }

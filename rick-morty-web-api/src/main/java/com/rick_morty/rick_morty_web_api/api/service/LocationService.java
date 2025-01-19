@@ -82,6 +82,7 @@ public class LocationService {
         db.getLocations().delete(location);
     }
 
+    @Transactional
     public void removeCharacterFromLocation(Integer locationId, Integer characterId) {
         Location location = db.getLocations().findById(locationId).orElseThrow(() -> new RuntimeException("Location not found"));
         Character character = db.getCharacters().findById(characterId).orElseThrow(() -> new RuntimeException("Character not found"));

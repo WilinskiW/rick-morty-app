@@ -53,8 +53,8 @@
                 <form th:action="@{/character/edit/{id}(id=${character.id})}" method="GET" style="display:inline;">
                     <input type="submit" value="Edit">
                 </form>
-                <form th:action="@{/character/remove-from-episode/{episodeId}/{characterId}(episodeId=${episode.id}, characterId=${character.id})}"
-                      method="POST" style="display:inline;">
+                <form th:action="@{/episode/{episodeId}/edit/remove-character/{characterId}(episodeId=${episode.id}, characterId=${character.id})}" method="POST" style="display:inline;">
+                    <input type="hidden" name="_method" value="delete">
                     <input type="submit" value="Remove">
                 </form>
             </td>

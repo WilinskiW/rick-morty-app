@@ -54,7 +54,7 @@ public class LocationController implements EntityController<LocationDto> {
 
     @DeleteMapping("/{id}/edit/remove-character/{characterId}")
     public String removeCharacter(@PathVariable int id, @PathVariable int characterId) {
-        appClient.removeCharacterFromLocation(id, characterId);
+        appClient.removeCharacterFromEntity("location",id, characterId);
         return "redirect:/location/edit/" + id;
     }
 

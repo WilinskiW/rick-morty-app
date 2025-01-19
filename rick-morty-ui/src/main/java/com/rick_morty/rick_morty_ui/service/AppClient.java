@@ -110,10 +110,10 @@ public class AppClient {
                 .toList();
     }
 
-    public void removeCharacterFromLocation(int locationId, int characterId) {
+    public void removeCharacterFromEntity(String path, int entityId, int characterId) {
         String url = provider.builder()
-                .pathSegment("location")
-                .pathSegment(String.valueOf(locationId))
+                .pathSegment(path)
+                .pathSegment(String.valueOf(entityId))
                 .pathSegment("remove-character")
                 .pathSegment(String.valueOf(characterId))
                 .toUriString();

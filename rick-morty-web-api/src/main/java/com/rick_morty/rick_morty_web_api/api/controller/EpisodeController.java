@@ -66,4 +66,9 @@ public class EpisodeController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/{id}/remove-character/{characterId}")
+    public ResponseEntity<Void> removeCharacterFromLocation(@PathVariable Integer id, @PathVariable Integer characterId) {
+        episodeService.removeCharacterFromLocation(id, characterId);
+        return ResponseEntity.ok().build();
+    }
 }

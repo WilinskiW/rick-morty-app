@@ -56,11 +56,17 @@ public class EpisodeController implements EntityController<EpisodeDto> {
         return "redirect:/episode/all";
     }
 
+    @DeleteMapping("/{id}/edit/remove-character/{characterId}")
+    public String removeCharacter(@PathVariable int id, @PathVariable int characterId) {
+        appClient.removeCharacterFromEntity("episode", id, characterId);
+        return "redirect:/episode/edit/" + id;
+    }
+
     @Override
     @PostMapping("/edit/{id}")
     public String update(@PathVariable int id, EpisodeDto episodeDto) {
         appClient.update("episode", id, episodeDto);
-        return "redirect:/episode/"+id;
+        return "redirect:/episode/" + id;
     }
 
     @Override
