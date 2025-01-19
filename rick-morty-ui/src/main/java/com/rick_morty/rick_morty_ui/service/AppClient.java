@@ -96,17 +96,28 @@ public class AppClient {
         });
     }
 
-    public LocationDto getLocationsSummary(int id) {
+    public LocationDto getLocation(int id) {
         return getForObject("location", LocationDto.class, String.valueOf(id));
     }
 
     public CharacterDto.LocationSummaryDto getLocationSummary(int id) {
-        return getLocationsSummary(id).toLocationSummaryDto();
+        return getLocation(id).toLocationSummaryDto();
     }
 
     public List<CharacterDto.LocationSummaryDto> getLocationsSummary() {
         return getAllLocations().stream()
                 .map(l -> l.toLocationSummaryDto())
                 .toList();
+    }
+
+    public void removeCharacterFromLocation(int locationId, int characterId) {
+        String url = provider.builder()
+                .pathSegment("location")
+                .pathSegment(String.valueOf(locationId))
+                .pathSegment("remove-character")
+                .pathSegment(String.valueOf(characterId))
+                .toUriString();
+
+        restTemplate.delete(url);
     }
 }

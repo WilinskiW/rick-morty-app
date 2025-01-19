@@ -16,7 +16,7 @@ public class LocationController implements EntityController<LocationDto> {
     @Override
     @GetMapping("/{id}")
     public String showSinglePage(@PathVariable int id, Model model) {
-        var location = appClient.getLocationsSummary(id);
+        var location = appClient.getLocation(id);
         model.addAttribute("location", location);
         return "location/location";
     }
@@ -32,7 +32,7 @@ public class LocationController implements EntityController<LocationDto> {
     @Override
     @GetMapping("/edit/{id}")
     public String showEditPage(@PathVariable int id, Model model) {
-        model.addAttribute("location", appClient.getLocationsSummary(id));
+        model.addAttribute("location", appClient.getLocation(id));
         model.addAttribute("allCharacters", appClient.getAllCharacters());
         return "location/edit-location";
     }
@@ -50,6 +50,12 @@ public class LocationController implements EntityController<LocationDto> {
     public String delete(@PathVariable int id) {
         appClient.delete("location", id);
         return "redirect:/location/all";
+    }
+
+    @DeleteMapping("/{id}/edit/remove-character/{characterId}")
+    public String removeCharacter(@PathVariable int id, @PathVariable int characterId) {
+        appClient.removeCharacterFromLocation(id, characterId);
+        return "redirect:/location/edit/" + id;
     }
 
     @Override

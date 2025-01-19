@@ -64,4 +64,10 @@ public class LocationController {
         locationService.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id}/remove-character/{characterId}")
+    public ResponseEntity<Void> removeCharacterFromLocation(@PathVariable Integer id, @PathVariable Integer characterId) {
+        locationService.removeCharacterFromLocation(id, characterId);
+        return ResponseEntity.ok().build();
+    }
 }
