@@ -52,7 +52,7 @@ public class LocationController implements EntityController<LocationDto> {
         return "redirect:/location/all";
     }
 
-    @DeleteMapping("/{id}/edit/remove-character/{characterId}")
+    @PostMapping("/{id}/edit/remove-character/{characterId}")
     public String removeCharacter(@PathVariable int id, @PathVariable int characterId) {
         appClient.removeCharacterFromEntity("location",id, characterId);
         return "redirect:/location/edit/" + id;

@@ -2,68 +2,124 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="'Editing: ' + ${episode.title}">Editing Episode</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
-<h1 th:text="'Editing: ' + ${episode.title}">Editing Episode</h1>
-<form th:object="${episode}" th:action="@{/episode/edit/{id}(id=${episode.id})}" method="POST">
-    <label>Title: <input type="text" th:field="*{title}" required></label>
-    <br>
-    <label>Air Date: <input type="text" th:field="*{airDate}" placeholder="YYYY-MM-DD" required></label>
-    <br>
-    <label>Episode: <input type="text" th:field="*{episode}" placeholder="SXXEXX" required></label>
-    <br>
-    <h2>Characters in this episode</h2>
-    <label>Select Characters:</label>
-    <select th:field="*{characters}" multiple size="10">
-        <option th:each="character : ${allCharacters}"
-                th:value="${character.id}"
-                th:text="${character.name}"></option>
-    </select>
+<body class="bg-light">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top mb-4">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/character/all}">Characters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/location/all}">Locations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/episode/all}">Episodes</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <table th:if="*{!characters.isEmpty()}">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Species</th>
-            <th>Type</th>
-            <th>Gender</th>
-            <th>Origin</th>
-            <th>Last Location</th>
-            <th>Image</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="character : *{characters}">
-            <td th:text="${character.id}"></td>
-            <td th:text="${character.name}"></td>
-            <td th:text="${character.status}"></td>
-            <td th:text="${character.species}"></td>
-            <td th:text="${character.type ?: 'N/A'}"></td>
-            <td th:text="${character.gender}"></td>
-            <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
-            <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
-            <td>
-                <img th:src="${character.imageUrl}" th:alt="${character.name}" style="max-height: 50px;">
-            </td>
-            <td>
-                <form th:action="@{/character/edit/{id}(id=${character.id})}" method="GET" style="display:inline;">
-                    <input type="submit" value="Edit">
-                </form>
-                <form th:action="@{/episode/{episodeId}/edit/remove-character/{characterId}(episodeId=${episode.id}, characterId=${character.id})}" method="POST" style="display:inline;">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="submit" value="Remove">
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <input type="submit" value="Save">
-</form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-dark text-center mb-4" th:text="'Editing: ' + ${episode.title}">Editing Episode</h1>
+                    <form th:object="${episode}" th:action="@{/episode/edit/{id}(id=${episode.id})}" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="title" th:field="*{title}" required placeholder="Enter title">
+                            <label for="title">Title</label>
+                        </div>
 
-<a href="/episode/all">Back to Episodes</a>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="airDate" th:field="*{airDate}" required>
+                            <label for="airDate">Air Date</label>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control" id="episode" th:field="*{episode}" placeholder="SXXEXX" required>
+                            <label for="episode">Episode Code (SXXEXX)</label>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label"><strong>Characters in this episode</strong></label>
+                            <select class="form-select" th:field="*{characters}" multiple style="height: 200px;">
+                                <option th:each="character : ${allCharacters}"
+                                        th:value="${character.id}"
+                                        th:text="${character.name}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="table-responsive" th:if="*{!characters.isEmpty()}">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Species</th>
+                                    <th>Type</th>
+                                    <th>Gender</th>
+                                    <th>Origin</th>
+                                    <th>Last Location</th>
+                                    <th>Image</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="character : *{characters}">
+                                    <td th:text="${character.id}"></td>
+                                    <td th:text="${character.name}"></td>
+                                    <td>
+                                        <span th:text="${character.status}"
+                                              th:class="${character.status == 'Alive' ? 'badge bg-success' : (character.status == 'Dead' ? 'badge bg-danger' : 'badge bg-warning')}">
+                                        </span>
+                                    </td>
+                                    <td th:text="${character.species}"></td>
+                                    <td th:text="${character.type ?: 'N/A'}"></td>
+                                    <td th:text="${character.gender}"></td>
+                                    <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
+                                    <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
+                                    <td>
+                                        <img th:src="${character.imageUrl}" th:alt="${character.name}" class="img-thumbnail" style="max-height: 50px;">
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a th:href="@{/character/edit/{id}(id=${character.id})}" class="btn btn-primary">Edit</a>
+                                            <form th:action="@{/episode/{episodeId}/edit/remove-character/{characterId}(episodeId=${episode.id}, characterId=${character.id})}"
+                                                  method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-danger">Remove</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-2 mt-4">
+                            <a href="/episode/all" class="btn btn-secondary">Back</a>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
