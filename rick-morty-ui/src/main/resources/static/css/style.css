@@ -1,0 +1,68 @@
+.card {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-title {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.card-characters {
+    background-image: url('../images/characters-bg.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-locations {
+    background-image: url('../images/locations-bg.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-episodes {
+    background-image: url('../images/episodes-bg.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-top: none;
+}
+
+.card-link {
+    text-decoration: none;
+    color: white;
+    display: block;
+    height: 100%;
+}
+
+.my-info-link {
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}
+
+.card-link:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.card-link:hover .card {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.card-link:hover .card-footer {
+    background-color: rgba(0, 0, 0, 0.9);
+}
