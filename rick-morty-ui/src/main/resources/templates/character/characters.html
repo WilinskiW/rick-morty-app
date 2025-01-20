@@ -31,30 +31,33 @@
 </nav>
 <div class="container mt-3">
     <h1 class="text-center p-2">Characters</h1>
-    <table class="table-bordered text-center justify-content-center m-1">
-        <tr class="text-bg-dark">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Gender</th>
-            <th>Origin</th>
-            <th>Last seen</th>
-            <th>Details</th>
-        </tr>
-        <tr th:each="character : ${characters}">
-            <td th:text="${character.id}"></td>
-            <td th:text="${character.name}"></td>
-            <td class="text-capitalize" th:text="${character.status}"></td>
-            <td th:text="${character.type}"></td>
-            <td class="text-capitalize" th:text="${character.gender}"></td>
-            <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
-            <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
-            <td>
-                <a class="btn btn-primary text-white m-2 rounded-2" th:href="@{/character/{id}(id=${character.id})}">View Details</a>
-            </td>
-        </tr>
-    </table>
+    <div class=" d-flex justify-content-center">
+        <table class="table-bordered text-center justify-content-center m-1">
+            <tr class="text-bg-dark">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Gender</th>
+                <th>Origin</th>
+                <th>Last seen</th>
+                <th>Details</th>
+            </tr>
+            <tr th:each="character : ${characters}">
+                <td th:text="${character.id}"></td>
+                <td th:text="${character.name}"></td>
+                <td class="text-capitalize" th:text="${character.status}"></td>
+                <td th:text="${character.type}"></td>
+                <td class="text-capitalize" th:text="${character.gender}"></td>
+                <td th:text="${character.origin?.name ?: 'Unknown'}"></td>
+                <td th:text="${character.currentLocation?.name ?: 'Unknown'}"></td>
+                <td>
+                    <a class="btn btn-primary text-white m-2 rounded-2"
+                       th:href="@{/character/{id}(id=${character.id})}">View Details</a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 </html>

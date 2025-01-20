@@ -3,17 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Rick and Morty - Add new episode</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Create new episode</h1>
-<form th:object="${episode}" th:action="@{/episode/add}" method="POST">
-    <label>Title: <input type="text" th:field="*{title}" required></label>
-    <br>
-    <label>Air Date: <input type="text" th:field="*{airDate}" placeholder="MM DD, YYYY" required></label>
-    <br>
-    <label>Episode: <input type="text" th:field="*{episode}" placeholder="SXXEXX" required></label>
-    <br>
-    <input type="submit" value="Save">
-</form>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{../}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{../character/all}">Characters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{../location/all}">Locations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{../episode/all}">Episodes</a>
+            </li>
+        </ul>
+        <div class="navbar-dark btn btn-success d-flex text-white">
+            <a class="nav-link" href="#">Add new episode</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid mt-4 d-flex justify-content-center align-items-center">
+    <div class="col-md-6 col-lg-4">
+        <h1 class="text-center mb-4">Create new episode</h1>
+        <form th:object="${episode}" th:action="@{/episode/add}" method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="title" placeholder="Enter episode title" th:field="*{title}"
+                       required>
+                <label for="title">Episode title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="air-date" placeholder="Enter episode air date"
+                       th:field="*{airDate}" required>
+                <label for="air-date">Air date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="episode-code" placeholder="Enter episode code (SXEXX)"
+                       th:field="*{episode}" required>
+                <label for="episode-code">Episode code (SXXEXX)</label>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <a href="/episode/all" class="btn btn-outline-secondary">Back to Episodes</a>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
