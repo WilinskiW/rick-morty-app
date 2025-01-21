@@ -24,6 +24,11 @@ public class AuthController {
         return "auth/register";
     }
 
+    @GetMapping("/account")
+    public String showAccountPage() {
+        return "auth/account";
+    }
+
     @PostMapping("/register")
     public String registerUser(@RequestParam String username, @RequestParam String password) {
         System.out.println("Wszedłem!!!!");
