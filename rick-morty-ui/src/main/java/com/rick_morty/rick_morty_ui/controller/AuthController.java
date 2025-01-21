@@ -31,7 +31,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@RequestParam String username, @RequestParam String password) {
-        System.out.println("Wszedłem!!!!");
         userService.registerUser(username, password);
         return "redirect:/login";
     }

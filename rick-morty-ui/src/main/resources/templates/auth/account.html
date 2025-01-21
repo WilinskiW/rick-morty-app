@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Rick and Morty - My account</title>
@@ -10,8 +11,13 @@
 <body>
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
     <div class="col-md-6 col-lg-4">
-        <h1 class="text-center mb-4">Account</h1>
+        <h1 class="text-center mb-2">Account</h1>
         <form th:action="@{/logout}" method="post">
+            <div class="d-grid gap-1 text-center m-2">
+                <label>User: <span sec:authentication="principal.username"></span></label>
+                <br>
+                <label>Roles: <span sec:authentication="principal.authorities"></span></label>
+            </div>
             <div class="d-grid gap-2">
                 <button class="btn btn-primary" type="submit">Logout</button>
                 <a href="/" class="btn btn-outline-secondary">Back to home</a>
