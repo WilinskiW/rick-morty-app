@@ -6,17 +6,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class RickAndMortyDbCatalog implements RickAndMortyDbCataloger{
-    private final AuthorityRepository authorityRepository;
     private final UserRepository userRepository;
     private final EpisodeRepository episodeRepository;
     private final CharacterRepository characterRepository;
     private final UserFavoritesRepository userFavoritesRepository;
     private final LocationRepository locationRepository;
-
-    @Override
-    public AuthorityRepository getAuthorities() {
-        return authorityRepository;
-    }
 
     @Override
     public UserRepository getUsers() {

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.rick_morty")
-@EnableJpaRepositories("com.rick_morty.rick_morty_data")
+@EnableJpaRepositories(basePackages = "com.rick_morty")
 public class RickMortySecurityApplication {
 
 	public static void main(String[] args) {

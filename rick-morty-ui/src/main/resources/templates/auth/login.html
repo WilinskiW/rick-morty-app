@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Login</title>
 </head>
 <body>
 <h2>Login</h2>
-<form th:action="@{/login}" method="post">
+<form th:action="@{/authenticateTheUser}" method="post">
   <div>
     <label>Username: <input type="text" name="username"/></label>
   </div>

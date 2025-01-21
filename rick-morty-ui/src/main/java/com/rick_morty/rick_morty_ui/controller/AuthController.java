@@ -1,20 +1,23 @@
 package com.rick_morty.rick_morty_ui.controller;
 
-import com.rick_morty.rick_morty_data.model.User;
-import com.rick_morty.rick_morty_data.repository.UserRepository;
+import com.rick_morty.rick_morty_security.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class AuthController {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "auth/login";
+    }
 
     @GetMapping("/register")
     public String showRegistrationForm() {
@@ -23,11 +26,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@RequestParam String username, @RequestParam String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        // user.getAuthorities().add(new Authority().)
-        userRepository.save(user);
-        return "redirect:auth/login";
+        System.out.println("Wszedłem!!!!");
+        userService.registerUser(username, password);
+        return "redirect:/login";
     }
 }
