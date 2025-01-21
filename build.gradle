@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 allprojects {
@@ -19,6 +20,7 @@ dependencies {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'jacoco'
 
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.18.30'
@@ -27,9 +29,27 @@ subprojects {
         testCompileOnly 'org.projectlombok:lombok:1.18.30'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+        testImplementation 'org.mockito:mockito-junit-jupiter'
     }
 
     test {
         useJUnitPlatform()
+        finalizedBy jacocoTestReport
+    }
+
+    jacocoTestReport {
+        dependsOn test //run tests before report
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 0.8
+                }
+            }
+        }
     }
 }
