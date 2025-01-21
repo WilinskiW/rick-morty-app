@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,28 +44,29 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card shadow-sm">
-                <div class="card-body">
+                <div th:object="${location}" class="card-body">
                     <h1 class="text-dark text-center mb-4" th:text="'Editing Location: ' + ${location.name}">Editing
                         Location</h1>
-                    <form th:object="${location}" th:action="@{/location/edit/{id}(id=${location.id})}" method="POST">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="name" th:field="*{name}"
-                                   placeholder="Enter name">
-                            <label for="name">Name</label>
-                        </div>
+                    <div>
+                        <form id="location" th:action="@{/location/edit/{id}(id=${location.id})}" method="POST">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="name" th:field="*{name}"
+                                       placeholder="Enter name">
+                                <label for="name">Name</label>
+                            </div>
 
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="type" th:field="*{type}"
-                                   placeholder="Enter type">
-                            <label for="type">Type</label>
-                        </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="type" th:field="*{type}"
+                                       placeholder="Enter type">
+                                <label for="type">Type</label>
+                            </div>
 
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control" id="dimension" th:field="*{dimension}"
-                                   placeholder="Enter dimension">
-                            <label for="dimension">Dimension</label>
-                        </div>
-
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="dimension" th:field="*{dimension}"
+                                       placeholder="Enter dimension">
+                                <label for="dimension">Dimension</label>
+                            </div>
+                        </form>
                         <div class="table-responsive" th:if="*{!residents.isEmpty()}">
                             <table class="table table-striped table-hover">
                                 <thead class="table-dark">
@@ -114,23 +115,22 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label"><strong>Select new residents</strong></label>
+                        <select class="form-select" th:field="*{residents}" multiple style="height: 200px;">
+                            <option th:each="resident : ${allCharacters}"
+                                    th:value="${resident.id}"
+                                    th:text="${resident.name}"
+                                    th:selected="${location.residents.contains(resident)}">
+                            </option>
+                        </select>
+                    </div>
 
-                        <div class="mb-4">
-                            <label class="form-label"><strong>Select new residents</strong></label>
-                            <select class="form-select" th:field="*{residents}" multiple style="height: 200px;">
-                                <option th:each="resident : ${allCharacters}"
-                                        th:value="${resident.id}"
-                                        th:text="${resident.name}"
-                                        th:selected="${location.residents.contains(resident)}">
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="d-flex justify-content-center gap-2 mt-4">
-                            <a href="/location/all" class="btn btn-secondary">Back</a>
-                            <input type="submit" class="btn btn-primary" value="Save changes">
-                        </div>
-                    </form>
+                    <div class="d-flex justify-content-center gap-2 mt-4">
+                        <a href="/location/all" class="btn btn-secondary">Back</a>
+                        <input form="location" type="submit" class="btn btn-primary" value="Save changes">
+                    </div>
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
   <div class="col-md-6 col-lg-4">
     <h1 class="text-center mb-4">Register</h1>
-    <form th:action="@{/authenticateTheUser}" method="post">
+    <form th:action="@{/auth/register}" method="post">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="username" placeholder="Enter location name" name="username" required>
         <label for="username">Username</label>
