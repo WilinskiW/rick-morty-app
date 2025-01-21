@@ -9,12 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("api/episode")
 @RequiredArgsConstructor
 public class EpisodeController {
     private final EpisodeService episodeService;
+    private static final Logger logger = Logger.getLogger(EpisodeController.class.getName());
+
 
     /**
      * CREATE
@@ -24,6 +27,7 @@ public class EpisodeController {
     @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> createCharacter(@RequestBody EpisodeDto episodeDto) {
         episodeService.save(episodeDto);
+        logger.info("Created episode " + episodeDto);
         return ResponseEntity.ok().build();
     }
 
@@ -35,12 +39,14 @@ public class EpisodeController {
     @Cacheable(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<List<EpisodeDto>> findAll() {
         var result = episodeService.getAll();
+        logger.info("Found " + result.size() + " episodes");
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EpisodeDto> findById(@PathVariable Integer id) {
         var result = episodeService.getById(id);
+        logger.info("Found " + result);
         return ResponseEntity.ok(result);
     }
 
@@ -52,6 +58,7 @@ public class EpisodeController {
     @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @RequestBody EpisodeDto episodeDto) {
         episodeService.update(id, episodeDto);
+        logger.info("Updated episode " + episodeDto);
         return ResponseEntity.ok().build();
     }
 
@@ -63,12 +70,14 @@ public class EpisodeController {
     @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
         episodeService.deleteById(id);
+        logger.info("Deleted episode " + id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}/remove-character/{characterId}")
     public ResponseEntity<Void> removeCharacterFromLocation(@PathVariable Integer id, @PathVariable Integer characterId) {
         episodeService.removeCharacterFromLocation(id, characterId);
+        logger.info("Removed character from location " + characterId);
         return ResponseEntity.ok().build();
     }
 }
