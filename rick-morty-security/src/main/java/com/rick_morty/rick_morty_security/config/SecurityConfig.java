@@ -31,7 +31,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "auth/register", "auth/login", "/character/all", "/location/all", "/episode/all").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/character/{id}", "/episode/{id}", "/episode/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/character/{id}", "/episode/{id}", "/location/{id}").permitAll()
                         .requestMatchers("/*/edit/**").hasAnyRole("MODERATOR", "ADMIN")
                         .requestMatchers("/*/add/**", "/*/delete").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register", "/authenticateTheUser").permitAll()
@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/authenticateTheUser")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
