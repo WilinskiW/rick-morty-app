@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,13 +19,13 @@ public class Episode {
     @Column(name = "source_id")
     private int sourceId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "air_date")
+    @Column(name = "air_date", nullable = false)
     private String airDate;
 
-    @Column(name = "episode")
+    @Column(name = "episode", nullable = false)
     private String episode;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -34,21 +34,8 @@ public class Episode {
             joinColumns = @JoinColumn(name = "episode_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "character_id", nullable = false)
     )
-    private Set<Character> characters;
+    private Set<Character> characters = new HashSet<>();
 
     @Column(name = "created")
-    private LocalDateTime created;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Episode episode = (Episode) o;
-        return sourceId == episode.sourceId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(sourceId, name);
-    }
+    private LocalDateTime created = LocalDateTime.now();
 }

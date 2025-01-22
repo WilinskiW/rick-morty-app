@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,22 +16,22 @@ public class Character {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "source_id", unique = true)
+    @Column(name = "source_id")
     private int sourceId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private String status;
 
-    @Column(name = "species")
+    @Column(name = "species", nullable = false)
     private String species;
 
     @Column(name = "type")
     private String type;
 
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     private String gender;
 
     @ManyToOne
@@ -45,22 +45,9 @@ public class Character {
     @Column(name = "image")
     private String imageUrl;
 
-    @Column(name = "created")
-    private LocalDateTime created;
+    @Column(name = "created", nullable = false)
+    private LocalDateTime created = LocalDateTime.now();
 
     @ManyToMany(mappedBy = "characters", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Episode> episodes;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Character character = (Character) o;
-        return sourceId == character.sourceId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(sourceId, name);
-    }
+    private Set<Episode> episodes = new HashSet<>();
 }
