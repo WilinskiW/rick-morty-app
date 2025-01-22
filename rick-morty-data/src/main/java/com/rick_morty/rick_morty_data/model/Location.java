@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -19,7 +19,7 @@ public class Location {
     @Column(name = "source_id")
     private int sourceId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "type")
@@ -29,11 +29,24 @@ public class Location {
     private String dimension;
 
     @Column(name = "created")
-    private LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created;
 
     @OneToMany(mappedBy = "origin", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Character> originCharacters = new HashSet<>();
+    private Set<Character> originCharacters;
 
     @OneToMany(mappedBy = "location", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Character> currentCharacters = new HashSet<>();
+    private Set<Character> currentCharacters;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return sourceId == location.sourceId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceId, name);
+    }
 }

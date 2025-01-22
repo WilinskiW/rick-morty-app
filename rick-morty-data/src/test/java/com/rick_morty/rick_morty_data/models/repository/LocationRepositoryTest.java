@@ -5,12 +5,10 @@ import com.rick_morty.rick_morty_data.repository.LocationRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 public class LocationRepositoryTest {
@@ -41,15 +39,5 @@ public class LocationRepositoryTest {
 
         boolean exists = locationRepository.existsBySourceId(2);
         assertThat(exists).isTrue();
-    }
-
-    @Test
-    void throwExceptionWhenNameIsNull() {
-        Location location = new Location();
-        location.setSourceId(1);
-        location.setType("Planet");
-        location.setDimension("Dimension C-137");
-
-        assertThrows(DataIntegrityViolationException.class, () -> locationRepository.save(location));
     }
 }
