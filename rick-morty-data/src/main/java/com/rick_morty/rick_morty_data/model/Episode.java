@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class Episode {
             joinColumns = @JoinColumn(name = "episode_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "character_id", nullable = false)
     )
-    private Set<Character> characters;
+    private Set<Character> characters = new HashSet<>();
 
     @Column(name = "created")
     private LocalDateTime created;

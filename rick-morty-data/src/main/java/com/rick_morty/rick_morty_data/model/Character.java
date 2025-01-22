@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -49,7 +50,7 @@ public class Character {
     private LocalDateTime created;
 
     @ManyToMany(mappedBy = "characters", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Episode> episodes;
+    private Set<Episode> episodes = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

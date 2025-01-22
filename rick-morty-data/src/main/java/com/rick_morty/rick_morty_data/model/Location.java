@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,10 +33,10 @@ public class Location {
     private LocalDateTime created;
 
     @OneToMany(mappedBy = "origin", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Character> originCharacters;
+    private Set<Character> originCharacters = new HashSet<>();
 
     @OneToMany(mappedBy = "location", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Character> currentCharacters;
+    private Set<Character> currentCharacters = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
