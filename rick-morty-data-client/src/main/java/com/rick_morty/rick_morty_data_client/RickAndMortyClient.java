@@ -89,13 +89,7 @@ public class RickAndMortyClient implements RickAndMortyDataPuller {
                 .queryParam("page", pages)
                 .toUriString();
 
-        var response = restClient.getForEntity(uri, responseType).getBody();
-
-        if (response == null) {
-            throw new RuntimeException("No response received from API: " + uri);
-        }
-
-        return response;
+        return restClient.getForEntity(uri, responseType).getBody();
     }
 
     private <T> T fetchById(String path, int id, Class<T> responseType) {
@@ -104,12 +98,6 @@ public class RickAndMortyClient implements RickAndMortyDataPuller {
                 .pathSegment("" + id)
                 .toUriString();
 
-        var response = restClient.getForEntity(uri, responseType).getBody();
-
-        if (response == null) {
-            throw new RuntimeException("No response received from API: " + uri);
-        }
-
-        return response;
+        return restClient.getForEntity(uri, responseType).getBody();
     }
 }
