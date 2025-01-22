@@ -21,6 +21,18 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void registerUser(String username, String password) {
+        if(username.isBlank() || password.isBlank()){
+            throw new IllegalArgumentException("Username or password are blank");
+        }
+
+        if(username.length() < 4 || username.length() > 255){
+            throw new IllegalArgumentException("Username is too long or too short");
+        }
+
+        if(password.length() < 4 || password.length() > 255){
+            throw new IllegalArgumentException("Password is too long or too short");
+        }
+
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
