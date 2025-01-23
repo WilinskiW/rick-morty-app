@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = com.rick_morty.rick_morty_web_api.RickMortyWebApiApplication.class)
 @AutoConfigureMockMvc()
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EpisodeControllerIntegrationTest {
+public class EpisodeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

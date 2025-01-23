@@ -2,6 +2,7 @@ package com.rick_morty.rick_morty_data.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -32,9 +33,11 @@ public class Location {
     @Column(name = "created")
     private LocalDateTime created;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "origin", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Character> originCharacters = new HashSet<>();
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "location", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Character> currentCharacters = new HashSet<>();
 
