@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(scanBasePackages = "com.rick_morty")
-@EnableJpaRepositories(basePackages = "com.rick_morty.rick_morty_data")
+@EnableJpaRepositories(basePackages = "com.rick_morty.rick_morty_data.repository")
 @EnableScheduling
 public class RickMortyWebApiApplication {
 
