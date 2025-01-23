@@ -75,7 +75,7 @@ class ViewEpisodeControllerTest {
         episodeDto.setCharacters(List.of(new CharacterDto(), new CharacterDto()));
 
         when(episodeService.getById(1)).thenReturn(episodeDto);
-        when(characterService.getAll()).thenReturn(Arrays.asList());
+        when(characterService.getAll()).thenReturn(List.of());
 
         mockMvc.perform(get("/episode/edit/1"))
                 .andExpect(status().isOk())
@@ -88,7 +88,7 @@ class ViewEpisodeControllerTest {
 
     @Test
     void testShowAddPage() throws Exception {
-        when(characterService.getAll()).thenReturn(Arrays.asList());
+        when(characterService.getAll()).thenReturn(List.of());
 
         mockMvc.perform(get("/episode/add"))
                 .andExpect(status().isOk())

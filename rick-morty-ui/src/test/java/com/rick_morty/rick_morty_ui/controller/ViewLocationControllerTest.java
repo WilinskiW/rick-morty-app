@@ -71,7 +71,7 @@ class ViewLocationControllerTest {
         locationDto.setId(1);
 
         when(locationService.getById(1)).thenReturn(locationDto);
-        when(characterService.getAll()).thenReturn(Arrays.asList());
+        when(characterService.getAll()).thenReturn(List.of());
 
         mockMvc.perform(get("/location/edit/1"))
                 .andExpect(status().isOk())
@@ -84,7 +84,7 @@ class ViewLocationControllerTest {
 
     @Test
     void testShowAddPage() throws Exception {
-        when(characterService.getAll()).thenReturn(Arrays.asList());
+        when(characterService.getAll()).thenReturn(List.of());
 
         mockMvc.perform(get("/location/add"))
                 .andExpect(status().isOk())
