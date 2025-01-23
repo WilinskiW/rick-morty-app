@@ -3,7 +3,7 @@ package com.rick_morty.rick_morty_ui.controller;
 import org.springframework.ui.Model;
 
 
-public interface EntityController<TDto> {
+public interface ViewEntityController<TDto> {
     String showSinglePage(int id, Model model);
 
     String showAll(Model model);

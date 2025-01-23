@@ -2,9 +2,8 @@ package com.rick_morty.rick_morty_web_api.api.service;
 
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
-import com.rick_morty.rick_morty_data.model.Location;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
-import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.EpisodeMapper;
@@ -56,17 +55,17 @@ public class EpisodeService {
 
         Set<Character> characters = new HashSet<>();
 
-        for (CharacterSummaryDto characterDto : episodeDto.characters()) {
-            Character character = db.getCharacters().findById(characterDto.id())
+        for (CharacterDto characterDto : episodeDto.getCharacters()) {
+            Character character = db.getCharacters().findById(characterDto.getId())
                     .orElseThrow(() -> new EntityNotFoundException("Character not found"));
             characters.add(character);
         }
 
         episode.getCharacters().addAll(characters);
 
-        episode.setName(episodeDto.title());
-        episode.setEpisode(episodeDto.episode());
-        episode.setAirDate(episodeDto.airDate());
+        episode.setName(episodeDto.getTitle());
+        episode.setEpisode(episodeDto.getEpisode());
+        episode.setAirDate(episodeDto.getAirDate());
 
         db.getEpisodes().save(episode);
     }

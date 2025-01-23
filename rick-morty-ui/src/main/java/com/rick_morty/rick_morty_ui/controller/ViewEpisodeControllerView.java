@@ -1,7 +1,8 @@
 package com.rick_morty.rick_morty_ui.controller;
 
-import com.rick_morty.rick_morty_ui.dto.EpisodeDto;
-import com.rick_morty.rick_morty_ui.service.AppClient;
+import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
+import com.rick_morty.rick_morty_web_api.api.service.CharacterService;
+import com.rick_morty.rick_morty_web_api.api.service.EpisodeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/episode")
 @RequiredArgsConstructor
-public class EpisodeController implements EntityController<EpisodeDto> {
-    private final AppClient appClient;
+public class ViewEpisodeControllerView implements ViewEntityController<EpisodeDto> {
+    private final EpisodeService episodeService;
+    private final CharacterService characterService;
 
     @Override
     @GetMapping("/{id}")
     public String showSinglePage(@PathVariable int id, Model model) {
-        var episode = appClient.getEpisode(id);
+        var episode = episodeService.getById(id);
         model.addAttribute("episode", episode);
         model.addAttribute("title", episode.getEpisode());
         model.addAttribute("characters", episode.getCharacters());
@@ -26,7 +28,7 @@ public class EpisodeController implements EntityController<EpisodeDto> {
     @Override
     @GetMapping("/all")
     public String showAll(Model model) {
-        var episodes = appClient.getAllEpisodes();
+        var episodes = episodeService.getAll();
         model.addAttribute("episodes", episodes);
         return "episode/episodes";
     }
@@ -34,10 +36,10 @@ public class EpisodeController implements EntityController<EpisodeDto> {
     @Override
     @GetMapping("/edit/{id}")
     public String showEditPage(@PathVariable int id, Model model) {
-        var episode = appClient.getEpisode(id);
+        var episode = episodeService.getById(id);
         model.addAttribute("episode", episode);
         model.addAttribute("characters", episode.getCharacters());
-        model.addAttribute("allCharacters", appClient.getAllCharacters());
+        model.addAttribute("allCharacters", characterService.getAll());
         return "episode/edit-episode";
     }
 
@@ -45,34 +47,34 @@ public class EpisodeController implements EntityController<EpisodeDto> {
     @GetMapping("/add")
     public String showAddPage(Model model) {
         model.addAttribute("episode", new EpisodeDto());
-        model.addAttribute("allCharacters", appClient.getAllCharacters());
+        model.addAttribute("allCharacters", characterService.getAll());
         return "episode/add-episode";
     }
 
     @Override
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-        appClient.delete("episode", id);
+        episodeService.deleteById(id);
         return "redirect:/episode/all";
     }
 
     @PostMapping("/{id}/edit/remove-character/{characterId}")
     public String removeCharacter(@PathVariable int id, @PathVariable int characterId) {
-        appClient.removeCharacterFromEntity("episode", id, characterId);
+        episodeService.removeCharacterFromLocation(id, characterId);
         return "redirect:/episode/edit/" + id;
     }
 
     @Override
     @PostMapping("/edit/{id}")
     public String update(@PathVariable int id, EpisodeDto episodeDto) {
-        appClient.update("episode", id, episodeDto);
+        episodeService.update(id, episodeDto);
         return "redirect:/episode/" + id;
     }
 
     @Override
     @PostMapping("/add")
     public String create(EpisodeDto episodeDto) {
-        appClient.create("episode", episodeDto);
+        episodeService.save(episodeDto);
         return "redirect:/episode/all";
     }
 }

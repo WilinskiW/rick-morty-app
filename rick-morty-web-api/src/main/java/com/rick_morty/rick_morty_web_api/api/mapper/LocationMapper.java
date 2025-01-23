@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_web_api.api.mapper;
 
 import com.rick_morty.rick_morty_data.model.Location;
-import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import org.springframework.stereotype.Component;
@@ -21,9 +21,9 @@ public class LocationMapper implements Mapper<Location, LocationDto> {
                 residentsToDto(location));
     }
 
-    private List<CharacterSummaryDto> residentsToDto(Location location) {
+    private List<CharacterDto> residentsToDto(Location location) {
         return location.getCurrentCharacters().stream()
-                .map(character -> new CharacterSummaryDto(character.getId(),character.getName(),
+                .map(character -> new CharacterDto(character.getId(),character.getName(),
                         character.getStatus(), character.getSpecies(), character.getType(), character.getGender(),
                         locationSummaryDto(character.getOrigin()),
                         locationSummaryDto(character.getLocation()),
@@ -41,10 +41,10 @@ public class LocationMapper implements Mapper<Location, LocationDto> {
     @Override
     public Location dtoToEntity(LocationDto locationDto) {
         Location location = new Location();
-        location.setSourceId(locationDto.id());
-        location.setName(locationDto.name());
-        location.setType(locationDto.type());
-        location.setDimension(locationDto.dimension());
+        location.setSourceId(locationDto.getId());
+        location.setName(locationDto.getName());
+        location.setType(locationDto.getType());
+        location.setDimension(locationDto.getDimension());
         location.setCreated(LocalDateTime.now());
         return location;
     }

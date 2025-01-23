@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_ui.config;
 
-import com.rick_morty.rick_morty_ui.service.utils.CharacterConverter;
-import com.rick_morty.rick_morty_ui.service.utils.LocationSummaryConverter;
+import com.rick_morty.rick_morty_ui.converters.CharacterConverter;
+import com.rick_morty.rick_morty_ui.converters.LocationSummaryConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addConverter(locationSummaryConverter);
         registry.addConverter(characterConverter);
     }
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

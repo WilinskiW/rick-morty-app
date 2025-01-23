@@ -26,18 +26,18 @@ public class LocationService {
         if (locationDto != null) {
             Location location = new Location();
 
-            Set<Character> characters = locationDto.residents().stream()
+            Set<Character> characters = locationDto.getResidents().stream()
                     .map(dto -> {
-                        var character = db.getCharacters().findById(dto.id())
+                        var character = db.getCharacters().findById(dto.getId())
                                 .orElseThrow(() -> new EntityNotFoundException("Character not found"));
                        character.setLocation(location);
                        return character;
                     })
                     .collect(Collectors.toSet());
 
-            location.setName(locationDto.name());
-            location.setType(locationDto.type());
-            location.setDimension(locationDto.dimension());
+            location.setName(locationDto.getName());
+            location.setType(locationDto.getType());
+            location.setDimension(locationDto.getDimension());
             location.setCreated(LocalDateTime.now());
             location.setCurrentCharacters(characters);
 
@@ -63,12 +63,12 @@ public class LocationService {
         }
         var location = locationOptional.get();
 
-        location.setName(locationDto.name());
-        location.setType(locationDto.type());
-        location.setDimension(locationDto.dimension());
-        locationDto.residents().forEach(dto -> {
-            removeCharacterFromLocation(id, dto.id());
-            Character character = db.getCharacters().findById(dto.id())
+        location.setName(locationDto.getName());
+        location.setType(locationDto.getType());
+        location.setDimension(locationDto.getDimension());
+        locationDto.getResidents().forEach(dto -> {
+            removeCharacterFromLocation(id, dto.getId());
+            Character character = db.getCharacters().findById(dto.getId())
                     .orElseThrow(() -> new RuntimeException("Character not found"));
             character.setLocation(location);
             location.getCurrentCharacters().add(character);
