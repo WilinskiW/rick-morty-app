@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/episode")
 @RequiredArgsConstructor
-public class ViewEpisodeControllerView implements ViewEntityController<EpisodeDto> {
+public class ViewEpisodeController implements ViewEntityController<EpisodeDto> {
     private final EpisodeService episodeService;
     private final CharacterService characterService;
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/character")
 @RequiredArgsConstructor
-public class ViewCharacterControllerView implements ViewEntityController<CharacterDto> {
+public class ViewCharacterController implements ViewEntityController<CharacterDto> {
     private final CharacterService characterService;
     private final LocationService locationService;
 

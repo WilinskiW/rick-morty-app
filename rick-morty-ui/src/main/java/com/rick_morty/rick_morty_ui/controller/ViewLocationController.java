@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/location")
 @RequiredArgsConstructor
-public class ViewLocationControllerView implements ViewEntityController<LocationDto> {
+public class ViewLocationController implements ViewEntityController<LocationDto> {
     private final LocationService locationService;
     private final CharacterService characterService;
 
