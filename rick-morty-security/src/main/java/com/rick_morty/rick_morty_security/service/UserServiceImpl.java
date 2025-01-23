@@ -21,6 +21,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void registerUser(String username, String password) {
+        if(userRepository.findUserByUsername(username).isPresent()){
+            throw new IllegalArgumentException("User already exists");
+        }
+
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));

@@ -3,6 +3,7 @@ package com.rick_morty.rick_morty_ui.controller;
 import com.rick_morty.rick_morty_security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +25,25 @@ public class AuthController {
         return "auth/register";
     }
 
+    @GetMapping("/register?error")
+    public String showRegistrationFormWithError() {
+        return "auth/register";
+    }
+
     @GetMapping("/account")
     public String showAccountPage() {
         return "auth/account";
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam String username, @RequestParam String password) {
-        userService.registerUser(username, password);
+    public String registerUser(@RequestParam String username, @RequestParam String password, Model model) {
+        try {
+            userService.registerUser(username, password);
+        }
+        catch (IllegalArgumentException e){
+            model.addAttribute("error", true);
+            return "auth/register";
+        }
         return "redirect:/login";
     }
 }
