@@ -26,6 +26,9 @@
             </li>
         </ul>
         <div class="d-flex gap-2">
+            <div class="navbar-dark btn btn-danger text-white">
+                <a class="nav-link" href="/character/schedule">5 minutes character</a>
+            </div>
             <div sec:authorize="${!isAuthenticated()}" class="navbar-dark btn btn-secondary text-white">
                 <a class="nav-link" href="/auth/login">Login</a>
             </div>

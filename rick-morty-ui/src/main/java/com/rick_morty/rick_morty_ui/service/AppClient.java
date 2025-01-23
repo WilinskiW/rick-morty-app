@@ -91,6 +91,10 @@ public class AppClient {
         return getForObject("character", CharacterDto.class, String.valueOf(id));
     }
 
+    public CharacterDto getScheduledCharacter() {
+        return getForObject("character", CharacterDto.class, "schedule");
+    }
+
     public List<LocationDto> getAllLocations() {
         return getAllForObject("location", new ParameterizedTypeReference<>() {
         });

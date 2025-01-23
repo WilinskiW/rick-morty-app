@@ -21,6 +21,13 @@ public class CharacterController implements EntityController<CharacterDto> {
         return "character/character";
     }
 
+    @GetMapping("/schedule")
+    public String showScheduleCharacterPage(Model model) {
+        var character = appClient.getScheduledCharacter();
+        model.addAttribute("character", character);
+        return "character/character";
+    }
+
     @Override
     @GetMapping("/all")
     public String showAll(Model model) {
