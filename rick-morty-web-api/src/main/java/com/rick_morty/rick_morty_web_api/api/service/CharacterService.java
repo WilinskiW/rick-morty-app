@@ -8,24 +8,18 @@ import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class CharacterService {
     private final RickAndMortyDbCataloger db;
     private final CharacterMapper mapper;
-    @Getter
     private CharacterDto scheduleCharacter;
-
-    public CharacterService(RickAndMortyDbCataloger db, CharacterMapper mapper) {
-        this.db = db;
-        this.mapper = mapper;
-        setScheduleCharacter();
-    }
 
     @Transactional
     public void save(CharacterDto characterDto) {
@@ -101,6 +95,13 @@ public class CharacterService {
             db.getEpisodes().save(episode); //update
         }
         db.getCharacters().delete(character);
+    }
+
+    public CharacterDto getScheduleCharacter() {
+        if(scheduleCharacter == null){
+            setScheduleCharacter();
+        }
+        return scheduleCharacter;
     }
 
     public void setScheduleCharacter() {
