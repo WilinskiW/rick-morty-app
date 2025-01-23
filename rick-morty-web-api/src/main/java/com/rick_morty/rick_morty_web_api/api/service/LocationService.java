@@ -4,7 +4,6 @@ import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Location;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
-import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -27,18 +26,18 @@ public class LocationService {
         if (locationDto != null) {
             Location location = new Location();
 
-            Set<Character> characters = locationDto.residents().stream()
+            Set<Character> characters = locationDto.getResidents().stream()
                     .map(dto -> {
-                        var character = db.getCharacters().findById(dto.id())
+                        var character = db.getCharacters().findById(dto.getId())
                                 .orElseThrow(() -> new EntityNotFoundException("Character not found"));
                        character.setLocation(location);
                        return character;
                     })
                     .collect(Collectors.toSet());
 
-            location.setName(locationDto.name());
-            location.setType(locationDto.type());
-            location.setDimension(locationDto.dimension());
+            location.setName(locationDto.getName());
+            location.setType(locationDto.getType());
+            location.setDimension(locationDto.getDimension());
             location.setCreated(LocalDateTime.now());
             location.setCurrentCharacters(characters);
 
@@ -57,16 +56,23 @@ public class LocationService {
     }
 
     @Transactional
-    public void update(Integer id, LocationSummaryDto locationSummaryDto) {
+    public void update(Integer id, LocationDto locationDto) {
         var locationOptional = db.getLocations().findById(id);
         if (locationOptional.isEmpty()) {
             throw new EntityNotFoundException("Location not found");
         }
         var location = locationOptional.get();
 
-        location.setName(locationSummaryDto.name());
-        location.setType(locationSummaryDto.type());
-        location.setDimension(locationSummaryDto.dimension());
+        location.setName(locationDto.getName());
+        location.setType(locationDto.getType());
+        location.setDimension(locationDto.getDimension());
+        locationDto.getResidents().forEach(dto -> {
+            removeCharacterFromLocation(id, dto.getId());
+            Character character = db.getCharacters().findById(dto.getId())
+                    .orElseThrow(() -> new RuntimeException("Character not found"));
+            character.setLocation(location);
+            location.getCurrentCharacters().add(character);
+        });
 
         db.getLocations().save(location);
     }

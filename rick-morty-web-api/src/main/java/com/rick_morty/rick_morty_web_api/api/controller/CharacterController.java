@@ -1,6 +1,6 @@
 package com.rick_morty.rick_morty_web_api.api.controller;
 
-import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
@@ -24,9 +24,9 @@ public class CharacterController {
 
     @PostMapping
     @CachePut(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<Void> createCharacter(@RequestBody CharacterSummaryDto characterSummaryDto) {
-        characterService.save(characterSummaryDto);
-        logger.info("Character created: " + characterSummaryDto);
+    public ResponseEntity<Void> createCharacter(@RequestBody CharacterDto characterDto) {
+        characterService.save(characterDto);
+        logger.info("Character created: " + characterDto);
         return ResponseEntity.ok().build();
     }
 
@@ -36,28 +36,28 @@ public class CharacterController {
 
     @GetMapping("/all")
     @Cacheable(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<List<CharacterSummaryDto>> findAll() {
+    public ResponseEntity<List<CharacterDto>> findAll() {
         var result = characterService.getAll();
         logger.info("Characters founded: " + result.size());
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CharacterSummaryDto> findById(@PathVariable Integer id) {
+    public ResponseEntity<CharacterDto> findById(@PathVariable Integer id) {
         var result = characterService.getCharacterById(id);
         logger.info("Character found: " + result);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("like/{like}")
-    public ResponseEntity<List<CharacterSummaryDto>> findByNameLike(@PathVariable String like) {
+    public ResponseEntity<List<CharacterDto>> findByNameLike(@PathVariable String like) {
         var result = characterService.getAllLikeName(like);
         logger.info("Characters found like " + like + " founded: "  + result.size());
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/schedule")
-    public ResponseEntity<CharacterSummaryDto> findScheduleCharacter() {
+    public ResponseEntity<CharacterDto> findScheduleCharacter() {
         var result = characterService.getScheduleCharacter();
         logger.info("Characters found schedule: " + result);
         return ResponseEntity.ok(result);
@@ -69,9 +69,9 @@ public class CharacterController {
 
     @PutMapping("/{id}")
     @CachePut(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @RequestBody CharacterSummaryDto characterSummaryDto) {
-        characterService.update(id, characterSummaryDto);
-        logger.info("Character updated: " + characterSummaryDto);
+    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @RequestBody CharacterDto characterDto) {
+        characterService.update(id, characterDto);
+        logger.info("Character updated: " + characterDto);
         return ResponseEntity.ok().build();
     }
 

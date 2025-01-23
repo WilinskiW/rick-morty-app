@@ -17,7 +17,7 @@ public class Character {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "source_id", unique = true)
+    @Column(name = "source_id")
     private int sourceId;
 
     @Column(name = "name")

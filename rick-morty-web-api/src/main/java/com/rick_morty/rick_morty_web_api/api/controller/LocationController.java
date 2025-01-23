@@ -1,7 +1,6 @@
 package com.rick_morty.rick_morty_web_api.api.controller;
 
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
-import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import com.rick_morty.rick_morty_web_api.api.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,9 +56,9 @@ public class LocationController {
      */
     @PutMapping("/{id}")
     @CachePut(value = "locations", key = "'allLocations'")
-    public ResponseEntity<Void> updateLocation(@PathVariable Integer id, @RequestBody LocationSummaryDto locationSummaryDto) {
-        locationService.update(id, locationSummaryDto);
-        logger.info("Location updated: " + locationSummaryDto);
+    public ResponseEntity<Void> updateLocation(@PathVariable Integer id, @RequestBody LocationDto locationDto) {
+        locationService.update(id, locationDto);
+        logger.info("Location updated: " + locationDto);
         return ResponseEntity.ok().build();
     }
 

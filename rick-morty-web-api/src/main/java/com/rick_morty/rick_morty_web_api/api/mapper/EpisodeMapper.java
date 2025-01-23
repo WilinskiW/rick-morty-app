@@ -3,7 +3,7 @@ package com.rick_morty.rick_morty_web_api.api.mapper;
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
 import com.rick_morty.rick_morty_data.model.Location;
-import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import org.springframework.stereotype.Component;
@@ -24,10 +24,10 @@ public class EpisodeMapper implements Mapper<Episode, EpisodeDto> {
         );
     }
 
-    private List<CharacterSummaryDto> charactersToDto(Set<Character> characters) {
+    private List<CharacterDto> charactersToDto(Set<Character> characters) {
         return characters.stream()
                 .map(character ->
-                        new CharacterSummaryDto(character.getId(),character.getName(),
+                        new CharacterDto(character.getId(),character.getName(),
                         character.getStatus(), character.getSpecies(), character.getType(), character.getGender(),
                         locationSummaryDto(character.getOrigin()),
                         locationSummaryDto(character.getLocation()),
@@ -45,10 +45,10 @@ public class EpisodeMapper implements Mapper<Episode, EpisodeDto> {
     @Override
     public Episode dtoToEntity(EpisodeDto dto) {
         Episode episode = new Episode();
-        episode.setId(dto.id());
-        episode.setName(dto.title());
-        episode.setAirDate(dto.airDate());
-        episode.setEpisode(dto.episode());
+        episode.setId(dto.getId());
+        episode.setName(dto.getTitle());
+        episode.setAirDate(dto.getAirDate());
+        episode.setEpisode(dto.getEpisode());
         episode.setCreated(LocalDateTime.now());
         return episode;
     }

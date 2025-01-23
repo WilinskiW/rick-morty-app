@@ -1,8 +1,12 @@
-package com.rick_morty.rick_morty_ui.dto;
+package com.rick_morty.rick_morty_web_api.api.contract;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CharacterDto {
     private int id;
     private String name;
@@ -13,12 +17,4 @@ public class CharacterDto {
     private LocationSummaryDto origin;
     private LocationSummaryDto currentLocation;
     private String imageUrl;
-
-    @Data
-    public static class LocationSummaryDto {
-        private int id;
-        private String name;
-        private String type;
-        private String dimension;
-    }
 }

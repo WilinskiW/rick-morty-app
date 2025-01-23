@@ -90,8 +90,8 @@
                                         th:selected="${character.origin?.id == location.id}">
                                 </option>
                             </select>
-                            <div class="mt-2">
-                                <a href="/add-location" target="_blank" class="text-decoration-none small">+ Add New Location</a>
+                            <div sec:authorize="${hasRole('ADMIN')}" class="mt-2">
+                                <a th:href="@{/location/add}" target="_blank" class="text-decoration-none small">+ Add New Location</a>
                             </div>
                         </div>
 
@@ -105,8 +105,8 @@
                                         th:selected="${character.currentLocation?.id == location.id}">
                                 </option>
                             </select>
-                            <div class="mt-2">
-                                <a href="/add-location" target="_blank" class="text-decoration-none small">+ Add New Location</a>
+                            <div sec:authorize="${hasRole('ADMIN')}" class="mt-2">
+                                <a th:href="@{/location/add}" target="_blank" class="text-decoration-none small">+ Add New Location</a>
                             </div>
                         </div>
 

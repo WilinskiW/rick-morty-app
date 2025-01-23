@@ -1,7 +1,7 @@
-package com.rick_morty.rick_morty_ui.service.utils;
+package com.rick_morty.rick_morty_ui.converters;
 
-import com.rick_morty.rick_morty_ui.dto.CharacterDto;
-import com.rick_morty.rick_morty_ui.service.AppClient;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
+import com.rick_morty.rick_morty_web_api.api.service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class CharacterConverter implements Converter<String, CharacterDto> {
-    private final AppClient appClient;
+    private final CharacterService characterService;
 
     @Override
     public CharacterDto convert(String source) {
         if (source.isEmpty()) {
             return null;
         }
-        return appClient.getCharacter(Integer.parseInt(source));
+        return characterService.getCharacterById(Integer.parseInt(source));
     }
 }

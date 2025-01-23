@@ -3,7 +3,7 @@ package com.rick_morty.rick_morty_web_api.api.service;
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
 import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
-import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,7 +19,7 @@ public class CharacterService {
     private final RickAndMortyDbCataloger db;
     private final CharacterMapper mapper;
     @Getter
-    private CharacterSummaryDto scheduleCharacter;
+    private CharacterDto scheduleCharacter;
 
     public CharacterService(RickAndMortyDbCataloger db, CharacterMapper mapper) {
         this.db = db;
@@ -28,17 +28,17 @@ public class CharacterService {
     }
 
     @Transactional
-    public void save(CharacterSummaryDto characterSummaryDto) {
-        if (characterSummaryDto != null) {
-            var character = mapper.dtoToEntity(characterSummaryDto);
+    public void save(CharacterDto characterDto) {
+        if (characterDto != null) {
+            var character = mapper.dtoToEntity(characterDto);
 
-            if (characterSummaryDto.origin() != null) {
-                var origin = db.getLocations().findById(characterSummaryDto.origin().id());
+            if (characterDto.getOrigin() != null) {
+                var origin = db.getLocations().findById(characterDto.getOrigin().getId());
                 origin.ifPresent(character::setOrigin);
             }
 
-            if (characterSummaryDto.currentLocation() != null) {
-                var currentLocation = db.getLocations().findById(characterSummaryDto.currentLocation().id());
+            if (characterDto.getCurrentLocation() != null) {
+                var currentLocation = db.getLocations().findById(characterDto.getCurrentLocation().getId());
                 currentLocation.ifPresent(character::setLocation);
             }
 
@@ -46,11 +46,11 @@ public class CharacterService {
         }
     }
 
-    public List<CharacterSummaryDto> getAll() {
+    public List<CharacterDto> getAll() {
         return mapper.entityListToDtoList(db.getCharacters().findAll());
     }
 
-    public CharacterSummaryDto getCharacterById(Integer id) {
+    public CharacterDto getCharacterById(Integer id) {
         var character = db.getCharacters().findById(id);
 
         if (character.isEmpty()) {
@@ -60,30 +60,30 @@ public class CharacterService {
         return mapper.entityToDto(character.get());
     }
 
-    public List<CharacterSummaryDto> getAllLikeName(String like) {
+    public List<CharacterDto> getAllLikeName(String like) {
         return mapper.entityListToDtoList(db.getCharacters().findLike("%" + like + "%"));
     }
 
     @Transactional
-    public void update(Integer id, CharacterSummaryDto characterSummaryDto) {
+    public void update(Integer id, CharacterDto characterDto) {
         var characterOptional = db.getCharacters().findById(id);
         if (characterOptional.isEmpty()) {
             throw new DataNotFoundException("Character not found");
         }
         var character = characterOptional.get();
 
-        character.setName(characterSummaryDto.name());
-        character.setStatus(characterSummaryDto.status());
-        character.setSpecies(characterSummaryDto.species());
-        character.setType(characterSummaryDto.type());
-        character.setGender(characterSummaryDto.gender());
-        character.setImageUrl(characterSummaryDto.imageUrl());
+        character.setName(characterDto.getName());
+        character.setStatus(characterDto.getStatus());
+        character.setSpecies(characterDto.getSpecies());
+        character.setType(characterDto.getType());
+        character.setGender(characterDto.getGender());
+        character.setImageUrl(characterDto.getImageUrl());
 
-        var origin = characterSummaryDto.origin() != null
-                ? db.getLocations().findById(characterSummaryDto.origin().id())
+        var origin = characterDto.getOrigin() != null
+                ? db.getLocations().findById(characterDto.getOrigin().getId())
                 : null;
-        var currentLocation = characterSummaryDto.currentLocation() != null
-                ? db.getLocations().findById(characterSummaryDto.currentLocation().id())
+        var currentLocation = characterDto.getCurrentLocation() != null
+                ? db.getLocations().findById(characterDto.getCurrentLocation().getId())
                 : null;
 
         origin.ifPresent(character::setOrigin);

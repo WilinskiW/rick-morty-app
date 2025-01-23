@@ -2,17 +2,17 @@ package com.rick_morty.rick_morty_web_api.api.mapper;
 
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Location;
-import com.rick_morty.rick_morty_web_api.api.contract.CharacterSummaryDto;
+import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
-public class CharacterMapper implements Mapper<Character, CharacterSummaryDto> {
+public class CharacterMapper implements Mapper<Character, CharacterDto> {
     @Override
-    public CharacterSummaryDto entityToDto(Character character) {
-        return new CharacterSummaryDto(
+    public CharacterDto entityToDto(Character character) {
+        return new CharacterDto(
                 character.getId(),
                 character.getName(),
                 character.getStatus(),
@@ -25,17 +25,17 @@ public class CharacterMapper implements Mapper<Character, CharacterSummaryDto> {
     }
 
     @Override
-    public Character dtoToEntity(CharacterSummaryDto characterSummaryDto) {
+    public Character dtoToEntity(CharacterDto characterDto) {
         Character character = new Character();
-        character.setSourceId(characterSummaryDto.id());
-        character.setName(characterSummaryDto.name());
-        character.setStatus(characterSummaryDto.status());
-        character.setSpecies(characterSummaryDto.species());
-        character.setType(characterSummaryDto.type());
-        character.setGender(characterSummaryDto.gender());
+        character.setSourceId(characterDto.getId());
+        character.setName(characterDto.getName());
+        character.setStatus(characterDto.getStatus());
+        character.setSpecies(characterDto.getSpecies());
+        character.setType(characterDto.getType());
+        character.setGender(characterDto.getGender());
         character.setOrigin(character.getOrigin());
         character.setOrigin(character.getLocation());
-        character.setImageUrl(characterSummaryDto.imageUrl());
+        character.setImageUrl(characterDto.getImageUrl());
         character.setCreated(LocalDateTime.now());
         return character;
     }

@@ -5,3 +5,6 @@ project(':rick-morty-data').projectDir = new File(settingsDir,'../rick-morty-dat
 
 include ':rick-morty-security'
 project(':rick-morty-security').projectDir = new File(settingsDir,'../rick-morty-security')
+
+include ':rick-morty-web-api'
+project(':rick-morty-web-api').projectDir = new File(settingsDir,'../rick-morty-web-api')
