@@ -118,7 +118,7 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label"><strong>Select new residents</strong></label>
-                        <select class="form-select" th:field="*{residents}" multiple style="height: 200px;">
+                        <select form="location" class="form-select" th:field="*{residents}" multiple style="height: 200px;">
                             <option th:each="resident : ${allCharacters}"
                                     th:value="${resident.id}"
                                     th:text="${resident.name}"
