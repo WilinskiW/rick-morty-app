@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EpisodeRepository extends JpaRepository<Episode, Integer> {
     boolean existsBySourceId(Integer sourceId);
+
+    boolean existsByName(String name);
 }

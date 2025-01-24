@@ -6,6 +6,7 @@ import com.rick_morty.rick_morty_data.repository.web.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;
+import jakarta.persistence.EntityExistsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,21 +23,23 @@ public class CharacterService {
 
     @Transactional
     public void save(CharacterDto characterDto) {
-        if (characterDto != null) {
-            var character = mapper.dtoToEntity(characterDto);
-
-            if (characterDto.getOrigin() != null) {
-                var origin = db.getLocations().findById(characterDto.getOrigin().getId());
-                origin.ifPresent(character::setOrigin);
-            }
-
-            if (characterDto.getCurrentLocation() != null) {
-                var currentLocation = db.getLocations().findById(characterDto.getCurrentLocation().getId());
-                currentLocation.ifPresent(character::setLocation);
-            }
-
-            db.getCharacters().save(character);
+        if (db.getCharacters().existsByName(characterDto.getName())) {
+            throw new EntityExistsException("Character with this name already exists");
         }
+
+        var character = mapper.dtoToEntity(characterDto);
+
+        if (characterDto.getOrigin() != null) {
+            var origin = db.getLocations().findById(characterDto.getOrigin().getId());
+            origin.ifPresent(character::setOrigin);
+        }
+
+        if (characterDto.getCurrentLocation() != null) {
+            var currentLocation = db.getLocations().findById(characterDto.getCurrentLocation().getId());
+            currentLocation.ifPresent(character::setLocation);
+        }
+
+        db.getCharacters().save(character);
     }
 
     public List<CharacterDto> getAll() {
@@ -97,7 +100,7 @@ public class CharacterService {
     }
 
     public CharacterDto getScheduleCharacter() {
-        if(scheduleCharacter == null){
+        if (scheduleCharacter == null) {
             setScheduleCharacter();
         }
         return scheduleCharacter;
@@ -107,7 +110,7 @@ public class CharacterService {
         int count = (int) db.getCharacters().count();
         Random random = new Random();
         try {
-            this.scheduleCharacter = getCharacterById(random.nextInt(count)+1);
+            this.scheduleCharacter = getCharacterById(random.nextInt(count) + 1);
         } catch (DataNotFoundException e) {
             setScheduleCharacter();
         }

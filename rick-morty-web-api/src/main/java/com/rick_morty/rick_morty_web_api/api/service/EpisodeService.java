@@ -7,6 +7,7 @@ import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.EpisodeMapper;
+import jakarta.persistence.EntityExistsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,11 @@ public class EpisodeService {
 
     @Transactional
     public void save(EpisodeDto episodeDto) {
-        if (episodeDto != null) {
-            db.getEpisodes().save(episodeMapper.dtoToEntity(episodeDto));
+        if(db.getEpisodes().existsByName(episodeDto.getTitle())) {
+            throw new EntityExistsException("Character with this title already exists");
         }
+
+        db.getEpisodes().save(episodeMapper.dtoToEntity(episodeDto));
     }
 
     public List<EpisodeDto> getAll() {

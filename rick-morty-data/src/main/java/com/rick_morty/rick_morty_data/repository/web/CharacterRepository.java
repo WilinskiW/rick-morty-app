@@ -14,4 +14,6 @@ public interface CharacterRepository extends JpaRepository<Character, Integer> {
 
     @Query("select x from Character x where x.name like (:pattern)")
     List<Character> findLike(String pattern);
+
+    boolean existsByName(String name);
 }

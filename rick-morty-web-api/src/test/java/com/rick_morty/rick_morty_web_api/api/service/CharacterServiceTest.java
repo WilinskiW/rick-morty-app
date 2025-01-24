@@ -10,6 +10,7 @@ import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationSummaryDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;
+import jakarta.persistence.EntityExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -64,6 +65,17 @@ class CharacterServiceTest {
         characterService.save(characterDto);
 
         verify(characterRepository).save(character);
+    }
+
+
+    @Test
+    void testSaveWhenCharacterAlreadyExist() {
+        CharacterDto characterDto = new CharacterDto();
+        characterDto.setName("Rick");
+
+        when(characterRepository.existsByName(characterDto.getName())).thenReturn(true);
+
+        assertThrows(EntityExistsException.class, () -> characterService.save(characterDto));
     }
 
     @Test

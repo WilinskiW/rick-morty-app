@@ -6,6 +6,7 @@ import com.rick_morty.rick_morty_data.repository.web.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
+import jakarta.persistence.EntityExistsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,26 +24,28 @@ public class LocationService {
 
     @Transactional
     public void save(LocationDto locationDto) {
-        if (locationDto != null) {
-            Location location = new Location();
-
-            Set<Character> characters = locationDto.getResidents().stream()
-                    .map(dto -> {
-                        var character = db.getCharacters().findById(dto.getId())
-                                .orElseThrow(() -> new DataNotFoundException("Character not found"));
-                       character.setLocation(location);
-                       return character;
-                    })
-                    .collect(Collectors.toSet());
-
-            location.setName(locationDto.getName());
-            location.setType(locationDto.getType());
-            location.setDimension(locationDto.getDimension());
-            location.setCreated(LocalDateTime.now());
-            location.setCurrentCharacters(characters);
-
-            db.getLocations().save(location);
+        if(db.getLocations().existsByName(locationDto.getName())) {
+            throw new EntityExistsException("Location with this name already exists");
         }
+
+        Location location = new Location();
+
+        Set<Character> characters = locationDto.getResidents().stream()
+                .map(dto -> {
+                    var character = db.getCharacters().findById(dto.getId())
+                            .orElseThrow(() -> new DataNotFoundException("Character not found"));
+                    character.setLocation(location);
+                    return character;
+                })
+                .collect(Collectors.toSet());
+
+        location.setName(locationDto.getName());
+        location.setType(locationDto.getType());
+        location.setDimension(locationDto.getDimension());
+        location.setCreated(LocalDateTime.now());
+        location.setCurrentCharacters(characters);
+
+        db.getLocations().save(location);
     }
 
     public List<LocationDto> getAll() {

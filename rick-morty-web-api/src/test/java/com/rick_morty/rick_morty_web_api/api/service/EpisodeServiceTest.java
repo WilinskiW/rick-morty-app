@@ -9,6 +9,7 @@ import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.EpisodeMapper;
+import jakarta.persistence.EntityExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -53,6 +54,16 @@ class EpisodeServiceTest {
         episodeService.save(episodeDto);
 
         verify(episodeRepository).save(episode);
+    }
+
+    @Test
+    void testSaveWhenLocationAlreadyExist() {
+        EpisodeDto episodeDto = new EpisodeDto();
+        episodeDto.setTitle("Pilot episode");
+
+        when(episodeRepository.existsByName(episodeDto.getTitle())).thenReturn(true);
+
+        assertThrows(EntityExistsException.class, () -> episodeService.save(episodeDto));
     }
 
     @Test

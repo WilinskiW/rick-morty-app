@@ -9,6 +9,7 @@ import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
+import jakarta.persistence.EntityExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -53,6 +54,16 @@ class LocationServiceTest {
         locationService.save(locationDto);
 
         verify(locationRepository).save(any(Location.class));
+    }
+
+    @Test
+    void testSaveWhenCharacterAlreadyExist() {
+        LocationDto locationDto = new LocationDto();
+        locationDto.setName("Earth 241");
+
+        when(locationRepository.existsByName(locationDto.getName())).thenReturn(true);
+
+        assertThrows(EntityExistsException.class, () -> locationService.save(locationDto));
     }
 
     @Test
