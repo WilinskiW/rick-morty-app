@@ -2,6 +2,7 @@ package com.rick_morty.rick_morty_web_api.api.controller;
 
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.api.service.LocationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
@@ -26,7 +27,7 @@ public class LocationController {
 
     @PostMapping
     @CachePut(value = "locations", key = "'allLocations'")
-    public ResponseEntity<Void> createLocation(@RequestBody LocationDto locationDto) {
+    public ResponseEntity<Void> createLocation(@Valid @RequestBody LocationDto locationDto) {
         locationService.save(locationDto);
         logger.info("Location created: " + locationDto);
         return ResponseEntity.ok().build();
@@ -56,7 +57,7 @@ public class LocationController {
      */
     @PutMapping("/{id}")
     @CachePut(value = "locations", key = "'allLocations'")
-    public ResponseEntity<Void> updateLocation(@PathVariable Integer id, @RequestBody LocationDto locationDto) {
+    public ResponseEntity<Void> updateLocation(@PathVariable Integer id, @Valid @RequestBody LocationDto locationDto) {
         locationService.update(id, locationDto);
         logger.info("Location updated: " + locationDto);
         return ResponseEntity.ok().build();

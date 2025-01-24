@@ -2,10 +2,12 @@ package com.rick_morty.rick_morty_web_api.api.controller;
 
 import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.service.CharacterService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,9 +26,14 @@ public class CharacterController {
 
     @PostMapping
     @CachePut(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<Void> createCharacter(@RequestBody CharacterDto characterDto) {
-        characterService.save(characterDto);
-        logger.info("Character created: " + characterDto);
+    public ResponseEntity<Void> createCharacter(@Valid @RequestBody CharacterDto characterDto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            characterService.save(characterDto);
+            logger.info("Character created: " + characterDto);
+        }
+        else {
+            throw new IllegalArgumentException("");
+        }
         return ResponseEntity.ok().build();
     }
 
@@ -69,7 +76,7 @@ public class CharacterController {
 
     @PutMapping("/{id}")
     @CachePut(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @RequestBody CharacterDto characterDto) {
+    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @Valid @RequestBody CharacterDto characterDto) {
         characterService.update(id, characterDto);
         logger.info("Character updated: " + characterDto);
         return ResponseEntity.ok().build();

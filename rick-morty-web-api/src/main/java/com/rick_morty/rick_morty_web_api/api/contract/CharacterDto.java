@@ -1,5 +1,7 @@
 package com.rick_morty.rick_morty_web_api.api.contract;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CharacterDto {
     private int id;
+    @NotEmpty(message = "Name can't be empty")
     private String name;
+    @NotNull(message = "Status can't be null")
     private String status;
+    @NotNull(message = "Species can't be null")
     private String species;
     private String type;
+    @NotNull
     private String gender;
     private LocationSummaryDto origin;
     private LocationSummaryDto currentLocation;
