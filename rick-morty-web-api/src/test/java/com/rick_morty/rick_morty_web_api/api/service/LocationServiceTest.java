@@ -7,8 +7,8 @@ import com.rick_morty.rick_morty_data.repository.web.LocationRepository;
 import com.rick_morty.rick_morty_data.repository.web.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
+import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -85,7 +85,7 @@ class LocationServiceTest {
         Integer id = 1;
         when(locationRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class, () -> locationService.getById(id));
+        assertThrows(DataNotFoundException.class, () -> locationService.getById(id));
     }
 
     @Test

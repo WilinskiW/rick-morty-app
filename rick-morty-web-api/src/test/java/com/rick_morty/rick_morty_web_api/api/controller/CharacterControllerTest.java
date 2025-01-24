@@ -40,6 +40,9 @@ public class CharacterControllerTest {
         characterDto = new CharacterDto();
         characterDto.setId(1);
         characterDto.setName("Rick Sanchez");
+        characterDto.setStatus("Alive");
+        characterDto.setSpecies("Human");
+        characterDto.setGender("Male");
     }
 
     @Test
@@ -61,7 +64,7 @@ public class CharacterControllerTest {
 
     @Test
     void testCreateCharacter() throws Exception {
-        doNothing().when(characterService).save(any(CharacterDto.class));
+        doNothing().when(characterService).save(characterDto);
 
         mockMvc.perform(post("/api/character")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -69,6 +72,17 @@ public class CharacterControllerTest {
                 .andExpect(status().isOk());
 
         verify(characterService, times(1)).save(any(CharacterDto.class));
+    }
+
+    @Test
+    void testCreateCharacterWhenValidationError() throws Exception {
+        characterDto.setName("");
+        mockMvc.perform(post("/api/character")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(characterDto)))
+                .andExpect(status().isBadRequest());
+
+        verify(characterService, times(0)).save(any(CharacterDto.class));
     }
 
     @Test
@@ -115,6 +129,21 @@ public class CharacterControllerTest {
                 .andExpect(status().isOk());
 
         verify(characterService, times(1)).update(eq(1), any(CharacterDto.class));
+    }
+
+    @Test
+    void testUpdateCharacterWhenValidationError() throws Exception {
+        characterDto.setName("");
+
+        doNothing().when(characterService).update(eq(1), any(CharacterDto.class));
+
+        mockMvc.perform(put("/api/character/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(characterDto)))
+                .andExpect(status().isBadRequest());
+
+        verify(characterService, times(0)).update(eq(1), any(CharacterDto.class));
+
     }
 
     @Test

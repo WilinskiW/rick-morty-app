@@ -3,14 +3,17 @@ package com.rick_morty.rick_morty_web_api.api.controller;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
 import com.rick_morty.rick_morty_web_api.api.service.LocationService;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @RestController
@@ -27,7 +30,12 @@ public class LocationController {
 
     @PostMapping
     @CachePut(value = "locations", key = "'allLocations'")
-    public ResponseEntity<Void> createLocation(@Valid @RequestBody LocationDto locationDto) {
+    public ResponseEntity<Void> createLocation(@Valid @RequestBody LocationDto locationDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.warning("Validation failed for: " + locationDto);
+            throw new ValidationException(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        }
+
         locationService.save(locationDto);
         logger.info("Location created: " + locationDto);
         return ResponseEntity.ok().build();
@@ -57,7 +65,14 @@ public class LocationController {
      */
     @PutMapping("/{id}")
     @CachePut(value = "locations", key = "'allLocations'")
-    public ResponseEntity<Void> updateLocation(@PathVariable Integer id, @Valid @RequestBody LocationDto locationDto) {
+    public ResponseEntity<Void> updateLocation(@PathVariable Integer id,
+                                               @Valid @RequestBody LocationDto locationDto,
+                                               BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.warning("Validation failed for: " + locationDto);
+            throw new ValidationException(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        }
+
         locationService.update(id, locationDto);
         logger.info("Location updated: " + locationDto);
         return ResponseEntity.ok().build();

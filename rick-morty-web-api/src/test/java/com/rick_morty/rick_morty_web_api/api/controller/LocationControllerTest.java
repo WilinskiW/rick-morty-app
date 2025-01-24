@@ -71,6 +71,17 @@ public class LocationControllerTest {
     }
 
     @Test
+    void testCreateLocationWhenValidationError() throws Exception {
+        locationDto.setName("");
+        mockMvc.perform(post("/api/location")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(locationDto)))
+                .andExpect(status().isBadRequest());
+
+        verify(locationService, times(0)).save(any(LocationDto.class));
+    }
+
+    @Test
     @Order(3)
     void testFindById() throws Exception {
         when(locationService.getById(1)).thenReturn(locationDto);
@@ -93,6 +104,20 @@ public class LocationControllerTest {
                 .andExpect(status().isOk());
 
         verify(locationService, times(1)).update(eq(1), any(LocationDto.class));
+    }
+
+    @Test
+    void testUpdateLocationWhenValidationError() throws Exception {
+        locationDto.setName("");
+
+        doNothing().when(locationService).update(eq(1), any(LocationDto.class));
+
+        mockMvc.perform(put("/api/location/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(locationDto)))
+                .andExpect(status().isBadRequest());
+
+        verify(locationService, times(0)).update(eq(1), any(LocationDto.class));
     }
 
     @Test

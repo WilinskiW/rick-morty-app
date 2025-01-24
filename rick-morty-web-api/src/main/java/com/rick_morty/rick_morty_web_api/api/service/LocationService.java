@@ -4,8 +4,8 @@ import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Location;
 import com.rick_morty.rick_morty_data.repository.web.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.LocationDto;
+import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class LocationService {
             Set<Character> characters = locationDto.getResidents().stream()
                     .map(dto -> {
                         var character = db.getCharacters().findById(dto.getId())
-                                .orElseThrow(() -> new EntityNotFoundException("Character not found"));
+                                .orElseThrow(() -> new DataNotFoundException("Character not found"));
                        character.setLocation(location);
                        return character;
                     })
@@ -51,7 +51,7 @@ public class LocationService {
 
     public LocationDto getById(Integer id) {
         var location = db.getLocations().findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Location not found"));
+                .orElseThrow(() -> new DataNotFoundException("Location not found"));
         return mapper.entityToDto(location);
     }
 
@@ -59,7 +59,7 @@ public class LocationService {
     public void update(Integer id, LocationDto locationDto) {
         var locationOptional = db.getLocations().findById(id);
         if (locationOptional.isEmpty()) {
-            throw new EntityNotFoundException("Location not found");
+            throw new DataNotFoundException("Location not found");
         }
         var location = locationOptional.get();
 
@@ -69,7 +69,7 @@ public class LocationService {
         locationDto.getResidents().forEach(dto -> {
             removeCharacterFromLocation(id, dto.getId());
             Character character = db.getCharacters().findById(dto.getId())
-                    .orElseThrow(() -> new RuntimeException("Character not found"));
+                    .orElseThrow(() -> new DataNotFoundException("Character not found"));
             character.setLocation(location);
             location.getCurrentCharacters().add(character);
         });
@@ -80,7 +80,7 @@ public class LocationService {
     @Transactional
     public void deleteById(Integer id) {
         var location = db.getLocations().findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Location not found"));
+                .orElseThrow(() -> new DataNotFoundException("Location not found"));
 
         location.getOriginCharacters().forEach(originCharacter -> originCharacter.setOrigin(null));
         location.getCurrentCharacters().forEach(currentCharacter -> currentCharacter.setLocation(null));
@@ -90,8 +90,8 @@ public class LocationService {
 
     @Transactional
     public void removeCharacterFromLocation(Integer locationId, Integer characterId) {
-        Location location = db.getLocations().findById(locationId).orElseThrow(() -> new RuntimeException("Location not found"));
-        Character character = db.getCharacters().findById(characterId).orElseThrow(() -> new RuntimeException("Character not found"));
+        Location location = db.getLocations().findById(locationId).orElseThrow(() -> new DataNotFoundException("Location not found"));
+        Character character = db.getCharacters().findById(characterId).orElseThrow(() -> new DataNotFoundException("Character not found"));
 
         location.getCurrentCharacters().remove(character);
 

@@ -3,13 +3,16 @@ package com.rick_morty.rick_morty_web_api.api.controller;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.api.service.EpisodeService;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @RestController
@@ -26,7 +29,13 @@ public class EpisodeController {
 
     @PostMapping
     @CachePut(value = "episodes", key = "'allEpisodes'")
-    public ResponseEntity<Void> createCharacter(@Valid @RequestBody EpisodeDto episodeDto) {
+    public ResponseEntity<Void> createCharacter(@Valid @RequestBody EpisodeDto episodeDto,
+                                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.warning("Validation failed for: " + episodeDto);
+            throw new ValidationException(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        }
+
         episodeService.save(episodeDto);
         logger.info("Created episode " + episodeDto);
         return ResponseEntity.ok().build();
@@ -57,7 +66,15 @@ public class EpisodeController {
 
     @PutMapping("/{id}")
     @CachePut(value = "episodes", key = "'allEpisodes'")
-    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @Valid @RequestBody EpisodeDto episodeDto) {
+    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id,
+                                                @Valid @RequestBody EpisodeDto episodeDto,
+                                                BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            logger.warning("Validation failed for: " + episodeDto);
+            throw new ValidationException(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        }
+
         episodeService.update(id, episodeDto);
         logger.info("Updated episode " + episodeDto);
         return ResponseEntity.ok().build();

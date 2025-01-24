@@ -6,7 +6,6 @@ import com.rick_morty.rick_morty_data.repository.web.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -89,7 +88,7 @@ public class CharacterService {
     @Transactional
     public void deleteById(int id) {
         Character character = db.getCharacters().findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Character not found"));
+                .orElseThrow(() -> new DataNotFoundException("Character not found"));
         for (Episode episode : character.getEpisodes()) {
             episode.getCharacters().remove(character);
             db.getEpisodes().save(episode); //update

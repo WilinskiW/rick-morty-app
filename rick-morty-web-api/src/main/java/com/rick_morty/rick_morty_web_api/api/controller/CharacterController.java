@@ -2,7 +2,9 @@ package com.rick_morty.rick_morty_web_api.api.controller;
 
 import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.service.CharacterService;
+
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -11,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @RestController
@@ -26,14 +29,15 @@ public class CharacterController {
 
     @PostMapping
     @CachePut(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<Void> createCharacter(@Valid @RequestBody CharacterDto characterDto, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            characterService.save(characterDto);
-            logger.info("Character created: " + characterDto);
+    public ResponseEntity<Void> createCharacter(@Valid @RequestBody CharacterDto characterDto,
+                                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.warning("Validation failed for: " + characterDto);
+            throw new ValidationException(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
         }
-        else {
-            throw new IllegalArgumentException("");
-        }
+
+        characterService.save(characterDto);
+        logger.info("Character created: " + characterDto);
         return ResponseEntity.ok().build();
     }
 
@@ -59,7 +63,7 @@ public class CharacterController {
     @GetMapping("like/{like}")
     public ResponseEntity<List<CharacterDto>> findByNameLike(@PathVariable String like) {
         var result = characterService.getAllLikeName(like);
-        logger.info("Characters found like " + like + " founded: "  + result.size());
+        logger.info("Characters found like " + like + " founded: " + result.size());
         return ResponseEntity.ok(result);
     }
 
@@ -76,7 +80,14 @@ public class CharacterController {
 
     @PutMapping("/{id}")
     @CachePut(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id, @Valid @RequestBody CharacterDto characterDto) {
+    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id,
+                                                @Valid @RequestBody CharacterDto characterDto,
+                                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.warning("Validation failed for: " + characterDto);
+            throw new ValidationException();
+        }
+
         characterService.update(id, characterDto);
         logger.info("Character updated: " + characterDto);
         return ResponseEntity.ok().build();

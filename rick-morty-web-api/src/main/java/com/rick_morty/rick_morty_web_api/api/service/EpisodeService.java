@@ -7,7 +7,6 @@ import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.contract.EpisodeDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.EpisodeMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,7 +48,7 @@ public class EpisodeService {
     public void update(Integer id, EpisodeDto episodeDto) {
         var episodeOptional = db.getEpisodes().findById(id);
         if (episodeOptional.isEmpty()) {
-            throw new EntityNotFoundException("Episode not found");
+            throw new DataNotFoundException("Episode not found");
         }
         var episode = episodeOptional.get();
 
@@ -57,7 +56,7 @@ public class EpisodeService {
 
         for (CharacterDto characterDto : episodeDto.getCharacters()) {
             Character character = db.getCharacters().findById(characterDto.getId())
-                    .orElseThrow(() -> new EntityNotFoundException("Character not found"));
+                    .orElseThrow(() -> new DataNotFoundException("Character not found"));
             characters.add(character);
         }
 
@@ -73,14 +72,14 @@ public class EpisodeService {
     @Transactional
     public void deleteById(Integer id) {
         var episode = db.getEpisodes().findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Episode not found"));
+                .orElseThrow(() -> new DataNotFoundException("Episode not found"));
         db.getEpisodes().delete(episode);
     }
 
     @Transactional
     public void removeCharacterFromLocation(Integer episodeId, Integer characterId) {
-        Episode episode = db.getEpisodes().findById(episodeId).orElseThrow(() -> new RuntimeException("Location not found"));
-        Character character = db.getCharacters().findById(characterId).orElseThrow(() -> new RuntimeException("Character not found"));
+        Episode episode = db.getEpisodes().findById(episodeId).orElseThrow(() -> new DataNotFoundException("Location not found"));
+        Character character = db.getCharacters().findById(characterId).orElseThrow(() -> new DataNotFoundException("Character not found"));
 
         episode.getCharacters().remove(character);
 

@@ -18,7 +18,7 @@ public class CharacterDto {
     @NotNull(message = "Species can't be null")
     private String species;
     private String type;
-    @NotNull
+    @NotNull(message = "Gender can't be null")
     private String gender;
     private LocationSummaryDto origin;
     private LocationSummaryDto currentLocation;

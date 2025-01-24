@@ -59,7 +59,7 @@ public class EpisodeControllerTest {
 
     @Test
     void testCreateEpisode() throws Exception {
-        doNothing().when(episodeService).save(any(EpisodeDto.class));
+        doNothing().when(episodeService).save(episodeDto);
 
         mockMvc.perform(post("/api/episode")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -67,6 +67,19 @@ public class EpisodeControllerTest {
                 .andExpect(status().isOk());
 
         verify(episodeService, times(1)).save(any(EpisodeDto.class));
+    }
+
+    @Test
+    void testCreateEpisodeWhenValidationError() throws Exception {
+        episodeDto.setTitle("");
+        doNothing().when(episodeService).save(episodeDto);
+
+        mockMvc.perform(post("/api/episode")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(episodeDto)))
+                .andExpect(status().isBadRequest());
+
+        verify(episodeService, times(0)).save(any(EpisodeDto.class));
     }
 
     @Test
@@ -90,7 +103,20 @@ public class EpisodeControllerTest {
                         .content(objectMapper.writeValueAsString(episodeDto)))
                 .andExpect(status().isOk());
 
-        verify(episodeService, times(1)).update(eq(1), any(EpisodeDto.class));
+        verify(episodeService, times(1)).update(1, episodeDto);
+    }
+
+    @Test
+    void testUpdateEpisodeWhenValidationError() throws Exception {
+        episodeDto.setTitle("");
+        doNothing().when(episodeService).update(eq(1), any(EpisodeDto.class));
+
+        mockMvc.perform(put("/api/episode/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(episodeDto)))
+                .andExpect(status().isBadRequest());
+
+        verify(episodeService, times(0)).update(eq(1), any(EpisodeDto.class));
     }
 
     @Test
