@@ -2,7 +2,7 @@ package com.rick_morty.rick_morty_web_api.api.service;
 
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
-import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
+import com.rick_morty.rick_morty_data.repository.web.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_web_api.api.contract.CharacterDto;
 import com.rick_morty.rick_morty_web_api.api.exception.DataNotFoundException;
 import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;

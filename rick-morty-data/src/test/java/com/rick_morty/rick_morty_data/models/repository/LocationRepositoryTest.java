@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_data.models.repository;
 
 import com.rick_morty.rick_morty_data.model.Location;
-import com.rick_morty.rick_morty_data.repository.LocationRepository;
+import com.rick_morty.rick_morty_data.repository.web.LocationRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

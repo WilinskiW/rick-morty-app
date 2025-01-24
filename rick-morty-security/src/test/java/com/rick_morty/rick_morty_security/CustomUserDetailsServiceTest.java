@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_security;
 
 import com.rick_morty.rick_morty_data.model.User;
-import com.rick_morty.rick_morty_data.repository.UserRepository;
+import com.rick_morty.rick_morty_data.repository.security.UserRepository;
 import com.rick_morty.rick_morty_security.service.CustomUserDetailsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@SpringBootTest(classes = com.rick_morty.rick_morty_security.RickMortySecurityApplication.class)
 public class CustomUserDetailsServiceTest {
     @InjectMocks
     private CustomUserDetailsService service;

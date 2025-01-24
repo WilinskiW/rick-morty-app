@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_data.models.repository;
 
 import com.rick_morty.rick_morty_data.model.Episode;
-import com.rick_morty.rick_morty_data.repository.EpisodeRepository;
+import com.rick_morty.rick_morty_data.repository.web.EpisodeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

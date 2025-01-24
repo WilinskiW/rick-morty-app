@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_security;
 
 import com.rick_morty.rick_morty_data.model.User;
-import com.rick_morty.rick_morty_data.repository.UserRepository;
+import com.rick_morty.rick_morty_data.repository.security.UserRepository;
 import com.rick_morty.rick_morty_security.service.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

@@ -3,7 +3,7 @@ package com.rick_morty.rick_morty_updater.updater;
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Episode;
 import com.rick_morty.rick_morty_data.model.Location;
-import com.rick_morty.rick_morty_data.repository.RickAndMortyDbCataloger;
+import com.rick_morty.rick_morty_data.repository.web.RickAndMortyDbCataloger;
 import com.rick_morty.rick_morty_data_client.RickAndMortyDataPuller;
 import com.rick_morty.rick_morty_data_client.contract.*;
 import com.rick_morty.rick_morty_updater.mapper.DtoToEntityMapper;

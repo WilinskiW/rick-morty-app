@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_security.service;
 
 import com.rick_morty.rick_morty_data.model.User;
-import com.rick_morty.rick_morty_data.repository.UserRepository;
+import com.rick_morty.rick_morty_data.repository.security.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

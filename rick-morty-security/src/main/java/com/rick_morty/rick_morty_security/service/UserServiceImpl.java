@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_security.service;
 
 import com.rick_morty.rick_morty_data.model.User;
-import com.rick_morty.rick_morty_data.repository.UserRepository;
+import com.rick_morty.rick_morty_data.repository.security.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,4 +1,4 @@
-package com.rick_morty.rick_morty_data.repository;
+package com.rick_morty.rick_morty_data.repository.web;
 
 import com.rick_morty.rick_morty_data.model.Character;
 import org.springframework.data.jpa.repository.JpaRepository;
