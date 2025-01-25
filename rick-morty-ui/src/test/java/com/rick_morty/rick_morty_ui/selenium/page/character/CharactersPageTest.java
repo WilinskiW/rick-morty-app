@@ -1,74 +1,114 @@
 package com.rick_morty.rick_morty_ui.selenium.page.character;
 
-import com.rick_morty.rick_morty_ui.selenium.utils.UserLoggerUtil;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class CharactersPageTest {
     private final CharactersPage charactersPage;
-    private final UserLoggerUtil userLogger;
+    private final WebDriver driver;
 
     public CharactersPageTest() {
-        WebDriver webDriver = new FirefoxDriver();
-        this.charactersPage = new CharactersPage(webDriver);
-        this.userLogger = new UserLoggerUtil(webDriver);
+        this.driver = new FirefoxDriver();
+        this.charactersPage = new CharactersPage(driver);
     }
 
     @Test
-    public void backToHomeTest(){
+    public void backToHomeTest() {
         charactersPage.open();
-        charactersPage.backToHome();
+        charactersPage.openHome();
+        assertEquals("http://localhost:8082/", driver.getCurrentUrl());
+        assertEquals("Rick and Morty - Home Page", driver.getTitle());
     }
 
     @Test
-    public void openCharacterDetailsTest(){
+    public void openCharacterDetailsTest() {
         charactersPage.open();
         charactersPage.openCharacterDetails();
+
+        int mockedId = 5;
+
+        driver.get("http://localhost:8082/character/" + mockedId);
+
+        assertEquals("http://localhost:8082/character/" + mockedId, driver.getCurrentUrl());
     }
 
     @Test
-    public void openEpisodesTest(){
+    public void openEpisodesTest() {
         charactersPage.open();
         charactersPage.openEpisodes();
+
+        assertEquals("http://localhost:8082/episode/all", driver.getCurrentUrl());
     }
 
     @Test
-    public void openLocationsTest(){
+    public void openLocationsTest() {
         charactersPage.open();
         charactersPage.openLocations();
+
+        assertEquals("http://localhost:8082/location/all", driver.getCurrentUrl());
     }
 
     @Test
-    public void openLoginTest(){
+    public void openLoginTest() {
         charactersPage.open();
         charactersPage.openLogin();
+
+        assertEquals("http://localhost:8082/auth/login", driver.getCurrentUrl());
     }
 
     @Test
-    public void openRegisterTest(){
+    public void openRegisterTest() {
         charactersPage.open();
         charactersPage.openRegister();
+
+        assertEquals("http://localhost:8082/auth/register", driver.getCurrentUrl());
     }
 
     @Test
-    public void openFiveMinutesCharacterTest(){
+    public void openFiveMinutesCharacterTest() {
         charactersPage.open();
         charactersPage.openFiveMinutesCharacterDetails();
+
+        assertEquals("http://localhost:8082/character/schedule", driver.getCurrentUrl());
     }
 
     @Test
-    public void openAddNewCharacterTest(){
-        userLogger.loginAsAdmin();
+    public void openAddNewCharacterWhenAuthorizeTest() {
+        charactersPage.loginAsAdmin();
         charactersPage.open();
         charactersPage.openAddNewCharacter();
+
+        assertEquals("http://localhost:8082/character/add", driver.getCurrentUrl());
     }
 
     @Test
-    public void openAccountTest(){
-        userLogger.loginAsAdmin();
+    public void openAddNewCharacterWithNoAuthorizationTest() {
+        charactersPage.loginAsModerator();
         charactersPage.open();
-        charactersPage.openAccount();
+        assertThrows(NoSuchElementException.class, () -> charactersPage.openAddNewCharacter());
+
+        assertEquals("http://localhost:8082/character/all", driver.getCurrentUrl());
     }
 
+    @Test
+    public void openAccountWhenItIsAvailableTest() {
+        charactersPage.loginAsAdmin();
+        charactersPage.open();
+        charactersPage.openAccount();
+
+        assertEquals("http://localhost:8082/auth/account", driver.getCurrentUrl());
+    }
+
+    @Test
+    public void openAccountTestWhenItIsNotAvailableTest() {
+        charactersPage.open();
+        assertThrows(NoSuchElementException.class, () -> charactersPage.openAccount());
+
+        assertEquals("http://localhost:8082/character/all", driver.getCurrentUrl());
+    }
 }

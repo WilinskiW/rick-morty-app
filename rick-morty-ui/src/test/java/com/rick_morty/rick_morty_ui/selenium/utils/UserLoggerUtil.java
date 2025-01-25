@@ -26,14 +26,14 @@ public class UserLoggerUtil {
     public void loginAsAdmin() {
         open();
         username.sendKeys("rick");
-        password.sendKeys("123");
+        password.sendKeys("1234");
         loginButton.click();
     }
 
     public void loginAsModerator() {
         open();
         username.sendKeys("morty");
-        password.sendKeys("123");
+        password.sendKeys("1234");
         loginButton.click();
     }
 

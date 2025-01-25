@@ -22,19 +22,19 @@ public class HomePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public void open(){
+    public void open() {
         webDriver.get("http://localhost:8082/");
     }
 
-    public void openCharacters(){
+    public void openCharacters() {
         charactersLink.click();
     }
 
-    public void openLocations(){
+    public void openLocations() {
         locationsLink.click();
     }
 
-    public void openEpisodes(){
+    public void openEpisodes() {
         episodesLink.click();
     }
 
