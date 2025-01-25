@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.context.annotation.Profile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@Profile("test")
 public class CharactersPageTest {
     private final CharactersPage charactersPage;
     private final WebDriver driver;

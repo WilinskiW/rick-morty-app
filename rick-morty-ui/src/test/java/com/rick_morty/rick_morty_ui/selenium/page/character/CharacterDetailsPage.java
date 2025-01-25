@@ -21,10 +21,8 @@ public class CharacterDetailsPage extends NavbarPage {
         super(driver);
     }
 
-    @Override
-    public void open() {
-        int id = 5;
-        driver.get("http://localhost:8082/character/" + id);
+    public void open(int characterId) {
+        driver.get("http://localhost:8082/character/" + characterId);
     }
 
     public void openBackLink() {

@@ -38,8 +38,6 @@ public abstract class NavbarPage {
         PageFactory.initElements(driver, this);
     }
 
-    public abstract void open();
-
     public void openHome(){
         homeLink.click();
     }
