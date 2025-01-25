@@ -1,5 +1,7 @@
 package com.rick_morty.rick_morty_ui.selenium.page.character;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +19,16 @@ public class CharactersPageTest {
     public CharactersPageTest() {
         this.driver = new FirefoxDriver();
         this.charactersPage = new CharactersPage(driver);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
+
+    @BeforeEach
+    public void cleanUp() {
+        driver.manage().deleteAllCookies();
     }
 
     @Test

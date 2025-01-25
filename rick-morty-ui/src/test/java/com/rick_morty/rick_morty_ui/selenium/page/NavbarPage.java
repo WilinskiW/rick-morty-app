@@ -5,10 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public abstract class NavbarPage {
     protected final WebDriver driver;
     protected final UserLoggerUtil userLogger;
+    protected final WebDriverWait wait;
 
     @FindBy(linkText = "Home")
     private WebElement homeLink;
@@ -35,6 +39,7 @@ public abstract class NavbarPage {
     protected NavbarPage(WebDriver driver) {
         this.driver = driver;
         this.userLogger = new UserLoggerUtil(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         PageFactory.initElements(driver, this);
     }
 

@@ -48,7 +48,7 @@
                     <h1 class="text-dark text-center mb-4" th:text="'Editing: ' + ${character.name}">Editing Character</h1>
                     <form th:object="${character}" th:action="@{/character/edit/{id}(id=${character.id})}" method="POST">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter name">
+                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter name" required>
                             <label for="name">Name</label>
                         </div>
 
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="species" th:field="*{species}" placeholder="Enter species">
+                            <input type="text" class="form-control" id="species" th:field="*{species}" placeholder="Enter species" required>
                             <label for="species">Species</label>
                         </div>
 
