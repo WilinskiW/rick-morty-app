@@ -1,7 +1,7 @@
 package com.rick_morty.rick_morty_ui.selenium.page.character;
 
 
-import com.rick_morty.rick_morty_ui.selenium.page.NavbarPage;
+import com.rick_morty.rick_morty_ui.selenium.utils.NavbarPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +17,7 @@ public class CharacterDetailsPage extends NavbarPage {
     @FindBy(css = "form[action*='/character/edit/'] button[type='submit']")
     private WebElement editLink;
 
-    protected CharacterDetailsPage(WebDriver driver) {
+    public CharacterDetailsPage(WebDriver driver) {
         super(driver);
     }
 

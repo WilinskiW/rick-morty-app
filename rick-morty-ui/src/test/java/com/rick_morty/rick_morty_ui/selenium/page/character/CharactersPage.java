@@ -1,6 +1,6 @@
 package com.rick_morty.rick_morty_ui.selenium.page.character;
 
-import com.rick_morty.rick_morty_ui.selenium.page.NavbarPage;
+import com.rick_morty.rick_morty_ui.selenium.utils.NavbarPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +15,7 @@ public class CharactersPage extends NavbarPage {
     @FindBy(linkText = "Add new character")
     private WebElement addNewCharacterLink;
 
-    protected CharactersPage(WebDriver driver) {
+    public CharactersPage(WebDriver driver) {
         super(driver);
     }
 

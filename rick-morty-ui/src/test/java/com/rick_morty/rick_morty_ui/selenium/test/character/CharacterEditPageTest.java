@@ -1,5 +1,6 @@
-package com.rick_morty.rick_morty_ui.selenium.page.character;
+package com.rick_morty.rick_morty_ui.selenium.test.character;
 
+import com.rick_morty.rick_morty_ui.selenium.page.character.CharacterEditPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,7 +67,7 @@ public class CharacterEditPageTest {
         characterEditPage.openAsAdmin(1);
         characterEditPage.openAddNewLocationLink();
 
-        driver.navigate().to("http://localhost:8082/location/add");
+        driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
 
         assertEquals("http://localhost:8082/location/add", driver.getCurrentUrl());
     }

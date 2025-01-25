@@ -1,6 +1,5 @@
-package com.rick_morty.rick_morty_ui.selenium.page;
+package com.rick_morty.rick_morty_ui.selenium.utils;
 
-import com.rick_morty.rick_morty_ui.selenium.utils.UserLoggerUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,9 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public abstract class NavbarPage {
-    protected final WebDriver driver;
-    protected final UserLoggerUtil userLogger;
-    protected final WebDriverWait wait;
+    public final WebDriver driver;
+    public final UserLoggerUtil userLogger;
+    public final WebDriverWait wait;
 
     @FindBy(linkText = "Home")
     private WebElement homeLink;

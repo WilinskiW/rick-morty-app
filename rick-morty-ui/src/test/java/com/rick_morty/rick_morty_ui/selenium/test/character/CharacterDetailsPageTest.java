@@ -1,5 +1,6 @@
-package com.rick_morty.rick_morty_ui.selenium.page.character;
+package com.rick_morty.rick_morty_ui.selenium.test.character;
 
+import com.rick_morty.rick_morty_ui.selenium.page.character.CharacterDetailsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

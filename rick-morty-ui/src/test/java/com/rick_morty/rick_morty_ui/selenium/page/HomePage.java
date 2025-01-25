@@ -1,4 +1,4 @@
-package com.rick_morty.rick_morty_ui.selenium.page.home;
+package com.rick_morty.rick_morty_ui.selenium.page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
