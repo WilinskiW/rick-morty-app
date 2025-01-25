@@ -14,6 +14,9 @@ public class SchedulingTasks {
     @Scheduled(fixedRate = 300000) //5 m
     @Async
     public void performTask(){
-        characterService.setScheduleCharacter();
+        try {
+            characterService.setScheduleCharacter();
+        }
+        catch (IllegalArgumentException ignored){}
     }
 }
