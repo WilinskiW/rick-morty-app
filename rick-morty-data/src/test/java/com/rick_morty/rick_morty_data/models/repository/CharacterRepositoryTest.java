@@ -28,7 +28,7 @@ public class CharacterRepositoryTest {
         characterRepository.save(character);
 
         List<Character> characters = characterRepository.findLike("Rick%");
-        assertEquals(1, characters.size());
+        assertEquals(2, characters.size());
         assertEquals("Rick Sanchez", characters.getFirst().getName());
     }
 

@@ -76,6 +76,8 @@ public class CharacterEditPage extends NavbarPage {
         originSelect.selectByVisibleText("Citadel of Ricks");
         currentLocationSelect.selectByVisibleText("Abadango");
 
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.body.style.zoom='50%'");
         wait.until(ExpectedConditions.elementToBeClickable(imageUrlInput)).clear();
         imageUrlInput.sendKeys("https://rickandmortyapi.com/api/character/avatar/1.jpeg");
         saveButton.click();
@@ -84,6 +86,7 @@ public class CharacterEditPage extends NavbarPage {
 
     public void openAddNewLocationLink() {
         addNewLocationLink.click();
+        driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
     }
 
     public void openBackLink() {
