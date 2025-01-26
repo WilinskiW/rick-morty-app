@@ -1,4 +1,4 @@
-CREATE TABLE locations
+CREATE TABLE IF NOT EXISTS locations
 (
     id        INT AUTO_INCREMENT PRIMARY KEY,
     source_id INT          DEFAULT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE locations
     type      VARCHAR(255) DEFAULT NULL
 );
 
-CREATE TABLE characters
+CREATE TABLE IF NOT EXISTS characters
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     location_id INT          DEFAULT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE characters
 );
 
 
-CREATE TABLE episodes
+CREATE TABLE IF NOT EXISTS episodes
 (
     id        INT AUTO_INCREMENT PRIMARY KEY,
     source_id INT          DEFAULT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE episodes
     name      VARCHAR(255) DEFAULT NULL
 );
 
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
     id       BIGINT AUTO_INCREMENT PRIMARY KEY,
     password VARCHAR(255) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE users
 );
 
 
-CREATE TABLE user_favorites
+CREATE TABLE IF NOT EXISTS user_favorites
 (
     character_id INT          DEFAULT NULL,
     id           INT AUTO_INCREMENT PRIMARY KEY,
@@ -53,14 +53,14 @@ CREATE TABLE user_favorites
     CONSTRAINT FK_character FOREIGN KEY (character_id) REFERENCES characters (id)
 );
 
-CREATE TABLE user_roles
+CREATE TABLE IF NOT EXISTS user_roles
 (
     user_id BIGINT NOT NULL,
     role    VARCHAR(255) DEFAULT NULL,
     CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-CREATE TABLE character_episode
+CREATE TABLE IF NOT EXISTS character_episode
 (
     character_id INT NOT NULL,
     episode_id   INT NOT NULL,
