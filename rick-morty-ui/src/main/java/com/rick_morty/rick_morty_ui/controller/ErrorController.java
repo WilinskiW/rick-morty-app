@@ -10,6 +10,6 @@ public class ErrorController {
 
     @GetMapping("/403")
     public String showForbiddenPage() {
-        return "error/403";
+        return "error/forbidden";
     }
 }
