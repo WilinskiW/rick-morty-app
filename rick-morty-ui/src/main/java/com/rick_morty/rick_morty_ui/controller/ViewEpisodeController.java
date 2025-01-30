@@ -39,7 +39,7 @@ public class ViewEpisodeController implements ViewEntityController<EpisodeDto> {
         var episode = episodeService.getById(id);
         model.addAttribute("episode", episode);
         model.addAttribute("characters", episode.getCharacters());
-        model.addAttribute("allCharacters", characterService.getAll());
+        model.addAttribute("charactersNotPresent", characterService.getAllNotInTheEpisode(id));
         return "episode/edit-episode";
     }
 

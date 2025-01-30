@@ -16,4 +16,9 @@ public interface CharacterRepository extends JpaRepository<Character, Integer> {
     List<Character> findLike(String pattern);
 
     boolean existsByName(String name);
+
+    @Query(value = "SELECT * FROM characters WHERE id NOT IN (" +
+            "SELECT character_id FROM character_episode WHERE episode_id = (:episodeId))",
+            nativeQuery = true)
+    List<Character> findByEpisodeNotIn(int episodeId);
 }

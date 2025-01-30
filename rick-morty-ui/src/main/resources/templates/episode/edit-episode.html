@@ -65,10 +65,11 @@
                             <label for="episode">Episode Code (SXXEXX)</label>
                         </div>
 
-                        <div class="mb-4">
-                            <label class="form-label"><strong>Characters in this episode</strong></label>
-                            <select class="form-select" th:field="*{characters}" multiple style="height: 200px;">
-                                <option th:each="character : ${allCharacters}"
+                        <div th:if="${!charactersNotPresent.isEmpty()}" class="mb-4">
+                            <label class="form-label"><strong>Add new characters to this episode:</strong></label>
+                            <select id="new-characters" class="form-select" th:field="*{characters}" multiple
+                                    style="height: 200px;">
+                                <option th:each="character : ${charactersNotPresent}"
                                         th:value="${character.id}"
                                         th:text="${character.name}">
                                 </option>

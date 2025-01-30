@@ -76,7 +76,7 @@ class ViewLocationControllerTest {
         mockMvc.perform(get("/location/edit/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("location/edit-location"))
-                .andExpect(model().attributeExists("location", "allCharacters"));
+                .andExpect(model().attributeExists("location", "charactersNotPresent"));
 
         verify(locationService).getById(1);
         verify(characterService).getAll();
@@ -89,7 +89,7 @@ class ViewLocationControllerTest {
         mockMvc.perform(get("/location/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("location/add-location"))
-                .andExpect(model().attributeExists("location", "allCharacters"));
+                .andExpect(model().attributeExists("location", "charactersNotPresent"));
 
         verify(characterService).getAll();
     }
