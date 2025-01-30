@@ -50,6 +50,10 @@ public class CharacterService {
         return mapper.entityListToDtoList(db.getCharacters().findByEpisodeNotIn(episodeId));
     }
 
+    public List<CharacterDto> getAllNotInTheLocation(int locationId) {
+        return mapper.entityListToDtoList(db.getCharacters().findByLocationNotIn(locationId));
+    }
+
     public CharacterDto getCharacterById(Integer id) {
         var character = db.getCharacters().findById(id);
 

@@ -20,7 +20,7 @@ public class CharacterDetailsPageTest {
 
     @AfterEach
     public void tearDown() {
-        driver.quit();
+        //driver.quit();
     }
 
     @BeforeEach
@@ -135,5 +135,6 @@ public class CharacterDetailsPageTest {
         driver.get("http://localhost:8082/character/all");
 
         assertEquals("http://localhost:8082/character/all", driver.getCurrentUrl());
+        assertFalse(driver.getPageSource().contains(characterName));
     }
 }

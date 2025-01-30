@@ -31,10 +31,11 @@ public class EpisodeDetailsPage extends NavbarPage {
     /**
      * @return Episode name which was deleted
      */
-    public String deleteCharacter() {
+    public String deleteEpisode() {
         String episodeName = driver.findElement(By.tagName("h1")).getText();
         deleteLink.click();
         driver.switchTo().alert().accept();
+        driver.navigate().refresh();
         return episodeName;
     }
 

@@ -122,18 +122,19 @@ public class EpisodeDetailsPageTest {
     @Test
     public void tryOpenDeleteLinkWhenNotAuthorized() {
         episodeDetailsPage.open(1);
-        assertThrows(NoSuchElementException.class, () -> episodeDetailsPage.deleteCharacter());
+        assertThrows(NoSuchElementException.class, () -> episodeDetailsPage.deleteEpisode());
     }
 
     @Test
     public void openDeleteLink() {
         episodeDetailsPage.loginAsAdmin();
         episodeDetailsPage.open(9);
-        String characterName = episodeDetailsPage.deleteCharacter();
-        System.out.println("Episode name: " + characterName);
+        String episodeName = episodeDetailsPage.deleteEpisode();
+        System.out.println("Episode name: " + episodeName);
 
         driver.get("http://localhost:8082/episode/all");
 
         assertEquals("http://localhost:8082/episode/all", driver.getCurrentUrl());
+        assertFalse(driver.getPageSource().contains(episodeName));
     }
 }

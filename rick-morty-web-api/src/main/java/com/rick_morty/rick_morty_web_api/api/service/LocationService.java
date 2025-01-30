@@ -24,7 +24,7 @@ public class LocationService {
 
     @Transactional
     public void save(LocationDto locationDto) {
-        if(db.getLocations().existsByName(locationDto.getName())) {
+        if (db.getLocations().existsByName(locationDto.getName())) {
             throw new EntityExistsException("Location with this name already exists");
         }
 
@@ -69,13 +69,15 @@ public class LocationService {
         location.setName(locationDto.getName());
         location.setType(locationDto.getType());
         location.setDimension(locationDto.getDimension());
-        locationDto.getResidents().forEach(dto -> {
-            removeCharacterFromLocation(id, dto.getId());
-            Character character = db.getCharacters().findById(dto.getId())
-                    .orElseThrow(() -> new DataNotFoundException("Character not found"));
-            character.setLocation(location);
-            location.getCurrentCharacters().add(character);
-        });
+        if (locationDto.getResidents() != null) {
+            locationDto.getResidents().forEach(dto -> {
+                removeCharacterFromLocation(id, dto.getId());
+                Character character = db.getCharacters().findById(dto.getId())
+                        .orElseThrow(() -> new DataNotFoundException("Character not found"));
+                character.setLocation(location);
+                location.getCurrentCharacters().add(character);
+            });
+        }
 
         db.getLocations().save(location);
     }

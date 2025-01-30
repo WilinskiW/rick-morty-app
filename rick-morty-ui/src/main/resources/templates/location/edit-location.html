@@ -51,7 +51,7 @@
                         <form id="location" th:action="@{/location/edit/{id}(id=${location.id})}" method="POST">
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="name" th:field="*{name}"
-                                       placeholder="Enter name">
+                                       placeholder="Enter name" required>
                                 <label for="name">Name</label>
                             </div>
 
@@ -118,8 +118,8 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label"><strong>Select new residents</strong></label>
-                        <select form="location" class="form-select" th:field="*{residents}" multiple style="height: 200px;">
-                            <option th:each="resident : ${allCharacters}"
+                        <select id="new-characters" form="location" class="form-select" th:field="*{residents}" multiple style="height: 200px;">
+                            <option th:each="resident : ${charactersNotPresent}"
                                     th:value="${resident.id}"
                                     th:text="${resident.name}"
                                     th:selected="${location.residents.contains(resident)}">

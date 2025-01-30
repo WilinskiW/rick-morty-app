@@ -1,4 +1,4 @@
-package com.rick_morty.rick_morty_ui.selenium.page.episode;
+package com.rick_morty.rick_morty_ui.selenium.page.location;
 
 import com.rick_morty.rick_morty_ui.selenium.utils.NavbarPage;
 import lombok.Getter;
@@ -11,16 +11,16 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class EpisodeEditPage extends NavbarPage {
-    @FindBy(id = "title")
+public class LocationEditPage extends NavbarPage {
+    @FindBy(id = "name")
     @Getter
-    private WebElement titleInput;
+    private WebElement nameInput;
 
-    @FindBy(id = "airDate")
-    private WebElement airDateInput;
+    @FindBy(id = "type")
+    private WebElement typeInput;
 
-    @FindBy(id = "episode")
-    private WebElement episodeCodeInput;
+    @FindBy(id = "dimension")
+    private WebElement dimensionInput;
 
     @FindBy(id = "new-characters")
     private WebElement newCharactersElement;
@@ -28,36 +28,36 @@ public class EpisodeEditPage extends NavbarPage {
     @FindBy(linkText = "Edit")
     private WebElement editButton;
 
-    @FindBy(css = "form[action*='/episode/'] button[type='submit'].btn-danger")
+    @FindBy(css = "form[action*='/location/'] button[type='submit'].btn-danger")
     private WebElement deleteButton;
 
     @FindBy(linkText = "Back")
     private WebElement backLink;
 
-    @FindBy(css = "button[type='submit'].btn-primary")
+    @FindBy(css = "input[type='submit'].btn-primary")
     private WebElement saveButton;
 
-    public EpisodeEditPage(WebDriver driver) {
+    public LocationEditPage(WebDriver driver) {
         super(driver);
     }
 
-    public void open(int episodeId) {
-        driver.get("http://localhost:8082/episode/edit/" + episodeId);
+    public void open(int locationId) {
+        driver.get("http://localhost:8082/location/edit/" + locationId);
     }
 
 
-    public void openAsAuthorize(int episodeId) {
+    public void openAsAuthorize(int locationId) {
         userLogger.loginAsModerator();
-        open(episodeId);
+        open(locationId);
     }
 
-    public void fillTheEditForm(String title, String airDate, String episodeCode) {
-        titleInput.clear();
-        titleInput.sendKeys(title);
-        airDateInput.clear();
-        airDateInput.sendKeys(airDate);
-        episodeCodeInput.clear();
-        episodeCodeInput.sendKeys(episodeCode);
+    public void fillTheEditForm(String name, String type, String input) {
+        nameInput.clear();
+        nameInput.sendKeys(name);
+        typeInput.clear();
+        typeInput.sendKeys(type);
+        dimensionInput.clear();
+        dimensionInput.sendKeys(input);
     }
 
     /**
@@ -74,6 +74,9 @@ public class EpisodeEditPage extends NavbarPage {
     }
 
     public List<String> selectManyCharacters() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.body.style.zoom='70%'");
+
         Select select = getCharacterSelect();
         Actions action = new Actions(driver);
 
@@ -91,13 +94,13 @@ public class EpisodeEditPage extends NavbarPage {
 
     public void openCharacterEdit() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.body.style.zoom='80%'");
+        js.executeScript("document.body.style.zoom='70%'");
         editButton.click();
     }
 
     public String deleteCharacter() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.body.style.zoom='80%'");
+        js.executeScript("document.body.style.zoom='60%'");
 
         List<WebElement> rows = driver.findElements(By.cssSelector("tbody tr"));
 
@@ -112,13 +115,13 @@ public class EpisodeEditPage extends NavbarPage {
         return "";
     }
 
-    public void submitEpisode() {
+    public void submitLocation() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.body.style.zoom='40%'");
+        js.executeScript("document.body.style.zoom='65%'");
         wait.until(ExpectedConditions.elementToBeClickable(saveButton)).click();
     }
 
-    public void backToEpisodes() {
+    public void backToLocations() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.body.style.zoom='40%'");
         backLink.click();

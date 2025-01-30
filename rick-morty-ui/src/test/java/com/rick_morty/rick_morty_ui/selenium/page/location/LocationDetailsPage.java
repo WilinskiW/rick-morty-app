@@ -1,5 +1,4 @@
-package com.rick_morty.rick_morty_ui.selenium.page.character;
-
+package com.rick_morty.rick_morty_ui.selenium.page.location;
 
 import com.rick_morty.rick_morty_ui.selenium.utils.NavbarPage;
 import org.openqa.selenium.By;
@@ -7,22 +6,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CharacterDetailsPage extends NavbarPage {
+public class LocationDetailsPage extends NavbarPage {
     @FindBy(linkText = "Back")
     private WebElement backLink;
 
-    @FindBy(css = "form[action*='/character/'] button[type='submit'].btn-danger")
+    @FindBy(css = "form[action*='/location/'] button[type='submit'].btn-danger")
     private WebElement deleteLink;
 
-    @FindBy(css = "form[action*='/character/edit/'] button[type='submit']")
+    @FindBy(css = "form[action*='/location/edit/'] button[type='submit']")
     private WebElement editLink;
 
-    public CharacterDetailsPage(WebDriver driver) {
+    public LocationDetailsPage(WebDriver driver) {
         super(driver);
     }
 
-    public void open(int characterId) {
-        driver.get("http://localhost:8082/character/" + characterId);
+    public void open(int locationId) {
+        driver.get("http://localhost:8082/location/" + locationId);
     }
 
     public void openBackLink() {
@@ -30,14 +29,14 @@ public class CharacterDetailsPage extends NavbarPage {
     }
 
     /**
-     * @return Character name who was deleted
+     * @return Location name which was deleted
      */
-    public String deleteCharacter() {
-        String characterName = driver.findElement(By.tagName("h1")).getText();
+    public String deleteLocation() {
+        String locationName = driver.findElement(By.tagName("h1")).getText();
         deleteLink.click();
         driver.switchTo().alert().accept();
         driver.navigate().refresh();
-        return characterName;
+        return locationName;
     }
 
     public void openEditLink() {

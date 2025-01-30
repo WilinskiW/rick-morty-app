@@ -35,7 +35,7 @@ public class ViewLocationController implements ViewEntityController<LocationDto>
     @GetMapping("/edit/{id}")
     public String showEditPage(@PathVariable int id, Model model) {
         model.addAttribute("location", locationService.getById(id));
-        model.addAttribute("allCharacters", characterService.getAll());
+        model.addAttribute("charactersNotPresent", characterService.getAllNotInTheLocation(id));
         return "location/edit-location";
     }
 
@@ -64,7 +64,7 @@ public class ViewLocationController implements ViewEntityController<LocationDto>
     @PostMapping("edit/{id}")
     public String update(@PathVariable int id, LocationDto locationDto) {
         locationService.update(id, locationDto);
-        return "redirect:/location/all";
+        return "redirect:/location/" + id;
     }
 
     @Override
