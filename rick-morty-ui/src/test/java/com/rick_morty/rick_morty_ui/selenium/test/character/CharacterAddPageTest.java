@@ -6,11 +6,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 @Profile("test")
+@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:reset_data.sql")
 public class CharacterAddPageTest {
     private final CharacterAddPage characterAddPage;
     private final WebDriver driver;
@@ -57,6 +61,7 @@ public class CharacterAddPageTest {
     }
 
     @Test
+    //Failure might happen, when running all tests. Single run won't cause failure.
     public void openAddLocationLinkTest() {
         characterAddPage.openAsAuthorize();
         characterAddPage.openAddNewLocationLink();

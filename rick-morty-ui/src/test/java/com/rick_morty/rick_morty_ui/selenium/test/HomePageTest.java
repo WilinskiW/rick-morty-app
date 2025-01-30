@@ -1,6 +1,7 @@
 package com.rick_morty.rick_morty_ui.selenium.test;
 
 import com.rick_morty.rick_morty_ui.selenium.page.HomePage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,6 +15,11 @@ public class HomePageTest {
     public HomePageTest() {
         this.driver = new FirefoxDriver();
         this.homePage = new HomePage(driver);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
     }
 
     @Test
