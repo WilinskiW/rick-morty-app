@@ -83,7 +83,7 @@ class ViewEpisodeControllerTest {
                 .andExpect(model().attributeExists("episode", "characters", "charactersNotPresent"));
 
         verify(episodeService).getById(1);
-        verify(characterService).getAll();
+        verify(characterService).getAllNotInTheEpisode(anyInt());
     }
 
     @Test
@@ -93,7 +93,7 @@ class ViewEpisodeControllerTest {
         mockMvc.perform(get("/episode/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("episode/add-episode"))
-                .andExpect(model().attributeExists("episode", "charactersNotPresent"));
+                .andExpect(model().attributeExists("episode", "allCharacters"));
 
         verify(characterService).getAll();
     }

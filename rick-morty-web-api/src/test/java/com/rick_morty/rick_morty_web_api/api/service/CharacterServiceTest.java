@@ -17,10 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -91,6 +88,38 @@ class CharacterServiceTest {
     }
 
     @Test
+    void testGetAllNotInEpisode() {
+        int episodeId = 1;
+        List<Character> characters = Arrays.asList(new Character(), new Character());
+        List<CharacterDto> characterDtos = List.of(new CharacterDto());
+
+        when(characterRepository.findByEpisodeNotIn(episodeId)).thenReturn(characters);
+        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
+
+        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
+
+        List<CharacterDto> result = characterService.getAllNotInTheEpisode(episodeId);
+
+        assertEquals(characterDtos, result);
+    }
+
+    @Test
+    void testGetAllNotInLocation() {
+        int locationId = 1;
+        List<Character> characters = Arrays.asList(new Character(), new Character());
+        List<CharacterDto> characterDtos = List.of(new CharacterDto());
+
+        when(characterRepository.findByLocationNotIn(locationId)).thenReturn(characters);
+        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
+
+        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
+
+        List<CharacterDto> result = characterService.getAllNotInTheLocation(locationId);
+
+        assertEquals(characterDtos, result);
+    }
+
+    @Test
     void testGetCharacterById() {
         Integer id = 1;
         Character character = new Character();
@@ -128,7 +157,7 @@ class CharacterServiceTest {
 
     @Test
     void testDeleteById() {
-        Integer id = 1;
+        int id = 1;
         Character character = new Character();
         character.setEpisodes(new HashSet<>());
         when(characterRepository.findById(id)).thenReturn(Optional.of(character));

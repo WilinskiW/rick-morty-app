@@ -79,7 +79,7 @@ class ViewLocationControllerTest {
                 .andExpect(model().attributeExists("location", "charactersNotPresent"));
 
         verify(locationService).getById(1);
-        verify(characterService).getAll();
+        verify(characterService).getAllNotInTheLocation(anyInt());
     }
 
     @Test
@@ -89,7 +89,7 @@ class ViewLocationControllerTest {
         mockMvc.perform(get("/location/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("location/add-location"))
-                .andExpect(model().attributeExists("location", "charactersNotPresent"));
+                .andExpect(model().attributeExists("location", "allCharacters"));
 
         verify(characterService).getAll();
     }
@@ -120,7 +120,7 @@ class ViewLocationControllerTest {
         mockMvc.perform(post("/location/edit/1")
                         .flashAttr("locationDto", locationDto))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/location/all"));
+                .andExpect(redirectedUrl("/location/1"));
 
         verify(locationService).update(1, locationDto);
     }
