@@ -16,7 +16,10 @@ public class AuthController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(@RequestParam(value = "error", required = false) boolean error, Model model) {
+        if (error) {
+            model.addAttribute("error", true);
+        }
         return "auth/login";
     }
 
@@ -39,8 +42,7 @@ public class AuthController {
     public String registerUser(@RequestParam String username, @RequestParam String password, Model model) {
         try {
             userService.registerUser(username, password);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             model.addAttribute("error", true);
             return "auth/register";
         }
