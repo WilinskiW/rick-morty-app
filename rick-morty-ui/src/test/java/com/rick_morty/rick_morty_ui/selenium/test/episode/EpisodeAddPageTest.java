@@ -88,7 +88,7 @@ public class EpisodeAddPageTest {
 
         driver.get("http://localhost:8082/episode/add");
 
-        assertTrue(driver.getPageSource().contains("Forbidden"));
+        assertTrue(driver.getPageSource().contains("Access denied"));
     }
 
 

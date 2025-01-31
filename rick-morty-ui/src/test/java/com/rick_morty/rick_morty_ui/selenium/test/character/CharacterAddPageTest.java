@@ -48,7 +48,7 @@ public class CharacterAddPageTest {
 
         driver.get("http://localhost:8082/character/add");
 
-        assertTrue(driver.getPageSource().contains("Forbidden"));
+        assertTrue(driver.getPageSource().contains("Access denied"));
     }
 
     @Test

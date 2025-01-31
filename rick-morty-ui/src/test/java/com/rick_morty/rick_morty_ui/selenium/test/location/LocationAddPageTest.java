@@ -81,7 +81,7 @@ public class LocationAddPageTest {
     @Test
     public void openWhileNotAuthorized(){
         locationAddPage.openAsModerator();
-        assertTrue(driver.getPageSource().contains("Forbidden"));
+        assertTrue(driver.getPageSource().contains("Access denied"));
     }
 
     @Test
