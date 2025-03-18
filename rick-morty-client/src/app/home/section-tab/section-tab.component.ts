@@ -1,8 +1,11 @@
 import {Component, computed, input} from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-section-tab',
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './section-tab.component.html',
   styleUrl: './section-tab.component.css'
 })
