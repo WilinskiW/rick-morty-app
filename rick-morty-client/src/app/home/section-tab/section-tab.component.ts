@@ -13,6 +13,10 @@ export class SectionTabComponent {
   sectionName = input.required<string>();
   imageUrl = computed<string>(() => `${this.sectionName().toLowerCase()}.jpeg`);
 
+  get wikiLink() {
+    return `/wiki/${this.sectionName().toLowerCase()}`
+  }
+
   get getBackgroundImg(): string {
     return `background-image: url(/images/${this.imageUrl()})`
   }

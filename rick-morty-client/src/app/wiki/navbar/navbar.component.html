@@ -6,24 +6,13 @@
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active-link"
-             [routerLinkActiveOptions]="{exact:true}"
-             [routerLink]="['./']">
-            Characters</a>
+          <app-nav-link name="Characters" [activeSection]="section()"/>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/location/all}"
-             routerLinkActive="active-link"
-             [routerLinkActiveOptions]="{exact:true}"
-             [routerLink]="['./']">
-            Locations</a>
+          <app-nav-link name="Locations" [activeSection]="section()"/>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/episode/all}"
-             routerLinkActive="active-link"
-             [routerLinkActiveOptions]="{exact:true}"
-             [routerLink]="['./']">
-            Episodes</a>
+          <app-nav-link name="Episodes" [activeSection]="section()"/>
         </li>
       </ul>
       <div class="d-flex gap-2">

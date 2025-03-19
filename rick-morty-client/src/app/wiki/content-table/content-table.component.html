@@ -2,24 +2,21 @@
   <h1 class="text-center p-2">{{ name() }}</h1>
   <div class=" d-flex justify-content-center">
     <table class="table-bordered text-center justify-content-center m-1">
+      <thead>
       <tr class="text-bg-dark">
-        @for (th of tableHeaders; track tableHeaders) {
+        @for (th of tableHeaders(); track $index) {
           <th>{{ th }}</th>
         }
       </tr>
+      </thead>
+      <tbody>
       <tr>
-        <td>TEST</td>
-        <td>TEST</td>
-        <td>TEST</td>
-        <td>TEST</td>
-        <td>TEST</td>
-        <td>TEST</td>
-        <td>TEST</td>
+        <td *ngFor="let x of numSequence(tableHeaders().length-1) ">TEST</td>
         <td>
-          <a class="btn btn-primary text-white m-2 rounded-2"
-             th:href="@{/character/{id}(id=${character.id})}">View details</a>
+          <a class="btn btn-primary text-white m-2 rounded-2">View details</a>
         </td>
       </tr>
+      </tbody>
     </table>
   </div>
 </main>
