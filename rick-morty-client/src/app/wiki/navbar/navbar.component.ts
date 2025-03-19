@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TitleCasePipe } from '@angular/common';
 import { NavLinkComponent } from './nav-link/nav-link.component';
 
 @Component({
@@ -8,7 +7,6 @@ import { NavLinkComponent } from './nav-link/nav-link.component';
   imports: [
     RouterLink,
     RouterLinkActive,
-    TitleCasePipe,
     NavLinkComponent
   ],
   templateUrl: './navbar.component.html',
