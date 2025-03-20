@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { WikiComponent } from './wiki/wiki.component';
+import { wikiRoutes } from './wiki/wiki.routes';
 
 export const routes: Routes = [
   {
@@ -8,7 +9,8 @@ export const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: "wiki/:section",
+    path: "wiki",
     component: WikiComponent,
+    children: wikiRoutes
   }
 ];

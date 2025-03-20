@@ -1,19 +1,21 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { ContentTableService } from './content-table.service';
+import { Component, input } from '@angular/core';
 import { NgForOf } from '@angular/common';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-content-table',
   imports: [
-    NgForOf
+    NgForOf,
+    RouterLink,
+    RouterOutlet
   ],
   templateUrl: './content-table.component.html',
+  standalone: true,
   styleUrl: './content-table.component.css'
 })
 export class ContentTableComponent {
-  private contentTableService = inject(ContentTableService);
-  name = input.required<string>();
-  tableHeaders = computed(() => this.contentTableService.tableHeaders(this.name()))
+  section = input.required<string>();
+  headers = input.required<string[]>();
 
   numSequence(n: number): Array<number> { // Tylko na fazę testów
     return Array(n);

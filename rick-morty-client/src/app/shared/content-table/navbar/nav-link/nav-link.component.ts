@@ -10,6 +10,7 @@ import { TitleCasePipe } from "@angular/common";
     RouterLink
   ],
   templateUrl: './nav-link.component.html',
+  standalone: true,
   styleUrl: './nav-link.component.css'
 })
 export class NavLinkComponent {
@@ -17,6 +18,6 @@ export class NavLinkComponent {
   activeSection = input.required<string>();
 
   get prepareRouteLink() {
-    return this.name() === this.activeSection() ? '[./]' : `../${this.name().toLowerCase()}`;
+    return `${this.name().toLowerCase()}`;
   }
 }

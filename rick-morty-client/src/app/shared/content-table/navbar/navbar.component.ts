@@ -10,6 +10,7 @@ import { NavLinkComponent } from './nav-link/nav-link.component';
     NavLinkComponent
   ],
   templateUrl: './navbar.component.html',
+  standalone: true,
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
