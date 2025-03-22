@@ -1,14 +1,12 @@
 import { Component, DestroyRef } from '@angular/core';
 import { NavbarComponent } from '../shared/content-table/navbar/navbar.component';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { ContentTableComponent } from '../shared/content-table/content-table.component';
 import { filter, map } from 'rxjs';
 
 
 @Component({
   selector: 'app-wiki',
   imports: [
-    ContentTableComponent,
     NavbarComponent,
     RouterOutlet,
   ],
