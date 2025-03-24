@@ -1,14 +1,16 @@
 import { ContentTableComponent } from '../shared/content-table/content-table.component';
 import { CharacterDetailComponent } from './characters/character-detail/character-detail.component';
 import { NoPhotoDetailComponent } from '../shared/no-photo-detail/no-photo-detail.component';
+import {
+  CharactersTableComponent
+} from './characters/characters-table/character-table-data/characters-table.component';
 
 export const wikiRoutes = [
   {
     path: "characters",
-    component: ContentTableComponent,
+    component: CharactersTableComponent,
     data: {
-      section: "Characters",
-      headers: ["ID", "Name", "Status", "Type", "Gender", "Origin", "Last Seen", "Details"]
+      section: "Characters"
     }
   },
   {

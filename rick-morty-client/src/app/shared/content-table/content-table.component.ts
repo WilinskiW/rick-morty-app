@@ -1,8 +1,8 @@
-import { Component, DestroyRef, inject, input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CharacterModel } from '../../wiki/characters/character.model';
+import { WikiService } from '../../wiki/wiki.service';
 
 
 @Component({
@@ -18,20 +18,23 @@ import { CharacterModel } from '../../wiki/characters/character.model';
 })
 export class ContentTableComponent implements OnInit {
   section = input.required<string>();
-  headers = input.required<string[]>();
-  private httpClient = inject(HttpClient);
+  data = signal<CharacterModel[]>([]);
+  isFetching = signal(false);
+  private wikiService = inject(WikiService);
   private destroyRef = inject(DestroyRef);
 
-  numSequence(n: number): Array<number> { // Tylko na fazę testów
-    return Array(n);
-  }
-
   ngOnInit(): void {
-    const subscription = this.httpClient.get<{characters:  CharacterModel[] }>("http://localhost:8081/api/character/1").subscribe({
-      next: (responseData) => {
-        console.log(responseData);
-      }
-    });
+    this.isFetching.set(true);
+    const subscription = this.wikiService.fetchData<CharacterModel[]>("http://localhost:8081/api/characters")
+      .subscribe({
+        next: responseData => {
+          this.data.set(responseData);
+        },
+        complete: () => {
+          console.log(this.data())
+          this.isFetching.set(false);
+        }
+      });
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }

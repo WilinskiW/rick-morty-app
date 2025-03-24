@@ -1,0 +1,36 @@
+@if (isFetching()) {
+  <app-content-table section="Characters">
+    <ng-container table-headers>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th>Gender</th>
+      <th>Origin</th>
+      <th>Last seen</th>
+      <th>Details</th>
+    </ng-container>
+    <ng-container table-body>
+      @for (character of characters; track character.id) {
+        <tr>
+          <td>{{ character.id }}</td>
+          <td>{{ character.name }}</td>
+          <td>{{ character.status | titlecase }}</td>
+          <td>{{ character.type }}</td>
+          <td>{{ character.gender }}</td>
+          <td>{{ character.origin?.name || "Unknown" }}</td>
+          <td>{{ character.currentLocation?.name || "Unknown" }}</td>
+          <td>
+            <a class="btn btn-primary text-white m-2 rounded-2" [routerLink]="String(character.id)">View details</a>
+          </td>
+        </tr>
+      }
+    </ng-container>
+  </app-content-table>
+} @else {
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+}

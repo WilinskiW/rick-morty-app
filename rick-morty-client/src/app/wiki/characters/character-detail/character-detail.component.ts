@@ -1,12 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
+import { CharacterModel } from '../character.model';
+import { WikiService } from '../../wiki.service';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-character-detail',
-  imports: [],
+  imports: [
+    TitleCasePipe
+  ],
   templateUrl: './character-detail.component.html',
   standalone: true,
   styleUrl: './character-detail.component.css'
 })
-export class CharacterDetailComponent {
+export class CharacterDetailComponent implements OnInit{
+  character : CharacterModel | undefined;
+  id = input.required<number>();
+  private wikiService = inject(WikiService);
 
+  ngOnInit() {
+    this.wikiService.fetchData<CharacterModel>(`http://localhost:8081/api/characters/${this.id()}`)
+      .subscribe({
+        next: (data) => {
+          this.character = data;
+        },
+        complete: () => {
+          console.log(this.character)
+        }
+      })
+  }
 }

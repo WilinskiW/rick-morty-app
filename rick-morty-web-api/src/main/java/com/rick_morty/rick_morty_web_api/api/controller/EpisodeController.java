@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("api/episode")
+@RequestMapping("api/episodes")
 @RequiredArgsConstructor
 public class EpisodeController {
     private final EpisodeService episodeService;
@@ -45,7 +45,7 @@ public class EpisodeController {
      * READ
      */
 
-    @GetMapping("/all")
+    @GetMapping
     @Cacheable(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<List<EpisodeDto>> findAll() {
         var result = episodeService.getAll();

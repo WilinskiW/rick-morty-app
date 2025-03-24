@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api/location")
+@RequestMapping("/api/locations")
 @Slf4j
 @RequiredArgsConstructor
 public class LocationController {
@@ -45,7 +45,7 @@ public class LocationController {
      * READ
      */
 
-    @GetMapping("/all")
+    @GetMapping
     @Cacheable(value = "locations", key = "'allLocations'")
     public ResponseEntity<List<LocationDto>> findAll() {
         var result = locationService.getAll();

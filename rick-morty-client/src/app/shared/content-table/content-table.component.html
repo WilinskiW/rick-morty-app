@@ -1,23 +1,16 @@
-<main class="container mt-3">
-  <h1 class="text-center p-2">{{ section() }}</h1>
-  <div class=" d-flex justify-content-center">
-    <table class="table-bordered text-center justify-content-center m-1">
-      <thead>
-      <tr class="text-bg-dark">
-        @for (th of headers(); track $index) {
-          <th>{{ th }}</th>
-        }
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td *ngFor="let x of numSequence(headers().length-1) ">TEST</td>
-        <td>
-          <a class="btn btn-primary text-white m-2 rounded-2" routerLink="1">View details</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</main>
-<router-outlet/>
+  <main class="container mt-3">
+    <h1 class="text-center p-2">{{ section() }}</h1>
+    <div class="d-flex justify-content-center">
+      <table class="table-bordered text-center justify-content-center m-1">
+        <thead>
+        <tr class="text-bg-dark">
+          <ng-content select="[table-headers]"></ng-content>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-content select="[table-body]"></ng-content>
+        </tbody>
+      </table>
+    </div>
+  </main>
+

@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api/character")
+@RequestMapping("/api/characters")
 @RequiredArgsConstructor
 public class CharacterController {
     private final CharacterService characterService;
@@ -45,7 +45,7 @@ public class CharacterController {
      * READ
      */
 
-    @GetMapping("/all")
+    @GetMapping
     @Cacheable(value = "characters", key = "'allCharacter'")
     public ResponseEntity<List<CharacterDto>> findAll() {
         var result = characterService.getAll();
