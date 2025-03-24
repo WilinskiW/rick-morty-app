@@ -30,6 +30,5 @@ export class CharactersTableComponent implements OnInit {
       });
   }
 
-  protected readonly TitleCasePipe = TitleCasePipe;
   protected readonly String = String;
 }

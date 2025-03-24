@@ -1,0 +1,30 @@
+@if (isFetching()) {
+  <app-content-table section="Locations">
+    <ng-container table-headers>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Dimension</th>
+      <th>Details</th>
+    </ng-container>
+    <ng-container table-body>
+      @for (location of locations; track location.id) {
+        <tr>
+          <td>{{ location.id }}</td>
+          <td>{{ location.name }}</td>
+          <td>{{ location.type }}</td>
+          <td>{{ location.dimension }}</td>
+          <td>
+            <a class="btn btn-primary text-white m-2 rounded-2" [routerLink]="String(location.id)">View details</a>
+          </td>
+        </tr>
+      }
+    </ng-container>
+  </app-content-table>
+} @else {
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+}

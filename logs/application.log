@@ -318,3 +318,196 @@
 2025-03-24 20:24:41 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2025-03-24 20:24:41 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
 2025-03-24 20:24:42 [http-nio-8081-exec-1] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:26:18 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2025-03-24 20:26:18 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 20:26:18 [Thread-7] INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2025-03-24 20:26:18 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-03-24 20:26:18 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 20:26:18 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-03-24 20:26:18 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 20:26:18 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-24 20:26:18 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-24 20:26:18 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Starting RickMortyWebApiApplication using Java 23.0.1 with PID 22244 (C:\Users\Użytkownik\IdeaProjects\rick-morty-app\rick-morty-web-api\build\classes\java\main started by Użytkownik in C:\Users\Użytkownik\IdeaProjects\rick-morty-app)
+2025-03-24 20:26:18 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - The following 1 profile is active: "dev"
+2025-03-24 20:26:18 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 20:26:18 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2025-03-24 20:26:18 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 20:26:19 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 3 JPA repository interfaces.
+2025-03-24 20:26:19 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-03-24 20:26:19 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-24 20:26:19 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2025-03-24 20:26:19 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-24 20:26:19 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 832 ms
+2025-03-24 20:26:19 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-24 20:26:19 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.mariadb.jdbc.Connection@5051c9d7
+2025-03-24 20:26:19 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-24 20:26:19 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mariadb://localhost:3307/rick_morty?user=root&password=***'
+2025-03-24 20:26:19 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24 20:26:19 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-24 20:26:19 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24 20:26:19 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24 20:26:19 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 20:26:19 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24 20:26:19 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@32779315, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@167308dc, org.springframework.security.web.context.SecurityContextHolderFilter@25f93ff0, org.springframework.security.web.header.HeaderWriterFilter@cdb8cd1, org.springframework.web.filter.CorsFilter@f060ffd, org.springframework.security.web.csrf.CsrfFilter@32f143e3, org.springframework.security.web.authentication.logout.LogoutFilter@534e77ad, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d2f9ef7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6f496d3a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f55f2af, org.springframework.security.web.access.ExceptionTranslationFilter@5634941c]
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2025-03-24 20:26:20 [restartedMain] INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@696b9dfd
+2025-03-24 20:26:20 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-03-24 20:26:20 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2025-03-24 20:26:20 [restartedMain] INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2025-03-24 20:26:20 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-03-24 20:26:20 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Started RickMortyWebApiApplication in 1.781 seconds (process running for 108.609)
+2025-03-24 20:26:20 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2025-03-24 20:26:21 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2025-03-24 20:26:21 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 20:26:21 [Thread-9] INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2025-03-24 20:26:21 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-03-24 20:26:21 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 20:26:21 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-03-24 20:26:21 [Thread-9] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 20:26:21 [Thread-9] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-03-24 20:26:21 [Thread-9] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-03-24 20:26:21 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Starting RickMortyWebApiApplication using Java 23.0.1 with PID 22244 (C:\Users\Użytkownik\IdeaProjects\rick-morty-app\rick-morty-web-api\build\classes\java\main started by Użytkownik in C:\Users\Użytkownik\IdeaProjects\rick-morty-app)
+2025-03-24 20:26:21 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - The following 1 profile is active: "dev"
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 3 JPA repository interfaces.
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-03-24 20:26:22 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-24 20:26:22 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2025-03-24 20:26:22 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 729 ms
+2025-03-24 20:26:22 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-24 20:26:22 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.mariadb.jdbc.Connection@3636a91f
+2025-03-24 20:26:22 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mariadb://localhost:3307/rick_morty?user=user&password=***'
+2025-03-24 20:26:22 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24 20:26:22 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24 20:26:22 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24 20:26:22 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 20:26:22 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24 20:26:23 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5031342, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6d4f953a, org.springframework.security.web.context.SecurityContextHolderFilter@1b37113c, org.springframework.security.web.header.HeaderWriterFilter@6f4c10af, org.springframework.web.filter.CorsFilter@3f26b2d9, org.springframework.security.web.csrf.CsrfFilter@24cc0d70, org.springframework.security.web.authentication.logout.LogoutFilter@7bec0d98, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5fd438a7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5737e26a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@24bde868, org.springframework.security.web.access.ExceptionTranslationFilter@76ffd28d]
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2025-03-24 20:26:23 [restartedMain] INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@692e2fce
+2025-03-24 20:26:23 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-03-24 20:26:23 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2025-03-24 20:26:23 [restartedMain] INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2025-03-24 20:26:23 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-03-24 20:26:23 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Started RickMortyWebApiApplication in 1.507 seconds (process running for 111.623)
+2025-03-24 20:26:23 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2025-03-24 20:28:08 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2025-03-24 20:35:01 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Starting RickMortyWebApiApplication using Java 23.0.1 with PID 17404 (C:\Users\Użytkownik\IdeaProjects\rick-morty-app\rick-morty-web-api\build\classes\java\main started by Użytkownik in C:\Users\Użytkownik\IdeaProjects\rick-morty-app)
+2025-03-24 20:35:01 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - The following 1 profile is active: "dev"
+2025-03-24 20:35:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-24 20:35:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-24 20:35:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 20:35:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 51 ms. Found 2 JPA repository interfaces.
+2025-03-24 20:35:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 20:35:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15 ms. Found 3 JPA repository interfaces.
+2025-03-24 20:35:03 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-03-24 20:35:03 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-24 20:35:03 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2025-03-24 20:35:03 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-24 20:35:03 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2254 ms
+2025-03-24 20:35:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-24 20:35:03 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@5389f818
+2025-03-24 20:35:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-24 20:35:03 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mariadb://localhost:3307/rick_morty?user=user&password=***'
+2025-03-24 20:35:03 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24 20:35:04 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2025-03-24 20:35:04 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-24 20:35:04 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24 20:35:05 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24 20:35:05 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 20:35:05 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-24 20:35:06 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24 20:35:07 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2f11e836, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4ed670d9, org.springframework.security.web.context.SecurityContextHolderFilter@a598987, org.springframework.security.web.header.HeaderWriterFilter@33375ec3, org.springframework.web.filter.CorsFilter@4e983257, org.springframework.security.web.csrf.CsrfFilter@b358ad7, org.springframework.security.web.authentication.logout.LogoutFilter@4c3a2f1f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ef89b31, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2881a8bd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5fcef706, org.springframework.security.web.access.ExceptionTranslationFilter@19585ca4]
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2025-03-24 20:35:07 [restartedMain] INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@59aa74d6
+2025-03-24 20:35:07 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-03-24 20:35:07 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2025-03-24 20:35:07 [restartedMain] INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2025-03-24 20:35:07 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-03-24 20:35:07 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Started RickMortyWebApiApplication in 7.014 seconds (process running for 7.847)
+2025-03-24 20:35:09 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-24 20:35:09 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-24 20:35:09 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-24 20:35:10 [http-nio-8081-exec-1] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:35:52 [http-nio-8081-exec-5] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:35:52 [http-nio-8081-exec-6] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:36:15 [http-nio-8081-exec-1] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:36:39 [http-nio-8081-exec-3] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:36:42 [http-nio-8081-exec-4] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:37:02 [http-nio-8081-exec-5] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:37:02 [http-nio-8081-exec-6] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:45:13 [http-nio-8081-exec-1] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:45:29 [http-nio-8081-exec-4] INFO  c.r.r.a.controller.EpisodeController - Found 51 episodes
+2025-03-24 20:45:29 [http-nio-8081-exec-2] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:45:40 [http-nio-8081-exec-7] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:45:41 [http-nio-8081-exec-8] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:48:12 [http-nio-8081-exec-10] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:48:12 [http-nio-8081-exec-1] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:48:12 [http-nio-8081-exec-3] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:48:32 [http-nio-8081-exec-6] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:48:34 [http-nio-8081-exec-8] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:50:19 [http-nio-8081-exec-1] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:50:20 [http-nio-8081-exec-4] INFO  c.r.r.a.controller.EpisodeController - Found 51 episodes
+2025-03-24 20:50:21 [http-nio-8081-exec-5] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:50:30 [http-nio-8081-exec-10] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:50:33 [http-nio-8081-exec-4] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:50:34 [http-nio-8081-exec-5] INFO  c.r.r.a.controller.EpisodeController - Found 51 episodes
+2025-03-24 20:50:40 [http-nio-8081-exec-6] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:50:43 [http-nio-8081-exec-7] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:51:20 [http-nio-8081-exec-9] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:51:20 [http-nio-8081-exec-10] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:51:21 [http-nio-8081-exec-4] INFO  c.r.r.a.controller.EpisodeController - Found 51 episodes
+2025-03-24 20:51:48 [http-nio-8081-exec-5] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 20:51:48 [http-nio-8081-exec-6] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 20:51:55 [http-nio-8081-exec-9] INFO  c.r.r.a.controller.EpisodeController - Found 51 episodes

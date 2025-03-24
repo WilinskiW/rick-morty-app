@@ -1,17 +1,15 @@
-import { ContentTableComponent } from '../shared/content-table/content-table.component';
 import { CharacterDetailComponent } from './characters/character-detail/character-detail.component';
 import { NoPhotoDetailComponent } from '../shared/no-photo-detail/no-photo-detail.component';
 import {
   CharactersTableComponent
 } from './characters/characters-table/character-table-data/characters-table.component';
+import { LocationsTableComponent } from './locations/location-table/locations-table.component';
+import { EpisodesLocationsComponent } from './episodes/episodes-locations/episodes-locations.component';
 
 export const wikiRoutes = [
   {
     path: "characters",
     component: CharactersTableComponent,
-    data: {
-      section: "Characters"
-    }
   },
   {
     path: "characters/:id",
@@ -19,11 +17,7 @@ export const wikiRoutes = [
   },
   {
     path: "locations",
-    component: ContentTableComponent,
-    data: {
-      section: "Locations",
-      headers: ["ID", "Name", "Type", "Dimension", "Details"]
-    }
+    component: LocationsTableComponent,
   },
   {
     path: "locations/:id",
@@ -34,11 +28,7 @@ export const wikiRoutes = [
   },
   {
     path: "episodes",
-    component: ContentTableComponent,
-    data: {
-      section: "Episodes",
-      headers: ["ID", "Name", "Air date", "Episode", "Number of characters", "Details"]
-    }
+    component: EpisodesLocationsComponent,
   },
   {
     path: "episodes/:id",

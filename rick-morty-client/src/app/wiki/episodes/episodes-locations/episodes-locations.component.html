@@ -1,0 +1,32 @@
+@if (isFetching()) {
+  <app-content-table section="Episodes">
+    <ng-container table-headers>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Air date</th>
+      <th>Episode</th>
+      <th>Number of characters</th>
+      <th>Details</th>
+    </ng-container>
+    <ng-container table-body>
+      @for (episode of episodes; track episode.id) {
+        <tr>
+          <td>{{ episode.id }}</td>
+          <td>{{ episode.title }}</td>
+          <td>{{ episode.date}}</td>
+          <td>{{ episode.episode }}</td>
+          <td>{{ episode.characters.length }}</td>
+          <td>
+            <a class="btn btn-primary text-white m-2 rounded-2" [routerLink]="String(episode.id)">View details</a>
+          </td>
+        </tr>
+      }
+    </ng-container>
+  </app-content-table>
+} @else {
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+}
