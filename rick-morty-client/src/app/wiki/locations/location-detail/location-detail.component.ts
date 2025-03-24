@@ -2,11 +2,13 @@ import { Component, inject, input, OnInit } from '@angular/core';
 import { WikiService } from '../../wiki.service';
 import { LocationModel } from '../location.model';
 import { TitleCasePipe } from '@angular/common';
+import { DetailCardComponent } from '../../../shared/detail-card/detail-card.component';
 
 @Component({
   selector: 'app-location-detail',
   imports: [
-    TitleCasePipe
+    TitleCasePipe,
+    DetailCardComponent
   ],
   templateUrl: './location-detail.component.html',
   styleUrl: './location-detail.component.css'

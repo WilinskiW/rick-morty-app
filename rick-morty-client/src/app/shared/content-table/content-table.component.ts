@@ -1,8 +1,6 @@
-import { Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
+import { Component, input} from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { CharacterModel } from '../../wiki/characters/character.model';
-import { WikiService } from '../../wiki/wiki.service';
 
 
 @Component({
@@ -16,26 +14,6 @@ import { WikiService } from '../../wiki/wiki.service';
   standalone: true,
   styleUrl: './content-table.component.css'
 })
-export class ContentTableComponent implements OnInit {
+export class ContentTableComponent {
   section = input.required<string>();
-  data = signal<CharacterModel[]>([]);
-  isFetching = signal(false);
-  private wikiService = inject(WikiService);
-  private destroyRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    this.isFetching.set(true);
-    const subscription = this.wikiService.fetchData<CharacterModel[]>("http://localhost:8081/api/characters")
-      .subscribe({
-        next: responseData => {
-          this.data.set(responseData);
-        },
-        complete: () => {
-          console.log(this.data())
-          this.isFetching.set(false);
-        }
-      });
-
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
-  }
 }

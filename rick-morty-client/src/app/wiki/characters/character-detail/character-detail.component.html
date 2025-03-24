@@ -1,47 +1,28 @@
-<div class="container">
-  <div class="row justify-content-center">
+<app-detail-card>
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img [src]="character?.imageUrl" [alt]="character?.name" class="img-fluid rounded-start"
+           style="object-fit: cover; height: 100%;">
+    </div>
     <div class="col-md-8">
-      <div class="card shadow-sm">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img [src]="character?.imageUrl" [alt]="character?.name" class="img-fluid rounded-start"
-                 style="object-fit: cover; height: 100%;">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h1 class="mb-3 text-dark">{{ character?.name }}</h1>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Status: </strong>
-                  <span [class]="character?.status == 'Alive' ?
-                  'badge bg-success' : (character?.status == 'Dead' ? 'badge bg-danger' : 'badge bg-warning')">
-                    {{ character?.status | titlecase }}
-                  </span>
-                </li>
-                <li class="list-group-item"><strong>Species: </strong> {{ character?.species }}</li>
-                <li class="list-group-item"><strong>Type: </strong>{{ character?.type | titlecase}}</li>
-                <li class="list-group-item"><strong>Gender: </strong> {{character?.gender}}</li>
-                <li class="list-group-item"><strong>Origin: </strong> {{character?.origin?.name || "Unknown"}}</li>
-                <li class="list-group-item"><strong>Last seen: </strong> {{character?.currentLocation?.name || "Unknown"}}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer bg-transparent">
-          <div class="d-flex justify-content-center">
-            <a href="/character/all" class="btn btn-secondary m-1">Back</a>
-            <form method="GET" class="d-inline">
-              <button type="submit" class="btn btn-primary m-1">Edit</button>
-            </form>
-            <form method="POST" class="d-inline">
-              <input type="hidden" name="_method" value="delete">
-              <button type="submit" class="btn btn-danger m-1"
-                      onclick="return confirm('Are you sure you want to delete this character?');">
-                Delete
-              </button>
-            </form>
-          </div>
-        </div>
+      <div class="card-body">
+        <h1 class="mb-3 text-dark">{{ character?.name }}</h1>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Status: </strong>
+            <span [class]="character?.status == 'Alive' ?
+                  'badge bg-success' : (character?.status == 'Dead' ?
+                  'badge bg-danger' : 'badge bg-warning')">
+              {{ character?.status | titlecase }}
+            </span>
+          </li>
+          <li class="list-group-item"><strong>Species: </strong> {{ character?.species }}</li>
+          <li class="list-group-item"><strong>Type: </strong>{{ character?.type | titlecase }}</li>
+          <li class="list-group-item"><strong>Gender: </strong> {{ character?.gender }}</li>
+          <li class="list-group-item"><strong>Origin: </strong> {{ character?.origin?.name || "Unknown" }}</li>
+          <li class="list-group-item"><strong>Last seen: </strong> {{ character?.currentLocation?.name || "Unknown" }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</div>
+</app-detail-card>

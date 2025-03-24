@@ -1,0 +1,15 @@
+<div class="card-footer bg-transparent">
+  <div class="d-flex justify-content-center">
+    <a href="/episode/all" class="btn btn-secondary m-1">Back</a>
+    <form method="GET" class="d-inline">
+      <button type="submit" class="btn btn-primary m-1">Edit</button>
+    </form>
+    <form method="POST" class="d-inline">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-danger m-1"
+              onclick="return confirm('Are you sure you want to delete this episode?');">
+        Delete
+      </button>
+    </form>
+  </div>
+</div>
