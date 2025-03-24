@@ -1,10 +1,9 @@
 import { CharacterDetailComponent } from './characters/character-detail/character-detail.component';
-import { NoPhotoDetailComponent } from '../shared/no-photo-detail/no-photo-detail.component';
-import {
-  CharactersTableComponent
-} from './characters/characters-table/character-table-data/characters-table.component';
+import { CharactersTableComponent } from './characters/characters-table/character-table-data/characters-table.component';
 import { LocationsTableComponent } from './locations/location-table/locations-table.component';
 import { EpisodesLocationsComponent } from './episodes/episodes-locations/episodes-locations.component';
+import { EpisodeDetailComponent } from './episodes/episode-detail/episode-detail.component';
+import { LocationDetailComponent } from './locations/location-detail/location-detail.component';
 
 export const wikiRoutes = [
   {
@@ -21,10 +20,7 @@ export const wikiRoutes = [
   },
   {
     path: "locations/:id",
-    component: NoPhotoDetailComponent,
-    data: {
-      infoFields: ["Type:", "Dimension:", "Residents:"]
-    }
+    component: LocationDetailComponent,
   },
   {
     path: "episodes",
@@ -32,9 +28,6 @@ export const wikiRoutes = [
   },
   {
     path: "episodes/:id",
-    component: NoPhotoDetailComponent,
-    data: {
-      infoFields: ["Episode code:", "Air date:", "Characters:"]
-    }
+    component: EpisodeDetailComponent,
   },
 ]

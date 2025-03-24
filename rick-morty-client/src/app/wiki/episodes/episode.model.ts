@@ -3,7 +3,7 @@ import { CharacterModel } from '../characters/character.model';
 export interface EpisodeModel {
   id: number,
   title: string,
-  date: Date,
+  airDate: string,
   episode: string,
   characters: CharacterModel[]
 }

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="text-center card-body">
+          <h1 class="mb-3 text-dark">{{ episode?.title }}</h1>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Episode code: </strong>{{ episode?.episode }}</li>
+            <li class="list-group-item"><strong>Air date: </strong>{{ episode?.airDate }}</li>
+            <li class="list-group-item">
+              <strong>Characters</strong>
+              <ul class="list-group-item list-unstyled">
+                @for (character of episode?.characters; track character.id) {
+                  <a [href]="'../../wiki/characters/' + character.id"><li>{{ character.name }}</li></a>
+                }
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer bg-transparent">
+          <div class="d-flex justify-content-center">
+            <a href="/episode/all" class="btn btn-secondary m-1">Back</a>
+            <form method="GET" class="d-inline">
+              <button type="submit" class="btn btn-primary m-1">Edit</button>
+            </form>
+            <form method="POST" class="d-inline">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="btn btn-danger m-1"
+                      onclick="return confirm('Are you sure you want to delete this episode?');">
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
