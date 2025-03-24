@@ -10,10 +10,10 @@ import { RouterLink } from '@angular/router';
     ContentTableComponent,
     RouterLink
   ],
-  templateUrl: './episodes-locations.component.html',
-  styleUrl: './episodes-locations.component.css'
+  templateUrl: './episodes-table.component.html',
+  styleUrl: './episodes-table.component.css'
 })
-export class EpisodesLocationsComponent {
+export class EpisodesTableComponent {
   episodes: EpisodeModel[] = [];
   isFetching = signal(false);
   private wikiService = inject(WikiService);
