@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { WikiComponent } from './wiki/wiki.component';
 import { wikiRoutes } from './wiki/wiki.routes';
+import { authRoutes } from './auth/auth.routes';
 
 export const routes: Routes = [
   {
@@ -12,5 +13,6 @@ export const routes: Routes = [
     path: "wiki",
     component: WikiComponent,
     children: wikiRoutes
-  }
+  },
+  ...authRoutes
 ];

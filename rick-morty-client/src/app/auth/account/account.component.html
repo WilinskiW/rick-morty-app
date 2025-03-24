@@ -1,0 +1,16 @@
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
+  <div class="col-md-6 col-lg-4">
+    <h1 class="text-center mb-2">Account</h1>
+    <form th:action="@{/logout}" method="post">
+      <div class="d-grid gap-1 text-center m-2">
+        <label>User:</label>
+        <br>
+        <label>Roles:</label>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Logout</button>
+        <a href="/" class="btn btn-outline-secondary">Back to home</a>
+      </div>
+    </form>
+  </div>
+</div>
