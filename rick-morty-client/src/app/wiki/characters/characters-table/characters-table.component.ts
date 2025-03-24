@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ContentTableComponent } from '../../../../shared/content-table/content-table.component';
-import { CharacterModel } from '../../character.model';
-import { WikiService } from '../../../wiki.service';
+import { ContentTableComponent } from '../../../shared/content-table/content-table.component';
+import { CharacterModel } from '../character.model';
+import { WikiService } from '../../wiki.service';
 import { RouterLink } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 
@@ -13,7 +13,6 @@ import { TitleCasePipe } from '@angular/common';
     TitleCasePipe
   ],
   templateUrl: './characters-table.component.html',
-  styleUrl: './characters-table.component.css'
 })
 export class CharactersTableComponent implements OnInit {
   characters: CharacterModel[] = [];

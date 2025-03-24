@@ -18,8 +18,8 @@
           <td>{{ character.status | titlecase }}</td>
           <td>{{ character.type }}</td>
           <td>{{ character.gender }}</td>
-          <td>{{ character.origin?.name || "Unknown" }}</td>
-          <td>{{ character.currentLocation?.name || "Unknown" }}</td>
+          <td>{{ character?.origin?.name || "Unknown" }}</td>
+          <td>{{ character?.currentLocation?.name || "Unknown" }}</td>
           <td>
             <a class="btn btn-primary text-white m-2 rounded-2" [routerLink]="String(character.id)">View details</a>
           </td>

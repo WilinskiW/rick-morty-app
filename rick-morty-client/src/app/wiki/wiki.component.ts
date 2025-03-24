@@ -12,7 +12,6 @@ import { filter, map } from 'rxjs';
   ],
   templateUrl: './wiki.component.html',
   standalone: true,
-  styleUrl: './wiki.component.css'
 })
 export class WikiComponent {
   section = "";

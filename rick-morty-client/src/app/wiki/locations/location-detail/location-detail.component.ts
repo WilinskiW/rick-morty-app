@@ -11,7 +11,6 @@ import { DetailCardComponent } from '../../../shared/detail-card/detail-card.com
     DetailCardComponent
   ],
   templateUrl: './location-detail.component.html',
-  styleUrl: './location-detail.component.css'
 })
 export class LocationDetailComponent implements OnInit{
   id = input.required<string>();

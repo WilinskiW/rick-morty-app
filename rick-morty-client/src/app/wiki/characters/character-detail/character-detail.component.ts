@@ -12,7 +12,6 @@ import { DetailCardComponent } from '../../../shared/detail-card/detail-card.com
   ],
   templateUrl: './character-detail.component.html',
   standalone: true,
-  styleUrl: './character-detail.component.css'
 })
 export class CharacterDetailComponent implements OnInit{
   character : CharacterModel | undefined;

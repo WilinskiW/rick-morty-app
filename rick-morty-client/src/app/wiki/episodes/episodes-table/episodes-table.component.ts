@@ -11,7 +11,6 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: './episodes-table.component.html',
-  styleUrl: './episodes-table.component.css'
 })
 export class EpisodesTableComponent {
   episodes: EpisodeModel[] = [];
