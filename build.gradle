@@ -69,19 +69,10 @@ project(':rick-morty-data') {
     }
 }
 
-project(':rick-morty-ui') {
-    dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-        implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
-    }
-}
-
 dependencies {
     jacocoAggregation project(':rick-morty-data')
     jacocoAggregation project(':rick-morty-data-client')
     jacocoAggregation project(':rick-morty-security')
-    jacocoAggregation project(':rick-morty-ui')
     jacocoAggregation project(':rick-morty-updater')
     jacocoAggregation project(':rick-morty-web-api')
 }

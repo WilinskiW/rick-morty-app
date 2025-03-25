@@ -688,3 +688,270 @@
 2025-03-24 22:56:40 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-03-24 22:56:40 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-03-24 22:56:40 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-24 23:11:07 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Starting RickMortyWebApiApplication using Java 23.0.1 with PID 16180 (C:\Users\Użytkownik\IdeaProjects\rick-morty-app\rick-morty-web-api\build\classes\java\main started by Użytkownik in C:\Users\Użytkownik\IdeaProjects\rick-morty-app)
+2025-03-24 23:11:07 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - The following 1 profile is active: "dev"
+2025-03-24 23:11:07 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-24 23:11:07 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-24 23:11:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 23:11:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 53 ms. Found 2 JPA repository interfaces.
+2025-03-24 23:11:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 23:11:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 14 ms. Found 3 JPA repository interfaces.
+2025-03-24 23:11:09 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-03-24 23:11:09 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-24 23:11:09 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2025-03-24 23:11:09 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-24 23:11:09 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2452 ms
+2025-03-24 23:11:09 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-24 23:11:09 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@ad3da49
+2025-03-24 23:11:09 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-24 23:11:09 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mariadb://localhost:3307/rick_morty?user=user&password=***'
+2025-03-24 23:11:10 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24 23:11:10 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2025-03-24 23:11:10 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-24 23:11:10 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24 23:11:11 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24 23:11:11 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 23:11:12 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-24 23:11:13 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24 23:11:13 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2cba5e43, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@130fd700, org.springframework.security.web.context.SecurityContextHolderFilter@7f621d67, org.springframework.security.web.header.HeaderWriterFilter@3e92b1b2, org.springframework.web.filter.CorsFilter@625721e, org.springframework.security.web.csrf.CsrfFilter@37759f86, org.springframework.security.web.authentication.logout.LogoutFilter@43bd02d0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@757ff90e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@73cbc531, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51b988f, org.springframework.security.web.access.ExceptionTranslationFilter@20a72094]
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2025-03-24 23:11:13 [restartedMain] INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@41ac3803
+2025-03-24 23:11:13 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-03-24 23:11:13 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2025-03-24 23:11:13 [restartedMain] INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2025-03-24 23:11:13 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-03-24 23:11:13 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Started RickMortyWebApiApplication in 7.948 seconds (process running for 9.119)
+2025-03-24 23:11:17 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-24 23:11:17 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-24 23:11:17 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-03-24 23:11:17 [http-nio-8081-exec-1] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 23:13:31 [http-nio-8081-exec-4] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 23:16:51 [http-nio-8081-exec-10] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 23:17:14 [http-nio-8081-exec-1] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 23:17:24 [http-nio-8081-exec-5] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 23:24:17 [http-nio-8081-exec-7] INFO  c.r.r.a.c.LocationController - Location found: LocationDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137, residents=[CharacterDto(id=201, name=Leonard Smith, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/201.jpeg), CharacterDto(id=338, name=Summer Smith, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/338.jpeg), CharacterDto(id=45, name=Bill, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/45.jpeg), CharacterDto(id=82, name=Cronenberg Rick, status=unknown, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=12, name=Cronenberg Earth, type=Planet, dimension=Cronenberg Dimension), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/82.jpeg), CharacterDto(id=116, name=Evil Beth Clone, status=Dead, species=Human, type=Clone, gender=Female, origin=null, currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/116.jpeg), CharacterDto(id=117, name=Evil Jerry Clone, status=Dead, species=Human, type=Clone, gender=Male, origin=null, currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/117.jpeg), CharacterDto(id=343, name=Tammy Guetermann, status=Alive, species=Cronenberg, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/343.jpeg), CharacterDto(id=302, name=Ruben, status=Dead, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/302.jpeg), CharacterDto(id=271, name=Principal Vagina, status=Alive, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/271.jpeg), CharacterDto(id=38, name=Beth Smith, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/38.jpeg), CharacterDto(id=179, name=Jessica, status=Alive, species=Cronenberg, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/179.jpeg), CharacterDto(id=356, name=Tom Randolph, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/356.jpeg), CharacterDto(id=92, name=Davin, status=Dead, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/92.jpeg), CharacterDto(id=71, name=Conroy, status=Dead, species=Robot, type=, gender=unknown, origin=LocationSummaryDto(id=20, name=Earth (Replacement Dimension), type=Planet, dimension=Replacement Dimension), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/71.jpeg), CharacterDto(id=112, name=Eric McMan, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/112.jpeg), CharacterDto(id=239, name=Mr. Goldenfold, status=Alive, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/239.jpeg), CharacterDto(id=175, name=Jerry Smith, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/175.jpeg), CharacterDto(id=186, name=Joyce Smith, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/186.jpeg), CharacterDto(id=120, name=Evil Summer Clone, status=Dead, species=Human, type=Clone, gender=Female, origin=null, currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/120.jpeg), CharacterDto(id=127, name=Frank Palicky, status=Dead, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/127.jpeg), CharacterDto(id=216, name=MC Haps, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/216.jpeg), CharacterDto(id=83, name=Cronenberg Morty, status=unknown, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=12, name=Cronenberg Earth, type=Planet, dimension=Cronenberg Dimension), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/83.jpeg), CharacterDto(id=114, name=Ethan, status=unknown, species=Human, type=Cronenberg, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/114.jpeg), CharacterDto(id=169, name=Jacob, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/169.jpeg), CharacterDto(id=394, name=Davin, status=Dead, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/394.jpeg), CharacterDto(id=303, name=Samantha, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/303.jpeg), CharacterDto(id=155, name=Harold, status=Alive, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/155.jpeg)])
+2025-03-24 23:24:19 [http-nio-8081-exec-8] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 23:28:20 [http-nio-8081-exec-10] INFO  c.r.r.a.c.LocationController - Location found: LocationDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137, residents=[CharacterDto(id=201, name=Leonard Smith, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/201.jpeg), CharacterDto(id=338, name=Summer Smith, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/338.jpeg), CharacterDto(id=45, name=Bill, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/45.jpeg), CharacterDto(id=82, name=Cronenberg Rick, status=unknown, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=12, name=Cronenberg Earth, type=Planet, dimension=Cronenberg Dimension), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/82.jpeg), CharacterDto(id=116, name=Evil Beth Clone, status=Dead, species=Human, type=Clone, gender=Female, origin=null, currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/116.jpeg), CharacterDto(id=117, name=Evil Jerry Clone, status=Dead, species=Human, type=Clone, gender=Male, origin=null, currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/117.jpeg), CharacterDto(id=343, name=Tammy Guetermann, status=Alive, species=Cronenberg, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/343.jpeg), CharacterDto(id=302, name=Ruben, status=Dead, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/302.jpeg), CharacterDto(id=271, name=Principal Vagina, status=Alive, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/271.jpeg), CharacterDto(id=38, name=Beth Smith, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/38.jpeg), CharacterDto(id=179, name=Jessica, status=Alive, species=Cronenberg, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/179.jpeg), CharacterDto(id=356, name=Tom Randolph, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/356.jpeg), CharacterDto(id=92, name=Davin, status=Dead, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/92.jpeg), CharacterDto(id=71, name=Conroy, status=Dead, species=Robot, type=, gender=unknown, origin=LocationSummaryDto(id=20, name=Earth (Replacement Dimension), type=Planet, dimension=Replacement Dimension), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/71.jpeg), CharacterDto(id=112, name=Eric McMan, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/112.jpeg), CharacterDto(id=239, name=Mr. Goldenfold, status=Alive, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/239.jpeg), CharacterDto(id=175, name=Jerry Smith, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/175.jpeg), CharacterDto(id=186, name=Joyce Smith, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/186.jpeg), CharacterDto(id=120, name=Evil Summer Clone, status=Dead, species=Human, type=Clone, gender=Female, origin=null, currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/120.jpeg), CharacterDto(id=127, name=Frank Palicky, status=Dead, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/127.jpeg), CharacterDto(id=216, name=MC Haps, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/216.jpeg), CharacterDto(id=83, name=Cronenberg Morty, status=unknown, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=12, name=Cronenberg Earth, type=Planet, dimension=Cronenberg Dimension), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/83.jpeg), CharacterDto(id=114, name=Ethan, status=unknown, species=Human, type=Cronenberg, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/114.jpeg), CharacterDto(id=169, name=Jacob, status=Alive, species=Human, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/169.jpeg), CharacterDto(id=394, name=Davin, status=Dead, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/394.jpeg), CharacterDto(id=303, name=Samantha, status=Alive, species=Human, type=, gender=Female, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/303.jpeg), CharacterDto(id=155, name=Harold, status=Alive, species=Cronenberg, type=, gender=Male, origin=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), currentLocation=LocationSummaryDto(id=1, name=Earth (C-137), type=Planet, dimension=Dimension C-137), imageUrl=https://rickandmortyapi.com/api/character/avatar/155.jpeg)])
+2025-03-24 23:28:21 [http-nio-8081-exec-1] INFO  c.r.r.a.c.LocationController - Locations founded: 126
+2025-03-24 23:28:22 [http-nio-8081-exec-2] INFO  c.r.r.a.c.LocationController - Location found: LocationDto(id=2, name=Abadango, type=Cluster, dimension=unknown, residents=[CharacterDto(id=6, name=Abadango Cluster Princess, status=Alive, species=Alien, type=, gender=Female, origin=LocationSummaryDto(id=2, name=Abadango, type=Cluster, dimension=unknown), currentLocation=LocationSummaryDto(id=2, name=Abadango, type=Cluster, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/6.jpeg)])
+2025-03-24 23:28:23 [http-nio-8081-exec-4] INFO  c.r.r.a.c.CharacterController - Character found: CharacterDto(id=6, name=Abadango Cluster Princess, status=Alive, species=Alien, type=, gender=Female, origin=LocationSummaryDto(id=2, name=Abadango, type=Cluster, dimension=unknown), currentLocation=LocationSummaryDto(id=2, name=Abadango, type=Cluster, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/6.jpeg)
+2025-03-24 23:28:23 [http-nio-8081-exec-3] INFO  c.r.r.a.c.LocationController - Location found: LocationDto(id=2, name=Abadango, type=Cluster, dimension=unknown, residents=[CharacterDto(id=6, name=Abadango Cluster Princess, status=Alive, species=Alien, type=, gender=Female, origin=LocationSummaryDto(id=2, name=Abadango, type=Cluster, dimension=unknown), currentLocation=LocationSummaryDto(id=2, name=Abadango, type=Cluster, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/6.jpeg)])
+2025-03-24 23:28:25 [http-nio-8081-exec-6] INFO  c.r.r.a.c.LocationController - Location found: LocationDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown, residents=[CharacterDto(id=10, name=Alan Rails, status=Dead, species=Human, type=Superhuman (Ghost trains summoner), gender=Male, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/10.jpeg), CharacterDto(id=226, name=Million Ants, status=Dead, species=Animal, type=Sentient ant colony, gender=Male, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/226.jpeg), CharacterDto(id=375, name=Vance Maximus, status=Dead, species=Human, type=, gender=Male, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/375.jpeg), CharacterDto(id=340, name=Supernova, status=Alive, species=Human, type=Superhuman, gender=Female, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/340.jpeg), CharacterDto(id=362, name=Traflorkian, status=Alive, species=Alien, type=Traflorkian, gender=unknown, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/362.jpeg), CharacterDto(id=382, name=Worldender, status=Dead, species=Alien, type=, gender=Male, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/382.jpeg), CharacterDto(id=208, name=Logic, status=Alive, species=Human, type=, gender=Male, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/208.jpeg), CharacterDto(id=81, name=Crocubot, status=Dead, species=Animal, type=Robot-Crocodile hybrid, gender=Male, origin=null, currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/81.jpeg), CharacterDto(id=395, name=Greebybobe, status=Alive, species=Alien, type=Greebybobe, gender=unknown, origin=LocationSummaryDto(id=68, name=Girvonesk, type=unknown, dimension=unknown), currentLocation=LocationSummaryDto(id=4, name=Worldender's lair, type=Planet, dimension=unknown), imageUrl=https://rickandmortyapi.com/api/character/avatar/395.jpeg)])
+2025-03-24 23:28:29 [http-nio-8081-exec-8] INFO  c.r.r.a.controller.EpisodeController - Found 51 episodes
+2025-03-24 23:28:31 [http-nio-8081-exec-10] INFO  c.r.r.a.c.CharacterController - Characters founded: 826
+2025-03-24 23:33:11 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 6 class path changes (0 additions, 6 deletions, 0 modifications)
+2025-03-24 23:33:11 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 23:33:11 [Thread-7] INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2025-03-24 23:33:11 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-03-24 23:33:11 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 23:33:11 [Thread-7] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-03-24 23:33:11 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 23:33:11 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-24 23:33:11 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-24 23:33:11 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Starting RickMortyWebApiApplication using Java 23.0.1 with PID 16180 (C:\Users\Użytkownik\IdeaProjects\rick-morty-app\rick-morty-web-api\build\classes\java\main started by Użytkownik in C:\Users\Użytkownik\IdeaProjects\rick-morty-app)
+2025-03-24 23:33:11 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - The following 1 profile is active: "dev"
+2025-03-24 23:33:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 23:33:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 3 JPA repository interfaces.
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-03-24 23:33:12 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-24 23:33:12 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2025-03-24 23:33:12 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 861 ms
+2025-03-24 23:33:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-24 23:33:12 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.mariadb.jdbc.Connection@435666aa
+2025-03-24 23:33:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mariadb://localhost:3307/rick_morty?user=user&password=***'
+2025-03-24 23:33:12 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24 23:33:12 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24 23:33:12 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 23:33:12 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2025-03-24 23:33:12 [restartedMain] INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@44758682
+2025-03-24 23:33:12 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 5a39d8ce-32f4-4742-a1b6-6c38c7121531
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@eecb0d9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a3a6d2f, org.springframework.security.web.context.SecurityContextHolderFilter@3ec6273b, org.springframework.security.web.header.HeaderWriterFilter@748bd1a2, org.springframework.web.filter.CorsFilter@13df0349, org.springframework.security.web.csrf.CsrfFilter@8cf9bc2, org.springframework.security.web.authentication.logout.LogoutFilter@3c29db56, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3f02577a, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1314e882, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@1d7199b2, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@25e568a8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4aa3aaaa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@393838c6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@76f098bd, org.springframework.security.web.access.ExceptionTranslationFilter@6632bb5b, org.springframework.security.web.access.intercept.AuthorizationFilter@45b5f480]
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2025-03-24 23:33:12 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-03-24 23:33:12 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Started RickMortyWebApiApplication in 1.618 seconds (process running for 1327.931)
+2025-03-24 23:33:12 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration matched:
+      - AllNestedConditions 2 matched 0 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) did not find any beans; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
+
+   SpringBootWebSecurityConfiguration.WebSecurityEnablerConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.config.annotation.web.configuration.EnableWebSecurity' (OnClassCondition)
+      - @ConditionalOnMissingBean (names: springSecurityFilterChain; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   UserDetailsServiceAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager'; @ConditionalOnMissingClass did not find unwanted classes 'org.springframework.security.oauth2.client.registration.ClientRegistrationRepository', 'org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector', 'org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository' (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.security.config.annotation.ObjectPostProcessor; SearchStrategy: all) found bean 'objectPostProcessor'; @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2025-03-24 23:33:40 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 6 class path changes (6 additions, 0 deletions, 0 modifications)
+2025-03-24 23:33:40 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 23:33:41 [Thread-9] INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2025-03-24 23:33:41 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-03-24 23:33:41 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 23:33:41 [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-03-24 23:33:41 [Thread-9] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 23:33:41 [Thread-9] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-03-24 23:33:41 [Thread-9] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-03-24 23:33:41 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Starting RickMortyWebApiApplication using Java 23.0.1 with PID 16180 (C:\Users\Użytkownik\IdeaProjects\rick-morty-app\rick-morty-web-api\build\classes\java\main started by Użytkownik in C:\Users\Użytkownik\IdeaProjects\rick-morty-app)
+2025-03-24 23:33:41 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - The following 1 profile is active: "dev"
+2025-03-24 23:33:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 23:33:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2025-03-24 23:33:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 23:33:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12 ms. Found 3 JPA repository interfaces.
+2025-03-24 23:33:41 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-03-24 23:33:41 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-24 23:33:41 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2025-03-24 23:33:41 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-24 23:33:41 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 847 ms
+2025-03-24 23:33:41 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-24 23:33:42 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.mariadb.jdbc.Connection@12ea8041
+2025-03-24 23:33:42 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mariadb://localhost:3307/rick_morty?user=user&password=***'
+2025-03-24 23:33:42 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24 23:33:42 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24 23:33:42 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 23:33:42 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70cafcff, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59200744, org.springframework.security.web.context.SecurityContextHolderFilter@a141f4a, org.springframework.security.web.header.HeaderWriterFilter@14f63cce, org.springframework.web.filter.CorsFilter@7f0517d0, org.springframework.security.web.csrf.CsrfFilter@1adc2000, org.springframework.security.web.authentication.logout.LogoutFilter@1e86ffa5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@71b3e228, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@11f70684, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5657b442, org.springframework.security.web.access.ExceptionTranslationFilter@77d2eed4]
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2025-03-24 23:33:42 [restartedMain] INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4ca6117d
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2025-03-24 23:33:42 [restartedMain] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-03-24 23:33:42 [restartedMain] INFO  c.r.r.RickMortyWebApiApplication - Started RickMortyWebApiApplication in 1.667 seconds (process running for 1357.899)
+2025-03-24 23:33:42 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+    None
+
+
+Negative matches:
+-----------------
+
+   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration:
+      Did not match:
+         - AllNestedConditions 1 matched 1 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) found beans of type 'org.springframework.security.web.SecurityFilterChain' securityFilterChain; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
+
+   SpringBootWebSecurityConfiguration.WebSecurityEnablerConfiguration:
+      Did not match:
+         - @ConditionalOnMissingBean (names: springSecurityFilterChain; SearchStrategy: all) found beans named springSecurityFilterChain (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.security.config.annotation.web.configuration.EnableWebSecurity' (OnClassCondition)
+
+   UserDetailsServiceAutoConfiguration:
+      Did not match:
+         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder; SearchStrategy: all) found beans of type 'org.springframework.security.authentication.AuthenticationManager' authenticationManager and found beans of type 'org.springframework.security.core.userdetails.UserDetailsService' customUserDetailsService (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager'; @ConditionalOnMissingClass did not find unwanted classes 'org.springframework.security.oauth2.client.registration.ClientRegistrationRepository', 'org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector', 'org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository' (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2025-03-24 23:35:06 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.

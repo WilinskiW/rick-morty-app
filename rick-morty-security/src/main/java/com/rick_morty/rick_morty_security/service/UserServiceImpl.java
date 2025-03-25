@@ -2,21 +2,23 @@ package com.rick_morty.rick_morty_security.service;
 
 import com.rick_morty.rick_morty_data.model.User;
 import com.rick_morty.rick_morty_data.repository.security.UserRepository;
+import com.rick_morty.rick_morty_security.dto.UserCredential;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authManager;
+    private final JWTService jwtService;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     @Transactional
@@ -38,5 +40,18 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(password));
         user.getRoles().add("USER");
         userRepository.save(user);
+    }
+
+    @Override
+    public String verify(UserCredential user) {
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(
+                user.username(),
+                user.password()
+        ));
+        return authentication.isAuthenticated() ? generateToken() : "Failure";
+    }
+
+    private String generateToken() {
+        return jwtService.generateToken();
     }
 }
