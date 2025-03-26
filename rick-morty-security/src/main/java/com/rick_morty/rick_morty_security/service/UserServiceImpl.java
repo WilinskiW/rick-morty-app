@@ -48,10 +48,10 @@ public class UserServiceImpl implements UserService {
                 user.username(),
                 user.password()
         ));
-        return authentication.isAuthenticated() ? generateToken() : "Failure";
+        return authentication.isAuthenticated() ? generateToken(user.username()) : "Failure";
     }
 
-    private String generateToken() {
-        return jwtService.generateToken();
+    private String generateToken(String username) {
+        return jwtService.generateToken(username);
     }
 }
