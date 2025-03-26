@@ -1,12 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
-
-interface UserCredential {
-  username: string,
-  password: string
-}
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -21,19 +16,17 @@ export class RegisterComponent {
     username: new FormControl(""),
     password: new FormControl("")
   });
-  private httpClient = inject(HttpClient);
   error = false;
-  private router = inject(Router);
+  private authService = inject(AuthService);
 
   onSubmit() {
     const username = this.registerForm.value.username;
     const password = this.registerForm.value.password;
-    this.httpClient.post<UserCredential>("http://localhost:8081/auth/register", {username: username, password: password})
-      .subscribe({
-        complete: () => this.router.navigate(["auth/login"], {
-          replaceUrl: true
-        }),
-        error: () => this.error = true
-      })
+
+    if(!username || !password){ //guard
+      return;
+    }
+
+    this.error = this.authService.registerUser({username, password});
   }
 }

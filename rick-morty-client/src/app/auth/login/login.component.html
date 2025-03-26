@@ -1,23 +1,27 @@
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
   <div class="col-md-6 col-lg-4">
     <h1 class="text-center mb-4">Login</h1>
-    <form th:action="@{/authenticateTheUser}" method="post">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="username" placeholder="Enter location name" name="username" required>
+        <input type="text" class="form-control" id="username" placeholder="Enter location name" name="username" required
+               formControlName="username">
         <label for="username">Username</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" placeholder="Enter location type" name="password" required>
+        <input type="password" class="form-control" id="password" placeholder="Enter location type" name="password" required
+               formControlName="password">
         <label for="password">Password</label>
       </div>
       <div class="d-grid gap-2">
         <button class="btn btn-primary" type="submit">Login</button>
-        <a href="/" class="btn btn-outline-secondary">Back to home</a>
+        <a routerLink="/" class="btn btn-outline-secondary">Back to home</a>
       </div>
     </form>
-    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-2">
+    @if (error){
+    <div class="alert alert-danger alert-dismissible fade show mt-2">
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       <strong>Sorry, your password was incorrect. Please double-check your password.</strong>
     </div>
+    }
   </div>
 </div>
