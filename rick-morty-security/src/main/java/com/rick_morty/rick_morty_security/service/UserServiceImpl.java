@@ -4,6 +4,8 @@ import com.rick_morty.rick_morty_data.model.User;
 import com.rick_morty.rick_morty_data.repository.security.UserRepository;
 import com.rick_morty.rick_morty_security.dto.TokenInfo;
 import com.rick_morty.rick_morty_security.dto.UserCredential;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +28,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void registerUser(String username, String password) {
+        verifyRegisterForm(username, password);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(passwordEncoder.encode(password));
+        user.getRoles().add("USER");
+        userRepository.save(user);
+    }
+
+    private void verifyRegisterForm(String username, String password){
         if (username.isBlank() || password.isBlank()) {
             throw new IllegalArgumentException("Username or password are blank");
         }
@@ -37,21 +48,14 @@ public class UserServiceImpl implements UserService {
         if (password.length() < 4 || password.length() > 255) {
             throw new IllegalArgumentException("Password is too long or too short");
         }
-
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        user.getRoles().add("USER");
-        userRepository.save(user);
     }
 
     @Override
-    public String verify(UserCredential user) {
+    public String verifyCredentials(UserCredential user) {
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(
                 user.username(),
                 user.password()
         ));
-        //authorities -> Simple Granted Authority
 
         return authentication.isAuthenticated() ? generateToken(user.username()) : "Failure";
     }
@@ -70,5 +74,17 @@ public class UserServiceImpl implements UserService {
         );
 
         return jwtService.generateToken(tokenInfo);
+    }
+
+    @Override
+    public void createJwtCookie(HttpServletResponse response, String verifiedOutcome) {
+        Cookie cookie = new Cookie("jwt", verifiedOutcome);
+        cookie.setHttpOnly(true);   // Helps with XSS
+        cookie.setSecure(true);     // HTTPS Only
+        cookie.setPath("/");        // Access by whole application
+        cookie.setMaxAge(3600);     // Expire after one hour
+        cookie.setAttribute("SameSite", "Strict");  // Protects from CSRF
+
+        response.addCookie(cookie);
     }
 }

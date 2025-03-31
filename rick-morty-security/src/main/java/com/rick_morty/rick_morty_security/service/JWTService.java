@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,13 +18,14 @@ import java.util.function.Function;
 
 @Service
 public class JWTService {
-    private final String secretKey;
+    // In prod, this password should be generated
+    private final String secretKey = "Ff8KVWABu7vbGipplO5M2VBddqlaGO13XI1P1WFBjQA=";
 
     public JWTService() {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA256");
             SecretKey sk = keyGenerator.generateKey();
-            this.secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
+//            this.secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -38,11 +38,9 @@ public class JWTService {
 
         return Jwts.builder()
                 .subject(tokenInfo.username())
-                .claims()
-                .add(claims)
+                .claims(claims)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10)) // 1 h
-                .and()
+                .expiration(new Date(System.currentTimeMillis() + 3600000)) // 1h
                 .signWith(getKey())
                 .compact();
     }

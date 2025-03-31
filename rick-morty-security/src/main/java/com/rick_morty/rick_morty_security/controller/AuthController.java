@@ -2,7 +2,6 @@ package com.rick_morty.rick_morty_security.controller;
 
 import com.rick_morty.rick_morty_security.dto.UserCredential;
 import com.rick_morty.rick_morty_security.service.UserService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,20 +26,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(@RequestBody UserCredential user, HttpServletResponse response) {
-        String verifiedOutcome = userService.verify(user);
+        String verifiedOutcome = userService.verifyCredentials(user);
 
-        if(verifiedOutcome.contains("Failure")){
+        if(verifiedOutcome.contains("Failure")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        Cookie cookie = new Cookie("jwt", verifiedOutcome);
-        cookie.setHttpOnly(true);   // Helps with XSS
-        cookie.setSecure(true);     // HTTPS Only
-        cookie.setPath("/");        // Access by whole application
-        cookie.setMaxAge(3600);     // Expire after one hour
-        cookie.setAttribute("SameSite", "Strict");  // Protects from CSRF
+        userService.createJwtCookie(response, verifiedOutcome);
 
-        response.addCookie(cookie);
         return ResponseEntity.ok().build();
     }
 }
