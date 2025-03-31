@@ -30,7 +30,8 @@ export class LoginComponent {
 
     this.authService.loginUser({username, password}).subscribe({
       complete: () => {
-        this.router.navigate(["/wiki/characters"], { replaceUrl: true })
+        this.authService.fetchCurrentUser();
+        this.router.navigate(["/wiki/characters"], { replaceUrl: true });
       },
       error: () => this.error = true
     });

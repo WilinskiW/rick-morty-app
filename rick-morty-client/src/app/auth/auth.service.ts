@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserModel } from './user.model';
-import { catchError, Observable, tap, throwError } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
+import { UserCredentialModel } from './model/userCredential.model';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { TokenInfoModel } from './model/tokenInfo.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = "http://localhost:8081/auth";
+  private userSubject = new BehaviorSubject<TokenInfoModel | null>(null);
+  user$ = this.userSubject.asObservable();
 
-  constructor(private httpClient: HttpClient, private router: Router, private cookieService: CookieService) {
+
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
-  registerUser(user: UserModel): Observable<UserModel> {
-    return this.httpClient.post<UserModel>(`${this.apiUrl}/register`, user)
+  registerUser(user: UserCredentialModel): Observable<UserCredentialModel> {
+    return this.httpClient.post<UserCredentialModel>(`${this.apiUrl}/register`, user)
       .pipe(
         tap(() => this.router.navigate(["auth/login"], {replaceUrl: true})),
         catchError(error => {
@@ -24,8 +27,8 @@ export class AuthService {
       );
   }
 
-  loginUser(user: UserModel): Observable<any> {
-    return this.httpClient.post<void>(`${this.apiUrl}/login`, user, { withCredentials: true })
+  loginUser(user: UserCredentialModel): Observable<any> {
+    return this.httpClient.post<void>(`${this.apiUrl}/login`, user, {withCredentials: true})
       .pipe(
         catchError(error => {
           return throwError(() => error);
@@ -33,8 +36,21 @@ export class AuthService {
       );
   }
 
-  logout(): void {
-    this.cookieService.delete('jwt', '/');
+  logout() {
+    this.httpClient.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).subscribe({
+      next: () => this.userSubject.next(null)
+    })
     this.router.navigate(["auth/login"]);
+  }
+
+  fetchCurrentUser() {
+    this.httpClient.get<TokenInfoModel>(`${this.apiUrl}/userInfo`, { withCredentials: true })
+      .pipe(
+        tap(user => this.userSubject.next(user)),
+        catchError(() => {
+          this.userSubject.next(null);
+          return [];
+        })
+      ).subscribe();
   }
 }

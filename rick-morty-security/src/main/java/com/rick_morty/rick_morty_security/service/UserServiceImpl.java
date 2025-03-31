@@ -87,4 +87,15 @@ public class UserServiceImpl implements UserService {
 
         response.addCookie(cookie);
     }
+
+    @Override
+    public void logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("jwt", "");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // Set to 0 for delete
+
+        response.addCookie(cookie);
+    }
 }

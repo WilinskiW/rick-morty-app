@@ -7,4 +7,5 @@ public interface UserService {
     void registerUser(String username, String password);
     String verifyCredentials(UserCredential user);
     void createJwtCookie(HttpServletResponse response, String token);
+    void logout(HttpServletResponse response);
 }

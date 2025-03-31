@@ -1,4 +1,4 @@
-export interface UserModel {
+export interface UserCredentialModel {
   username: string,
   password: string
 }

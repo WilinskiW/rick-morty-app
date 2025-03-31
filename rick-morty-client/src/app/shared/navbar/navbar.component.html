@@ -16,15 +16,20 @@
         </li>
       </ul>
       <div class="d-flex gap-2">
-        <div class="navbar-dark btn btn-secondary text-white">
-          <a class="nav-link" routerLink="/auth/login">Login</a>
-        </div>
-        <div class="navbar-dark btn btn-primary text-white">
-          <a class="nav-link" routerLink="/auth/register">Register</a>
-        </div>
-        <div class="navbar-dark btn btn-primary text-white">
-          <a class="nav-link" routerLink="/auth/account">Account</a>
-        </div>
+        @if ({info: user$ | async}; as user) {
+          @if (user.info?.roles){
+            <div class="navbar-dark btn btn-primary text-white">
+              <a class="nav-link" routerLink="/auth/account">Account</a>
+            </div>
+          } @else {
+            <div class="navbar-dark btn btn-secondary text-white">
+              <a class="nav-link" routerLink="/auth/login">Login</a>
+            </div>
+            <div class="navbar-dark btn btn-primary text-white">
+              <a class="nav-link" routerLink="/auth/register">Register</a>
+            </div>
+          }
+        }
       </div>
     </div>
   </nav>
