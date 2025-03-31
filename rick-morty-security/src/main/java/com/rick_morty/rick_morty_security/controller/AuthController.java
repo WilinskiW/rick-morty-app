@@ -2,6 +2,8 @@ package com.rick_morty.rick_morty_security.controller;
 
 import com.rick_morty.rick_morty_security.dto.UserCredential;
 import com.rick_morty.rick_morty_security.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 @RestController
@@ -27,15 +26,21 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody UserCredential user) {
+    public ResponseEntity<Void> login(@RequestBody UserCredential user, HttpServletResponse response) {
         String verifiedOutcome = userService.verify(user);
 
         if(verifiedOutcome.contains("Failure")){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Unauthorized"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        Map<String, String> response = new HashMap<>();
-        response.put("token", verifiedOutcome);
-        return ResponseEntity.ok(response);
+        Cookie cookie = new Cookie("jwt", verifiedOutcome);
+        cookie.setHttpOnly(true);   // Helps with XSS
+        cookie.setSecure(true);     // HTTPS Only
+        cookie.setPath("/");        // Access by whole application
+        cookie.setMaxAge(3600);     // Expire after one hour
+        cookie.setAttribute("SameSite", "Strict");  // Protects from CSRF
+
+        response.addCookie(cookie);
+        return ResponseEntity.ok().build();
     }
 }

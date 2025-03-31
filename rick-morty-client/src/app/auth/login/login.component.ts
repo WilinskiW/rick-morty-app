@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,17 +18,21 @@ export class LoginComponent {
   });
   error = false;
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   onSubmit() {
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
 
-    console.log(username, password)
-
-    if (!username || !password) { //guard
+    if (!username || !password) {
       return;
     }
 
-    this.error = this.authService.loginUser({username, password});
+    this.authService.loginUser({username, password}).subscribe({
+      complete: () => {
+        this.router.navigate(["/wiki/characters"], { replaceUrl: true })
+      },
+      error: () => this.error = true
+    });
   }
 }

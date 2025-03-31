@@ -23,10 +23,13 @@ export class RegisterComponent {
     const username = this.registerForm.value.username;
     const password = this.registerForm.value.password;
 
-    if(!username || !password){ //guard
+    if(!username || !password){
       return;
     }
 
-    this.error = this.authService.registerUser({username, password});
+    this.authService.registerUser({username, password})
+      .subscribe({
+        error: () => this.error = true
+      });
   }
 }

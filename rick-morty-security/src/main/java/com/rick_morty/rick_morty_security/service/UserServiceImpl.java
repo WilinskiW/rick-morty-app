@@ -2,6 +2,7 @@ package com.rick_morty.rick_morty_security.service;
 
 import com.rick_morty.rick_morty_data.model.User;
 import com.rick_morty.rick_morty_data.repository.security.UserRepository;
+import com.rick_morty.rick_morty_security.dto.TokenInfo;
 import com.rick_morty.rick_morty_security.dto.UserCredential;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,15 +26,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void registerUser(String username, String password) {
-        if(username.isBlank() || password.isBlank()){
+        if (username.isBlank() || password.isBlank()) {
             throw new IllegalArgumentException("Username or password are blank");
         }
 
-        if(username.length() < 4 || username.length() > 255){
+        if (username.length() < 4 || username.length() > 255) {
             throw new IllegalArgumentException("Username is too long or too short");
         }
 
-        if(password.length() < 4 || password.length() > 255){
+        if (password.length() < 4 || password.length() > 255) {
             throw new IllegalArgumentException("Password is too long or too short");
         }
 
@@ -48,10 +51,24 @@ public class UserServiceImpl implements UserService {
                 user.username(),
                 user.password()
         ));
+        //authorities -> Simple Granted Authority
+
         return authentication.isAuthenticated() ? generateToken(user.username()) : "Failure";
     }
 
     private String generateToken(String username) {
-        return jwtService.generateToken(username);
+        Optional<User> user = userRepository.findUserByUsername(username);
+
+        if (user.isEmpty()) {
+            throw new IllegalCallerException();
+        }
+
+        TokenInfo tokenInfo = new TokenInfo(
+                user.get().getId().toString(),
+                user.get().getUsername(),
+                user.get().getRoles()
+        );
+
+        return jwtService.generateToken(tokenInfo);
     }
 }

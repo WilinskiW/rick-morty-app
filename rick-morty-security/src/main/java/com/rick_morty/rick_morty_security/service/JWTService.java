@@ -1,5 +1,6 @@
 package com.rick_morty.rick_morty_security.service;
 
+import com.rick_morty.rick_morty_security.dto.TokenInfo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -30,15 +31,17 @@ public class JWTService {
         }
     }
 
-    public String generateToken(String username) {
+    public String generateToken(TokenInfo tokenInfo) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("sub_id", tokenInfo.id());
+        claims.put("roles", tokenInfo.roles());
 
         return Jwts.builder()
+                .subject(tokenInfo.username())
                 .claims()
                 .add(claims)
-                .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10)) // 1 h
                 .and()
                 .signWith(getKey())
                 .compact();
