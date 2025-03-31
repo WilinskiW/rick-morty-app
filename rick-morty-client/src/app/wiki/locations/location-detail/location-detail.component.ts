@@ -22,9 +22,6 @@ export class LocationDetailComponent implements OnInit{
       .subscribe({
         next: (data) => {
           this.location = data;
-        },
-        complete: () => {
-          console.log(this.location);
         }
       });
   }

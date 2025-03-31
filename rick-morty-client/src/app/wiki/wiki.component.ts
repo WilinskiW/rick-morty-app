@@ -20,7 +20,7 @@ export class WikiComponent {
     const sub = this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        map(() => this.route.firstChild?.snapshot.data['section'])
+        map(() => this.route.firstChild?.snapshot?.url[0]?.path || "unknown")
       )
       .subscribe(section => {
         this.section = section || 'Unknown';

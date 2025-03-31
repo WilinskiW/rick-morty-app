@@ -17,7 +17,12 @@
       </ul>
       <div class="d-flex gap-2">
         @if ({info: user$ | async}; as user) {
-          @if (user.info?.roles){
+          @if (user.info?.roles?.includes("ADMIN")) {
+            <div class="navbar-dark btn btn-success text-white">
+              <a class="nav-link" [routerLink]="['/wiki', section().toLowerCase(), 'add']">Add</a>
+            </div>
+          }
+          @if (user.info?.roles) {
             <div class="navbar-dark btn btn-primary text-white">
               <a class="nav-link" routerLink="/auth/account">Account</a>
             </div>

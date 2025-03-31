@@ -23,9 +23,6 @@ export class CharacterDetailComponent implements OnInit{
       .subscribe({
         next: (data) => {
           this.character = data;
-        },
-        complete: () => {
-          console.log(this.character)
         }
       })
   }

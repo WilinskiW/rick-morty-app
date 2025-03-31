@@ -1,0 +1,81 @@
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
+  <div class="col-md-6 col-lg-4">
+    <h1 class="text-center mb-4">Create new character</h1>
+    <form [formGroup]="form" method="POST" (ngSubmit)="addCharacter()">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Enter character name" formControlName="name"
+               required>
+        <label for="name">Character name</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <select class="form-select" id="status" required formControlName="status">
+          <option value="Unknown">Unknown</option>
+          <option value="Alive">Alive</option>
+          <option value="Dead">Dead</option>
+        </select>
+        <label for="status">Status</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="species" placeholder="Enter species" required
+               formControlName="species">
+        <label for="species">Species</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="type" placeholder="Enter type" formControlName="type">
+        <label for="type">Type (optional)</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <select class="form-select" id="gender" required formControlName="gender">
+          <option value="Unknown">Unknown</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        <label for="gender">Gender</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <select class="form-select" id="origin" formControlName="origin">
+          <option value="">Unknown</option>
+          @for (location of locations; track $index) {
+            <option>{{ location.name }}</option>
+          }
+        </select>
+        <label for="origin">Origin Location</label>
+        <div class="mt-1">
+          <a href="/locations/add" target="_blank" class="text-decoration-none small">+ Add New Location</a>
+        </div>
+      </div>
+
+      <div class="form-floating mb-3">
+        <select class="form-select" id="currentLocation" formControlName="current">
+          <option value="">Unknown</option>
+          @for (location of locations; track $index) {
+            <option>{{ location.name }}</option>
+          }
+        </select>
+        <label for="currentLocation">Current Location</label>
+        <div class="mt-1">
+          <a href="/locations/add" target="_blank" class="text-decoration-none small">+ Add New Location</a>
+        </div>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="imageUrl" placeholder="Enter image URL" formControlName="imageUrl">
+        <label for="imageUrl">Image URL</label>
+      </div>
+
+      <div class="text-center mb-3">
+        <img class="img-thumbnail" style="max-height: 150px;">
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a href="./" class="btn btn-outline-secondary">Back to Characters</a>
+      </div>
+    </form>
+  </div>
+</div>

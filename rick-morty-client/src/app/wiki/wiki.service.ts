@@ -16,4 +16,12 @@ export class WikiService {
       })
     )
   }
+
+  sendData<T>(body: object, url: string): Observable<T> {
+    return this.httpClient.post<T>(url, body, { withCredentials: true }).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    )
+  }
 }

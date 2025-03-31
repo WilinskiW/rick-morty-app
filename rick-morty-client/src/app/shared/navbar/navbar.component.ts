@@ -18,6 +18,4 @@ import { AsyncPipe } from '@angular/common';
 export class NavbarComponent{
   section = input.required<string>();
   user$ = inject(AuthService).user$;
-
-
 }

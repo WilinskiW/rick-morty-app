@@ -20,9 +20,6 @@ export class EpisodeDetailComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.episode = data;
-        },
-        complete: () => {
-          console.log(this.episode);
         }
       });
   }

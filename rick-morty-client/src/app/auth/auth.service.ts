@@ -20,7 +20,7 @@ export class AuthService {
   registerUser(user: UserCredentialModel): Observable<UserCredentialModel> {
     return this.httpClient.post<UserCredentialModel>(`${this.apiUrl}/register`, user)
       .pipe(
-        tap(() => this.router.navigate(["auth/login"], {replaceUrl: true})),
+        tap(() => this.router.navigate(["auth/login"], { replaceUrl: true })),
         catchError(error => {
           return throwError(() => error);
         })
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   loginUser(user: UserCredentialModel): Observable<any> {
-    return this.httpClient.post<void>(`${this.apiUrl}/login`, user, {withCredentials: true})
+    return this.httpClient.post<void>(`${this.apiUrl}/login`, user, { withCredentials: true })
       .pipe(
         catchError(error => {
           return throwError(() => error);
@@ -37,14 +37,14 @@ export class AuthService {
   }
 
   logout() {
-    this.httpClient.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).subscribe({
+    this.httpClient.post(`${this.apiUrl}/logout`, {}, {withCredentials: true}).subscribe({
       next: () => this.userSubject.next(null)
     })
-    this.router.navigate(["auth/login"]);
+    this.router.navigate(["auth/login"], { replaceUrl: true });
   }
 
   fetchCurrentUser() {
-    this.httpClient.get<TokenInfoModel>(`${this.apiUrl}/userInfo`, { withCredentials: true })
+    this.httpClient.get<TokenInfoModel>(`${this.apiUrl}/userInfo`, {withCredentials: true})
       .pipe(
         tap(user => this.userSubject.next(user)),
         catchError(() => {
