@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
   <div class="col-md-6 col-lg-4">
     <h1 class="text-center mb-4">Create new character</h1>
-    <form class="needs-validation" [formGroup]="form" (ngSubmit)="addCharacter()">
+    <form [formGroup]="form" (ngSubmit)="addCharacter()">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" [class.is-invalid]="isInvalid('name')"
                id="name" placeholder="Enter character name"

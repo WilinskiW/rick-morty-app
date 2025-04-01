@@ -4,22 +4,37 @@
     <form [formGroup]="form" (ngSubmit)="addEpisode()">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="title" placeholder="Enter episode title" formControlName="title"
-               required>
+               [class.is-invalid]="isInvalid('title')" required>
         <label for="title">Episode title</label>
+        @if (isInvalid("title")) {
+          <div class="invalid-feedback">
+            Episode title is required!
+          </div>
+        }
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="air-date" placeholder="Enter episode air date"
-               formControlName="airDate" required>
+               formControlName="airDate" [class.is-invalid]="isInvalid('airDate')" required>
         <label for="air-date">Air date</label>
+        @if (isInvalid("airDate")) {
+          <div class="invalid-feedback">
+            Air date is required!
+          </div>
+        }
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="episode-code" placeholder="Enter episode code (SXEXX)"
-               formControlName="code" required>
+               formControlName="code" [class.is-invalid]="isInvalid('code')" required>
         <label for="episode-code">Episode code (SXXEXX)</label>
+        @if (isInvalid("code")) {
+          <div class="invalid-feedback">
+            Episode code is required!
+          </div>
+        }
       </div>
       <div class="d-grid gap-2">
         <button class="btn btn-primary" type="submit">Save</button>
-        <a href="/episode/all" class="btn btn-outline-secondary">Back to Episodes</a>
+        <a (click)="goBack()" class="btn btn-outline-secondary">Back to Episodes</a>
       </div>
     </form>
   </div>
