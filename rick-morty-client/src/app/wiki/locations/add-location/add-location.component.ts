@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { CharacterModel } from '../../characters/character.model';
 import { LocationModel } from '../location.model';
-import { Router } from '@angular/router';
+import { FormService } from '../../form.service';
 
 @Component({
   selector: 'app-add-location',
@@ -20,8 +20,8 @@ export class AddLocationComponent implements OnInit {
     residents: new FormControl("")
   });
   characters: CharacterModel[] = [];
+  private formService = inject(FormService);
   private wikiService = inject(WikiService);
-  private router = inject(Router);
 
 
   ngOnInit() {
@@ -32,34 +32,19 @@ export class AddLocationComponent implements OnInit {
   }
 
   isInvalid(key: string): boolean {
-    const control = this.form.get(key);
-    return !!(control && control.touched && control.invalid);
-    // In TypeScript !! - mean double negation
-    // undefined, null -> false
-    // {}, "some string" -> true
-  }
-
-  goBack() {
-    this.router.navigate(['/wiki/locations']);
+    return this.formService.isInvalid(this.form, key);
   }
 
   addLocation() {
     if (this.form.invalid) {
-      //Mark all controls as touched
-      Object.keys(this.form.controls).forEach(controlName => {
-        const control = this.form.get(controlName);
-        if (control) {
-          control.markAsTouched();
-        }
-
-      });
+      this.formService.markAllControlsAsTouched(this.form);
       return;
     }
 
     const location = {
       name: this.form.value.name!,
       type: this.form.value.type!,
-      dimension: this.form.value.dimension!  || "Unknown",
+      dimension: this.form.value.dimension! || "Unknown",
       residents: this.form.value.residents || [],
     }
 
@@ -68,5 +53,9 @@ export class AddLocationComponent implements OnInit {
         complete: () => this.goBack(),
         error: err => console.error("Błąd podczas dodawania lokacji", err)
       });
+  }
+
+  goBack() {
+    this.formService.navigateTo("locations");
   }
 }

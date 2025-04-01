@@ -3,7 +3,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../../locations/locationSummary.model';
 import { CharacterModel } from '../character.model';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { FormService } from '../../form.service';
 
 @Component({
   selector: 'app-add-character',
@@ -30,8 +31,8 @@ export class AddCharacterComponent implements OnInit {
     imageUrl: new FormControl("")
   })
   locations: LocationSummaryModel[] = [];
+  private formService = inject(FormService);
   private wikiService = inject(WikiService);
-  private router = inject(Router);
 
 
   ngOnInit() {
@@ -42,27 +43,16 @@ export class AddCharacterComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/wiki/characters']);
+    this.formService.navigateTo("characters");
   }
 
   isInvalid(key: string): boolean {
-    const control = this.form.get(key);
-    return !!(control && control.touched && control.invalid);
-    // In TypeScript !! - mean double negation
-    // undefined, null -> false
-    // {}, "some string" -> true
+    return this.formService.isInvalid(this.form, key);
   }
 
   addCharacter() {
     if (this.form.invalid) {
-      //Mark all controls as touched
-      Object.keys(this.form.controls).forEach(controlName => {
-        const control = this.form.get(controlName);
-        if (control) {
-          control.markAsTouched();
-        }
-
-      });
+      this.formService.markAllControlsAsTouched(this.form);
       return;
     }
 

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { EpisodeModel } from '../episode.model';
-import { Router } from '@angular/router';
+import { FormService } from '../../form.service';
 
 @Component({
   selector: 'app-add-episode',
@@ -17,31 +17,16 @@ export class AddEpisodeComponent {
     airDate: new FormControl(""),
     code: new FormControl(""),
   });
+  private formService = inject(FormService);
   private wikiService = inject(WikiService);
-  private router = inject(Router);
-
-  goBack() {
-    this.router.navigate(['/wiki/episodes']);
-  }
 
   isInvalid(key: string): boolean {
-    const control = this.form.get(key);
-    return !!(control && control.touched && control.invalid);
-    // In TypeScript !! - mean double negation
-    // undefined, null -> false
-    // {}, "some string" -> true
+    return this.formService.isInvalid(this.form, key);
   }
 
   addEpisode() {
     if (this.form.invalid) {
-      //Mark all controls as touched
-      Object.keys(this.form.controls).forEach(controlName => {
-        const control = this.form.get(controlName);
-        if (control) {
-          control.markAsTouched();
-        }
-
-      });
+      this.formService.markAllControlsAsTouched(this.form);
       return;
     }
 
@@ -56,5 +41,9 @@ export class AddEpisodeComponent {
         complete: () => this.goBack(),
         error: err => console.error("Błąd podczas dodawania epizodu", err)
       });
+  }
+
+  goBack() {
+    this.formService.navigateTo("episodes")
   }
 }

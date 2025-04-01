@@ -81,7 +81,7 @@
       </div>
 
       <div class="text-center mb-3">
-        <img class="img-thumbnail" style="max-height: 150px;">
+        <img [src]="form.controls.imageUrl.value" [alt]="form.controls.name.value" class="img-thumbnail" style="max-height: 150px;">
       </div>
 
       <div class="d-grid gap-2">
