@@ -1,9 +1,9 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../../locations/locationSummary.model';
-import { map } from 'rxjs';
 import { CharacterModel } from '../character.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-character',
@@ -24,8 +24,10 @@ export class AddCharacterComponent implements OnInit{
     current: new FormControl("Unknown"),
     imageUrl: new FormControl("")
   })
-  private wikiService = inject(WikiService);
   locations: LocationSummaryModel[] = [];
+  private wikiService = inject(WikiService);
+  private siteLocation = inject(Location);
+
 
   ngOnInit() {
     this.wikiService.fetchData<LocationSummaryModel[]>("http://localhost:8081/api/locations")
@@ -51,7 +53,7 @@ export class AddCharacterComponent implements OnInit{
 
     this.wikiService.sendData<CharacterModel>(character, "http://localhost:8081/api/characters")
       .subscribe({
-        next: () => console.log("Postać dodana!"),
+        complete: () => this.siteLocation.back(),
         error: err => console.error("Błąd podczas dodawania postaci", err)
       });
   }

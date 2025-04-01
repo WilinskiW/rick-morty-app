@@ -9,7 +9,6 @@ import { WikiService } from '../../../wiki/wiki.service';
   imports: [
     AsyncPipe
   ],
-  styleUrl: './card-footer.component.css'
 })
 export class CardFooterComponent {
   private location = inject(Location);

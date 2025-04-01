@@ -13,7 +13,6 @@ import { AsyncPipe } from '@angular/common';
   ],
   templateUrl: './navbar.component.html',
   standalone: true,
-  styleUrl: './navbar.component.css'
 })
 export class NavbarComponent{
   section = input.required<string>();

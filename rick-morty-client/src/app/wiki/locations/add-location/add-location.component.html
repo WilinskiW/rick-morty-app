@@ -1,0 +1,34 @@
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
+  <div class="col-md-6 col-lg-4">
+    <h1 class="text-center mb-4">Create new location</h1>
+    <form [formGroup]="form" (ngSubmit)="addLocation()">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Enter location name"
+               formControlName="name" required>
+        <label for="name">Location name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="type" placeholder="Enter location type"
+               formControlName="type" required>
+        <label for="type">Location type</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="dimension" placeholder="Enter dimension"
+               formControlName="dimension" required>
+        <label for="dimension">Dimension</label>
+      </div>
+      <div class="form-group mb-3">
+        <label for="residents" class="form-label">Residents</label>
+        <select class="form-select" id="residents" multiple style="height: 200px;" formControlName="residents">
+          @for (resident of characters; track resident.id) {
+            <option [ngValue]="resident">{{ resident.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a href="/location/all" class="btn btn-outline-secondary">Back to Locations</a>
+      </div>
+    </form>
+  </div>
+</div>

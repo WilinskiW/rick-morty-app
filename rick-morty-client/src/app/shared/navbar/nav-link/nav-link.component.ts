@@ -9,7 +9,6 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
   ],
   templateUrl: './nav-link.component.html',
   standalone: true,
-  styleUrl: './nav-link.component.css'
 })
 export class NavLinkComponent {
   name =  input.required<string>();
