@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe, Location } from '@angular/common';
 import { AuthService } from '../../../auth/auth.service';
+import { WikiService } from '../../../wiki/wiki.service';
 
 @Component({
   selector: 'app-card-footer',
@@ -12,9 +13,18 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class CardFooterComponent {
   private location = inject(Location);
+  private wikiService = inject(WikiService);
   user$ = inject(AuthService).user$;
 
   goBack() {
     this.location.back();
+  }
+
+  confirmDelete() {
+    if(confirm(`Are you sure want to delete this element?`)){
+      this.wikiService.deleteData(window.location.href).subscribe({
+        complete: () => this.goBack()
+      });
+    }
   }
 }

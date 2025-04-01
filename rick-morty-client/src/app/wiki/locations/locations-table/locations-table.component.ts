@@ -3,12 +3,14 @@ import { ContentTableComponent } from '../../../shared/content-table/content-tab
 import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../locationSummary.model';
 import { RouterLink } from '@angular/router';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-location-table',
   imports: [
     ContentTableComponent,
-    RouterLink
+    RouterLink,
+    TitleCasePipe
   ],
   templateUrl: './locations-table.component.html',
 })
