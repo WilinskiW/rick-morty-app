@@ -4,6 +4,7 @@
       <th>ID</th>
       <th>Name</th>
       <th>Status</th>
+      <th>Specie</th>
       <th>Type</th>
       <th>Gender</th>
       <th>Origin</th>
@@ -16,6 +17,7 @@
           <td>{{ character.id }}</td>
           <td>{{ character.name }}</td>
           <td>{{ character.status | titlecase }}</td>
+          <td>{{ character.species }}</td>
           <td>{{ character.type }}</td>
           <td>{{ character.gender }}</td>
           <td>{{ character?.origin?.name || "Unknown" }}</td>

@@ -15,10 +15,10 @@ public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "source_id")
-    private int sourceId;
+    private Integer sourceId;
 
     @Column(name = "name")
     private String name;

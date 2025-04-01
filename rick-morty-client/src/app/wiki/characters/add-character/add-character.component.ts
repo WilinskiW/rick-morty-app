@@ -1,23 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../../locations/locationSummary.model';
 import { CharacterModel } from '../character.model';
 import { Location } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-character',
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './add-character.component.html',
 })
-export class AddCharacterComponent implements OnInit{
+export class AddCharacterComponent implements OnInit {
   form = new FormGroup({
-    name: new FormControl(""),
+    name: new FormControl("", {
+      validators: [Validators.required, Validators.minLength(3)]
+    }),
     status: new FormControl("Unknown"),
-    species: new FormControl(""),
+    species: new FormControl("", {
+      validators: [Validators.required]
+    }),
     type: new FormControl(""),
     gender: new FormControl("Unknown"),
     origin: new FormControl("Unknown"),
@@ -36,26 +42,49 @@ export class AddCharacterComponent implements OnInit{
       });
   }
 
-  addCharacter() {
-    const origin = this.locations.find(loc => loc.name === this.form.value.origin);
-    const current = this.locations.find(loc => loc.name === this.form.value.current);
-
-    const character = {
-      name: this.form.value.name!,
-      status: this.form.value.status!,
-      species: this.form.value.species!,
-      type: this.form.value.type!,
-      gender: this.form.value.gender!,
-      origin: origin || { id: 0, name: 'Unknown', type: '', dimension: 'Unknown'},
-      currentLocation: current || { id: 0, name: 'Unknown', type: '', dimension: "Unknown" },
-      imageUrl: this.form.value.imageUrl!
-    };
-
-    this.wikiService.sendData<CharacterModel>(character, "http://localhost:8081/api/characters")
-      .subscribe({
-        complete: () => this.siteLocation.back(),
-        error: err => console.error("Błąd podczas dodawania postaci", err)
-      });
+  goBack() {
+    this.siteLocation.back();
   }
 
+  isInvalid(key: string): boolean {
+    const control = this.form.get(key);
+    return !!(control && control.touched && control.invalid);
+    // In TypeScript !! - mean double negation
+    // undefined, null -> false
+    // {}, "some string" -> true
+  }
+
+  addCharacter() {
+    if (this.form.invalid) {
+      //Mark all controls as touched
+      Object.keys(this.form.controls).forEach(controlName => {
+        const control = this.form.get(controlName);
+        if (control) {
+          control.markAsTouched();
+        }
+
+      });
+      return;
+    }
+
+      const origin = this.locations.find(loc => loc.name === this.form.value.origin);
+      const current = this.locations.find(loc => loc.name === this.form.value.current);
+
+      const character = {
+        name: this.form.value.name!,
+        status: this.form.value.status!,
+        species: this.form.value.species!,
+        type: this.form.value.type!,
+        gender: this.form.value.gender!,
+        origin: this.form.value.origin! === "Unknown" ? null : origin,
+        currentLocation: this.form.value.current! === "Unknown" ? null : current,
+        imageUrl: this.form.value.imageUrl!
+      };
+
+      this.wikiService.sendData<CharacterModel>(character, "http://localhost:8081/api/characters")
+        .subscribe({
+          complete: () => this.goBack(),
+          error: err => console.error("Błąd podczas dodawania postaci", err)
+        });
+  }
 }

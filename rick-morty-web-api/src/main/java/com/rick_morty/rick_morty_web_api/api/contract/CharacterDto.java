@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CharacterDto {
-    private int id;
+    private Integer id;
     @NotEmpty(message = "Name can't be empty")
     private String name;
     @NotNull(message = "Status can't be null")

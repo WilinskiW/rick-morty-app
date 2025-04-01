@@ -1,11 +1,18 @@
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
   <div class="col-md-6 col-lg-4">
     <h1 class="text-center mb-4">Create new character</h1>
-    <form [formGroup]="form" method="POST" (ngSubmit)="addCharacter()">
+    <form class="needs-validation" [formGroup]="form" (ngSubmit)="addCharacter()">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="name" placeholder="Enter character name" formControlName="name"
+        <input type="text" class="form-control" [class.is-invalid]="isInvalid('name')"
+               id="name" placeholder="Enter character name"
+               formControlName="name"
                required>
         <label for="name">Character name</label>
+        @if (isInvalid("name")) {
+          <div class="invalid-feedback">
+            Character name must be at least 3 character long!
+          </div>
+        }
       </div>
 
       <div class="form-floating mb-3">
@@ -18,9 +25,14 @@
       </div>
 
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="species" placeholder="Enter species" required
-               formControlName="species">
+        <input type="text" class="form-control" [class.is-invalid]="isInvalid('species')"
+               id="species" placeholder="Enter species" required formControlName="species">
         <label for="species">Species</label>
+        @if (isInvalid("species")) {
+          <div class="invalid-feedback">
+            Species is required
+          </div>
+        }
       </div>
 
       <div class="form-floating mb-3">
@@ -39,27 +51,27 @@
 
       <div class="form-floating mb-3">
         <select class="form-select" id="origin" formControlName="origin">
-          <option value="">Unknown</option>
+          <option>Unknown</option>
           @for (location of locations; track $index) {
             <option>{{ location.name }}</option>
           }
         </select>
         <label for="origin">Origin Location</label>
         <div class="mt-1">
-          <a href="/locations/add" target="_blank" class="text-decoration-none small">+ Add New Location</a>
+          <a [href]="'wiki/locations/add'" target="_blank" class="text-decoration-none small">+ Add New Location</a>
         </div>
       </div>
 
       <div class="form-floating mb-3">
         <select class="form-select" id="currentLocation" formControlName="current">
-          <option value="">Unknown</option>
+          <option>Unknown</option>
           @for (location of locations; track $index) {
             <option>{{ location.name }}</option>
           }
         </select>
         <label for="currentLocation">Current Location</label>
         <div class="mt-1">
-          <a href="/locations/add" target="_blank" class="text-decoration-none small">+ Add New Location</a>
+          <a [href]="'wiki/locations/add'" target="_blank" class="text-decoration-none small">+ Add New Location</a>
         </div>
       </div>
 
@@ -74,7 +86,7 @@
 
       <div class="d-grid gap-2">
         <button class="btn btn-primary" type="submit">Save</button>
-        <a href="./" class="btn btn-outline-secondary">Back to Characters</a>
+        <a (click)="goBack()" class="btn btn-outline-secondary">Back to Characters</a>
       </div>
     </form>
   </div>
