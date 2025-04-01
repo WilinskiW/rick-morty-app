@@ -26,4 +26,9 @@ export class CardFooterComponent {
       });
     }
   }
+
+  goToEdit() {
+    const url = this.location.path() + "/edit";
+    this.wikiService.router.navigateByUrl(url);
+  }
 }

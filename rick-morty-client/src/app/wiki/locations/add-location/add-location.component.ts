@@ -56,6 +56,6 @@ export class AddLocationComponent implements OnInit {
   }
 
   goBack() {
-    this.formService.navigateTo("locations");
+    this.wikiService.navigateTo("locations");
   }
 }

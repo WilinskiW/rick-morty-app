@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="text-dark text-center mb-4">{{ "Editing: " + character?.name }}</h1>
+          <form [formGroup]="editForm" (ngSubmit)="editOnSubmit()">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="name" placeholder="Enter name"
+                     required formControlName="name" [class.is-invalid]="isInvalid('name')">
+              <label for="name">Name</label>
+              @if (isInvalid("name")) {
+                <div class="invalid-feedback">
+                  Character name must be at least 3 character long!
+                </div>
+              }
+            </div>
+
+            <div class="form-floating mb-3">
+              <select class="form-select" id="status" formControlName="status">
+                <option value="Unknown">Unknown</option>
+                <option value="Alive">Alive</option>
+                <option value="Dead">Dead</option>
+              </select>
+              <label for="status">Status</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="species" formControlName="species"
+                     placeholder="Enter species"
+                     required [class.is-invalid]="isInvalid('species')">
+              <label for="species">Species</label>
+              @if (isInvalid("species")) {
+                <div class="invalid-feedback">
+                  Species is required
+                </div>
+              }
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="type" placeholder="Enter type" formControlName="type">
+              <label for="type">Type (optional)</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <select class="form-select" id="gender" formControlName="gender">
+                <option value="Unknown">Unknown</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <label for="gender">Gender</label>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label"><strong>Origin</strong></label>
+              <select class="form-select" formControlName="origin">
+                <option>Unknown</option>
+                @for (location of locations; track location.id) {
+                  <option [value]="location.name" [selected]="location.name === editForm.value.origin">
+                    {{ location.name }}
+                  </option>
+                }
+              </select>
+              @if ({info: user$ | async}; as user) {
+                @if (user.info?.roles?.includes("ADMIN")) {
+                  <div class="mt-2">
+                    <a target="_blank" class="text-decoration-none small">+ Add New Location</a>
+                  </div>
+                }
+              }
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label"><strong>Current Location</strong></label>
+              <select class="form-select" formControlName="current">
+                <option>Unknown</option>
+                @for (location of locations; track location.id) {
+                  <option [value]="location.name" [selected]="location.name === editForm.value.origin">
+                    {{ location.name }}
+                  </option>
+                }
+              </select>
+              @if ({info: user$ | async}; as user) {
+                @if (user.info?.roles?.includes("ADMIN")) {
+                  <div class="mt-2">
+                    <a target="_blank" class="text-decoration-none small">+ Add New Location</a>
+                  </div>
+                }
+              }
+            </div>
+
+            <div class="mb-3">
+              <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl"
+                       placeholder="Enter image URL">
+                <label for="imageUrl">Image URL</label>
+              </div>
+              @if (this.editForm.controls.imageUrl.value) {
+                <div class="text-center mt-3">
+                  <img [src]="this.editForm.controls.imageUrl.value" [alt]="this.editForm.controls.name.value"
+                       class="img-thumbnail" style="max-height: 150px;">
+                </div>
+              }
+            </div>
+
+            <div class="d-flex justify-content-center gap-2 mt-4">
+              <a (click)="goBack()" class="btn btn-secondary">Back</a>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

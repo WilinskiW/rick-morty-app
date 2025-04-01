@@ -44,6 +44,6 @@ export class AddEpisodeComponent {
   }
 
   goBack() {
-    this.formService.navigateTo("episodes")
+    this.wikiService.navigateTo("episodes")
   }
 }

@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { CharactersTableComponent } from './characters-table/characters-table.component';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 import { AddCharacterComponent } from './add-character/add-character.component';
+import { EditCharacterComponent } from './edit-characters/edit-character.component';
 
 export const charactersRoutes: Route[] = [
   {
@@ -16,4 +17,8 @@ export const charactersRoutes: Route[] = [
     path: "characters/:id",
     component: CharacterDetailComponent
   },
+  {
+    path: "characters/:id/edit",
+    component: EditCharacterComponent
+  }
 ]

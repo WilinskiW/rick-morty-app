@@ -43,7 +43,7 @@ export class AddCharacterComponent implements OnInit {
   }
 
   goBack() {
-    this.formService.navigateTo("characters");
+    this.wikiService.navigateTo("characters");
   }
 
   isInvalid(key: string): boolean {

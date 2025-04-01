@@ -3,7 +3,7 @@
     <a (click)="goBack()" class="btn btn-secondary m-1">Back</a>
     @if ({info: user$ | async}; as user) {
       @if (user.info?.roles?.includes("MODERATOR")) {
-        <button type="submit" class="d-inline btn btn-primary m-1">Edit</button>
+        <a (click)="goToEdit()" class="d-inline btn btn-primary m-1">Edit</a>
       }
       @if (user.info?.roles?.includes("ADMIN")) {
         <button type="submit" class="d-inline btn btn-danger m-1" (click)="confirmDelete()">Delete</button>

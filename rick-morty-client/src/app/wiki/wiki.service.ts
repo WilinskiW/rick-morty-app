@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WikiService {
-  constructor(private httpClient: HttpClient) {
-  }
+  private httpClient = inject(HttpClient);
+  router = inject(Router);
 
   fetchData<T>(url: string): Observable<T> {
     return this.httpClient.get<T>(url).pipe(
@@ -25,6 +26,14 @@ export class WikiService {
     )
   }
 
+  patchData<T>(body: object, url: string): Observable<T> {
+    return this.httpClient.put<T>(url, body, { withCredentials: true }).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    )
+  }
+
   deleteData(url: string): Observable<void> {
     console.log(url);
     const apiUrl = url.replace("http://localhost:4200/wiki", "http://localhost:8081/api");
@@ -34,5 +43,9 @@ export class WikiService {
         throw error;
       })
     )
+  }
+
+  navigateTo(...args: string[]) {
+    this.router.navigate(['wiki', ...args]);
   }
 }
