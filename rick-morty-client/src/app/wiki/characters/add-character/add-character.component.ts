@@ -3,8 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../../locations/locationSummary.model';
 import { CharacterModel } from '../character.model';
-import { Location } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-character',
@@ -32,7 +31,7 @@ export class AddCharacterComponent implements OnInit {
   })
   locations: LocationSummaryModel[] = [];
   private wikiService = inject(WikiService);
-  private siteLocation = inject(Location);
+  private router = inject(Router);
 
 
   ngOnInit() {
@@ -43,7 +42,7 @@ export class AddCharacterComponent implements OnInit {
   }
 
   goBack() {
-    this.siteLocation.back();
+    this.router.navigate(['/wiki/characters']);
   }
 
   isInvalid(key: string): boolean {

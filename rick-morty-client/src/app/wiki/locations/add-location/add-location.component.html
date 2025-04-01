@@ -4,17 +4,33 @@
     <form [formGroup]="form" (ngSubmit)="addLocation()">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="name" placeholder="Enter location name"
-               formControlName="name" required>
+               formControlName="name" [class.is-invalid]="isInvalid('name')" required>
         <label for="name">Location name</label>
+        @if (isInvalid("name")) {
+          <div class="invalid-feedback">
+            Location name is required!
+          </div>
+        }
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="type" placeholder="Enter location type"
-               formControlName="type" required>
+               formControlName="type" [class.is-invalid]="isInvalid('type')" required>
+        @if (isInvalid("type")) {
+          <div class="invalid-feedback">
+            Location type is required!
+          </div>
+        }
         <label for="type">Location type</label>
+
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="dimension" placeholder="Enter dimension"
-               formControlName="dimension" required>
+               formControlName="dimension" [class.is-invalid]="isInvalid('dimension')" required>
+        @if (isInvalid("dimension")) {
+          <div class="invalid-feedback">
+            Location name is required!
+          </div>
+        }
         <label for="dimension">Dimension</label>
       </div>
       <div class="form-group mb-3">
@@ -27,7 +43,7 @@
       </div>
       <div class="d-grid gap-2">
         <button class="btn btn-primary" type="submit">Save</button>
-        <a href="/location/all" class="btn btn-outline-secondary">Back to Locations</a>
+        <a (click)="goBack()" class="btn btn-outline-secondary">Back to Locations</a>
       </div>
     </form>
   </div>

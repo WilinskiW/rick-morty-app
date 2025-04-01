@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { CharacterModel } from '../../characters/character.model';
 import { LocationModel } from '../location.model';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-location',
@@ -21,7 +21,7 @@ export class AddLocationComponent implements OnInit {
   });
   characters: CharacterModel[] = [];
   private wikiService = inject(WikiService);
-  private siteLocation = inject(Location);
+  private router = inject(Router);
 
 
   ngOnInit() {
@@ -31,7 +31,31 @@ export class AddLocationComponent implements OnInit {
       });
   }
 
+  isInvalid(key: string): boolean {
+    const control = this.form.get(key);
+    return !!(control && control.touched && control.invalid);
+    // In TypeScript !! - mean double negation
+    // undefined, null -> false
+    // {}, "some string" -> true
+  }
+
+  goBack() {
+    this.router.navigate(['/wiki/locations']);
+  }
+
   addLocation() {
+    if (this.form.invalid) {
+      //Mark all controls as touched
+      Object.keys(this.form.controls).forEach(controlName => {
+        const control = this.form.get(controlName);
+        if (control) {
+          control.markAsTouched();
+        }
+
+      });
+      return;
+    }
+
     const location = {
       name: this.form.value.name!,
       type: this.form.value.type!,
@@ -41,7 +65,7 @@ export class AddLocationComponent implements OnInit {
 
     this.wikiService.sendData<LocationModel>(location, "http://localhost:8081/api/locations")
       .subscribe({
-        complete: () => this.siteLocation.back(),
+        complete: () => this.goBack(),
         error: err => console.error("Błąd podczas dodawania lokacji", err)
       });
   }
