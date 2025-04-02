@@ -1,0 +1,7 @@
+.forbidden-img {
+  object-fit:fill;
+  object-position: right;
+  padding-left: 50px;
+  width: 100%;
+  height: auto;
+}

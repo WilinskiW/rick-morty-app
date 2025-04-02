@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { WikiComponent } from './wiki/wiki.component';
 import { wikiRoutes } from './wiki/wiki.routes';
 import { authRoutes } from './auth/auth.routes';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -14,5 +15,9 @@ export const routes: Routes = [
     component: WikiComponent,
     children: wikiRoutes
   },
-  ...authRoutes
+  ...authRoutes,
+  {
+    path: "**",
+    component: NotFoundComponent
+  }
 ];
