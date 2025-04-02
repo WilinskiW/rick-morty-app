@@ -12,14 +12,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
 public class CharacterService {
     private final RickAndMortyDbCataloger db;
     private final CharacterMapper mapper;
-    private CharacterDto scheduleCharacter;
 
     @Transactional
     public void save(CharacterDto characterDto) {
@@ -64,10 +62,6 @@ public class CharacterService {
         return mapper.entityToDto(character.get());
     }
 
-    public List<CharacterDto> getAllLikeName(String like) {
-        return mapper.entityListToDtoList(db.getCharacters().findLike("%" + like + "%"));
-    }
-
     @Transactional
     public void update(Integer id, CharacterDto characterDto) {
         var characterOptional = db.getCharacters().findById(id);
@@ -105,22 +99,5 @@ public class CharacterService {
             db.getEpisodes().save(episode); //update
         }
         db.getCharacters().delete(character);
-    }
-
-    public CharacterDto getScheduleCharacter() {
-        if (scheduleCharacter == null) {
-            setScheduleCharacter();
-        }
-        return scheduleCharacter;
-    }
-
-    public void setScheduleCharacter() {
-        int count = (int) db.getCharacters().count();
-        Random random = new Random();
-        try {
-            this.scheduleCharacter = getCharacterById(random.nextInt(count) + 1);
-        } catch (DataNotFoundException e) {
-            setScheduleCharacter();
-        }
     }
 }

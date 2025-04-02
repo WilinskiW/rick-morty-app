@@ -26,7 +26,7 @@ export class WikiService {
     )
   }
 
-  patchData<T>(body: object, url: string): Observable<T> {
+  putData<T>(body: object, url: string): Observable<T> {
     return this.httpClient.put<T>(url, body, { withCredentials: true }).pipe(
       catchError((error) => {
         throw error;

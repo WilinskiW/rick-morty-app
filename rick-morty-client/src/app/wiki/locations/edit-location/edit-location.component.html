@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="text-dark text-center mb-4">{{ "Editing: " + location?.name }}</h1>
+          <div>
+            <form id="location" [formGroup]="editForm" (ngSubmit)="editOnSubmit()">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="name" placeholder="Enter location name"
+                       formControlName="name" [class.is-invalid]="isInvalid('name')" required>
+                <label for="name">Location name</label>
+                @if (isInvalid("name")) {
+                  <div class="invalid-feedback">
+                    Location name is required!
+                  </div>
+                }
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="type" placeholder="Enter location type"
+                       formControlName="type" [class.is-invalid]="isInvalid('type')" required>
+                @if (isInvalid("type")) {
+                  <div class="invalid-feedback">
+                    Location type is required!
+                  </div>
+                }
+                <label for="type">Location type</label>
+
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="dimension" placeholder="Enter dimension"
+                       formControlName="dimension" [class.is-invalid]="isInvalid('dimension')" required>
+                @if (isInvalid("dimension")) {
+                  <div class="invalid-feedback">
+                    Location name is required!
+                  </div>
+                }
+                <label for="dimension">Dimension</label>
+              </div>
+              <div class="form-group mb-3">
+                <label for="residents" class="form-label">Residents</label>
+                <select class="form-select" id="residents" multiple style="height: 200px;" formControlName="residents">
+                  @for (resident of restOfCharacters; track resident.id) {
+                    <option [ngValue]="resident">{{ resident.name }}</option>
+                  }
+                </select>
+              </div>
+            </form>
+            <label class="form-label"><strong>Current residents</strong></label>
+            <app-character-edit-table [characters]="location?.residents"/>
+          </div>
+          <div class="d-flex justify-content-center gap-2 mt-4">
+            <a (click)="goBack()" class="btn btn-secondary">Back</a>
+            <input form="location" type="submit" class="btn btn-primary" value="Save changes">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

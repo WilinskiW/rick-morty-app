@@ -5,8 +5,6 @@ import com.rick_morty.rick_morty_web_api.api.service.EpisodeService;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +26,6 @@ public class EpisodeController {
      */
 
     @PostMapping
-    @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> createCharacter(@Valid @RequestBody EpisodeDto episodeDto,
                                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -46,7 +43,6 @@ public class EpisodeController {
      */
 
     @GetMapping
-    @Cacheable(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<List<EpisodeDto>> findAll() {
         var result = episodeService.getAll();
         logger.info("Found " + result.size() + " episodes");
@@ -65,7 +61,6 @@ public class EpisodeController {
      */
 
     @PutMapping("/{id}")
-    @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> updateCharacter(@PathVariable Integer id,
                                                 @Valid @RequestBody EpisodeDto episodeDto,
                                                 BindingResult bindingResult) {
@@ -85,7 +80,6 @@ public class EpisodeController {
      */
 
     @DeleteMapping("/{id}")
-    @CachePut(value = "episodes", key = "'allEpisodes'")
     public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
         episodeService.deleteById(id);
         logger.info("Deleted episode " + id);

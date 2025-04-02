@@ -90,7 +90,7 @@ export class EditCharacterComponent implements OnInit {
       imageUrl: this.editForm.value.imageUrl!
     };
 
-    this.wikiService.patchData<CharacterModel>(character, `http://localhost:8081/api/characters/${this.id()}`)
+    this.wikiService.putData<CharacterModel>(character, `http://localhost:8081/api/characters/${this.id()}`)
       .subscribe({
         complete: () => this.goBack(),
         error: err => console.error("Błąd podczas edytowania postaci", err)

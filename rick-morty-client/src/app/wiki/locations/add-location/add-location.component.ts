@@ -35,6 +35,10 @@ export class AddLocationComponent implements OnInit {
     return this.formService.isInvalid(this.form, key);
   }
 
+  goBack() {
+    this.wikiService.navigateTo("locations");
+  }
+
   addLocation() {
     if (this.form.invalid) {
       this.formService.markAllControlsAsTouched(this.form);
@@ -48,14 +52,10 @@ export class AddLocationComponent implements OnInit {
       residents: this.form.value.residents || [],
     }
 
-    this.wikiService.sendData<LocationModel>(location, "http://localhost:8081/api/locations")
+    this.wikiService.putData<LocationModel>(location, "http://localhost:8081/api/locations")
       .subscribe({
         complete: () => this.goBack(),
-        error: err => console.error("Błąd podczas dodawania lokacji", err)
+        error: err => console.error("Błąd podczas edytowania lokacji", err)
       });
-  }
-
-  goBack() {
-    this.wikiService.navigateTo("locations");
   }
 }

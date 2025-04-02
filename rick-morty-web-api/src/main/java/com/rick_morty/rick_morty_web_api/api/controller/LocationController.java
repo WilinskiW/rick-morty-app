@@ -6,8 +6,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +27,6 @@ public class LocationController {
      */
 
     @PostMapping
-    @CachePut(value = "locations", key = "'allLocations'")
     public ResponseEntity<Void> createLocation(@Valid @RequestBody LocationDto locationDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logger.warning("Validation failed for: " + locationDto);
@@ -46,7 +43,6 @@ public class LocationController {
      */
 
     @GetMapping
-    @Cacheable(value = "locations", key = "'allLocations'")
     public ResponseEntity<List<LocationDto>> findAll() {
         var result = locationService.getAll();
         logger.info("Locations founded: " + result.size());
@@ -64,7 +60,6 @@ public class LocationController {
      * UPDATE
      */
     @PutMapping("/{id}")
-    @CachePut(value = "locations", key = "'allLocations'")
     public ResponseEntity<Void> updateLocation(@PathVariable Integer id,
                                                @Valid @RequestBody LocationDto locationDto,
                                                BindingResult bindingResult) {
@@ -82,7 +77,6 @@ public class LocationController {
      * DELETE
      */
     @DeleteMapping("/{id}")
-    @CachePut(value = "locations", key = "'allLocations'")
     public ResponseEntity<Void> deleteLocation(@PathVariable Integer id) {
         locationService.deleteById(id);
         logger.info("Location deleted: " + id);

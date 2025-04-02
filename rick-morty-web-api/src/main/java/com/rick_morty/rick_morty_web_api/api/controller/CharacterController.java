@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,6 @@ public class CharacterController {
      */
 
     @PostMapping
-    @CachePut(value = "characters", key = "'allCharacter'")
     public ResponseEntity<Void> createCharacter(@Valid @RequestBody CharacterDto characterDto,
                                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -46,7 +44,6 @@ public class CharacterController {
      */
 
     @GetMapping
-    @Cacheable(value = "characters", key = "'allCharacter'")
     public ResponseEntity<List<CharacterDto>> findAll() {
         var result = characterService.getAll();
         logger.info("Characters founded: " + result.size());
@@ -60,17 +57,10 @@ public class CharacterController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("like/{like}")
-    public ResponseEntity<List<CharacterDto>> findByNameLike(@PathVariable String like) {
-        var result = characterService.getAllLikeName(like);
-        logger.info("Characters found like " + like + " founded: " + result.size());
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/schedule")
-    public ResponseEntity<CharacterDto> findScheduleCharacter() {
-        var result = characterService.getScheduleCharacter();
-        logger.info("Characters found schedule: " + result);
+    @GetMapping("/{episodeId}/notInLocation")
+    public ResponseEntity<List<CharacterDto>> findCharactersNotInLocation(@PathVariable Integer episodeId) {
+        var result = characterService.getAllNotInTheLocation(episodeId);
+        logger.info("Characters not in episode " + episodeId + " : " + result);
         return ResponseEntity.ok(result);
     }
 
@@ -79,7 +69,6 @@ public class CharacterController {
      */
 
     @PutMapping("/{id}")
-    @CachePut(value = "characters", key = "'allCharacter'")
     public ResponseEntity<Void> updateCharacter(@PathVariable Integer id,
                                                 @Valid @RequestBody CharacterDto characterDto,
                                                 BindingResult bindingResult) {
