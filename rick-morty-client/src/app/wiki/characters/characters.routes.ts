@@ -3,6 +3,7 @@ import { CharactersTableComponent } from './characters-table/characters-table.co
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 import { AddCharacterComponent } from './add-character/add-character.component';
 import { EditCharacterComponent } from './edit-characters/edit-character.component';
+import { isAdmin, isModeratorOrAdmin } from '../../auth/auth.guard';
 
 export const charactersRoutes: Route[] = [
   {
@@ -11,7 +12,8 @@ export const charactersRoutes: Route[] = [
   },
   {
     path: "characters/add",
-    component: AddCharacterComponent
+    component: AddCharacterComponent,
+    canMatch: [isAdmin]
   },
   {
     path: "characters/:id",
@@ -19,6 +21,7 @@ export const charactersRoutes: Route[] = [
   },
   {
     path: "characters/:id/edit",
-    component: EditCharacterComponent
+    component: EditCharacterComponent,
+    canMatch: [isModeratorOrAdmin]
   }
 ]

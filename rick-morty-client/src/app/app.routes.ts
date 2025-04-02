@@ -4,6 +4,7 @@ import { WikiComponent } from './wiki/wiki.component';
 import { wikiRoutes } from './wiki/wiki.routes';
 import { authRoutes } from './auth/auth.routes';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
     ]
   },
   ...authRoutes,
+  {
+    path: "unauthorized",
+    component: UnauthorizedComponent
+  },
   {
     path: "**",
     component: NotFoundComponent

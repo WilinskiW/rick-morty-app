@@ -2,6 +2,7 @@ import { LocationsTableComponent } from './locations-table/locations-table.compo
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { AddLocationComponent } from './add-location/add-location.component';
 import { EditLocationComponent } from './edit-location/edit-location.component';
+import { isAdmin, isModeratorOrAdmin } from '../../auth/auth.guard';
 
 export const locationsRoutes = [
   {
@@ -11,6 +12,7 @@ export const locationsRoutes = [
   {
     path: "locations/add",
     component: AddLocationComponent,
+    canMatch: [isAdmin]
   },
   {
     path: "locations/:id",
@@ -19,5 +21,6 @@ export const locationsRoutes = [
   {
     path: "locations/:id/edit",
     component: EditLocationComponent,
+    canMatch: [isModeratorOrAdmin]
   }
 ]

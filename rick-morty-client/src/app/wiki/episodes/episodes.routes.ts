@@ -2,6 +2,7 @@ import { EpisodesTableComponent } from './episodes-table/episodes-table.componen
 import { EpisodeDetailComponent } from './episode-detail/episode-detail.component';
 import { AddEpisodeComponent } from './add-episode/add-episode.component';
 import { EditEpisodeComponent } from './edit-episode/edit-episode.component';
+import { isAdmin, isModeratorOrAdmin } from '../../auth/auth.guard';
 
 export const episodesRoutes = [
   {
@@ -11,6 +12,7 @@ export const episodesRoutes = [
   {
     path: "episodes/add",
     component: AddEpisodeComponent,
+    canMatch: [isAdmin]
   },
   {
     path: "episodes/:id",
@@ -19,5 +21,6 @@ export const episodesRoutes = [
   {
     path: "episodes/:id/edit",
     component: EditEpisodeComponent,
+    canMatch: [isModeratorOrAdmin]
   },
 ]

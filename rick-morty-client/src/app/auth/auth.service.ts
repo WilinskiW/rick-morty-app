@@ -20,7 +20,7 @@ export class AuthService {
   registerUser(user: UserCredentialModel): Observable<UserCredentialModel> {
     return this.httpClient.post<UserCredentialModel>(`${this.apiUrl}/register`, user)
       .pipe(
-        tap(() => this.router.navigate(["auth/login"], { replaceUrl: true })),
+        tap(() => this.router.navigate(["auth/login"], {replaceUrl: true})),
         catchError(error => {
           return throwError(() => error);
         })
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   loginUser(user: UserCredentialModel): Observable<any> {
-    return this.httpClient.post<void>(`${this.apiUrl}/login`, user, { withCredentials: true })
+    return this.httpClient.post<void>(`${this.apiUrl}/login`, user, {withCredentials: true})
       .pipe(
         catchError(error => {
           return throwError(() => error);
@@ -40,7 +40,7 @@ export class AuthService {
     this.httpClient.post(`${this.apiUrl}/logout`, {}, {withCredentials: true}).subscribe({
       next: () => this.userSubject.next(null)
     })
-    this.router.navigate(["auth/login"], { replaceUrl: true });
+    this.router.navigate(["auth/login"], {replaceUrl: true});
   }
 
   fetchCurrentUser() {
@@ -52,5 +52,17 @@ export class AuthService {
           return [];
         })
       ).subscribe();
+  }
+
+  isAuthenticated() {
+    return this.userSubject.value !== null;
+  }
+
+  isAdmin(){
+    return this.userSubject.value?.roles.includes("ADMIN");
+  }
+
+  isModerator(){
+    return this.userSubject.value?.roles.includes("MODERATOR");
   }
 }

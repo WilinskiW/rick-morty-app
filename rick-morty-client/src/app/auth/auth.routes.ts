@@ -1,6 +1,7 @@
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
+import { isAuthenticated } from './auth.guard';
 
 export const authRoutes = [
   {
@@ -13,5 +14,7 @@ export const authRoutes = [
   },
   {
     path: "auth/account",
-    component: AccountComponent
-  }]
+    component: AccountComponent,
+    canMatch: [isAuthenticated]
+  }
+]
