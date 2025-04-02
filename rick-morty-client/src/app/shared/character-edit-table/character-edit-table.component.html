@@ -41,12 +41,18 @@
             <img [src]="character.imageUrl" [alt]="character.name"
                  class="img-thumbnail" style="max-height: 50px;">
           </td>
-          <td>
-            <div class="btn-group btn-group-sm">
-              <a class="btn btn-primary">Edit</a>
-              <a type="submit" class="d-inline btn btn-danger">Remove</a>
-            </div>
-          </td>
+          @if ({info: user$ | async}; as user) {
+            <td>
+              <div class="btn-group btn-group-sm">
+                <button (click)="goToEdit(character.id)" class="btn btn-primary">Edit</button>
+                @if (user.info?.roles?.includes("ADMIN")) {
+                  <button (click)="removeCharacter(character.id)" type="submit" class="d-inline btn btn-danger">
+                    Remove
+                  </button>
+                }
+              </div>
+            </td>
+          }
         </tr>
       }
     </tbody>

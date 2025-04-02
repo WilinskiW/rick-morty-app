@@ -2,7 +2,6 @@ import { Component, inject, input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormService } from '../../form.service';
 import { WikiService } from '../../wiki.service';
-import { AuthService } from '../../../auth/auth.service';
 import { LocationModel } from '../location.model';
 import { CharacterModel } from '../../characters/character.model';
 import { CharacterEditTableComponent } from '../../../shared/character-edit-table/character-edit-table.component';
@@ -26,7 +25,6 @@ export class EditLocationComponent implements OnInit{
   id = input.required<string>();
   location: LocationModel | undefined;
   restOfCharacters: CharacterModel[] = [];
-  user$ = inject(AuthService).user$;
   private wikiService = inject(WikiService);
   private formService = inject(FormService);
 

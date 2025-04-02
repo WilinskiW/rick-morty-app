@@ -3,7 +3,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../../locations/locationSummary.model';
 import { CharacterModel } from '../character.model';
-import { RouterLink } from '@angular/router';
 import { FormService } from '../../form.service';
 
 @Component({
@@ -11,7 +10,6 @@ import { FormService } from '../../form.service';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
   ],
   templateUrl: './add-character.component.html',
 })

@@ -1,11 +1,40 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { CharacterModel } from '../../wiki/characters/character.model';
+import { AuthService } from '../../auth/auth.service';
+import { AsyncPipe } from '@angular/common';
+import { WikiService } from '../../wiki/wiki.service';
 
 @Component({
   selector: 'app-character-edit-table',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './character-edit-table.component.html',
 })
-export class CharacterEditTableComponent {
-  characters = input.required<CharacterModel[] | undefined>();
+export class CharacterEditTableComponent implements OnInit{
+  locationId = input.required<number | undefined>();
+  charactersInput = input.required<CharacterModel[] | undefined>();
+  characters = signal<CharacterModel[] | undefined>([]);
+  user$ = inject(AuthService).user$;
+  private wikiService = inject(WikiService);
+
+  ngOnInit() {
+    this.characters.set(this.charactersInput());
+    console.log(this.charactersInput());
+    console.log(this.characters());
+  }
+
+  removeCharacter(characterId: number | undefined) {
+    this.wikiService
+      .deleteData(`http://localhost:8081/api/locations/${String(this.locationId())}/remove-character/${characterId}`)
+      .subscribe(() => {
+        if (this.characters()) {
+          this.characters.set(
+            this.characters()!.filter((c) => c.id !== characterId)
+          );
+        }
+      });
+  }
+
+  goToEdit(id: number | undefined) {
+    this.wikiService.navigateTo('characters', String(id), 'edit');
+  }
 }
