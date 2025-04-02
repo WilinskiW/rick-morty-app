@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="text-dark text-center mb-4">{{ "Editing: " + episode?.title }}</h1>
+          <div>
+            <form id="episode" [formGroup]="editForm" (ngSubmit)="editOnSubmit()">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="title" placeholder="Enter episode title" formControlName="title"
+                       [class.is-invalid]="isInvalid('title')" required>
+                <label for="title">Episode title</label>
+                @if (isInvalid("title")) {
+                  <div class="invalid-feedback">
+                    Episode title is required!
+                  </div>
+                }
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="air-date" placeholder="Enter episode air date"
+                       formControlName="airDate" [class.is-invalid]="isInvalid('airDate')" required>
+                <label for="air-date">Air date</label>
+                @if (isInvalid("airDate")) {
+                  <div class="invalid-feedback">
+                    Air date is required!
+                  </div>
+                }
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="episode-code" placeholder="Enter episode code (SXEXX)"
+                       formControlName="episode" [class.is-invalid]="isInvalid('code')" required>
+                <label for="episode-code">Episode code (SXXEXX)</label>
+                @if (isInvalid("code")) {
+                  <div class="invalid-feedback">
+                    Episode code is required!
+                  </div>
+                }
+              </div>
+              <div class="form-group mb-3">
+                <label for="residents" class="form-label"><strong>Add residents</strong></label>
+                <select class="form-select" id="residents" multiple style="height: 200px;" formControlName="characters">
+                  @for (character of restOfCharacters; track character.id) {
+                    <option [ngValue]="character">{{ character.name }}</option>
+                  }
+                </select>
+              </div>
+            </form>
+            <label class="form-label"><strong>Current residents</strong></label>
+            <app-character-edit-table [id]="episode?.id" section="episodes" [charactersInput]="episode?.characters"/>
+          </div>
+          <div class="d-flex justify-content-center gap-2 mt-4">
+            <a (click)="goBack()" class="btn btn-secondary">Back</a>
+            <input form="episode" type="submit" class="btn btn-primary" value="Save changes">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

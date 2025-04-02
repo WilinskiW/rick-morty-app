@@ -57,8 +57,15 @@ public class CharacterController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{episodeId}/notInLocation")
-    public ResponseEntity<List<CharacterDto>> findCharactersNotInLocation(@PathVariable Integer episodeId) {
+    @GetMapping("/{locationId}/notInLocation")
+    public ResponseEntity<List<CharacterDto>> findCharactersNotInLocation(@PathVariable Integer locationId) {
+        var result = characterService.getAllNotInTheLocation(locationId);
+        logger.info("Characters not in location " + locationId + " : " + result);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{episodeId}/notInEpisode")
+    public ResponseEntity<List<CharacterDto>> findCharactersNotInEpisode(@PathVariable Integer episodeId) {
         var result = characterService.getAllNotInTheLocation(episodeId);
         logger.info("Characters not in episode " + episodeId + " : " + result);
         return ResponseEntity.ok(result);

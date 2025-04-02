@@ -10,7 +10,8 @@ import { WikiService } from '../../wiki/wiki.service';
   templateUrl: './character-edit-table.component.html',
 })
 export class CharacterEditTableComponent implements OnInit, OnChanges{
-  locationId = input.required<number | undefined>();
+  id = input.required<number | undefined>();
+  section = input.required<string>();
   charactersInput = input.required<CharacterModel[] | undefined>();
   characters = signal<CharacterModel[] | undefined>([]);
   user$ = inject(AuthService).user$;
@@ -28,7 +29,7 @@ export class CharacterEditTableComponent implements OnInit, OnChanges{
 
   removeCharacter(characterId: number | undefined) {
     this.wikiService
-      .deleteData(`http://localhost:8081/api/locations/${String(this.locationId())}/remove-character/${characterId}`)
+      .deleteData(`http://localhost:8081/api/${this.section()}/${String(this.id())}/remove-character/${characterId}`)
       .subscribe(() => {
         if (this.characters()) {
           this.characters.set(
