@@ -37,7 +37,6 @@ export class EditLocationComponent implements OnInit{
           name: data.name,
           type: data.type,
           dimension: data.dimension,
-          residents: data.residents
         });
       });
 

@@ -38,7 +38,7 @@
                 <label for="dimension">Dimension</label>
               </div>
               <div class="form-group mb-3">
-                <label for="residents" class="form-label">Residents</label>
+                <label for="residents" class="form-label"><strong>Add residents</strong></label>
                 <select class="form-select" id="residents" multiple style="height: 200px;" formControlName="residents">
                   @for (resident of restOfCharacters; track resident.id) {
                     <option [ngValue]="resident">{{ resident.name }}</option>
@@ -46,7 +46,7 @@
                 </select>
               </div>
             </form>
-            <label class="form-label"><strong>Current residents</strong></label>
+              <label class="form-label"><strong>Current residents</strong></label>
               <app-character-edit-table [locationId]="location?.id" [charactersInput]="location?.residents"/>
           </div>
           <div class="d-flex justify-content-center gap-2 mt-4">

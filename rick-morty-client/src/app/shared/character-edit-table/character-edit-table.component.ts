@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { CharacterModel } from '../../wiki/characters/character.model';
 import { AuthService } from '../../auth/auth.service';
 import { AsyncPipe } from '@angular/common';
@@ -9,7 +9,7 @@ import { WikiService } from '../../wiki/wiki.service';
   imports: [AsyncPipe],
   templateUrl: './character-edit-table.component.html',
 })
-export class CharacterEditTableComponent implements OnInit{
+export class CharacterEditTableComponent implements OnInit, OnChanges{
   locationId = input.required<number | undefined>();
   charactersInput = input.required<CharacterModel[] | undefined>();
   characters = signal<CharacterModel[] | undefined>([]);
@@ -18,8 +18,12 @@ export class CharacterEditTableComponent implements OnInit{
 
   ngOnInit() {
     this.characters.set(this.charactersInput());
-    console.log(this.charactersInput());
-    console.log(this.characters());
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['charactersInput'] && changes['charactersInput'].currentValue) {
+      this.characters.set(changes['charactersInput'].currentValue);
+    }
   }
 
   removeCharacter(characterId: number | undefined) {
