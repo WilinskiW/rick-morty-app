@@ -13,7 +13,14 @@ export const routes: Routes = [
   {
     path: "wiki",
     component: WikiComponent,
-    children: wikiRoutes
+    children: [
+      {
+        path: "",
+        pathMatch: "full",
+        redirectTo: "characters" // default route for wiki
+      },
+      ...wikiRoutes
+    ]
   },
   ...authRoutes,
   {
