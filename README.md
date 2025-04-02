@@ -3,52 +3,64 @@
 
 # Rick and Morty App
 
-A web application built with Java and Spring Boot that allows CRUD operations on data retrieved from the external [Rick and Morty API](https://rickandmortyapi.com/).
+A web application built with Angular and Spring Boot that allows CRUD operations on data retrieved from the external [Rick and Morty API](https://rickandmortyapi.com/).
 
 ## 🚀 Features
 
 - Fetch and display characters, locations, and episodes from the Rick and Morty universe
 - Perform CRUD operations on the retrieved data
-- User interface for easy interaction with the application
-- Secure API endpoints with authentication
+- User-friendly interface built with Angular.
+- Secure API endpoints with JWT authentication
 - Automatic data updates from the external API
 
 ## 📁 Project Structure
 
 The project is organized into several modules:
 
+- **rick-morty-client**: Application frontend based in Angular
 - **rick-morty-data-client**: Client for interacting with the external Rick and Morty API
 - **rick-morty-data**: Data models and repositories
-- **rick-morty-security**: Security configuration and authentication
-- **rick-morty-ui**: User interface components
+- **rick-morty-security**: Security configuration and authentication using JWT stored safely in cookies.
 - **rick-morty-updater**: Service for updating data from the external API
 - **rick-morty-web-api**: REST API endpoints
 
 ## 🔧 Technologies
+### Frontend
+- Angular
+- TypeScript
+- HTML
+- CSS, Bootstrap
 
-- Java 
+### Backend
+- Java 21
 - Spring Boot
-- Spring Security
+- Spring Security - JWT
 - Spring Data JPA
-- Spring MVC using Thymeleaf
-- Spring Scheduler, Spring Cache
 - MariaDB
 - Gradle
-- HTML/CSS, Bootstrap
 - RESTful API
 
 ## 🛠️ Setup and Installation
 
 ### Prerequisites
-
 - JDK 11 or higher
 - Gradle
+- Node.js + npm
+- Angular CLI
+- Docker (to run database)
 - Your favorite IDE (IntelliJ IDEA recommended)
 
 ### Installation Steps
 
-1. Clone the repository
-2. Build the project
-3. Initialize the database
-4. Run the application
-5. Access the application at `http://localhost:8080`
+#### Backend
+1. Clone the repository.
+2. Build the project using Gradle.
+3. Initialize the database using `docker-compose.yml` file.
+4. Run the `rick-morty-web-api` module.
+5. Access the application at `http://localhost:8081`.
+
+#### Frontend
+1. Enter `cd rick-morty-client`.
+2. Run `npm install` in rick-morty-client folder.
+3. Run `ng serve` to start the Angular application.
+4. Access the application at `http://localhost:4200`.
