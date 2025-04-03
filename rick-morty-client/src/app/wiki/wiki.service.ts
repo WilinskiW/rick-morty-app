@@ -35,9 +35,7 @@ export class WikiService {
   }
 
   deleteData(url: string): Observable<void> {
-    console.log(url);
     const apiUrl = url.replace("http://localhost:4200/wiki", "http://localhost:8081/api");
-    console.log(apiUrl);
     return this.httpClient.delete<void>(apiUrl, { withCredentials: true }).pipe(
       catchError((error) => {
         throw error;

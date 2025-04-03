@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, Location } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { AuthService } from '../../../auth/auth.service';
 import { WikiService } from '../../../wiki/wiki.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-card-footer',
@@ -11,16 +12,18 @@ import { WikiService } from '../../../wiki/wiki.service';
   ],
 })
 export class CardFooterComponent {
-  private location = inject(Location);
+  private activeRouter = inject(ActivatedRoute);
   private wikiService = inject(WikiService);
   user$ = inject(AuthService).user$;
 
   goBack() {
-    this.location.back();
+    const segments = this.activeRouter.snapshot.url;
+    segments.pop()
+    this.wikiService.navigateTo(segments[0].path);
   }
 
   confirmDelete() {
-    if(confirm(`Are you sure want to delete this element?`)){
+    if (confirm(`Are you sure want to delete this element?`)) {
       this.wikiService.deleteData(window.location.href).subscribe({
         complete: () => this.goBack()
       });
@@ -28,7 +31,6 @@ export class CardFooterComponent {
   }
 
   goToEdit() {
-    const url = this.location.path() + "/edit";
-    this.wikiService.router.navigateByUrl(url);
+    this.wikiService.navigateTo("edit");
   }
 }
