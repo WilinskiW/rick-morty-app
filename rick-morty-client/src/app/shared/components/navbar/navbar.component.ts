@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NavLinkComponent } from './nav-link/nav-link.component';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

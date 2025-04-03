@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { CharacterEditTableComponent } from '../../../shared/character-edit-table/character-edit-table.component';
+import { CharacterEditTableComponent } from '../../characters/character-edit-table/character-edit-table.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CharacterModel } from '../../characters/character.model';
 import { WikiService } from '../../wiki.service';

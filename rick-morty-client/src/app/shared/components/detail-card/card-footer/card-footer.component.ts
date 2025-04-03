@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { AuthService } from '../../../auth/auth.service';
-import { WikiService } from '../../../wiki/wiki.service';
+import { AuthService } from '../../../../auth/auth.service';
+import { WikiService } from '../../../../wiki/wiki.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -11,7 +11,7 @@
       <th>Details</th>
     </ng-container>
     <ng-container table-body>
-      @for (location of locations; track location.id) {
+      @for (location of data; track location.id) {
         <tr>
           <td>{{ location.id }}</td>
           <td>{{ location.name }}</td>

@@ -4,7 +4,7 @@ import { FormService } from '../../form.service';
 import { WikiService } from '../../wiki.service';
 import { LocationModel } from '../location.model';
 import { CharacterModel } from '../../characters/character.model';
-import { CharacterEditTableComponent } from '../../../shared/character-edit-table/character-edit-table.component';
+import { CharacterEditTableComponent } from '../../characters/character-edit-table/character-edit-table.component';
 
 @Component({
   selector: 'app-edit-location',

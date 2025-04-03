@@ -2,7 +2,7 @@ import { Component, inject, input, OnInit } from '@angular/core';
 import { CharacterModel } from '../character.model';
 import { WikiService } from '../../wiki.service';
 import { TitleCasePipe } from '@angular/common';
-import { DetailCardComponent } from '../../../shared/detail-card/detail-card.component';
+import { DetailCardComponent } from '../../../shared/components/detail-card/detail-card.component';
 
 @Component({
   selector: 'app-character-detail',

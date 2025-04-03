@@ -1,5 +1,5 @@
 import { Component, DestroyRef } from '@angular/core';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
+import { NavbarComponent } from '../shared/components/navbar/navbar.component';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 

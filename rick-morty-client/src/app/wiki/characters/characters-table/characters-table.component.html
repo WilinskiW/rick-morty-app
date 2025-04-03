@@ -14,7 +14,7 @@
       <th>Details</th>
     </ng-container>
     <ng-container table-body>
-      @for (character of characters; track character.id) {
+      @for (character of data; track character.id) {
         <tr>
           <td>{{ character.id }}</td>
           <td>{{ character.name }}</td>

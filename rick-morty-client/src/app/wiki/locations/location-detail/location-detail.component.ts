@@ -2,7 +2,7 @@ import { Component, inject, input, OnInit } from '@angular/core';
 import { WikiService } from '../../wiki.service';
 import { LocationModel } from '../location.model';
 import { TitleCasePipe } from '@angular/common';
-import { DetailCardComponent } from '../../../shared/detail-card/detail-card.component';
+import { DetailCardComponent } from '../../../shared/components/detail-card/detail-card.component';
 
 @Component({
   selector: 'app-location-detail',
