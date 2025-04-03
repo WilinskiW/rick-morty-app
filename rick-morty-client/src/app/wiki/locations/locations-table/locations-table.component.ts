@@ -4,28 +4,33 @@ import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../locationSummary.model';
 import { RouterLink } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
+import { ConnectionErrorComponent } from '../../../shared/connection-error/connection-error.component';
 
 @Component({
   selector: 'app-location-table',
   imports: [
     ContentTableComponent,
     RouterLink,
-    TitleCasePipe
+    TitleCasePipe,
+    ConnectionErrorComponent
   ],
   templateUrl: './locations-table.component.html',
 })
 export class LocationsTableComponent implements OnInit{
   locations: LocationSummaryModel[] = [];
-  isFetching = signal(false);
+  isFetching = signal(true);
+  isError = signal(false);
   private wikiService = inject(WikiService);
 
   ngOnInit() {
     this.wikiService.fetchData<LocationSummaryModel[]>("http://localhost:8081/api/locations")
       .subscribe({
-        next: (locations) => this.locations = locations,
-        complete: () => {
-          this.isFetching.set(true);
-        }
+        next: (locations) => {
+          this.locations = locations
+          this.isFetching.set(false);
+          console.log(this.isFetching())
+        },
+        error: () => this.isError.set(true)
       });
   }
 

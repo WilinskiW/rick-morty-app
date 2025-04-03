@@ -1,4 +1,7 @@
-@if (isFetching()) {
+@if (isError()){
+  <app-connection-error/>
+}
+@else if (!isFetching()) {
   <app-content-table section="Locations">
     <ng-container table-headers>
       <th>ID</th>

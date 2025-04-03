@@ -4,28 +4,33 @@ import { CharacterModel } from '../character.model';
 import { WikiService } from '../../wiki.service';
 import { RouterLink } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
+import { ConnectionErrorComponent } from '../../../shared/connection-error/connection-error.component';
 
 @Component({
   selector: 'app-characters-table',
   imports: [
     ContentTableComponent,
     RouterLink,
-    TitleCasePipe
+    TitleCasePipe,
+    ConnectionErrorComponent
   ],
   templateUrl: './characters-table.component.html',
 })
 export class CharactersTableComponent implements OnInit {
   characters: CharacterModel[] = [];
-  isFetching = signal(false);
+  isFetching = signal(true);
+  isError = signal(false);
   private wikiService = inject(WikiService);
 
   ngOnInit() {
     this.wikiService.fetchData<CharacterModel[]>("http://localhost:8081/api/characters")
       .subscribe({
-        next: (characters) => this.characters = characters,
-        complete: () => {
-          this.isFetching.set(true);
-        }
+        next: (characters) => {
+          this.characters = characters
+          this.isFetching.set(false);
+          console.log(this.isFetching())
+        },
+        error: () => this.isError.set(true)
       });
   }
 
