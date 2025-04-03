@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { EpisodeModel } from '../episode.model';
 import { WikiService } from '../../wiki.service';
 import { DetailCardComponent } from '../../../shared/components/detail-card/detail-card.component';
@@ -12,6 +12,7 @@ import { DetailCardComponent } from '../../../shared/components/detail-card/deta
 })
 export class EpisodeDetailComponent implements OnInit {
   id = input.required<string>();
+  isCharacterExist = signal(false);
   episode: EpisodeModel | undefined;
   private wikiService = inject(WikiService);
 
@@ -20,6 +21,7 @@ export class EpisodeDetailComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.episode = data;
+          this.isCharacterExist.set(this.episode.characters.length > 0);
         },
         error: () => this.wikiService.goToResourceNotFound()
       });

@@ -14,7 +14,7 @@ import { DetailCardComponent } from '../../../shared/components/detail-card/deta
 })
 export class LocationDetailComponent implements OnInit{
   id = input.required<string>();
-  isResidentsExist = signal(false);
+  isResidentExist = signal(false);
   location: LocationModel | undefined;
   private wikiService = inject(WikiService);
 
@@ -23,7 +23,7 @@ export class LocationDetailComponent implements OnInit{
       .subscribe({
         next: (data) => {
           this.location = data;
-          this.isResidentsExist.set(this.location.residents.length > 0);
+          this.isResidentExist.set(this.location.residents.length > 0);
         },
         error: () => this.wikiService.goToResourceNotFound()
       });

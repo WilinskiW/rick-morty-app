@@ -1,17 +1,21 @@
 <app-detail-card>
-        <div class="text-center card-body">
-          <h1 class="mb-3 text-dark">{{ episode?.title }}</h1>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Episode code: </strong>{{ episode?.episode }}</li>
-            <li class="list-group-item"><strong>Air date: </strong>{{ episode?.airDate }}</li>
-            <li class="list-group-item">
-              <strong>Characters</strong>
-              <ul class="list-group-item list-unstyled">
-                @for (character of episode?.characters; track character.id) {
-                  <a [href]="'../../wiki/characters/' + character.id"><li>{{ character.name }}</li></a>
-                }
-              </ul>
-            </li>
+  <div class="text-center card-body">
+    <h1 class="mb-3 text-dark">{{ episode?.title }}</h1>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Episode code: </strong>{{ episode?.episode }}</li>
+      <li class="list-group-item"><strong>Air date: </strong>{{ episode?.airDate }}</li>
+      @if (isCharacterExist()) {
+        <li class="list-group-item">
+          <strong>Characters</strong>
+          <ul class="list-group-item list-unstyled">
+            @for (character of episode?.characters; track character.id) {
+              <a [href]="'../../wiki/characters/' + character.id">
+                <li>{{ character.name }}</li>
+              </a>
+            }
           </ul>
-        </div>
+        </li>
+      }
+    </ul>
+  </div>
 </app-detail-card>

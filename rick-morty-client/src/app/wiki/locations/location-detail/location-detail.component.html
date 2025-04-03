@@ -4,7 +4,7 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><strong>Type: </strong>{{ location?.type }}</li>
       <li class="list-group-item"><strong>Dimension: </strong>{{ location?.dimension | titlecase }}</li>
-      @if (isResidentsExist()) {
+      @if (isResidentExist()) {
         <li class="list-group-item">
           <strong>Residents</strong>
           <ul class="list-group-item list-unstyled">
