@@ -3,7 +3,7 @@ import { CharacterEditTableComponent } from '../../characters/character-edit-tab
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CharacterModel } from '../../characters/character.model';
 import { WikiService } from '../../wiki.service';
-import { FormService } from '../../form.service';
+import { FormService } from '../../../form.service';
 import { EpisodeModel } from '../episode.model';
 
 @Component({

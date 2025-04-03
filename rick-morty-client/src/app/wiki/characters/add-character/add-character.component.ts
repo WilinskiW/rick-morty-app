@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../../locations/locationSummary.model';
 import { CharacterModel } from '../character.model';
-import { FormService } from '../../form.service';
+import { FormService } from '../../../form.service';
 
 @Component({
   selector: 'app-add-character',

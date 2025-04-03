@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormService } from '../../form.service';
+import { FormService } from '../../../form.service';
 import { WikiService } from '../../wiki.service';
 import { LocationModel } from '../location.model';
 import { CharacterModel } from '../../characters/character.model';

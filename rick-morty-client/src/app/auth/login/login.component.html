@@ -18,9 +18,9 @@
         <a routerLink="/" class="btn btn-outline-secondary">Back to home</a>
       </div>
     </form>
-    @if (error) {
+    @if (error()) {
       <div class="alert alert-danger alert-dismissible fade show mt-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <button type="button" class="btn-close" (click)="closeErrMsg()"></button>
         <strong>Sorry, your password was incorrect. Please double-check your password.</strong>
       </div>
     }

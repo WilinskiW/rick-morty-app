@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { CharacterModel } from '../../characters/character.model';
 import { LocationModel } from '../location.model';
-import { FormService } from '../../form.service';
+import { FormService } from '../../../form.service';
 
 @Component({
   selector: 'app-add-location',

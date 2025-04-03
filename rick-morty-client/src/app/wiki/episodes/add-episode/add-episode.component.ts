@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { EpisodeModel } from '../episode.model';
-import { FormService } from '../../form.service';
+import { FormService } from '../../../form.service';
 
 @Component({
   selector: 'app-add-episode',

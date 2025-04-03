@@ -5,7 +5,7 @@ import { LocationSummaryModel } from '../../locations/locationSummary.model';
 import { AuthService } from '../../../auth/auth.service';
 import { AsyncPipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormService } from '../../form.service';
+import { FormService } from '../../../form.service';
 
 @Component({
   selector: 'app-edit-characters',

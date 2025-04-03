@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router, RouterLink } from '@angular/router';
@@ -16,7 +16,7 @@ export class LoginComponent {
     username: new FormControl(""),
     password: new FormControl("")
   });
-  error = false;
+  error = signal(false);
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -33,7 +33,11 @@ export class LoginComponent {
         this.authService.fetchCurrentUser();
         this.router.navigate(["/wiki/characters"], { replaceUrl: true });
       },
-      error: () => this.error = true
+      error: () => this.error.set(true)
     });
+  }
+
+  closeErrMsg() {
+    this.error.set(false);
   }
 }

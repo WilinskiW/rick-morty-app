@@ -1,6 +1,9 @@
-import { inject, OnInit, signal } from '@angular/core';
+import { inject, Injectable, OnInit, signal } from '@angular/core';
 import { WikiService } from '../../wiki/wiki.service';
 
+@Injectable({
+  providedIn: 'root',
+})
 export abstract class DataTableClass<T> implements OnInit {
   data: T[] = [];
   isFetching = signal(true);

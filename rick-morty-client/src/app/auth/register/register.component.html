@@ -4,24 +4,28 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="username" placeholder="Enter location name" name="username"
-               formControlName="username" required>
+               formControlName="username" [class.is-invalid]="isInvalid('username')" required>
         <label for="username">Username</label>
+        @if (isInvalid("username")) {
+          <div class="invalid-feedback">
+            Username must be between 4 and 255 characters.
+          </div>
+        }
       </div>
       <div class="form-floating mb-3">
         <input type="password" class="form-control" id="password" placeholder="Enter location type"
-               name="password" formControlName="password" required>
+               name="password" formControlName="password" [class.is-invalid]="isInvalid('password')" required>
         <label for="password">Password</label>
+        @if (isInvalid("password")) {
+          <div class="invalid-feedback">
+            Password must be between 4 and 255 characters.
+          </div>
+        }
       </div>
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-primary" type="submit">Register</button>
         <a routerLink="/" class="btn btn-outline-secondary">Back to home</a>
       </div>
     </form>
-    @if (error) {
-      <div class="alert alert-danger alert-dismissible fade show mt-2">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Something went wrong!</strong>
-      </div>
-    }
   </div>
 </div>
