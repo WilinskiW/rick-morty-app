@@ -1,17 +1,21 @@
 <app-detail-card>
-        <div class="text-center card-body">
-          <h1 class="mb-3 text-dark">{{ location?.name }}</h1>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Type: </strong>{{ location?.type }}</li>
-            <li class="list-group-item"><strong>Dimension: </strong>{{ location?.dimension | titlecase}}</li>
-            <li class="list-group-item">
-              <strong>Residents</strong>
-              <ul class="list-group-item list-unstyled">
-                @for (character of location?.residents; track character.id) {
-                  <a [href]="'../../wiki/characters/' + character.id"><li>{{ character.name }}</li></a>
-                }
-              </ul>
-            </li>
+  <div class="text-center card-body">
+    <h1 class="mb-3 text-dark">{{ location?.name }}</h1>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Type: </strong>{{ location?.type }}</li>
+      <li class="list-group-item"><strong>Dimension: </strong>{{ location?.dimension | titlecase }}</li>
+      @if (isResidentsExist()) {
+        <li class="list-group-item">
+          <strong>Residents</strong>
+          <ul class="list-group-item list-unstyled">
+            @for (character of location?.residents; track character.id) {
+              <a [href]="'../../wiki/characters/' + character.id">
+                <li>{{ character.name }}</li>
+              </a>
+            }
           </ul>
-        </div>
+        </li>
+      }
+    </ul>
+  </div>
 </app-detail-card>

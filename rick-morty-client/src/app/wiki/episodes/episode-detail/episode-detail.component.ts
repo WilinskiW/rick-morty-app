@@ -20,7 +20,8 @@ export class EpisodeDetailComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.episode = data;
-        }
+        },
+        error: () => this.wikiService.goToResourceNotFound()
       });
   }
 }

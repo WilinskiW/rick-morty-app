@@ -23,7 +23,8 @@ export class CharacterDetailComponent implements OnInit{
       .subscribe({
         next: (data) => {
           this.character = data;
-        }
+        },
+        error: () => this.wikiService.goToResourceNotFound()
       })
   }
 }

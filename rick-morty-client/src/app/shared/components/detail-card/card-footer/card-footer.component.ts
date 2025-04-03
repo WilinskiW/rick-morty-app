@@ -31,6 +31,6 @@ export class CardFooterComponent {
   }
 
   goToEdit() {
-    this.wikiService.navigateTo("edit");
+    this.wikiService.navigateTo(...this.activeRouter.snapshot.url.toString().split(","), "edit");
   }
 }

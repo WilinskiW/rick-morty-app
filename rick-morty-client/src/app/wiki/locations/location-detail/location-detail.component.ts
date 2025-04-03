@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { WikiService } from '../../wiki.service';
 import { LocationModel } from '../location.model';
 import { TitleCasePipe } from '@angular/common';
@@ -14,6 +14,7 @@ import { DetailCardComponent } from '../../../shared/components/detail-card/deta
 })
 export class LocationDetailComponent implements OnInit{
   id = input.required<string>();
+  isResidentsExist = signal(false);
   location: LocationModel | undefined;
   private wikiService = inject(WikiService);
 
@@ -22,7 +23,9 @@ export class LocationDetailComponent implements OnInit{
       .subscribe({
         next: (data) => {
           this.location = data;
-        }
+          this.isResidentsExist.set(this.location.residents.length > 0);
+        },
+        error: () => this.wikiService.goToResourceNotFound()
       });
   }
 }

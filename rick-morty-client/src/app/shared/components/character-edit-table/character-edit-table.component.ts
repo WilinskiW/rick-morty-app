@@ -1,8 +1,8 @@
 import { Component, inject, input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
-import { CharacterModel } from '../character.model';
+import { CharacterModel } from '../../../wiki/characters/character.model';
 import { AuthService } from '../../../auth/auth.service';
 import { AsyncPipe } from '@angular/common';
-import { WikiService } from '../../wiki.service';
+import { WikiService } from '../../../wiki/wiki.service';
 
 @Component({
   selector: 'app-character-edit-table',

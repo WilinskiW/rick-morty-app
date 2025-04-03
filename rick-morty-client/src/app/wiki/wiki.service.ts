@@ -46,4 +46,8 @@ export class WikiService {
   navigateTo(...args: string[]) {
     this.router.navigate(['wiki', ...args]);
   }
+
+  goToResourceNotFound() {
+    this.router.navigate(["**"]);
+  }
 }
