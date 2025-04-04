@@ -17,4 +17,9 @@ import { AsyncPipe } from '@angular/common';
 export class NavbarComponent{
   section = input.required<string>();
   user$ = inject(AuthService).user$;
+
+  get sectionSingular(): string {
+    // section name in singular form
+    return this.section().slice(0, -1);
+  }
 }

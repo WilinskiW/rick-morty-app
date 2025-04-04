@@ -19,7 +19,7 @@
         @if ({info: user$ | async}; as user) {
           @if (user.info?.roles?.includes("ADMIN")) {
             <div class="navbar-dark btn btn-success text-white">
-              <a class="nav-link" [routerLink]="['/wiki', section().toLowerCase(), 'add']">Add</a>
+              <a class="nav-link" [routerLink]="['/wiki', section().toLowerCase(), 'add']">Add {{ sectionSingular }}</a>
             </div>
           }
           @if (user.info?.roles) {
