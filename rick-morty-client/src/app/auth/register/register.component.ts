@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -21,7 +21,7 @@ export class RegisterComponent {
       validators: [Validators.required, Validators.minLength(4), Validators.maxLength(255)]
     })
   });
-  error = false;
+  error = signal(false);
   private authService = inject(AuthService);
   private formService = inject(FormService);
 
@@ -43,6 +43,12 @@ export class RegisterComponent {
     }
 
     this.authService.registerUser({username, password})
-      .subscribe();
+      .subscribe({
+          error: () => this.error.set(true)
+        })
+  }
+
+  closeErrMsg() {
+    this.error.set(false);
   }
 }

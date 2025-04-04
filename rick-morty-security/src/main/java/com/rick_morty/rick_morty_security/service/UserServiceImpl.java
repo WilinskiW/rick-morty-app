@@ -48,6 +48,10 @@ public class UserServiceImpl implements UserService {
         if (password.length() < 4 || password.length() > 255) {
             throw new IllegalArgumentException("Password is too long or too short");
         }
+
+        if(userRepository.findUserByUsername(username).isPresent()){
+            throw new IllegalArgumentException("Username is already in use");
+        }
     }
 
     @Override

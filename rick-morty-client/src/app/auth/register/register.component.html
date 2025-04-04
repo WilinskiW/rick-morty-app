@@ -27,5 +27,11 @@
         <a routerLink="/" class="btn btn-outline-secondary">Back to home</a>
       </div>
     </form>
+    @if (error()) {
+      <div class="alert alert-danger alert-dismissible fade show mt-2">
+        <button type="button" class="btn-close" (click)="closeErrMsg()"></button>
+        <strong>Username already exist!</strong>
+      </div>
+    }
   </div>
 </div>
