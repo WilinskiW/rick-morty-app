@@ -43,26 +43,18 @@ export class AuthService {
     this.router.navigate(["auth/login"], {replaceUrl: true});
   }
 
-  fetchCurrentUser() {
-    this.httpClient.get<TokenInfoModel>(`${this.apiUrl}/userInfo`, {withCredentials: true})
+  fetchCurrentUser(): Observable<TokenInfoModel | null> {
+    return this.httpClient.get<TokenInfoModel>(`${this.apiUrl}/userInfo`, {withCredentials: true})
       .pipe(
         tap(user => this.userSubject.next(user)),
         catchError(() => {
           this.userSubject.next(null);
-          return [];
+          return [null]; // musi być Observable z wartością
         })
-      ).subscribe();
+      );
   }
 
   isAuthenticated() {
     return this.userSubject.value !== null;
-  }
-
-  isAdmin(){
-    return this.userSubject.value?.roles.includes("ADMIN");
-  }
-
-  isModerator(){
-    return this.userSubject.value?.roles.includes("MODERATOR");
   }
 }

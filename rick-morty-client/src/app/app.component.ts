@@ -11,6 +11,6 @@ export class AppComponent implements OnInit{
   private authService = inject(AuthService);
 
   ngOnInit() {
-    this.authService.fetchCurrentUser();
+    this.authService.fetchCurrentUser().subscribe();
   }
 }
