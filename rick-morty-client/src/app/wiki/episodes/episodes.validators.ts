@@ -11,9 +11,7 @@ export function cantBeInTheFuture(dateControl: AbstractControl) {
 export function mustBeCode(codeControl: AbstractControl){
   const regex = new RegExp("S\\d{2}E\\d{2}$");
   if(regex.test(codeControl.value)){
-    console.log("TRUE!")
     return null;
   }
-  console.log("False");
   return { isPatternIncorrect: true };
 }

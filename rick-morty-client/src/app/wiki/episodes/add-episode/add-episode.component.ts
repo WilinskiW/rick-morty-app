@@ -1,10 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { WikiService } from '../../wiki.service';
 import { EpisodeModel } from '../episode.model';
-import { FormService } from '../../../form.service';
 import '../episodes.validators';
 import { cantBeInTheFuture, mustBeCode } from '../episodes.validators';
+import { FormWiki } from '../../../shared/abstract/formWiki';
 
 @Component({
   selector: 'app-add-episode',
@@ -13,7 +12,7 @@ import { cantBeInTheFuture, mustBeCode } from '../episodes.validators';
   ],
   templateUrl: './add-episode.component.html',
 })
-export class AddEpisodeComponent {
+export class AddEpisodeComponent extends FormWiki{
   form = new FormGroup({
     title: new FormControl("", {
       validators: [Validators.required]
@@ -25,14 +24,8 @@ export class AddEpisodeComponent {
       validators: [Validators.required, mustBeCode]
     }),
   });
-  private formService = inject(FormService);
-  private wikiService = inject(WikiService);
 
-  isInvalid(key: string): boolean {
-    return this.formService.isInvalid(this.form, key);
-  }
-
-  addEpisode() {
+  submit(): void {
     if (this.form.invalid) {
       this.formService.markAllControlsAsTouched(this.form);
       return;
@@ -46,12 +39,8 @@ export class AddEpisodeComponent {
 
     this.wikiService.sendData<EpisodeModel>(episode, "http://localhost:8081/api/episodes")
       .subscribe({
-        complete: () => this.goBack(),
+        complete: () => this.goBack(["episodes"]),
         error: err => console.error("Błąd podczas dodawania epizodu", err)
       });
-  }
-
-  goBack() {
-    this.wikiService.navigateTo("episodes")
   }
 }

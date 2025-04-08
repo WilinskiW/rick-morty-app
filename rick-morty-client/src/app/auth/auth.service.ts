@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserCredentialModel } from './model/userCredential.model';
@@ -11,11 +11,9 @@ import { TokenInfoModel } from './model/tokenInfo.model';
 export class AuthService {
   private apiUrl = "http://localhost:8081/auth";
   private userSubject = new BehaviorSubject<TokenInfoModel | null>(null);
+  private httpClient = inject(HttpClient);
+  private router = inject(Router);
   user$ = this.userSubject.asObservable();
-
-
-  constructor(private httpClient: HttpClient, private router: Router) {
-  }
 
   registerUser(user: UserCredentialModel): Observable<UserCredentialModel> {
     return this.httpClient.post<UserCredentialModel>(`${this.apiUrl}/register`, user)

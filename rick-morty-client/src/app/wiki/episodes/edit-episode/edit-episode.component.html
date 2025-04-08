@@ -5,7 +5,7 @@
         <div class="card-body">
           <h1 class="text-dark text-center mb-4">{{ "Editing: " + episode?.title }}</h1>
           <div>
-            <form id="episode" [formGroup]="editForm" (ngSubmit)="editOnSubmit()">
+            <form id="episode" [formGroup]="form" (ngSubmit)="submit()">
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="title" placeholder="Enter episode title" formControlName="title"
                        [class.is-invalid]="isInvalid('title')" required>
@@ -17,7 +17,7 @@
                 }
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="air-date" placeholder="Enter episode air date"
+                <input type="date" class="form-control" id="air-date" placeholder="Enter episode air date"
                        formControlName="airDate" [class.is-invalid]="isInvalid('airDate')" required>
                 <label for="air-date">Air date</label>
                 @if (isInvalid("airDate")) {
@@ -49,7 +49,7 @@
             <app-character-edit-table [id]="episode?.id" section="episodes" [charactersInput]="episode?.characters"/>
           </div>
           <div class="d-flex justify-content-center gap-2 mt-4">
-            <a (click)="goBack()" class="btn btn-secondary">Back</a>
+            <a (click)="goBack(['episodes'])" class="btn btn-secondary">Back</a>
             <input form="episode" type="submit" class="btn btn-primary" value="Save changes">
           </div>
         </div>
