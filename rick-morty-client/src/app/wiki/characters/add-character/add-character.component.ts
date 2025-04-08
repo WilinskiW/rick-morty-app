@@ -1,9 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { WikiService } from '../../wiki.service';
 import { LocationSummaryModel } from '../../locations/locationSummary.model';
 import { CharacterModel } from '../character.model';
-import { FormService } from '../../../form.service';
+import { FormWiki } from '../../../shared/abstract/formWiki';
 
 @Component({
   selector: 'app-add-character',
@@ -13,7 +12,7 @@ import { FormService } from '../../../form.service';
   ],
   templateUrl: './add-character.component.html',
 })
-export class AddCharacterComponent implements OnInit {
+export class AddCharacterComponent extends FormWiki implements OnInit {
   form = new FormGroup({
     name: new FormControl("", {
       validators: [Validators.required, Validators.minLength(3)]
@@ -29,9 +28,6 @@ export class AddCharacterComponent implements OnInit {
     imageUrl: new FormControl("")
   })
   locations: LocationSummaryModel[] = [];
-  private formService = inject(FormService);
-  private wikiService = inject(WikiService);
-
 
   ngOnInit() {
     this.wikiService.fetchData<LocationSummaryModel[]>("http://localhost:8081/api/locations")
@@ -40,15 +36,7 @@ export class AddCharacterComponent implements OnInit {
       });
   }
 
-  goBack() {
-    this.wikiService.navigateTo("characters");
-  }
-
-  isInvalid(key: string): boolean {
-    return this.formService.isInvalid(this.form, key);
-  }
-
-  addCharacter() {
+  submit() {
     if (this.form.invalid) {
       this.formService.markAllControlsAsTouched(this.form);
       return;
@@ -70,7 +58,7 @@ export class AddCharacterComponent implements OnInit {
 
       this.wikiService.sendData<CharacterModel>(character, "http://localhost:8081/api/characters")
         .subscribe({
-          complete: () => this.goBack(),
+          complete: () => this.goBack(["characters"]),
           error: err => console.error("Błąd podczas dodawania postaci", err)
         });
   }

@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
   <div class="col-md-6 col-lg-4">
     <h1 class="text-center mb-4">Create new character</h1>
-    <form [formGroup]="form" (ngSubmit)="addCharacter()">
+    <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" [class.is-invalid]="isInvalid('name')"
                id="name" placeholder="Enter character name"
@@ -86,7 +86,7 @@
 
       <div class="d-grid gap-2">
         <button class="btn btn-primary" type="submit">Save</button>
-        <a (click)="goBack()" class="btn btn-outline-secondary">Back to Characters</a>
+        <a (click)="goBack(['characters'])" class="btn btn-outline-secondary">Back to Characters</a>
       </div>
     </form>
   </div>

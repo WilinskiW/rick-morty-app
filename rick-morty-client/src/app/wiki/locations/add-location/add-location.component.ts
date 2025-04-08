@@ -1,9 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { WikiService } from '../../wiki.service';
 import { CharacterModel } from '../../characters/character.model';
 import { LocationModel } from '../location.model';
-import { FormService } from '../../../form.service';
+import { FormWiki } from '../../../shared/abstract/formWiki';
 
 @Component({
   selector: 'app-add-location',
@@ -12,7 +11,7 @@ import { FormService } from '../../../form.service';
   ],
   templateUrl: './add-location.component.html',
 })
-export class AddLocationComponent implements OnInit {
+export class AddLocationComponent extends FormWiki implements OnInit {
   form = new FormGroup({
     name: new FormControl(""),
     type: new FormControl(""),
@@ -20,9 +19,6 @@ export class AddLocationComponent implements OnInit {
     residents: new FormControl("")
   });
   characters: CharacterModel[] = [];
-  private formService = inject(FormService);
-  private wikiService = inject(WikiService);
-
 
   ngOnInit() {
     this.wikiService.fetchData<CharacterModel[]>("http://localhost:8081/api/characters")
@@ -31,15 +27,7 @@ export class AddLocationComponent implements OnInit {
       });
   }
 
-  isInvalid(key: string): boolean {
-    return this.formService.isInvalid(this.form, key);
-  }
-
-  goBack() {
-    this.wikiService.navigateTo("locations");
-  }
-
-  addLocation() {
+  submit() {
     if (this.form.invalid) {
       this.formService.markAllControlsAsTouched(this.form);
       return;
@@ -49,12 +37,12 @@ export class AddLocationComponent implements OnInit {
       name: this.form.value.name!,
       type: this.form.value.type!,
       dimension: this.form.value.dimension! || "Unknown",
-      residents: this.form.value.residents || [],
+      residents: this.form.value.residents || []
     }
 
-    this.wikiService.putData<LocationModel>(location, "http://localhost:8081/api/locations")
+    this.wikiService.sendData<LocationModel>(location, "http://localhost:8081/api/locations")
       .subscribe({
-        complete: () => this.goBack(),
+        complete: () => this.goBack(["locations"]),
         error: err => console.error("Błąd podczas edytowania lokacji", err)
       });
   }

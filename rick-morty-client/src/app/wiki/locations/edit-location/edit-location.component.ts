@@ -1,10 +1,9 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormService } from '../../../form.service';
-import { WikiService } from '../../wiki.service';
 import { LocationModel } from '../location.model';
 import { CharacterModel } from '../../characters/character.model';
 import { CharacterEditTableComponent } from '../../../shared/components/character-edit-table/character-edit-table.component';
+import { FormWiki } from '../../../shared/abstract/formWiki';
 
 @Component({
   selector: 'app-edit-location',
@@ -14,8 +13,8 @@ import { CharacterEditTableComponent } from '../../../shared/components/characte
   ],
   templateUrl: './edit-location.component.html',
 })
-export class EditLocationComponent implements OnInit{
-  editForm = new FormGroup({
+export class EditLocationComponent extends FormWiki implements OnInit{
+  form = new FormGroup({
     name: new FormControl(""),
     type: new FormControl(""),
     dimension: new FormControl(""),
@@ -25,15 +24,13 @@ export class EditLocationComponent implements OnInit{
   id = input.required<string>();
   location: LocationModel | undefined;
   restOfCharacters: CharacterModel[] = [];
-  private wikiService = inject(WikiService);
-  private formService = inject(FormService);
 
   ngOnInit() {
     this.wikiService.fetchData<LocationModel>(`http://localhost:8081/api/locations/${this.id()}`)
       .subscribe(data => {
         this.location = data;
 
-        this.editForm.patchValue({
+        this.form.patchValue({
           name: data.name,
           type: data.type,
           dimension: data.dimension,
@@ -44,30 +41,22 @@ export class EditLocationComponent implements OnInit{
       .subscribe(data => this.restOfCharacters = data)
   }
 
-  isInvalid(key: string): boolean {
-    return this.formService.isInvalid(this.editForm, key);
-  }
-
-  goBack() {
-    this.wikiService.navigateTo("locations", this.id());
-  }
-
-  editOnSubmit() {
-    if (this.editForm.invalid) {
-      this.formService.markAllControlsAsTouched(this.editForm);
+  submit() {
+    if (this.form.invalid) {
+      this.formService.markAllControlsAsTouched(this.form);
       return;
     }
 
     const location = {
-      name: this.editForm.value.name!,
-      type: this.editForm.value.type!,
-      dimension: this.editForm.value.dimension! || "Unknown",
-      residents: this.editForm.value.residents || [],
+      name: this.form.value.name!,
+      type: this.form.value.type!,
+      dimension: this.form.value.dimension! || "Unknown",
+      residents: this.form.value.residents || [],
     }
 
     this.wikiService.putData<LocationModel>(location, `http://localhost:8081/api/locations/${this.id()}`)
       .subscribe({
-        complete: () => this.goBack(),
+        complete: () => this.goBack(["locations", this.id()]),
         error: err => console.error("Błąd podczas dodawania lokacji", err)
       });
   }
