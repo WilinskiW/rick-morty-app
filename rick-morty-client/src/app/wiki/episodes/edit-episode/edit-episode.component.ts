@@ -1,11 +1,10 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { CharacterEditTableComponent } from '../../../shared/components/character-edit-table/character-edit-table.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CharacterModel } from '../../characters/character.model';
-import { WikiService } from '../../wiki.service';
-import { FormService } from '../../../form.service';
 import { EpisodeModel } from '../episode.model';
 import { cantBeInTheFuture, mustBeCode } from '../episodes.validators';
+import { FormWiki } from '../../../shared/abstract/formWiki';
 
 @Component({
   selector: 'app-edit-episode',
@@ -15,8 +14,8 @@ import { cantBeInTheFuture, mustBeCode } from '../episodes.validators';
   ],
   templateUrl: './edit-episode.component.html',
 })
-export class EditEpisodeComponent implements OnInit {
-  editForm = new FormGroup({
+export class EditEpisodeComponent extends FormWiki implements OnInit {
+  form = new FormGroup({
     title: new FormControl("", {
       validators: [Validators.required]
     }),
@@ -31,15 +30,13 @@ export class EditEpisodeComponent implements OnInit {
   id = input.required<string>();
   episode: EpisodeModel | undefined;
   restOfCharacters: CharacterModel[] = [];
-  private wikiService = inject(WikiService);
-  private formService = inject(FormService);
 
   ngOnInit() {
     this.wikiService.fetchData<EpisodeModel>(`http://localhost:8081/api/episodes/${this.id()}`)
       .subscribe(data => {
         this.episode = data;
 
-        this.editForm.patchValue({
+        this.form.patchValue({
           title: data.title,
           airDate: data.airDate,
           episode: data.episode,
@@ -50,30 +47,22 @@ export class EditEpisodeComponent implements OnInit {
       .subscribe(data => this.restOfCharacters = data)
   }
 
-  isInvalid(key: string): boolean {
-    return this.formService.isInvalid(this.editForm, key);
-  }
-
-  goBack() {
-    this.wikiService.navigateTo("episodes", this.id());
-  }
-
-  editOnSubmit() {
-    if (this.editForm.invalid) {
-      this.formService.markAllControlsAsTouched(this.editForm);
+  submit() {
+    if (this.form.invalid) {
+      this.formService.markAllControlsAsTouched(this.form);
       return;
     }
 
     const episode = {
-      title: this.editForm.value.title!,
-      airDate: this.editForm.value.airDate!,
-      episode: this.editForm.value.episode!,
-      characters: this.editForm.value.characters || [],
+      title: this.form.value.title!,
+      airDate: this.form.value.airDate!,
+      episode: this.form.value.episode!,
+      characters: this.form.value.characters || [],
     }
 
     this.wikiService.putData<EpisodeModel>(episode, `http://localhost:8081/api/episodes/${this.id()}`)
       .subscribe({
-        complete: () => this.goBack(),
+        complete: () => this.goBack(["episodes", this.id()]),
         error: err => console.error("Błąd podczas edycji epizodu", err)
       });
   }
