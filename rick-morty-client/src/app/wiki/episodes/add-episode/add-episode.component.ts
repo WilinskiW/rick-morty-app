@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WikiService } from '../../wiki.service';
 import { EpisodeModel } from '../episode.model';
 import { FormService } from '../../../form.service';
+import '../episodes.validators';
+import { cantBeInTheFuture, mustBeCode } from '../episodes.validators';
 
 @Component({
   selector: 'app-add-episode',
@@ -13,9 +15,15 @@ import { FormService } from '../../../form.service';
 })
 export class AddEpisodeComponent {
   form = new FormGroup({
-    title: new FormControl(""),
-    airDate: new FormControl(""),
-    code: new FormControl(""),
+    title: new FormControl("", {
+      validators: [Validators.required]
+    }),
+    airDate: new FormControl("", {
+      validators: [Validators.required, cantBeInTheFuture]
+    }),
+    episode: new FormControl("", {
+      validators: [Validators.required, mustBeCode]
+    }),
   });
   private formService = inject(FormService);
   private wikiService = inject(WikiService);
@@ -33,7 +41,7 @@ export class AddEpisodeComponent {
     const episode = {
       title: this.form.value.title!,
       airDate: this.form.value.airDate!,
-      episode: this.form.value.code!,
+      episode: this.form.value.episode!,
     }
 
     this.wikiService.sendData<EpisodeModel>(episode, "http://localhost:8081/api/episodes")

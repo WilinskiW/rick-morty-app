@@ -4,13 +4,15 @@ import { RouterLink } from '@angular/router';
 import { ContentTableComponent } from '../../../shared/components/content-table/content-table.component';
 import { ConnectionErrorComponent } from '../../../shared/components/connection-error/connection-error.component';
 import { DataTableClass } from '../../../shared/abstract/dataTable.class';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-episodes-locations',
   imports: [
     ContentTableComponent,
     RouterLink,
-    ConnectionErrorComponent
+    ConnectionErrorComponent,
+    DatePipe
   ],
   templateUrl: './episodes-table.component.html',
 })

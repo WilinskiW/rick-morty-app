@@ -1,10 +1,11 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { CharacterEditTableComponent } from '../../../shared/components/character-edit-table/character-edit-table.component';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CharacterModel } from '../../characters/character.model';
 import { WikiService } from '../../wiki.service';
 import { FormService } from '../../../form.service';
 import { EpisodeModel } from '../episode.model';
+import { cantBeInTheFuture, mustBeCode } from '../episodes.validators';
 
 @Component({
   selector: 'app-edit-episode',
@@ -16,12 +17,17 @@ import { EpisodeModel } from '../episode.model';
 })
 export class EditEpisodeComponent implements OnInit {
   editForm = new FormGroup({
-    title: new FormControl(""),
-    airDate: new FormControl(""),
-    episode: new FormControl(""),
+    title: new FormControl("", {
+      validators: [Validators.required]
+    }),
+    airDate: new FormControl("", {
+      validators: [Validators.required, cantBeInTheFuture]
+    }),
+    episode: new FormControl("", {
+      validators: [Validators.required, mustBeCode]
+    }),
     characters: new FormControl<CharacterModel[]>([])
   });
-
   id = input.required<string>();
   episode: EpisodeModel | undefined;
   restOfCharacters: CharacterModel[] = [];

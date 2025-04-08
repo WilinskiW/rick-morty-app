@@ -16,7 +16,7 @@
         <tr>
           <td>{{ episode.id }}</td>
           <td>{{ episode.title }}</td>
-          <td>{{ episode.airDate}}</td>
+          <td>{{ episode.airDate | date:"longDate" }}</td>
           <td>{{ episode.episode }}</td>
           <td>{{ episode.characters.length }}</td>
           <td>
