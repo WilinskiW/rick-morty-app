@@ -6,11 +6,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -43,9 +43,9 @@ public class LocationController {
      */
 
     @GetMapping
-    public ResponseEntity<List<LocationDto>> findAll() {
-        var result = locationService.getAll();
-        logger.info("Locations founded: " + result.size());
+    public ResponseEntity<Page<LocationDto>> findAll(@RequestParam Integer page) {
+        var result = locationService.getAll(page);
+        logger.info("Locations founded: " + result.getTotalElements());
         return ResponseEntity.ok(result);
     }
 

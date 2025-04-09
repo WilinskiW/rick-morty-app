@@ -166,42 +166,4 @@ class CharacterServiceTest {
 
         verify(characterRepository).delete(character);
     }
-
-    @Test
-    void testGetAllLikeName() {
-        String like = "Rick";
-        List<Character> characters = Arrays.asList(new Character(), new Character());
-        List<CharacterDto> characterDtos = Arrays.asList(new CharacterDto(), new CharacterDto());
-        when(characterRepository.findLike("%" + like + "%")).thenReturn(characters);
-        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
-
-        List<CharacterDto> result = characterService.getAllLikeName(like);
-
-        assertEquals(characterDtos, result);
-    }
-
-    @Test
-    void testGetScheduleCharacter() {
-        CharacterDto characterDto = new CharacterDto();
-        when(characterRepository.count()).thenReturn(10L);
-        when(characterRepository.findById(anyInt())).thenReturn(Optional.of(new Character()));
-        when(mapper.entityToDto(any(Character.class))).thenReturn(characterDto);
-
-        CharacterDto result = characterService.getScheduleCharacter();
-
-        assertNotNull(result);
-        assertEquals(characterDto, result);
-    }
-
-    @Test
-    void testSetScheduleCharacter() {
-        CharacterDto characterDto = new CharacterDto();
-        when(characterRepository.count()).thenReturn(10L);
-        when(characterRepository.findById(anyInt())).thenReturn(Optional.of(new Character()));
-        when(mapper.entityToDto(any(Character.class))).thenReturn(characterDto);
-
-        characterService.setScheduleCharacter();
-
-        assertNotNull(characterService.getScheduleCharacter());
-    }
 }

@@ -5,11 +5,11 @@ import com.rick_morty.rick_morty_web_api.api.service.EpisodeService;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -43,9 +43,9 @@ public class EpisodeController {
      */
 
     @GetMapping
-    public ResponseEntity<List<EpisodeDto>> findAll() {
-        var result = episodeService.getAll();
-        logger.info("Found " + result.size() + " episodes");
+    public ResponseEntity<Page<EpisodeDto>> findAll(@RequestParam Integer page) {
+        var result = episodeService.getAll(page);
+        logger.info("Found " + result.getTotalElements() + " episodes");
         return ResponseEntity.ok(result);
     }
 

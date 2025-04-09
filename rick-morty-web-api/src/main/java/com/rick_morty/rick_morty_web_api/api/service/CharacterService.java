@@ -9,6 +9,9 @@ import com.rick_morty.rick_morty_web_api.api.mapper.CharacterMapper;
 import jakarta.persistence.EntityExistsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +43,9 @@ public class CharacterService {
         db.getCharacters().save(character);
     }
 
-    public List<CharacterDto> getAll() {
-        return mapper.entityListToDtoList(db.getCharacters().findAll());
+    public Page<CharacterDto> getAll(Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, 25);
+        return mapper.entityListToDtoPage(db.getCharacters().findAll(pageable));
     }
 
     public List<CharacterDto> getAllNotInTheEpisode(int episodeId) {

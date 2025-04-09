@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +45,9 @@ public class CharacterController {
      */
 
     @GetMapping
-    public ResponseEntity<List<CharacterDto>> findAll() {
-        var result = characterService.getAll();
-        logger.info("Characters founded: " + result.size());
+    public ResponseEntity<Page<CharacterDto>> findAll(@RequestParam Integer page) {
+        var result = characterService.getAll(page);
+        logger.info("Characters founded: " + result.getTotalElements());
         return ResponseEntity.ok(result);
     }
 

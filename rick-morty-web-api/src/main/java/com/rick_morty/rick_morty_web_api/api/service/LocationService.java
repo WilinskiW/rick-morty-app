@@ -9,10 +9,12 @@ import com.rick_morty.rick_morty_web_api.api.mapper.LocationMapper;
 import jakarta.persistence.EntityExistsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,8 +50,9 @@ public class LocationService {
         db.getLocations().save(location);
     }
 
-    public List<LocationDto> getAll() {
-        return mapper.entityListToDtoList(db.getLocations().findAll());
+    public Page<LocationDto> getAll(Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, 25);
+        return mapper.entityListToDtoPage(db.getLocations().findAll(pageable));
     }
 
     public LocationDto getById(Integer id) {

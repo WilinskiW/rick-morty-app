@@ -10,17 +10,19 @@ import com.rick_morty.rick_morty_web_api.api.mapper.EpisodeMapper;
 import jakarta.persistence.EntityExistsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class EpisodeService {
     private final RickAndMortyDbCataloger db;
-    private final EpisodeMapper episodeMapper;
+    private final EpisodeMapper mapper;
 
     @Transactional
     public void save(EpisodeDto episodeDto) {
@@ -28,13 +30,12 @@ public class EpisodeService {
             throw new EntityExistsException("Character with this title already exists");
         }
 
-        db.getEpisodes().save(episodeMapper.dtoToEntity(episodeDto));
+        db.getEpisodes().save(mapper.dtoToEntity(episodeDto));
     }
 
-    public List<EpisodeDto> getAll() {
-        return db.getEpisodes().findAll().stream()
-                .map(episodeMapper::entityToDto)
-                .toList();
+    public Page<EpisodeDto> getAll(Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber,  25);
+        return mapper.entityListToDtoPage(db.getEpisodes().findAll(pageable));
     }
 
     public EpisodeDto getById(Integer id) {
@@ -44,7 +45,7 @@ public class EpisodeService {
             throw new DataNotFoundException("Episode not found");
         }
 
-        return episodeMapper.entityToDto(episode.get());
+        return mapper.entityToDto(episode.get());
     }
 
     @Transactional
