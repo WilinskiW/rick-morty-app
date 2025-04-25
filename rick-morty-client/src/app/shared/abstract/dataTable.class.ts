@@ -1,11 +1,12 @@
 import { inject, Injectable, OnInit, signal } from '@angular/core';
 import { WikiService } from '../../wiki/wiki.service';
+import { PageModel } from '../../wiki/page.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export abstract class DataTableClass<T> implements OnInit {
-  data: T[] = [];
+  data: PageModel<T> | undefined;
   isFetching = signal(true);
   isError = signal(false);
   private wikiService = inject(WikiService);
@@ -13,10 +14,10 @@ export abstract class DataTableClass<T> implements OnInit {
   protected abstract url: string;
 
   ngOnInit() {
-    this.wikiService.fetchData<T[]>(this.url)
+    this.wikiService.fetchDataWithPages<T>(this.url, 0)
       .subscribe({
         next: (data) => {
-          this.data = data
+          this.data = data;
           this.isFetching.set(false);
         },
         error: () => {

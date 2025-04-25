@@ -14,7 +14,7 @@
       <th>Details</th>
     </ng-container>
     <ng-container table-body>
-      @for (character of data; track character.id) {
+      @for (character of characters()?.content; track character.id) {
         <tr>
           <td>{{ character.id }}</td>
           <td>{{ character.name }}</td>
@@ -29,6 +29,9 @@
           </td>
         </tr>
       }
+    </ng-container>
+    <ng-container table-nav>
+      <app-table-nav [data]="data"/>
     </ng-container>
   </app-content-table>
 } @else {

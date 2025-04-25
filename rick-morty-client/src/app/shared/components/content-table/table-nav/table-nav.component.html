@@ -1,0 +1,18 @@
+<nav>
+  <p>Page number: {{ data()?.number }}</p>
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" routerLink="./" [queryParams]="{ page: 1 }" tabindex="-1"
+         aria-disabled="true">Start</a>
+    </li>
+    <li class="page-item"><a class="page-link" routerLink="./"
+                             [queryParams]="{ page: previous() } ">{{ previous() }}</a></li>
+    <li class="page-item"><a class="page-link" routerLink="./"
+                             [queryParams]="{ page: current() } ">{{ current() }}</a></li>
+    <li class="page-item"><a class="page-link" routerLink="./"
+                             [queryParams]="{ page: next() }">{{ next() }}</a></li>
+    <li class="page-item">
+      <a class="page-link" routerLink="./" [queryParams]="{ page: last() }">End</a>
+    </li>
+  </ul>
+</nav>

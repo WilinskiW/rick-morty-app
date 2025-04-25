@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { PageModel } from './page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,15 @@ export class WikiService {
 
   fetchData<T>(url: string): Observable<T> {
     return this.httpClient.get<T>(url).pipe(
+      catchError((error) => {
+        throw error;
+      })
+    )
+  }
+
+  fetchDataWithPages<T>(url: string, pageNumber: number = 0): Observable<PageModel<T>> {
+    return this.httpClient.get<PageModel<T>>(`${url}?page=${pageNumber}`).pipe(
+      map(data => data),
       catchError((error) => {
         throw error;
       })

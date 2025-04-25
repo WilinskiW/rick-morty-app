@@ -1,16 +1,18 @@
-  <main class="container mt-3">
-    <h1 class="text-center p-2">{{ section() }}</h1>
-    <div class="d-flex justify-content-center">
-      <table class="table-bordered text-center justify-content-center m-1">
-        <thead>
-        <tr class="text-bg-dark">
-          <ng-content select="[table-headers]"></ng-content>
-        </tr>
-        </thead>
-        <tbody>
-        <ng-content select="[table-body]"></ng-content>
-        </tbody>
-      </table>
-    </div>
-  </main>
-
+<main class="container mt-3">
+  <h1 class="text-center p-2">{{ section() }}</h1>
+  <div class="d-flex justify-content-center">
+    <table class="table-bordered text-center justify-content-center m-1">
+      <thead>
+      <tr class="text-bg-dark">
+        <ng-content select="[table-headers]"/>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-content select="[table-body]"/>
+      </tbody>
+    </table>
+  </div>
+</main>
+<footer>
+  <ng-content select="[table-nav]"/>
+</footer>
