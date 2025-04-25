@@ -14,7 +14,7 @@ export abstract class DataTableClass<T> implements OnInit {
   protected abstract url: string;
 
   ngOnInit() {
-    this.wikiService.fetchDataWithPages<T>(this.url, 0)
+    this.wikiService.fetchDataWithPages<T>(this.url, 1)
       .subscribe({
         next: (data) => {
           this.data = data;

@@ -10,7 +10,7 @@ import { CharacterModel } from './character.model';
 
 const resolveData: ResolveFn<any> = (activatedRoute: ActivatedRouteSnapshot) => {
   const wikiService = inject(WikiService);
-  const pageNumber = Number(activatedRoute.queryParamMap.get("page")) || 0;
+  const pageNumber = Number(activatedRoute.queryParamMap.get("page")) || 1;
 
   return wikiService.fetchDataWithPages<CharacterModel>(
     "http://localhost:8081/api/characters", pageNumber

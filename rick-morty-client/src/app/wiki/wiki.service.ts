@@ -19,8 +19,8 @@ export class WikiService {
     )
   }
 
-  fetchDataWithPages<T>(url: string, pageNumber: number = 0): Observable<PageModel<T>> {
-    return this.httpClient.get<PageModel<T>>(`${url}?page=${pageNumber}`).pipe(
+  fetchDataWithPages<T>(url: string, pageNumber: number = 1): Observable<PageModel<T>> {
+    return this.httpClient.get<PageModel<T>>(`${url}?page=${ pageNumber - 1}`).pipe(
       map(data => data),
       catchError((error) => {
         throw error;
