@@ -4,13 +4,13 @@
       <a class="page-link" routerLink="./" [queryParams]="{ page: 1 }" tabindex="-1"
          aria-disabled="true">Start</a>
     </li>
-    @if (!characters()?.first) {
+    @if (!data()?.first) {
       <li class="page-item"><a class="page-link" routerLink="./"
                                [queryParams]="{ page: previous() } ">{{ previous() }}</a></li>
     }
     <li class="page-item"><a class="page-link" routerLink="./"
                              [queryParams]="{ page: current() } ">{{ current() }}</a></li>
-    @if (!characters()?.last) {
+    @if (!data()?.last) {
       <li class="page-item"><a class="page-link" routerLink="./"
                                [queryParams]="{ page: next() }">{{ next() }}</a></li>
     }

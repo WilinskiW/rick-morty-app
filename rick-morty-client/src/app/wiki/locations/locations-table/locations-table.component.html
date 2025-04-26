@@ -11,7 +11,7 @@
       <th>Details</th>
     </ng-container>
     <ng-container table-body>
-      @for (location of data?.content; track location.id) {
+      @for (location of locations()?.content; track location.id) {
         <tr>
           <td>{{ location.id }}</td>
           <td>{{ location.name }}</td>
@@ -22,6 +22,9 @@
           </td>
         </tr>
       }
+    </ng-container>
+    <ng-container table-nav>
+      <app-table-nav [data]="locations()"/>
     </ng-container>
   </app-content-table>
 } @else {

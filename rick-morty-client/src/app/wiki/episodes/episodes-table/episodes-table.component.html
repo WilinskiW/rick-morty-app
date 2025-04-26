@@ -12,7 +12,7 @@
       <th>Details</th>
     </ng-container>
     <ng-container table-body>
-      @for (episode of data?.content; track episode.id) {
+      @for (episode of episodes()?.content; track episode.id) {
         <tr>
           <td>{{ episode.id }}</td>
           <td>{{ episode.title }}</td>
@@ -24,6 +24,9 @@
           </td>
         </tr>
       }
+    </ng-container>
+    <ng-container table-nav>
+      <app-table-nav [data]="episodes()"/>
     </ng-container>
   </app-content-table>
 } @else {

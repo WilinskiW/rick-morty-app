@@ -10,11 +10,11 @@ import { PageModel } from '../../../../wiki/page.model';
   templateUrl: './table-nav.component.html',
 })
 export class TableNavComponent<T> {
-  characters = input.required<PageModel<T> | undefined>();
-  previous = computed(() => this.characters()!.first ? this.characters()!.number + 1 : (this.characters()!.number + 1) - 1);
-  current = computed(() => this.characters()!.number + 1);
-  next = computed(() => this.characters()!.last ? this.characters()!.number + 1 : this.characters()!.number + 2)
-  last = computed(() => this.characters!()!.totalPages)
+  data = input.required<PageModel<T> | undefined>();
+  previous = computed(() => this.data()!.first ? this.data()!.number + 1 : (this.data()!.number + 1) - 1);
+  current = computed(() => this.data()!.number + 1);
+  next = computed(() => this.data()!.last ? this.data()!.number + 1 : this.data()!.number + 2)
+  last = computed(() => this.data!()!.totalPages)
 
   //todo:
   //  2. Pull danych ze strony i wyświetlanie
