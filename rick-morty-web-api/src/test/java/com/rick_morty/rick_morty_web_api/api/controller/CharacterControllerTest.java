@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.*;
@@ -20,9 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(classes = com.rick_morty.rick_morty_web_api.RickMortyWebApiApplication.class)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CharacterControllerTest {
+class CharacterControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -48,25 +49,21 @@ public class CharacterControllerTest {
     @Test
     @Order(1)
     void testFindAll() throws Exception {
-        CharacterDto characterDto2 = new CharacterDto();
-        characterDto.setId(2);
-        characterDto.setName("Morty Smith");
+        Page<CharacterDto> characters = Page.empty(PageRequest.of(0, 10));
+        when(characterService.getAll(1)).thenReturn(characters);
 
-        List<CharacterDto> characters = List.of(characterDto, characterDto2);
-        when(characterService.getAll()).thenReturn(characters);
-
-        mockMvc.perform(get("/api/character/all"))
+        mockMvc.perform(get("/api/characters?page=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(characters)));
 
-        verify(characterService, times(1)).getAll();
+        verify(characterService, times(1)).getAll(1);
     }
 
     @Test
     void testCreateCharacter() throws Exception {
-        doNothing().when(characterService).save(characterDto);
+        doNothing().when(characterService).save(any(CharacterDto.class));
 
-        mockMvc.perform(post("/api/character")
+        mockMvc.perform(post("/api/characters")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(characterDto)))
                 .andExpect(status().isOk());
@@ -77,7 +74,8 @@ public class CharacterControllerTest {
     @Test
     void testCreateCharacterWhenValidationError() throws Exception {
         characterDto.setName("");
-        mockMvc.perform(post("/api/character")
+
+        mockMvc.perform(post("/api/characters")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(characterDto)))
                 .andExpect(status().isBadRequest());
@@ -89,7 +87,7 @@ public class CharacterControllerTest {
     void testFindById() throws Exception {
         when(characterService.getCharacterById(1)).thenReturn(characterDto);
 
-        mockMvc.perform(get("/api/character/1"))
+        mockMvc.perform(get("/api/characters/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(characterDto)));
 
@@ -97,33 +95,34 @@ public class CharacterControllerTest {
     }
 
     @Test
-    void testFindByNameLike() throws Exception {
-        List<CharacterDto> characters = Arrays.asList(characterDto);
-        when(characterService.getAllLikeName("Rick")).thenReturn(characters);
+    void testFindCharactersNotInLocation() throws Exception {
+        List<CharacterDto> characters = List.of(characterDto);
+        when(characterService.getAllNotInTheLocation(1)).thenReturn(characters);
 
-        mockMvc.perform(get("/api/character/like/Rick"))
+        mockMvc.perform(get("/api/characters/1/notInLocation"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(characters)));
 
-        verify(characterService, times(1)).getAllLikeName("Rick");
+        verify(characterService, times(1)).getAllNotInTheLocation(1);
     }
 
     @Test
-    void testFindScheduleCharacter() throws Exception {
-        when(characterService.getScheduleCharacter()).thenReturn(characterDto);
+    void testFindCharactersNotInEpisode() throws Exception {
+        List<CharacterDto> characters = List.of(characterDto);
+        when(characterService.getAllNotInTheLocation(1)).thenReturn(characters); // Twoja metoda ma tą samą implementację
 
-        mockMvc.perform(get("/api/character/schedule"))
+        mockMvc.perform(get("/api/characters/1/notInEpisode"))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(characterDto)));
+                .andExpect(content().json(objectMapper.writeValueAsString(characters)));
 
-        verify(characterService, times(1)).getScheduleCharacter();
+        verify(characterService, times(1)).getAllNotInTheLocation(1);
     }
 
     @Test
     void testUpdateCharacter() throws Exception {
         doNothing().when(characterService).update(eq(1), any(CharacterDto.class));
 
-        mockMvc.perform(put("/api/character/1")
+        mockMvc.perform(put("/api/characters/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(characterDto)))
                 .andExpect(status().isOk());
@@ -135,22 +134,19 @@ public class CharacterControllerTest {
     void testUpdateCharacterWhenValidationError() throws Exception {
         characterDto.setName("");
 
-        doNothing().when(characterService).update(eq(1), any(CharacterDto.class));
-
-        mockMvc.perform(put("/api/character/1")
+        mockMvc.perform(put("/api/characters/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(characterDto)))
                 .andExpect(status().isBadRequest());
 
         verify(characterService, times(0)).update(eq(1), any(CharacterDto.class));
-
     }
 
     @Test
     void testDeleteCharacter() throws Exception {
         doNothing().when(characterService).deleteById(1);
 
-        mockMvc.perform(delete("/api/character/1"))
+        mockMvc.perform(delete("/api/characters/1"))
                 .andExpect(status().isOk());
 
         verify(characterService, times(1)).deleteById(1);

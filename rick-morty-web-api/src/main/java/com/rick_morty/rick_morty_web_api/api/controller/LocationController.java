@@ -43,14 +43,14 @@ public class LocationController {
      */
 
     @GetMapping
-    public ResponseEntity<Page<LocationDto>> findAll(@RequestParam Integer page) {
+    public ResponseEntity<Page<LocationDto>> findAll(@RequestParam("page") Integer page) {
         var result = locationService.getAll(page);
         logger.info("Locations founded: " + result.getTotalElements());
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LocationDto> findById(@PathVariable Integer id) {
+    public ResponseEntity<LocationDto> findById(@PathVariable("id") Integer id) {
         var result = locationService.getById(id);
         logger.info("Location found: " + result);
         return ResponseEntity.ok(result);
@@ -60,7 +60,7 @@ public class LocationController {
      * UPDATE
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateLocation(@PathVariable Integer id,
+    public ResponseEntity<Void> updateLocation(@PathVariable("id") Integer id,
                                                @Valid @RequestBody LocationDto locationDto,
                                                BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -77,14 +77,14 @@ public class LocationController {
      * DELETE
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLocation(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteLocation(@PathVariable("id") Integer id) {
         locationService.deleteById(id);
         logger.info("Location deleted: " + id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}/remove-character/{characterId}")
-    public ResponseEntity<Void> removeCharacterFromLocation(@PathVariable Integer id, @PathVariable Integer characterId) {
+    public ResponseEntity<Void> removeCharacterFromLocation(@PathVariable("id") Integer id, @PathVariable("characterId") Integer characterId) {
         locationService.removeCharacterFromLocation(id, characterId);
         logger.info("Character deleted: " + characterId);
         return ResponseEntity.ok().build();

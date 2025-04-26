@@ -45,28 +45,28 @@ public class CharacterController {
      */
 
     @GetMapping
-    public ResponseEntity<Page<CharacterDto>> findAll(@RequestParam Integer page) {
+    public ResponseEntity<Page<CharacterDto>> findAll(@RequestParam("page" )Integer page) {
         var result = characterService.getAll(page);
         logger.info("Characters founded: " + result.getTotalElements());
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CharacterDto> findById(@PathVariable Integer id) {
+    public ResponseEntity<CharacterDto> findById(@PathVariable("id") Integer id) {
         var result = characterService.getCharacterById(id);
         logger.info("Character found: " + result);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{locationId}/notInLocation")
-    public ResponseEntity<List<CharacterDto>> findCharactersNotInLocation(@PathVariable Integer locationId) {
+    public ResponseEntity<List<CharacterDto>> findCharactersNotInLocation(@PathVariable("locationId") Integer locationId) {
         var result = characterService.getAllNotInTheLocation(locationId);
         logger.info("Characters not in location " + locationId + " : " + result);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{episodeId}/notInEpisode")
-    public ResponseEntity<List<CharacterDto>> findCharactersNotInEpisode(@PathVariable Integer episodeId) {
+    public ResponseEntity<List<CharacterDto>> findCharactersNotInEpisode(@PathVariable("episodeId") Integer episodeId) {
         var result = characterService.getAllNotInTheLocation(episodeId);
         logger.info("Characters not in episode " + episodeId + " : " + result);
         return ResponseEntity.ok(result);
@@ -77,7 +77,7 @@ public class CharacterController {
      */
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id,
+    public ResponseEntity<Void> updateCharacter(@PathVariable("id") Integer id,
                                                 @Valid @RequestBody CharacterDto characterDto,
                                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -96,7 +96,7 @@ public class CharacterController {
 
     @DeleteMapping("/{id}")
     @CachePut(value = "characters", key = "'allCharacter'")
-    public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCharacter(@PathVariable("id") Integer id) {
         characterService.deleteById(id);
         logger.info("Character deleted: " + id);
         return ResponseEntity.ok().build();

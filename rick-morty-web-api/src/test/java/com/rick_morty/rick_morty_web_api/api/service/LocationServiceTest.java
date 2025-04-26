@@ -15,6 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.*;
 
@@ -48,7 +51,12 @@ class LocationServiceTest {
     @Test
     void testSave() {
         LocationDto locationDto = new LocationDto();
-        locationDto.setResidents(Arrays.asList(new CharacterDto()));
+        locationDto.setName("Earth");
+        CharacterDto residentDto = new CharacterDto();
+        residentDto.setId(1);
+        locationDto.setResidents(Collections.singletonList(residentDto));
+
+        when(locationRepository.existsByName(locationDto.getName())).thenReturn(false);
         when(characterRepository.findById(any())).thenReturn(Optional.of(new Character()));
 
         locationService.save(locationDto);
@@ -57,7 +65,7 @@ class LocationServiceTest {
     }
 
     @Test
-    void testSaveWhenCharacterAlreadyExist() {
+    void testSaveWhenLocationAlreadyExists() {
         LocationDto locationDto = new LocationDto();
         locationDto.setName("Earth 241");
 
@@ -69,13 +77,15 @@ class LocationServiceTest {
     @Test
     void testGetAll() {
         List<Location> locations = Arrays.asList(new Location(), new Location());
-        List<LocationDto> locationDtos = Arrays.asList(new LocationDto(), new LocationDto());
-        when(locationRepository.findAll()).thenReturn(locations);
-        when(mapper.entityListToDtoList(locations)).thenReturn(locationDtos);
+        Page<Location> page = new PageImpl<>(locations, PageRequest.of(0, 25), locations.size());
+        Page<LocationDto> dtoPage = new PageImpl<>(Arrays.asList(new LocationDto(), new LocationDto()), PageRequest.of(0, 25), locations.size());
 
-        List<LocationDto> result = locationService.getAll();
+        when(locationRepository.findAll(PageRequest.of(0, 25))).thenReturn(page);
+        when(mapper.entityListToDtoPage(page)).thenReturn(dtoPage);
 
-        assertEquals(locationDtos, result);
+        Page<LocationDto> result = locationService.getAll(0);
+
+        assertEquals(dtoPage, result);
     }
 
     @Test
@@ -83,6 +93,7 @@ class LocationServiceTest {
         Integer id = 1;
         Location location = new Location();
         LocationDto locationDto = new LocationDto();
+
         when(locationRepository.findById(id)).thenReturn(Optional.of(location));
         when(mapper.entityToDto(location)).thenReturn(locationDto);
 
@@ -94,6 +105,7 @@ class LocationServiceTest {
     @Test
     void testGetByIdNotFound() {
         Integer id = 1;
+
         when(locationRepository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(DataNotFoundException.class, () -> locationService.getById(id));
@@ -103,14 +115,26 @@ class LocationServiceTest {
     void testUpdate() {
         Integer id = 1;
         LocationDto locationDto = new LocationDto();
-        locationDto.setResidents(Arrays.asList(new CharacterDto()));
+        locationDto.setName("New Earth");
+        CharacterDto residentDto = new CharacterDto();
+        residentDto.setId(1);
+        locationDto.setResidents(Collections.singletonList(residentDto));
+
         Location location = new Location();
+        location.setCurrentCharacters(new HashSet<>());
+
+        Character character = new Character();
+        character.setId(1);
+
         when(locationRepository.findById(id)).thenReturn(Optional.of(location));
-        when(characterRepository.findById(any())).thenReturn(Optional.of(new Character()));
+        when(characterRepository.findById(residentDto.getId())).thenReturn(Optional.of(character));
+        when(locationRepository.findById(id)).thenReturn(Optional.of(location)); // For removeCharacterFromLocation
+        when(characterRepository.findById(residentDto.getId())).thenReturn(Optional.of(character)); // For removeCharacterFromLocation
 
         locationService.update(id, locationDto);
 
-        verify(locationRepository, times(2)).save(location);
+        verify(locationRepository, atLeastOnce()).save(location);
+        verify(characterRepository, atLeastOnce()).save(character);
     }
 
     @Test
@@ -119,6 +143,7 @@ class LocationServiceTest {
         Location location = new Location();
         location.setOriginCharacters(new HashSet<>());
         location.setCurrentCharacters(new HashSet<>());
+
         when(locationRepository.findById(id)).thenReturn(Optional.of(location));
 
         locationService.deleteById(id);

@@ -43,14 +43,14 @@ public class EpisodeController {
      */
 
     @GetMapping
-    public ResponseEntity<Page<EpisodeDto>> findAll(@RequestParam Integer page) {
+    public ResponseEntity<Page<EpisodeDto>> findAll(@RequestParam("page") Integer page) {
         var result = episodeService.getAll(page);
         logger.info("Found " + result.getTotalElements() + " episodes");
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EpisodeDto> findById(@PathVariable Integer id) {
+    public ResponseEntity<EpisodeDto> findById(@PathVariable("id") Integer id) {
         var result = episodeService.getById(id);
         logger.info("Found " + result);
         return ResponseEntity.ok(result);
@@ -61,7 +61,7 @@ public class EpisodeController {
      */
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateCharacter(@PathVariable Integer id,
+    public ResponseEntity<Void> updateCharacter(@PathVariable("id") Integer id,
                                                 @Valid @RequestBody EpisodeDto episodeDto,
                                                 BindingResult bindingResult) {
 
@@ -80,14 +80,14 @@ public class EpisodeController {
      */
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCharacter(@PathVariable("id") Integer id) {
         episodeService.deleteById(id);
         logger.info("Deleted episode " + id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}/remove-character/{characterId}")
-    public ResponseEntity<Void> removeCharacterFromLocation(@PathVariable Integer id, @PathVariable Integer characterId) {
+    public ResponseEntity<Void> removeCharacterFromLocation(@PathVariable("id") Integer id, @PathVariable("characterId") Integer characterId) {
         episodeService.removeCharacterFromLocation(id, characterId);
         logger.info("Removed character from location " + characterId);
         return ResponseEntity.ok().build();

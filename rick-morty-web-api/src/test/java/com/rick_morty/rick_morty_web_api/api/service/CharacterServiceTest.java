@@ -2,6 +2,7 @@ package com.rick_morty.rick_morty_web_api.api.service;
 
 import com.rick_morty.rick_morty_data.model.Character;
 import com.rick_morty.rick_morty_data.model.Location;
+import com.rick_morty.rick_morty_data.model.Episode;
 import com.rick_morty.rick_morty_data.repository.web.CharacterRepository;
 import com.rick_morty.rick_morty_data.repository.web.EpisodeRepository;
 import com.rick_morty.rick_morty_data.repository.web.LocationRepository;
@@ -16,6 +17,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.*;
 
@@ -64,7 +69,6 @@ class CharacterServiceTest {
         verify(characterRepository).save(character);
     }
 
-
     @Test
     void testSaveWhenCharacterAlreadyExist() {
         CharacterDto characterDto = new CharacterDto();
@@ -77,14 +81,18 @@ class CharacterServiceTest {
 
     @Test
     void testGetAll() {
+        int pageNumber = 0;
+        Pageable pageable = PageRequest.of(pageNumber, 25);
         List<Character> characters = Arrays.asList(new Character(), new Character());
-        List<CharacterDto> characterDtos = Arrays.asList(new CharacterDto(), new CharacterDto());
-        when(characterRepository.findAll()).thenReturn(characters);
-        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
+        Page<Character> characterPage = new PageImpl<>(characters, pageable, characters.size());
+        Page<CharacterDto> characterDtoPage = new PageImpl<>(Arrays.asList(new CharacterDto(), new CharacterDto()), pageable, characters.size());
 
-        List<CharacterDto> result = characterService.getAll();
+        when(characterRepository.findAll(pageable)).thenReturn(characterPage);
+        when(mapper.entityListToDtoPage(characterPage)).thenReturn(characterDtoPage);
 
-        assertEquals(characterDtos, result);
+        Page<CharacterDto> result = characterService.getAll(pageNumber);
+
+        assertEquals(characterDtoPage, result);
     }
 
     @Test
@@ -94,8 +102,6 @@ class CharacterServiceTest {
         List<CharacterDto> characterDtos = List.of(new CharacterDto());
 
         when(characterRepository.findByEpisodeNotIn(episodeId)).thenReturn(characters);
-        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
-
         when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
 
         List<CharacterDto> result = characterService.getAllNotInTheEpisode(episodeId);
@@ -110,8 +116,6 @@ class CharacterServiceTest {
         List<CharacterDto> characterDtos = List.of(new CharacterDto());
 
         when(characterRepository.findByLocationNotIn(locationId)).thenReturn(characters);
-        when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
-
         when(mapper.entityListToDtoList(characters)).thenReturn(characterDtos);
 
         List<CharacterDto> result = characterService.getAllNotInTheLocation(locationId);
@@ -160,10 +164,27 @@ class CharacterServiceTest {
         int id = 1;
         Character character = new Character();
         character.setEpisodes(new HashSet<>());
+
         when(characterRepository.findById(id)).thenReturn(Optional.of(character));
 
         characterService.deleteById(id);
 
+        verify(characterRepository).delete(character);
+    }
+
+    @Test
+    void testDeleteByIdWithEpisodes() {
+        int id = 1;
+        Character character = new Character();
+        Episode episode = new Episode();
+        character.setEpisodes(new HashSet<>(Collections.singletonList(episode)));
+        episode.setCharacters(new HashSet<>(Collections.singletonList(character)));
+
+        when(characterRepository.findById(id)).thenReturn(Optional.of(character));
+
+        characterService.deleteById(id);
+
+        verify(episodeRepository).save(episode);
         verify(characterRepository).delete(character);
     }
 }

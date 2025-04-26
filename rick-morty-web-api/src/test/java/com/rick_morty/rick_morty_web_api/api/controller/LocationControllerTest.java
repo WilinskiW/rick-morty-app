@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
@@ -20,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(classes = com.rick_morty.rick_morty_web_api.RickMortyWebApiApplication.class)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LocationControllerTest {
 
@@ -47,14 +46,14 @@ public class LocationControllerTest {
     @Test
     @Order(1)
     void testFindAll() throws Exception {
-        List<LocationDto> locations = Arrays.asList(locationDto);
-        when(locationService.getAll()).thenReturn(locations);
+        Page<LocationDto> locations = Page.empty(PageRequest.of(0, 10));
+        when(locationService.getAll(1)).thenReturn(locations);
 
-        mockMvc.perform(get("/api/location/all"))
+        mockMvc.perform(get("/api/locations?page=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(locations)));
 
-        verify(locationService, times(1)).getAll();
+        verify(locationService, times(1)).getAll(1);
     }
 
     @Test
@@ -62,7 +61,7 @@ public class LocationControllerTest {
     void testCreateLocation() throws Exception {
         doNothing().when(locationService).save(any(LocationDto.class));
 
-        mockMvc.perform(post("/api/location")
+        mockMvc.perform(post("/api/locations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(locationDto)))
                 .andExpect(status().isOk());
@@ -73,7 +72,7 @@ public class LocationControllerTest {
     @Test
     void testCreateLocationWhenValidationError() throws Exception {
         locationDto.setName("");
-        mockMvc.perform(post("/api/location")
+        mockMvc.perform(post("/api/locations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(locationDto)))
                 .andExpect(status().isBadRequest());
@@ -86,7 +85,7 @@ public class LocationControllerTest {
     void testFindById() throws Exception {
         when(locationService.getById(1)).thenReturn(locationDto);
 
-        mockMvc.perform(get("/api/location/1"))
+        mockMvc.perform(get("/api/locations/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(locationDto)));
 
@@ -98,7 +97,7 @@ public class LocationControllerTest {
     void testUpdateLocation() throws Exception {
         doNothing().when(locationService).update(eq(1), any(LocationDto.class));
 
-        mockMvc.perform(put("/api/location/1")
+        mockMvc.perform(put("/api/locations/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(locationDto)))
                 .andExpect(status().isOk());
@@ -112,7 +111,7 @@ public class LocationControllerTest {
 
         doNothing().when(locationService).update(eq(1), any(LocationDto.class));
 
-        mockMvc.perform(put("/api/location/1")
+        mockMvc.perform(put("/api/locations/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(locationDto)))
                 .andExpect(status().isBadRequest());
@@ -125,7 +124,7 @@ public class LocationControllerTest {
     void testDeleteLocation() throws Exception {
         doNothing().when(locationService).deleteById(1);
 
-        mockMvc.perform(delete("/api/location/1"))
+        mockMvc.perform(delete("/api/locations/1"))
                 .andExpect(status().isOk());
 
         verify(locationService, times(1)).deleteById(1);
@@ -136,7 +135,7 @@ public class LocationControllerTest {
     void testRemoveCharacterFromLocation() throws Exception {
         doNothing().when(locationService).removeCharacterFromLocation(1, 2);
 
-        mockMvc.perform(delete("/api/location/1/remove-character/2"))
+        mockMvc.perform(delete("/api/locations/1/remove-character/2"))
                 .andExpect(status().isOk());
 
         verify(locationService, times(1)).removeCharacterFromLocation(1, 2);
