@@ -15,10 +15,6 @@ export class TableNavComponent<T> {
   current = computed(() => this.data()!.number + 1);
   next = computed(() => this.data()!.last ? this.data()!.number + 1 : this.data()!.number + 2)
   last = computed(() => this.data!()!.totalPages)
-
-  //todo:
-  //  2. Pull danych ze strony i wyświetlanie
-  //  3. Wprowadzenie tego do episodes i locations
 }
 
 // Page = 0       + 1 -> Obiekt PageModel (Indeks przesuwany o +1 dla UX)

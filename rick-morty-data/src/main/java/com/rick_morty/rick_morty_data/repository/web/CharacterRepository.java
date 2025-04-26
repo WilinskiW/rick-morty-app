@@ -21,7 +21,7 @@ public interface CharacterRepository extends JpaRepository<Character, Integer> {
     @Query(value = "SELECT * FROM characters WHERE id NOT IN (" +
             "SELECT character_id FROM character_episode WHERE episode_id = (:episodeId))",
             nativeQuery = true)
-    List<Character> findByEpisodeNotIn(int episodeId);
+    List<Character> findByEpisodeNotIn(@Param("episodeId") int episodeId);
 
     @Query(value = "SELECT * FROM characters WHERE location_id <> :locationId or location_id is null",
             nativeQuery = true)

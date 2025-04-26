@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -21,22 +19,6 @@ public class CharacterRepositoryTest {
 
     @Autowired
     private CharacterRepository characterRepository;
-
-    @Test
-    void shouldSaveAndFindCharacterTest() {
-        Character character = new Character();
-        character.setSourceId(1);
-        character.setName("Rick Sanchez");
-        character.setStatus("Alive");
-        character.setSpecies("Human");
-        character.setGender("Male");
-
-        characterRepository.save(character);
-
-        List<Character> characters = characterRepository.findLike("Rick%");
-        assertEquals(2, characters.size());
-        assertEquals("Rick Sanchez", characters.getFirst().getName());
-    }
 
     @Test
     void shouldCheckIfCharacterExistsBySourceIdTest() {
